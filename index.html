@@ -440,28 +440,38 @@ class NoiseField{
 
 const canvas = document.getElementById('noise-canvas');
 const hint = document.getElementById('hint');
+const heroEl = document.getElementById('hero');
 const signalEl = document.getElementById('signal');
 const signalLine = document.getElementById('signal-line');
 
 // ── TUNING KNOBS ────────────────────────────────────────────
-// Fractions (0–1) of the #signal section's pinned scroll range.
-// Noise and text each get their own independent window, so the
-// line deliberately lags behind the noise instead of crossfading
-// with it:
-//   0 ─ noiseFadeEnd ──────────────────────────────────────── 1
-//   (noise dissolving, starting the instant the hero is gone)
-//   0 ───────────────── textFadeStart ── textFadeEnd ──────── 1
-//        (line invisible)          (line fading in)   (held, readable)
-// noiseFadeStart is 0, so the dissolve begins the moment #signal
-// is reached (i.e. the instant the hero scrolls out of view).
-// textFadeStart sits after noiseFadeEnd, so the line only starts
-// appearing once the noise has fully cleared. The tail after
-// textFadeEnd is empty runway — a beat to read the line before
-// it scrolls away.
+// The noise fade now spans TWO different reference frames, stitched
+// into one continuous scroll-based progress by noiseProgress() below:
+//   - it STARTS while still inside the hero, at noiseHeroStart (0.6)
+//     = 60% of the hero's own height scrolled — i.e. the hero is
+//     60% scrolled out of view, still 40% on screen.
+//   - it ENDS at noiseFadeEnd (0.75), same as before: a fraction of
+//     #signal's own pinned scroll range (not the hero's).
+// An ease-out curve (easeOutCubic) is applied on top of that raw
+// 0–1 span: fast at first, then a long slow tail, rather than linear.
+//
+// Text is UNCHANGED by this — it's still keyed to #signal's own
+// local progress (textFadeStart/End below), which only starts moving
+// once the hero has fully scrolled away. Since noise now starts
+// fading earlier (during the hero itself), its ~50%-faded point will
+// land before #signal even begins, so text will start later than
+// "noise 50% faded" now implies — that sync is broken until text's
+// timing gets a follow-up pass, if that relationship still matters.
 const SIGNAL = {
-  noiseFadeStart: 0,    noiseFadeEnd: 0.12,
-  textFadeStart:  0.16, textFadeEnd:  0.21,
+  noiseHeroStart: 0.6,
+  noiseFadeEnd:   0.75,
+  textFadeStart:  0.175, textFadeEnd:  0.5,
 };
+
+// Fast-then-slow: reaches 50% at t≈0.2063 (solve 1-(1-t)^3=0.5), so
+// half the visual fade happens in the first ~21% of the noise's
+// scroll window, with a long slow tail for the remaining ~79%.
+function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
 
 const field = new NoiseField(canvas, NOISE);
 // Text opacity is smoothed (lerped) inside the same per-frame
@@ -488,10 +498,22 @@ function remap(raw, start, end){
   return Math.min(1, Math.max(0, (raw - start) / (end - start)));
 }
 
+// Unified 0–1 progress for the noise fade, spanning from inside the
+// hero (noiseHeroStart fraction of hero height) through into #signal
+// (noiseFadeEnd fraction of signal's range) — two different element
+// references stitched into one continuous scrollY-based measure.
+function noiseProgress(){
+  const heroH = heroEl.offsetHeight;
+  const signalScrollable = signalEl.offsetHeight - window.innerHeight;
+  const startY = SIGNAL.noiseHeroStart * heroH;
+  const endY = heroH + SIGNAL.noiseFadeEnd * Math.max(0, signalScrollable);
+  if (endY <= startY) return window.scrollY >= endY ? 1 : 0;
+  return Math.min(1, Math.max(0, (window.scrollY - startY) / (endY - startY)));
+}
+
 function onScroll(){
-  const raw = signalProgress();
-  field.setFadeTarget(remap(raw, SIGNAL.noiseFadeStart, SIGNAL.noiseFadeEnd));
-  textTarget = remap(raw, SIGNAL.textFadeStart, SIGNAL.textFadeEnd);
+  field.setFadeTarget(easeOutCubic(noiseProgress()));
+  textTarget = remap(signalProgress(), SIGNAL.textFadeStart, SIGNAL.textFadeEnd);
   hint.style.opacity = (window.scrollY>40 || interacted) ? '0' : '1';
 }
 window.addEventListener('scroll', onScroll, {passive:true});

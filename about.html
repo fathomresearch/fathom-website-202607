@@ -67,20 +67,19 @@ a{text-decoration:none;color:inherit;}
 /* ── TEAM ── */
 /* MEET-THE-TEAM tab — teal cue at the bottom of the navy hero, same width as the spine/pic below */
 .meet-tab{width:calc((100% - 2*var(--pad) - 5*40px) / 6);height:46px;margin:auto 0 0 var(--pad);background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
-/* THE TEAM — full-height teal spine (= pic width) bleeds top & bottom; founder + 5 members on one aligned baseline */
+/* THE TEAM — full-height teal spine (= pic width) bleeds top & bottom; founder + 6 members on one aligned baseline */
 .team{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--warm);overflow:hidden;}
-.team::before{content:'';position:absolute;top:0;bottom:0;left:var(--pad);width:calc((100% - 2*var(--pad) - 5*40px) / 6);background:var(--teal);z-index:0;}
-.team-inner{position:relative;z-index:1;display:grid;grid-template-columns:calc((100% - 5*40px) / 6) 1fr;gap:40px;align-items:start;padding:64px var(--pad);}
-/* Photo placeholders — fill their column so every pic is the same width and top-aligned */
-.ph-block{aspect-ratio:4/5;border-radius:3px;background:linear-gradient(145deg,#13294d,#0A1628);display:flex;align-items:center;justify-content:center;}
-.ph-initials{font-family:'Spectral',serif;font-size:22px;font-weight:300;color:rgba(0,214,179,.5);letter-spacing:.06em;}
+.team::before{content:'';position:absolute;top:0;bottom:0;left:var(--pad);width:calc((100% - 2*var(--pad) - 6*40px) / 7);background:var(--teal);z-index:0;}
+.team-inner{position:relative;z-index:1;display:grid;grid-template-columns:calc((100% - 6*40px) / 7) 1fr;gap:40px;align-items:start;padding:64px var(--pad);}
+/* Team photos — fill their column so every pic is the same width and top-aligned */
+.tm-photo{aspect-ratio:4/5;border-radius:3px;object-fit:cover;display:block;width:100%;background:linear-gradient(145deg,#13294d,#0A1628);}
 /* Founder — on the teal spine, light type; label floats above the pic at the same 16px gap the names sit below */
 .founder-col{position:relative;text-align:center;}
 .founder-col-role{position:absolute;left:0;right:0;bottom:100%;margin-bottom:16px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.08em;}
 .founder-col-ph{width:100%;margin:0 0 16px;}
 .founder-col-name{font-family:'Spectral',serif;font-size:24px;font-weight:400;color:#fff;letter-spacing:-.02em;}
 /* Member row */
-.team-row{display:grid;grid-template-columns:repeat(5,1fr);gap:40px;}
+.team-row{display:grid;grid-template-columns:repeat(6,1fr);gap:40px;}
 .tm{text-align:center;}
 .tm-photo-ph{width:100%;margin-bottom:16px;}
 .tm-name{font-family:'Spectral',serif;font-size:19px;font-weight:400;color:var(--navy);margin-bottom:5px;letter-spacing:-.01em;}
@@ -147,7 +146,7 @@ a{text-decoration:none;color:inherit;}
   .team-row{grid-template-columns:repeat(3,1fr);gap:32px 28px;}
   .founder-col{background:var(--teal);max-width:300px;margin:0 auto;padding:34px 28px 32px;border-radius:3px;}
   .founder-col-role{position:static;margin-bottom:16px;}
-  .founder-col-ph{width:160px;margin:0 auto 16px;}
+  .founder-col-ph{margin:0 auto 16px;}
   .meet-tab{width:220px;}
   .radical-text{font-size:48px;}
   .radical-bar{height:34px;}
@@ -214,33 +213,38 @@ a{text-decoration:none;color:inherit;}
   <div class="team-inner sa">
     <div class="founder-col">
       <span class="founder-col-role">Founder &amp; CEO</span>
-      <div class="ph-block founder-col-ph"><span class="ph-initials">DB</span></div>
+      <img class="tm-photo founder-col-ph" src="images/team/Danni-Bayn.jpg" alt="Danni Bayn">
       <h3 class="founder-col-name">Danni Bayn</h3>
     </div>
     <div class="team-row">
       <div class="tm sa s1">
-        <div class="ph-block tm-photo-ph"><span class="ph-initials">TC</span></div>
+        <img class="tm-photo tm-photo-ph" src="images/team/Tom-Colville.jpg" alt="Tom Colville">
         <h4 class="tm-name">Tom Colville</h4>
         <p class="tm-role">Director of Analytics</p>
       </div>
       <div class="tm sa s2">
-        <div class="ph-block tm-photo-ph"><span class="ph-initials">KW</span></div>
+        <img class="tm-photo tm-photo-ph" src="images/team/Kelvin-Wong.jpeg" alt="Kelvin Wong">
         <h4 class="tm-name">Kelvin Wong</h4>
         <p class="tm-role">Manager, Consumer Insights &amp; Analytics</p>
       </div>
       <div class="tm sa s3">
-        <div class="ph-block tm-photo-ph"><span class="ph-initials">MI</span></div>
+        <img class="tm-photo tm-photo-ph" src="images/team/Marcel-Iam.jpg" alt="Marcel Iam">
         <h4 class="tm-name">Marcel Iam</h4>
         <p class="tm-role">Manager, Consumer Insights &amp; Market Research</p>
       </div>
       <div class="tm sa s4">
-        <div class="ph-block tm-photo-ph"><span class="ph-initials">PG</span></div>
+        <img class="tm-photo tm-photo-ph" src="images/team/Preeti-Ganesh.jpg" alt="Preeti Ganesh">
         <h4 class="tm-name">Preeti Ganesh</h4>
         <p class="tm-role">AI Strategist / Insights Analyst</p>
       </div>
       <div class="tm sa s5">
-        <div class="ph-block tm-photo-ph"><span class="ph-initials">NP</span></div>
+        <img class="tm-photo tm-photo-ph" src="images/team/Namasya-Patel.png" alt="Namasya Patel">
         <h4 class="tm-name">Namasya Patel</h4>
+        <p class="tm-role">AI Strategist / Insights Analyst</p>
+      </div>
+      <div class="tm sa s6">
+        <img class="tm-photo tm-photo-ph" src="images/team/Ellaine-Tsai.jpeg" alt="Ellaine Tsai">
+        <h4 class="tm-name">Ellaine Tsai</h4>
         <p class="tm-role">AI Strategist / Insights Analyst</p>
       </div>
     </div>

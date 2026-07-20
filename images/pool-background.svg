@@ -1,0 +1,158 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Radial gradient for pool background - darker edges, lighter center -->
+    <radialGradient id="poolGradient" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#0A3A52;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#082D40;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#071F2E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#05141F;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Bubble gradient (semi-transparent white) -->
+    <radialGradient id="smallBubble" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgba(180,220,230,0.2);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(120,160,180,0.05);stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Highlight for bubbles -->
+    <radialGradient id="bubbleHighlight" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.7);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Pool background -->
+  <rect width="1920" height="1080" fill="url(#poolGradient)"/>
+  
+  <!-- Scattered bubbles - varying sizes and positions -->
+  <!-- Top left cluster -->
+  <circle cx="80" cy="60" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="82" cy="58" r="3" fill="url(#bubbleHighlight)" opacity="0.8"/>
+  <circle cx="120" cy="45" r="12" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="122" cy="42" r="4" fill="url(#bubbleHighlight)" opacity="0.7"/>
+  <circle cx="150" cy="80" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="200" cy="55" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="240" cy="90" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="280" cy="65" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Top center -->
+  <circle cx="400" cy="40" r="11" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="402" cy="37" r="4" fill="url(#bubbleHighlight)" opacity="0.8"/>
+  <circle cx="450" cy="75" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="500" cy="55" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="550" cy="85" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="600" cy="50" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="650" cy="70" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Top right cluster -->
+  <circle cx="1200" cy="60" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1250" cy="45" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1300" cy="80" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1350" cy="55" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1400" cy="70" r="11" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1450" cy="50" r="6" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1500" cy="85" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1550" cy="60" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1600" cy="75" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1650" cy="55" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1700" cy="80" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1750" cy="65" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1800" cy="70" r="10" fill="url(#smallBubble)" opacity="0.6"/>
+  
+  <!-- Middle left -->
+  <circle cx="50" cy="200" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="100" cy="250" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="150" cy="220" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="200" cy="280" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="250" cy="240" r="10" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="300" cy="270" r="7" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Center area - more scattered -->
+  <circle cx="400" cy="200" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="500" cy="250" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="600" cy="220" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="700" cy="280" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="800" cy="240" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="900" cy="270" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1000" cy="230" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1100" cy="260" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  
+  <!-- Middle right -->
+  <circle cx="1300" cy="200" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1400" cy="250" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1500" cy="220" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1600" cy="280" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1700" cy="240" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1800" cy="270" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  
+  <!-- Center cluster -->
+  <circle cx="800" cy="400" r="10" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="802" cy="397" r="4" fill="url(#bubbleHighlight)" opacity="0.8"/>
+  <circle cx="850" cy="420" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="900" cy="390" r="12" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="902" cy="387" r="4" fill="url(#bubbleHighlight)" opacity="0.8"/>
+  <circle cx="950" cy="410" r="7" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1000" cy="430" r="9" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1050" cy="400" r="6" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Lower left -->
+  <circle cx="100" cy="500" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="150" cy="550" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="200" cy="520" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="250" cy="580" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="300" cy="540" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="350" cy="570" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Lower center -->
+  <circle cx="500" cy="600" r="11" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="502" cy="597" r="4" fill="url(#bubbleHighlight)" opacity="0.8"/>
+  <circle cx="600" cy="650" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="700" cy="620" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="800" cy="680" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="900" cy="640" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1000" cy="670" r="6" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1100" cy="630" r="9" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1200" cy="660" r="7" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Lower right -->
+  <circle cx="1400" cy="600" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1500" cy="650" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1600" cy="620" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1700" cy="680" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1800" cy="640" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  
+  <!-- Bottom left cluster -->
+  <circle cx="150" cy="800" r="9" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="200" cy="850" r="7" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="250" cy="820" r="10" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="300" cy="880" r="6" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="350" cy="840" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  
+  <!-- Bottom center cluster -->
+  <circle cx="600" cy="900" r="11" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="602" cy="897" r="4" fill="url(#bubbleHighlight)" opacity="0.8"/>
+  <circle cx="700" cy="950" r="8" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="800" cy="920" r="10" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="900" cy="980" r="7" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1000" cy="940" r="9" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1100" cy="970" r="6" fill="url(#smallBubble)" opacity="0.5"/>
+  
+  <!-- Bottom right cluster -->
+  <circle cx="1400" cy="900" r="8" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1500" cy="950" r="10" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1600" cy="920" r="7" fill="url(#smallBubble)" opacity="0.6"/>
+  <circle cx="1700" cy="980" r="9" fill="url(#smallBubble)" opacity="0.5"/>
+  <circle cx="1750" cy="940" r="6" fill="url(#smallBubble)" opacity="0.6"/>
+  
+  <!-- Tiny sparkles scattered throughout -->
+  <circle cx="300" cy="150" r="2" fill="white" opacity="0.8"/>
+  <circle cx="700" cy="300" r="2" fill="white" opacity="0.7"/>
+  <circle cx="1200" cy="450" r="2" fill="white" opacity="0.8"/>
+  <circle cx="400" cy="700" r="2" fill="white" opacity="0.7"/>
+  <circle cx="1500" cy="800" r="2" fill="white" opacity="0.8"/>
+  <circle cx="900" cy="150" r="2" fill="white" opacity="0.7"/>
+  <circle cx="1600" cy="350" r="2" fill="white" opacity="0.8"/>
+  <circle cx="200" cy="600" r="2" fill="white" opacity="0.7"/>
+  <circle cx="1100" cy="750" r="2" fill="white" opacity="0.8"/>
+</svg>

@@ -1,0 +1,5 @@
+# Internal working/prototype folder -- not part of the deployed site.
+references/
+
+.DS_Store
+.claude/settings.local.json

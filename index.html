@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fathom Research &amp; Strategy — Landing Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:#fff;color:#2C3E50;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+::selection{background:#00D6B3;color:#050B14;}
+
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#0e2038;
+  --teal:#00D6B3; --teal-h:#009E85;
+  --white:#fff; --warm:#F8F7F4;
+  --body:#2C3E50; --muted:#6B7280; --border:#ECEAE6;
+  --bdr:rgba(255,255,255,.08);
+  --max:1200px; --pad:80px;
+}
+
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:14px 32px;border-radius:4px;letter-spacing:.025em;transition:background .2s,transform .15s;border:0;cursor:pointer;font-family:inherit;}
+.btn:hover{background:var(--teal-h);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:12.5px 30px;border-radius:4px;letter-spacing:.025em;transition:border-color .2s,background .2s;background:transparent;cursor:pointer;font-family:inherit;}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+
+.label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+.label::before{content:'';display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;}
+
+.container{max-width:var(--max);margin:0 auto;}
+.section{padding:96px var(--pad);}
+
+/* ── NAV — identical to the live site ── */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
+.nav-link:hover{color:rgba(255,255,255,.92);}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-h);}
+@media(max-width:820px){.nav-link{display:none;}}
+
+/* ── FIXED NOISE BACKGROUND ──
+   Sits behind everything (z-index:0), pinned to the viewport so
+   it does not scroll with the page. It fades out as the hero is
+   scrolled past, so by the time the next section arrives, the
+   noise has fully dissolved rather than being cut off abruptly. */
+.noise-bg{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(ellipse 900px 700px at 50% 38%, var(--navy-mid) 0%, var(--navy) 48%, var(--navy-deep) 100%);
+}
+#noise-canvas{position:absolute;inset:0;width:100%;height:100%;}
+
+/* ── HERO ── */
+.hero{position:relative;z-index:1;min-height:calc(100vh - 72px);overflow:hidden;display:flex;flex-direction:column;}
+
+.hero-inner{
+  position:relative;z-index:2;flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:96px 24px;
+  pointer-events:none;
+}
+.hero h1{
+  font-family:'Spectral',serif;font-weight:300;
+  font-size:clamp(34px,5.4vw,68px);
+  line-height:1.12;letter-spacing:-.02em;color:#fff;
+  max-width:1120px;
+  text-shadow:0 2px 28px rgba(0,0,0,.7), 0 1px 4px rgba(0,0,0,.55);
+  filter:blur(16px);opacity:0;
+  animation:resolve 1.6s cubic-bezier(.16,1,.3,1) .2s forwards;
+}
+.hero h1 em{font-style:italic;font-weight:300;color:rgba(255,255,255,.6);}
+/* each line is its own no-wrap box, so the letter-spacing swing in
+   the resolve animation can never trigger a mid-line re-wrap — it
+   can only ever overflow briefly, which .hero's overflow:hidden
+   clips silently instead of jumping line counts.
+   Desktop keeps the original two-line break; mobile swaps in a
+   hardcoded three-line break instead (below), since forcing the
+   full "Research should tell you what to do" onto one no-wrap
+   line doesn't fit mobile widths at all. */
+.hero h1 .hl-set{display:block;}
+.hero h1 .hl-line{display:block;white-space:nowrap;}
+.hero h1 .hl-mobile{display:none;}
+@media(max-width:820px){
+  .hero h1 .hl-desktop{display:none;}
+  .hero h1 .hl-mobile{display:block;}
+  /* slightly smaller than the desktop clamp's 34px floor, so the
+     longest hardcoded line ("Research should tell you") still
+     fits narrow phones like iPhone SE (375px) */
+  .hero h1{font-size:clamp(28px,7.2vw,44px);}
+}
+
+.hero-inner .btn{pointer-events:auto;}
+
+.hero-sub{
+  font-size:17px;line-height:1.68;color:rgba(255,255,255,.55);
+  max-width:440px;margin-top:22px;
+  opacity:0;animation:fadeUp .8s ease 1s forwards;
+}
+
+.hero-ctas{
+  margin-top:40px;
+  opacity:0;animation:fadeUp .8s ease 1.3s forwards;
+}
+
+@keyframes resolve{
+  0%{filter:blur(16px);opacity:0;letter-spacing:.12em;}
+  60%{filter:blur(2px);opacity:1;}
+  100%{filter:blur(0);opacity:1;letter-spacing:-.02em;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.hero-hint{
+  position:absolute;left:28px;bottom:26px;z-index:2;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;
+  color:rgba(0,214,179,.4);transition:opacity .5s;pointer-events:none;
+}
+.hero-hint b{color:var(--teal);font-weight:500;}
+
+.hero-scroll{
+  position:absolute;right:32px;bottom:26px;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;
+  color:rgba(255,255,255,.34);text-transform:uppercase;
+  pointer-events:none;
+}
+.hero-scroll .line{width:1px;height:26px;background:linear-gradient(180deg,var(--teal),transparent);animation:sink 1.8s ease-in-out infinite;}
+@keyframes sink{0%{transform:translateY(-6px);opacity:.2;}50%{opacity:1;}100%{transform:translateY(6px);opacity:.2;}}
+
+@media(prefers-reduced-motion:reduce){
+  .hero h1,.hero-sub,.hero-ctas{animation:none;opacity:1;filter:none;}
+  .hero-scroll .line{animation:none;}
+}
+@media(max-width:600px){
+  .hero-scroll{display:none;}
+}
+
+/* ── SIGNAL — empty noisy runway between hero and content ──
+   Transparent section: the fixed noise-bg keeps showing through
+   as the user scrolls it. The line inside is pinned via sticky
+   while the section's extra height scrolls past, so its opacity
+   can be scrubbed by scroll position instead of just toggled.
+
+   TUNING:
+   - height below (260vh) is the total scroll runway on
+     larger screens; the mobile breakpoint sets its own, longer
+     value further down. Raising either stretches the hold time
+     at the end (line stays put longer) without slowing the fades
+     themselves, since SIGNAL below is fraction-based.
+   - SIGNAL.noiseFadeStart/End and textFadeStart/End in the script
+     below control the sequence: noise stays put, then dissolves,
+     then (starting later, once mostly/fully gone) the line fades
+     in, then holds for the remainder of the runway. */
+.signal{
+  position:relative; z-index:1;
+  height:260vh;
+  background:transparent;
+}
+.signal-sticky{
+  position:sticky; top:72px;
+  height:calc(100vh - 72px);
+  display:flex; align-items:center; justify-content:center;
+  padding:0 24px;
+  pointer-events:none;
+}
+.signal-line{
+  font-family:'Spectral',serif;font-weight:300;
+  font-size:clamp(26px,4vw,48px);
+  line-height:1.34;letter-spacing:-.01em;
+  color:#fff;max-width:760px;text-align:center;
+  opacity:0;
+}
+.signal-line em{font-style:italic;font-weight:300;color:rgba(255,255,255,.66);}
+@media(max-width:600px){.signal{height:340vh;}}
+
+/* ── PROPOSITION — reused verbatim from the live site ── */
+.section-white{background:#fff;color:var(--navy);position:relative;z-index:1;}
+.prop-grid{display:grid;grid-template-columns:55fr 45fr;gap:72px;align-items:start;}
+.prop-hl{font-family:'Spectral',serif;font-size:46px;font-weight:400;line-height:1.12;color:var(--navy);letter-spacing:-.015em;}
+.prop-body{font-size:17px;font-weight:400;line-height:1.75;color:var(--body);padding-top:8px;}
+.prop-body p+p{margin-top:18px;}
+.prop-body strong{font-weight:600;color:var(--navy);}
+.metrics{display:flex;gap:0;margin-top:64px;border-top:2px solid var(--teal);}
+.metric{flex:1;padding:28px 32px 0 0;}
+.metric+.metric{padding-left:32px;border-left:1px solid var(--border);}
+.metric-num{font-size:52px;font-weight:700;color:var(--navy);letter-spacing:-.025em;line-height:1;}
+.metric-num .unit{font-size:.55em;letter-spacing:0;font-weight:600;}
+.metric-num.teal{color:var(--teal);}
+.metric-label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:10px;}
+@media(max-width:900px){.prop-grid{grid-template-columns:1fr;gap:32px;}.metrics{flex-direction:column;}.metric,.metric+.metric{padding:20px 0;border-left:none;border-top:1px solid var(--border);}}
+
+.sa{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.s1{transition-delay:.1s;}.s2{transition-delay:.2s;}.s3{transition-delay:.3s;}
+
+/* ── FOOTER — reused as-is ── */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);position:relative;z-index:1;}
+.footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:'Spectral',serif;font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(max-width:820px){:root{--pad:24px;}.prop-hl{font-size:34px;}}
+</style>
+</head>
+<body>
+
+<div class="noise-bg"><canvas id="noise-canvas"></canvas></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <h1>
+      <span class="hl-set hl-desktop"><span class="hl-line">Research should tell you what to do</span><span class="hl-line">&mdash; <em>not just what happened.</em></span></span>
+      <span class="hl-set hl-mobile"><span class="hl-line">Research should tell you</span><span class="hl-line">what to do</span><span class="hl-line">&mdash; <em>not just what happened.</em></span></span>
+    </h1>
+    <p class="hero-sub">We challenge what you think research is.</p>
+    <div class="hero-ctas">
+      <a href="#work" class="btn">See What We Do</a>
+    </div>
+  </div>
+  <div class="hero-hint" id="hint">&gt;_ move your cursor &mdash; <b>that&rsquo;s the sonar</b></div>
+  <div class="hero-scroll"><span>Fathom</span><span class="line"></span></div>
+</header>
+
+<section class="signal" id="signal">
+  <div class="signal-sticky">
+    <p class="signal-line" id="signal-line">We&rsquo;re fast, we&rsquo;re focused, and we cut through the noise <em>to tell you what to do with it.</em></p>
+  </div>
+</section>
+
+<section class="section section-white" id="work">
+  <div class="container">
+    <span class="label sa">What we do differently</span>
+    <div class="prop-grid">
+      <div class="sa s1">
+        <h2 class="prop-hl">Depth and speed<br>aren&rsquo;t a trade-off.<br>They&rsquo;re the point.</h2>
+      </div>
+      <div class="prop-body sa s2">
+        <p>Most research firms make you choose. Go deep and wait months. Move fast and accept shallow. We built Fathom because that choice is false.</p>
+        <p>AI handles the processing. Our researchers handle the judgment. What you get is both &mdash; rigorous, focused insight with a clear recommendation. <strong>Not a deck. A decision.</strong></p>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric sa s1"><div class="metric-num">48<span class="unit"> hrs</span></div><div class="metric-label">Category scan</div></div>
+      <div class="metric sa s2"><div class="metric-num">2&ndash;3<span class="unit"> wks</span></div><div class="metric-label">Full strategic study</div></div>
+      <div class="metric sa s3"><div class="metric-num teal">100<span class="unit">%</span></div><div class="metric-label">Recommendations, not readouts</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+      <nav class="footer-nav">
+        <a href="work.html" class="footer-link">Work</a>
+        <a href="what-we-do.html" class="footer-link">What We Do</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+        <a href="tel:+16123263993">(612) 326-3993</a>
+      </div>
+    </div>
+    <div class="footer-close">
+      <p class="footer-tagline">Clarity beneath the surface.</p>
+      <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// NOISE FIELD — words sit as murk over deep navy. No physics is
+// tied to the cursor (no push, no rings) — only a static proximity
+// glow reveals words near it, so there is no ripple/wobble motion.
+// On scroll, the whole field fades and gently disperses outward
+// from center (mirroring the reference concept's scroll behaviour),
+// so the noise has fully dissolved by the time the next section
+// arrives rather than being cut off abruptly.
+// ============================================================
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const NOISE = [
+  'friday deadline, brief landed today','six weeks minimum','the deck was beautiful',
+  'nobody knew what to do with it','too many assumptions','everyone has a take',
+  'what does it mean','analysis paralysis','conflicting signals','filed in a shared drive',
+  'vibes and caffeine','unstructured feedback','no clear answer','three months to wait',
+  'survey says','so what','just a hunch','cant defend it with a hunch','another deck',
+  'shelved research','scattered data','who has time','timeline: today','null','undefined',
+  'insight not found','[no signal]','too much noise','read the room, not the report',
+  'proposal due wednesday','decision without confidence','404'
+];
+
+const GLYPHS = '!@#$%&*<>|\\~^░▒▓╬═01100101';
+function corrupt(w, amt){
+  return w.split('').map(c => c!==' ' && Math.random()<amt ? GLYPHS[Math.floor(Math.random()*GLYPHS.length)] : c).join('');
+}
+function decorate(w){
+  const r = Math.random();
+  if (r<.14) return '> '+w;
+  if (r<.24) return '// '+w;
+  if (r<.32) return '['+w+']';
+  return w;
+}
+
+class NoiseField{
+  constructor(canvas, words){
+    this.cv=canvas; this.ctx=canvas.getContext('2d');
+    this.words=words; this.particles=[];
+    this.mouse={x:-9999,y:-9999};
+    this.W=0; this.H=0; this.dpr=Math.min(devicePixelRatio||1,2);
+    this._fade=0; this._fadeTarget=0; // 0 = fully visible, 1 = fully dissolved
+    this._scan=0;
+    this._mm = e=>{ this.mouse.x=e.clientX; this.mouse.y=e.clientY; };
+  }
+  mount(onFade){
+    this._onFade = onFade || null;
+    this.resize();
+    window.addEventListener('resize', this._onResize=()=>this.resize());
+    document.addEventListener('mousemove', this._mm);
+    this._tick();
+  }
+  setFadeTarget(v){ this._fadeTarget = v; }
+  resize(){
+    this.W=window.innerWidth; this.H=window.innerHeight;
+    this.cv.width=this.W*this.dpr; this.cv.height=this.H*this.dpr;
+    this.cv.style.width=this.W+'px'; this.cv.style.height=this.H+'px';
+    this.ctx.setTransform(this.dpr,0,0,this.dpr,0,0);
+    this._make();
+  }
+  _make(){
+    this.particles=[];
+    // density/alpha/glitch pacing matched to the mockup-3 reference field,
+    // then eased back ~25% (higher divisor = fewer particles)
+    const n = Math.floor((this.W*this.H)/5867);
+    for(let i=0;i<n;i++){
+      const x=Math.random()*this.W, y=Math.random()*this.H;
+      const w = decorate(this.words[Math.floor(Math.random()*this.words.length)]);
+      this.particles.push({
+        x,y,w,dw:w,
+        sz:9+Math.random()*11,
+        rot:(Math.random()-.5)*.1,
+        al:.10+Math.random()*.38,
+        gt:Math.floor(Math.random()*180+60), gl:0
+      });
+    }
+  }
+  _tick(){
+    this._fade += (this._fadeTarget - this._fade) * .1;
+    this._draw();
+    if(this._onFade) this._onFade(this._fade);
+    this._raf = requestAnimationFrame(()=>this._tick());
+  }
+  _draw(){
+    const {ctx,W,H,mouse:m,particles:ps} = this;
+    ctx.clearRect(0,0,W,H);
+    const fade = this._fade;
+    const visible = 1 - fade;
+    if(visible < 0.01) return; // fully dissolved — nothing to draw
+
+    // faint scanline sweep — ambient texture, matched to mockup-3
+    this._scan = (this._scan + .35) % H;
+    ctx.fillStyle = `rgba(0,214,179,${.025*visible})`;
+    ctx.fillRect(0, this._scan, W, 1.5);
+
+    const cx = W*0.5, cy = H*0.5;
+
+    // ── QUIET CENTER ──
+    // A fixed elliptical zone at the viewport's center where noise
+    // is suppressed — not tied to the headline element, just "the
+    // middle of the screen stays calmer than the edges." Soft
+    // falloff, no hard boundary.
+    const qz = { rx: Math.max(220, W*0.24), ry: Math.max(140, H*0.20) };
+
+    for(const p of ps){
+      if(!REDUCED){
+        p.gt--;
+        if(p.gt<=0){ p.gl=3+Math.floor(Math.random()*7); p.gt=140+Math.floor(Math.random()*220); }
+        if(p.gl>0){ p.gl--; p.dw=corrupt(p.w,.38); if(!p.gl) p.dw=p.w; }
+      }
+
+      // static proximity glow — brightness only, no movement
+      const dx=p.x-m.x, dy=p.y-m.y, dist=REDUCED?9999:Math.hypot(dx,dy);
+      const near = Math.max(0, 1 - dist/170);
+
+      const qnx=(p.x-cx)/qz.rx, qny=(p.y-cy)/qz.ry, qed=Math.hypot(qnx,qny);
+      const quiet = qed<1 ? 1 : Math.max(0, 1-(qed-1)/0.6);
+
+      const alpha = Math.min(1, p.al + near*near*.85) * visible * (1-quiet);
+      if(alpha<0.01) continue;
+
+      // gentle outward dispersal as the field dissolves on scroll
+      const ddx = p.x-cx, ddy = p.y-cy, dd = Math.hypot(ddx,ddy)||1;
+      const disperse = fade*fade*90;
+      const px = p.x + (ddx/dd)*disperse;
+      const py = p.y + (ddy/dd)*disperse;
+
+      ctx.save();
+      ctx.translate(px,py); ctx.rotate(p.rot);
+      ctx.font = `${p.sz}px 'IBM Plex Mono', monospace`;
+      ctx.fillStyle = near>0.55 ? `rgba(255,255,255,${alpha})` : `rgba(0,214,179,${alpha})`;
+      ctx.fillText(p.dw,0,0);
+      ctx.restore();
+    }
+  }
+}
+
+const canvas = document.getElementById('noise-canvas');
+const hint = document.getElementById('hint');
+const signalEl = document.getElementById('signal');
+const signalLine = document.getElementById('signal-line');
+
+// ── TUNING KNOBS ────────────────────────────────────────────
+// Fractions (0–1) of the #signal section's pinned scroll range.
+// Noise and text each get their own independent window, so the
+// line deliberately lags behind the noise instead of crossfading
+// with it:
+//   0 ─ noiseFadeEnd ──────────────────────────────────────── 1
+//   (noise dissolving, starting the instant the hero is gone)
+//   0 ───────────────── textFadeStart ── textFadeEnd ──────── 1
+//        (line invisible)          (line fading in)   (held, readable)
+// noiseFadeStart is 0, so the dissolve begins the moment #signal
+// is reached (i.e. the instant the hero scrolls out of view).
+// textFadeStart sits after noiseFadeEnd, so the line only starts
+// appearing once the noise has fully cleared. The tail after
+// textFadeEnd is empty runway — a beat to read the line before
+// it scrolls away.
+const SIGNAL = {
+  noiseFadeStart: 0,    noiseFadeEnd: 0.12,
+  textFadeStart:  0.16, textFadeEnd:  0.21,
+};
+
+const field = new NoiseField(canvas, NOISE);
+// Text opacity is smoothed (lerped) inside the same per-frame
+// callback the noise field already runs, so both stay equally
+// smooth even though their targets are now independent.
+let textTarget = 0, textCurrent = 0;
+field.mount(()=>{
+  textCurrent += (textTarget - textCurrent) * .16;
+  signalLine.style.opacity = textCurrent;
+  signalLine.style.transform = `translateY(${(1-textCurrent)*16}px)`;
+});
+
+let interacted=false;
+document.addEventListener('mousemove', ()=>{ if(!interacted){ interacted=true; hint.style.opacity='0'; } }, {once:true});
+
+function signalProgress(){
+  const rect = signalEl.getBoundingClientRect();
+  const scrollable = signalEl.offsetHeight - window.innerHeight;
+  if (scrollable <= 0) return rect.top <= 0 ? 1 : 0;
+  return Math.min(1, Math.max(0, -rect.top / scrollable));
+}
+
+function remap(raw, start, end){
+  return Math.min(1, Math.max(0, (raw - start) / (end - start)));
+}
+
+function onScroll(){
+  const raw = signalProgress();
+  field.setFadeTarget(remap(raw, SIGNAL.noiseFadeStart, SIGNAL.noiseFadeEnd));
+  textTarget = remap(raw, SIGNAL.textFadeStart, SIGNAL.textFadeEnd);
+  hint.style.opacity = (window.scrollY>40 || interacted) ? '0' : '1';
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll('.sa').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

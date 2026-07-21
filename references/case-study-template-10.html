@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 10 — "The Cast"
+     Fathom Research & Strategy
+
+     For SEGMENTATION cases: the value was proving the "audience"
+     is really several distinct people, and naming which one to
+     build for. Signature = a gallery of segment "character" cards,
+     each with a radar fingerprint (a shape unique to that segment).
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Trap      {{TRAP_LEAD}}   (the averaging trap)
+       Method    per .mstep: {{STEP_LABEL}} {{STEP_TITLE}} {{STEP_BODY}}
+                 (the "process layer" — shareable method, no client secrets)
+       Cast      per .segment: {{SEG_NAME}} {{SEG_SIZE}} {{SEG_TENSION}} {{SEG_QUOTE}}
+                 radar data = the .plot polygon's points (5 axes, see
+                 the shared legend for axis order, clockwise from top;
+                 each vertex 0=center .. max=outer ring)
+       Priority  {{PRIORITY_LINE}}  (the segment to build for)
+       Outcome   {{OUTCOME_STAT}} {{OUTCOME_STAT_LABEL}}
+
+     PROCESS LAYER / CONFIDENTIALITY
+       Wrap any client-specific value in <span class="redacted">…</span> to
+       black it out (confidentiality as credibility — method crisp, findings
+       protected). Remove the class to reveal; or swap the .redacted rule to a
+       blur (see the CSS note). The method section + the radar framework are
+       what's shared; sizes/quotes/outcome are what you dial down per client.
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* COVER */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:16ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* THE AVERAGING TRAP */
+.trap{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.trap-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.trap-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   THE METHOD — the "process layer". Pure method, no client
+   secrets: the most shareable, rigour-signalling content there is.
+   ============================================================ */
+.method{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.method-head{max-width:var(--max);margin:0 auto clamp(40px,7vh,64px);}
+.method-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.08;letter-spacing:-.025em;color:#fff;margin-top:20px;max-width:18ch;}
+.method-steps{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(24px,3vw,44px);}
+.mstep{border-top:2px solid var(--teal);padding-top:24px;}
+.mstep-n{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
+.mstep-t{font-family:var(--serif);font-weight:400;font-size:clamp(19px,2vw,23px);line-height:1.2;letter-spacing:-.01em;color:#fff;margin-bottom:12px;}
+.mstep-b{font-size:14.5px;line-height:1.66;color:rgba(255,255,255,.6);}
+@media(max-width:820px){.method-steps{grid-template-columns:1fr 1fr;gap:32px;}}
+@media(max-width:520px){.method-steps{grid-template-columns:1fr;}}
+
+/* REDACTION MOTIF — blacks out a client-specific value while everything
+   around it stays legible. Confidentiality read as a trust signal.
+   For a "blurred" look instead, swap to: filter:blur(5px);background:none;
+   color:inherit;  (keeps the value hinted rather than hidden). */
+.redacted{color:transparent;background:var(--navy-mid);border-radius:3px;padding:0 .2em;user-select:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);}
+.segment .redacted,.close .redacted{background:#0A1628;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+
+/* ============================================================
+   THE CAST — signature. Segment cards with radar fingerprints.
+   ============================================================ */
+.cast-note{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,44px);font-size:13.5px;line-height:1.6;color:var(--muted);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.cast-note .tag{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-dim);border:1px solid var(--line);border-radius:100px;padding:5px 11px;flex-shrink:0;}
+.cast-note b{color:var(--ink);font-weight:600;}
+.cast{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.cast-head{max-width:var(--max);margin:0 auto clamp(30px,5vh,48px);}
+.cast-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin-top:20px;max-width:16ch;}
+.cast-legend{max-width:var(--max);margin:0 auto clamp(40px,6vh,64px);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px 18px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:20px;}
+.cast-legend b{color:var(--teal-dim);font-weight:500;}
+.cast-legend .k{color:var(--ink);}
+.cast-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,2.4vw,28px);}
+@media(max-width:720px){.cast-grid{grid-template-columns:1fr;}}
+.segment{background:#fff;border:1px solid var(--line);border-radius:10px;padding:clamp(26px,3vw,40px);display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,36px);align-items:center;}
+.segment.priority{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 18px 40px rgba(0,214,179,.10);background:linear-gradient(160deg,rgba(0,214,179,.05),#fff 60%);}
+.radar{width:clamp(140px,15vw,168px);height:auto;flex-shrink:0;}
+.radar .web,.radar .spoke{fill:none;stroke:rgba(10,22,40,.11);stroke-width:.6;}
+.radar .plot{fill:rgba(0,214,179,.20);stroke:var(--teal);stroke-width:1.5;stroke-linejoin:round;}
+.segment.priority .radar .plot{fill:rgba(0,214,179,.34);}
+.radar .ax{fill:var(--muted);font-family:var(--mono);font-size:7px;letter-spacing:.04em;text-transform:uppercase;}
+.radar .vtx{fill:var(--teal);}
+.seg-body{min-width:0;}
+.seg-tag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-dim);background:rgba(0,214,179,.1);border-radius:100px;padding:4px 11px;margin-bottom:14px;}
+.seg-name{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.4vw,28px);line-height:1.1;letter-spacing:-.015em;color:var(--ink);margin-bottom:6px;}
+.seg-size{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:16px;}
+.seg-tension{font-size:15px;line-height:1.6;color:var(--body);margin-bottom:16px;}
+.seg-quote{font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.5;color:var(--ink);border-top:1px solid var(--line);padding-top:14px;}
+@media(max-width:520px){.segment{grid-template-columns:1fr;justify-items:center;text-align:center;gap:20px;}.seg-quote{text-align:left;}}
+
+/* THE PRIORITY */
+.priority-sec{background:var(--navy-deep);color:#fff;padding:clamp(90px,16vh,180px) var(--pad);}
+.priority-inner{max-width:1000px;margin:0 auto;text-align:center;}
+.priority-inner .section-mark{justify-content:center;margin-bottom:40px;}
+.priority-line{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.6vw,62px);line-height:1.12;letter-spacing:-.025em;color:#fff;text-wrap:balance;}
+.priority-line em{font-style:italic;color:var(--teal);}
+
+/* OUTCOME */
+.outcome{background:var(--navy);color:#fff;padding:clamp(64px,10vh,110px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:baseline;gap:clamp(24px,4vw,56px);flex-wrap:wrap;}
+.outcome-inner .num{font-family:var(--serif);font-weight:200;font-size:clamp(52px,7vw,100px);line-height:.9;letter-spacing:-.03em;color:var(--teal);font-variant-numeric:tabular-nums;}
+.outcome-inner .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.6;max-width:40ch;}
+
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">You don&rsquo;t have an audience. <em>You have four.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on the single "customer" the whole strategy was aimed at, and why that person doesn&rsquo;t actually exist.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE AVERAGING TRAP -->
+<section class="trap" aria-label="The averaging trap">
+  <div class="trap-inner">
+    <div class="sa"><div class="section-mark">The trap</div></div>
+    <div>
+      <p class="lead sa d1">{{TRAP_LEAD}} <em>The average customer is a statistical fiction</em> &mdash; a blend of people who want opposite things, described so no one in particular is recognizable.</p>
+      <div class="prose sa d2" style="margin-top:34px;">
+        <p>A paragraph on how the client had been treating the market as one audience, and what that costs: messaging aimed at the average lands with no one, because the average is an average of contradictions.</p>
+        <p>So we stopped averaging and started <strong>sorting</strong> &mdash; and four distinct people fell out of the data, each with a shape of their own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE METHOD — process layer (shareable; no client findings) -->
+<section class="method" aria-label="How we built it">
+  <div class="method-head sa">
+    <div class="section-mark">How we built it</div>
+    <h2>We didn&rsquo;t guess the segments. We derived them.</h2>
+  </div>
+  <div class="method-steps">
+    <div class="mstep sa">
+      <div class="mstep-n">01 &middot; Design</div>
+      <div class="mstep-t">Divide, don&rsquo;t describe</div>
+      <p class="mstep-b">We profile on the attributes that actually split a market &mdash; needs, values, behaviours &mdash; not the demographics that only describe it.</p>
+    </div>
+    <div class="mstep sa d1">
+      <div class="mstep-n">02 &middot; Field</div>
+      <div class="mstep-t">Sized to survive the cut</div>
+      <p class="mstep-b">A representative sample big enough to hold up once it&rsquo;s split into pieces &mdash; <span class="redacted">N=1,200</span> across <span class="redacted">6 markets</span>.</p>
+    </div>
+    <div class="mstep sa d2">
+      <div class="mstep-n">03 &middot; Analyze</div>
+      <div class="mstep-t">Let the groups emerge</div>
+      <p class="mstep-b">A needs-based latent-class model &mdash; the segments fall out of the data instead of being drawn where we expected the lines to be.</p>
+    </div>
+    <div class="mstep sa d3">
+      <div class="mstep-n">04 &middot; Validate</div>
+      <div class="mstep-t">Distinct, stable, reachable</div>
+      <p class="mstep-b">Every segment gets pressure-tested: different enough to matter, stable enough to build on, reachable enough to act on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE CAST — signature -->
+<section class="cast" aria-label="The cast">
+  <div class="cast-head sa">
+    <div class="section-mark">The cast</div>
+    <h2>Four people, four shapes, one worth building for.</h2>
+  </div>
+  <p class="cast-note sa"><span class="tag">Redacted</span> <span>The profiling method above is ours to share; the segment sizes are the client&rsquo;s, so they&rsquo;re blacked out. <b>The shapes are real.</b></span></p>
+  <div class="cast-legend sa">
+    <span class="k">Each fingerprint profiled clockwise from top &mdash;</span>
+    <span><b>1</b> Price sensitivity</span>
+    <span><b>2</b> Brand loyalty</span>
+    <span><b>3</b> Feature appetite</span>
+    <span><b>4</b> Risk tolerance</span>
+    <span><b>5</b> Social influence</span>
+  </div>
+  <div class="cast-grid">
+
+    <!-- Each card's radar: swap the <polygon class="plot"> points to reshape the
+         fingerprint. 5 vertices, clockwise from top; center 60,60, outer ring = the
+         faint outer pentagon. The web/spokes/labels stay fixed across cards. -->
+    <article class="segment sa">
+      <svg class="radar" viewBox="-16 -4 152 120" role="img" aria-label="Segment profile">
+        <polygon class="web" points="60,14 103.75,45.79 87.05,97.21 32.95,97.21 16.25,45.79"/>
+        <polygon class="web" points="60,29.64 88.88,50.62 77.85,84.56 42.15,84.56 31.12,50.62"/>
+        <polygon class="web" points="60,44.82 74.44,55.31 68.93,72.28 51.07,72.28 45.56,55.31"/>
+        <line class="spoke" x1="60" y1="60" x2="60" y2="14"/><line class="spoke" x1="60" y1="60" x2="103.75" y2="45.79"/><line class="spoke" x1="60" y1="60" x2="87.05" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="32.95" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="16.25" y2="45.79"/>
+        <polygon class="plot" points="60,18.6 95,48.63 73.53,78.61 49.18,74.88 29.37,50.05"/>
+        <text class="ax" x="60" y="7" text-anchor="middle">Price</text><text class="ax" x="112" y="45" text-anchor="start">Loyal</text><text class="ax" x="92" y="110" text-anchor="middle">Feat</text><text class="ax" x="28" y="110" text-anchor="middle">Risk</text><text class="ax" x="8" y="45" text-anchor="end">Social</text>
+      </svg>
+      <div class="seg-body">
+        <div class="seg-name">{{SEG_NAME}} &mdash; The Maximizer</div>
+        <div class="seg-size"><span class="redacted">24%</span> of the market</div>
+        <p class="seg-tension">Wants the best of everything and will research for weeks to be sure of it. Loyal to whoever earns it, ruthless when they don&rsquo;t.</p>
+        <p class="seg-quote">&ldquo;If I&rsquo;m paying for it, it had better be the top of the line.&rdquo;</p>
+      </div>
+    </article>
+
+    <article class="segment sa">
+      <svg class="radar" viewBox="-16 -4 152 120" role="img" aria-label="Segment profile">
+        <polygon class="web" points="60,14 103.75,45.79 87.05,97.21 32.95,97.21 16.25,45.79"/>
+        <polygon class="web" points="60,29.64 88.88,50.62 77.85,84.56 42.15,84.56 31.12,50.62"/>
+        <polygon class="web" points="60,44.82 74.44,55.31 68.93,72.28 51.07,72.28 45.56,55.31"/>
+        <line class="spoke" x1="60" y1="60" x2="60" y2="14"/><line class="spoke" x1="60" y1="60" x2="103.75" y2="45.79"/><line class="spoke" x1="60" y1="60" x2="87.05" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="32.95" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="16.25" y2="45.79"/>
+        <polygon class="plot" points="60,37 77.5,54.32 84.35,93.49 43.77,82.33 46.87,55.74"/>
+        <text class="ax" x="60" y="7" text-anchor="middle">Price</text><text class="ax" x="112" y="45" text-anchor="start">Loyal</text><text class="ax" x="92" y="110" text-anchor="middle">Feat</text><text class="ax" x="28" y="110" text-anchor="middle">Risk</text><text class="ax" x="8" y="45" text-anchor="end">Social</text>
+      </svg>
+      <div class="seg-body">
+        <div class="seg-name">{{SEG_NAME}} &mdash; The Pragmatist</div>
+        <div class="seg-size"><span class="redacted">31%</span> of the market</div>
+        <p class="seg-tension">Good enough, on time, no drama. Their loyalty is really just a preference for not having to think about it again.</p>
+        <p class="seg-quote">&ldquo;I don&rsquo;t need the best. I need it to just work.&rdquo;</p>
+      </div>
+    </article>
+
+    <article class="segment sa">
+      <svg class="radar" viewBox="-16 -4 152 120" role="img" aria-label="Segment profile">
+        <polygon class="web" points="60,14 103.75,45.79 87.05,97.21 32.95,97.21 16.25,45.79"/>
+        <polygon class="web" points="60,29.64 88.88,50.62 77.85,84.56 42.15,84.56 31.12,50.62"/>
+        <polygon class="web" points="60,44.82 74.44,55.31 68.93,72.28 51.07,72.28 45.56,55.31"/>
+        <line class="spoke" x1="60" y1="60" x2="60" y2="14"/><line class="spoke" x1="60" y1="60" x2="103.75" y2="45.79"/><line class="spoke" x1="60" y1="60" x2="87.05" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="32.95" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="16.25" y2="45.79"/>
+        <polygon class="plot" points="60,46.2 90.63,50.05 70.82,74.88 35.65,93.49 38.12,52.89"/>
+        <text class="ax" x="60" y="7" text-anchor="middle">Price</text><text class="ax" x="112" y="45" text-anchor="start">Loyal</text><text class="ax" x="92" y="110" text-anchor="middle">Feat</text><text class="ax" x="28" y="110" text-anchor="middle">Risk</text><text class="ax" x="8" y="45" text-anchor="end">Social</text>
+      </svg>
+      <div class="seg-body">
+        <div class="seg-name">{{SEG_NAME}} &mdash; The Skeptic</div>
+        <div class="seg-size"><span class="redacted">18%</span> of the market</div>
+        <p class="seg-tension">Assumes every pitch is inflated until proven otherwise. Hard to win &mdash; but once convinced, tells everyone.</p>
+        <p class="seg-quote">&ldquo;Everyone says they&rsquo;re premium. Prove it.&rdquo;</p>
+      </div>
+    </article>
+
+    <article class="segment priority sa">
+      <svg class="radar" viewBox="-16 -4 152 120" role="img" aria-label="Segment profile">
+        <polygon class="web" points="60,14 103.75,45.79 87.05,97.21 32.95,97.21 16.25,45.79"/>
+        <polygon class="web" points="60,29.64 88.88,50.62 77.85,84.56 42.15,84.56 31.12,50.62"/>
+        <polygon class="web" points="60,44.82 74.44,55.31 68.93,72.28 51.07,72.28 45.56,55.31"/>
+        <line class="spoke" x1="60" y1="60" x2="60" y2="14"/><line class="spoke" x1="60" y1="60" x2="103.75" y2="45.79"/><line class="spoke" x1="60" y1="60" x2="87.05" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="32.95" y2="97.21"/><line class="spoke" x1="60" y1="60" x2="16.25" y2="45.79"/>
+        <polygon class="plot" points="60,27.8 81.88,52.89 76.23,82.33 51.88,71.16 20.62,47.21"/>
+        <text class="ax" x="60" y="7" text-anchor="middle">Price</text><text class="ax" x="112" y="45" text-anchor="start">Loyal</text><text class="ax" x="92" y="110" text-anchor="middle">Feat</text><text class="ax" x="28" y="110" text-anchor="middle">Risk</text><text class="ax" x="8" y="45" text-anchor="end">Social</text>
+      </svg>
+      <div class="seg-body">
+        <span class="seg-tag">Priority segment</span>
+        <div class="seg-name">{{SEG_NAME}} &mdash; The Overlooked</div>
+        <div class="seg-size"><span class="redacted">27%</span> of the market</div>
+        <p class="seg-tension">Ready to buy, high on social influence, and spoken to by no one &mdash; every competitor aims at the other three.</p>
+        <p class="seg-quote">&ldquo;I&rsquo;ve been looking for exactly this. Why is no one talking to me?&rdquo;</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- THE PRIORITY -->
+<section class="priority-sec" aria-label="The one to build for">
+  <div class="priority-inner sa">
+    <div class="section-mark">Who to build for</div>
+    <p class="priority-line">{{PRIORITY_LINE}} <em>&mdash; the biggest room in the market that no one else had walked into.</em></p>
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-inner sa">
+    <div class="num">27%</div><!-- swap: {{OUTCOME_STAT}} — keep it short, renders huge -->
+    <div class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; what changed once the strategy aimed at a real person instead of an average.</div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Still marketing to the average? <em>Let&rsquo;s meet the real ones.</em></h2>
+    <p>No lengthy brief required. If you know the audience you&rsquo;re trying to reach, that&rsquo;s enough to start.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

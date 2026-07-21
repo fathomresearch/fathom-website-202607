@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 5 — "The Descent"
+     Fathom Research & Strategy
+
+     For cases where the story is one of DEPTH — the presenting
+     symptom sits on the surface, the real cause runs beneath it,
+     and the truth is on the floor. Scroll descends through the
+     layers; grounds darken, then clarify as the finding surfaces.
+     Signature = a fixed depth-gauge tracking how far down you are.
+     Ties to the brand: fathom = a measure of depth.
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Layers    repeat .layer: {{LAYER_LABEL}} {{LAYER_TITLE}} {{LAYER_BODY}}
+       Surface   {{SURFACE_LINE}}  (the clarity brought up)
+       Outcome   {{OUTCOME_STAT}} {{OUTCOME_STAT_LABEL}}
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --abyss:#02060c; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* ============================================================
+   DEPTH GAUGE — signature. Fixed on the left, its marker tracks
+   how far through the descent you've scrolled; the readout counts
+   fathoms down. Hidden on narrow screens.
+   ============================================================ */
+.gauge{position:fixed;left:26px;top:50%;transform:translateY(-50%);z-index:60;height:min(56vh,420px);display:flex;gap:14px;align-items:stretch;pointer-events:none;mix-blend-mode:difference;}
+.gauge-rail{position:relative;width:2px;background:rgba(255,255,255,.25);}
+.gauge-rail .tick{position:absolute;left:-4px;width:10px;height:1px;background:rgba(255,255,255,.35);}
+.gauge-marker{position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:50%;background:var(--teal);transform:translate(-50%,-50%);box-shadow:0 0 12px rgba(0,214,179,.7);transition:top .1s linear;}
+.gauge-read{display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);}
+.gauge-read .now{color:var(--teal);}
+@media(max-width:1100px){.gauge{display:none;}}
+
+/* ============================================================
+   COVER — the surface. Zero fathoms.
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%, rgba(0,214,179,.12), transparent 55%);}
+.cover-inner{position:relative;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:16ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.cover-depth{margin-top:40px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.cover-depth::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--teal),transparent);}
+.dossier{border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* ============================================================
+   THE DESCENT — layered sections, grounds darkening downward.
+   ============================================================ */
+.descent{position:relative;}
+.layer{padding:clamp(80px,15vh,170px) var(--pad);color:#fff;}
+.layer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.layer-1{background:var(--navy);}
+.layer-2{background:var(--navy-deep);}
+.layer-3{background:var(--abyss);}
+.layer-depth{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;}
+.layer-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.layer h2{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.6vw,46px);line-height:1.12;letter-spacing:-.02em;color:#fff;text-wrap:balance;margin-bottom:8px;}
+.layer-body{font-size:17px;line-height:1.78;color:rgba(255,255,255,.66);max-width:var(--measure);}
+.layer-body p + p{margin-top:18px;}
+.layer-body strong{color:#fff;font-weight:600;}
+@media(max-width:820px){.layer-inner{grid-template-columns:1fr;gap:20px;}}
+
+/* THE SURFACING — clarity, in the light */
+.surfacing{background:var(--paper);color:var(--ink);padding:clamp(90px,16vh,190px) var(--pad);position:relative;}
+.surfacing::before{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,var(--abyss),transparent);opacity:.14;}
+.surfacing-inner{position:relative;max-width:1000px;margin:0 auto;text-align:center;}
+.surfacing-inner .section-mark{justify-content:center;margin-bottom:40px;}
+.surfacing-line{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.6vw,62px);line-height:1.12;letter-spacing:-.025em;color:var(--ink);text-wrap:balance;}
+.surfacing-line em{font-style:italic;color:var(--teal-dim);}
+
+/* OUTCOME */
+.outcome{background:var(--navy);color:#fff;padding:clamp(64px,10vh,110px) var(--pad);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:baseline;gap:clamp(24px,4vw,56px);flex-wrap:wrap;}
+.outcome-inner .num{font-family:var(--serif);font-weight:200;font-size:clamp(52px,7vw,100px);line-height:.9;letter-spacing:-.03em;color:var(--teal);font-variant-numeric:tabular-nums;}
+.outcome-inner .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);line-height:1.6;max-width:40ch;}
+
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}.gauge-marker{transition:none;}}
+</style>
+</head>
+<body>
+
+<!-- DEPTH GAUGE (signature) -->
+<div class="gauge" aria-hidden="true">
+  <div class="gauge-rail">
+    <span class="tick" style="top:0"></span><span class="tick" style="top:25%"></span>
+    <span class="tick" style="top:50%"></span><span class="tick" style="top:75%"></span>
+    <span class="tick" style="top:100%"></span>
+    <span class="gauge-marker" id="gauge-marker" style="top:0"></span>
+  </div>
+  <div class="gauge-read">
+    <span>Surface</span>
+    <span class="now" id="gauge-depth">0 fm</span>
+    <span>Floor</span>
+  </div>
+</div>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER — the surface -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">The symptom everyone could see. <em>The cause nobody had gone down for.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on what showed up on the surface, and why the real answer was further down than anyone had looked.</p>
+    <div class="cover-depth">Begin the descent &darr;</div>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE DESCENT -->
+<div class="descent" id="descent">
+
+  <section class="layer layer-1" aria-label="The surface">
+    <div class="layer-inner">
+      <div class="sa">
+        <div class="layer-depth">&mdash; The surface</div>
+        <span class="layer-kicker">What everyone could see</span>
+      </div>
+      <div class="sa d1">
+        <h2>{{LAYER_TITLE}} &mdash; the presenting symptom.</h2>
+        <div class="layer-body" style="margin-top:20px;">
+          <p>Start where the client started: the thing that was visibly wrong, the number that was off, the reaction in the room. This is the layer most research never gets past &mdash; it describes the symptom and calls it a finding.</p>
+          <p>Name why staying here would have been a mistake: the surface reading pointed at the <strong>wrong fix</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layer layer-2" aria-label="Beneath">
+    <div class="layer-inner">
+      <div class="sa">
+        <div class="layer-depth">&mdash; Beneath</div>
+        <span class="layer-kicker">What the surface was hiding</span>
+      </div>
+      <div class="sa d1">
+        <h2>{{LAYER_TITLE}} &mdash; the driver underneath the symptom.</h2>
+        <div class="layer-body" style="margin-top:20px;">
+          <p>Go one level down. What was actually producing the surface symptom? This is where the study starts earning its keep &mdash; connecting the visible problem to the mechanism behind it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layer layer-3" aria-label="The floor">
+    <div class="layer-inner">
+      <div class="sa">
+        <div class="layer-depth">&mdash; The floor</div>
+        <span class="layer-kicker">The truth at the bottom</span>
+      </div>
+      <div class="sa d1">
+        <h2>{{LAYER_TITLE}} &mdash; the thing it all rested on.</h2>
+        <div class="layer-body" style="margin-top:20px;">
+          <p>The deepest layer: the root truth that, once seen, reorganizes everything above it. Everything the client does next should be built from here, not from the surface.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- THE SURFACING -->
+<section class="surfacing" aria-label="Surfacing the clarity">
+  <div class="surfacing-inner sa">
+    <div class="section-mark">Surfaced</div>
+    <p class="surfacing-line">{{SURFACE_LINE}} <em>&mdash; the clarity that was always down there, brought up where a decision could use it.</em></p>
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-inner sa">
+    <div class="num">3&times;</div><!-- swap: {{OUTCOME_STAT}} — keep it short, renders huge -->
+    <div class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; what changed once the real cause was on the table.</div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Stuck fixing a symptom? <em>Let&rsquo;s go find the cause.</em></h2>
+    <p>No lengthy brief required. If you know what looks wrong on the surface, that&rsquo;s enough to start.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.18 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+
+// Signature: depth gauge tracks scroll progress through the descent.
+const descent = document.getElementById('descent');
+const marker = document.getElementById('gauge-marker');
+const readout = document.getElementById('gauge-depth');
+const FLOOR = 240; // fathoms at the bottom (illustrative)
+if (descent && marker) {
+  const onScroll = () => {
+    const r = descent.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = r.height;
+    const p = Math.min(1, Math.max(0, (vh * 0.5 - r.top) / total));
+    marker.style.top = (p * 100) + '%';
+    if (readout) readout.textContent = Math.round(p * FLOOR) + ' fm';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+}
+</script>
+
+</body>
+</html>

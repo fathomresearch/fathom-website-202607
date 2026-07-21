@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenge Us — Fathom Research & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:#fff;color:#2C3E50;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --navy:#0A1628;--teal:#00D6B3;--teal-h:#009E85;
+  --white:#fff;--warm:#F8F7F4;
+  --body:#2C3E50;--muted:#6B7280;--border:#ECEAE6;
+  --bdr:rgba(255,255,255,.08);--max:1200px;--pad:80px;
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.s1{transition-delay:.07s;}.s2{transition-delay:.17s;}.s3{transition-delay:.27s;}.s4{transition-delay:.37s;}.s5{transition-delay:.47s;}
+.label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+.label::before{content:'';display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;}
+.label-m{color:var(--muted);}.label-m::before{background:var(--muted);}
+.section{padding:96px var(--pad);}
+.section-sm{padding:44px var(--pad);}
+.section-lg{padding:128px var(--pad);}
+.sw{background:#fff;color:var(--navy);}
+.sn{background:var(--navy);color:#fff;}
+.swm{background:var(--warm);color:var(--navy);}
+.container{max-width:var(--max);margin:0 auto;}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:14px 32px;border-radius:4px;letter-spacing:.025em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-h);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:13px 30px;border-radius:4px;letter-spacing:.025em;transition:border-color .2s,background .2s;}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
+.nav-logo-sub{font-family:'IBM Plex Sans',sans-serif;font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
+.nav-link:hover{color:rgba(255,255,255,.92);}
+.nav-link.active{color:rgba(255,255,255,.92);font-weight:500;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-h);}
+/* HERO SHARED */
+.page-hero{padding:88px var(--pad) 80px;background:var(--navy);color:#fff;}
+.page-hl{font-family:'Spectral',serif;font-size:60px;font-weight:300;line-height:1.06;color:#fff;letter-spacing:-.025em;max-width:760px;margin-bottom:24px;}
+.page-hl em{font-style:italic;font-weight:200;color:rgba(255,255,255,.65);}
+.page-sub{font-size:18px;font-weight:400;line-height:1.7;color:rgba(255,255,255,.55);max-width:520px;}
+/* TWO-COL GRID */
+.grid-2{display:grid;grid-template-columns:55fr 45fr;gap:72px;align-items:start;}
+.grid-2-even{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+/* CASE CARDS */
+.case-card{border-radius:8px;overflow:hidden;border:.5px solid var(--border);transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;background:#fff;cursor:pointer;}
+.case-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(10,22,40,.12);}
+.case-img-wrap{position:relative;overflow:hidden;height:240px;}
+.case-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.08) brightness(.9);transition:transform .45s cubic-bezier(.25,.46,.45,.94);}
+.case-card:hover .case-img{transform:scale(1.04);}
+.case-img-wrap::before{content:'';position:absolute;inset:0;background:rgba(0,215,132,.12);mix-blend-mode:color;z-index:1;pointer-events:none;}
+.case-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,transparent 40%,rgba(10,22,40,.5) 100%);z-index:2;pointer-events:none;}
+.case-body{padding:22px 22px 26px;}
+.case-sector{font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.case-sector::before{content:'';display:block;width:14px;height:1.5px;background:var(--teal);}
+.case-hook{font-family:'Spectral',serif;font-size:19px;font-weight:400;line-height:1.3;color:var(--navy);margin-bottom:8px;letter-spacing:-.005em;}
+.case-brief{font-size:14px;font-weight:400;line-height:1.65;color:var(--muted);margin-bottom:18px;}
+.case-read{font-size:13px;font-weight:500;color:var(--navy);opacity:.4;transition:opacity .2s;}
+.case-card:hover .case-read{opacity:1;}
+/* PLACEHOLDER CARD */
+.case-placeholder{border-radius:8px;border:.5px dashed var(--border);background:var(--warm);min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;}
+.ph-label{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:8px;justify-content:center;}
+.ph-label::before{content:'';display:block;width:14px;height:1.5px;background:var(--teal);}
+.ph-title{font-family:'Spectral',serif;font-size:18px;font-weight:400;color:var(--navy);margin-bottom:8px;opacity:.6;}
+.ph-note{font-size:13px;color:var(--muted);}
+/* OFFERING CARDS */
+.offering{padding:32px 0;border-top:.5px solid var(--border);}
+.offering-header{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:12px;}
+.offering-name{font-family:'Spectral',serif;font-size:24px;font-weight:400;color:var(--navy);letter-spacing:-.01em;}
+.offering-time{font-size:12px;font-weight:600;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;}
+.offering-body{font-size:16px;line-height:1.72;color:var(--body);}
+.offering-tag{display:inline-block;font-size:11px;font-weight:500;color:var(--muted);background:var(--warm);border:.5px solid var(--border);padding:4px 12px;border-radius:100px;margin-top:12px;letter-spacing:.04em;}
+/* PRINCIPLES */
+.principle{padding:32px 0;border-top:.5px solid var(--border);}
+.principle-name{font-family:'Spectral',serif;font-size:20px;font-weight:400;color:var(--navy);margin-bottom:10px;}
+.principle-body{font-size:16px;line-height:1.72;color:var(--body);}
+/* TEAM */
+.team-card{padding:32px;border:.5px solid var(--border);border-radius:8px;}
+.team-photo{width:80px;height:80px;border-radius:50%;background:var(--warm);border:.5px solid var(--border);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
+.team-name{font-family:'Spectral',serif;font-size:22px;font-weight:400;color:var(--navy);margin-bottom:4px;}
+.team-role{font-size:13px;font-weight:500;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
+.team-bio{font-size:15px;line-height:1.72;color:var(--body);}
+/* INSIGHTS */
+.article-card{background:#fff;border:.5px solid var(--border);border-radius:8px;padding:32px 32px 36px;transition:transform .3s cubic-bezier(.25,.46,.45,.94),box-shadow .3s;}
+.article-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(10,22,40,.10);}
+.article-tag{font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.article-tag::before{content:'';display:block;width:14px;height:1.5px;background:var(--teal);}
+.article-title{font-family:'Spectral',serif;font-size:22px;font-weight:400;line-height:1.28;color:var(--navy);margin-bottom:12px;letter-spacing:-.005em;}
+.article-excerpt{font-size:15px;line-height:1.68;color:var(--muted);margin-bottom:20px;}
+.article-meta{font-size:12px;color:var(--muted);letter-spacing:.04em;}
+.article-read{font-size:13px;font-weight:500;color:var(--navy);opacity:.42;transition:opacity .2s;}
+.article-card:hover .article-read{opacity:1;}
+/* FORM */
+.form-field{margin-bottom:28px;}
+.form-label{display:block;font-size:13px;font-weight:600;color:var(--navy);letter-spacing:.04em;margin-bottom:8px;}
+.form-input{width:100%;border:.5px solid var(--border);border-radius:4px;padding:14px 16px;font-family:'IBM Plex Sans',sans-serif;font-size:15px;color:var(--navy);background:#fff;transition:border-color .2s;outline:none;}
+.form-input:focus{border-color:var(--teal);}
+.form-textarea{min-height:120px;resize:vertical;}
+.form-hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;}
+/* CONTACT DIRECT */
+.contact-item{display:flex;align-items:center;gap:10px;font-size:16px;color:var(--body);margin-bottom:12px;}
+.contact-item a{color:var(--navy);font-weight:500;transition:color .2s;}
+.contact-item a:hover{color:var(--teal);}
+/* METRICS */
+.metrics{display:flex;gap:0;border-top:2px solid var(--teal);}
+.metric{flex:1;padding:28px 32px 0 0;}
+.metric+.metric{padding-left:32px;border-left:1px solid var(--border);}
+.metric-num{font-size:52px;font-weight:700;color:var(--navy);letter-spacing:-.025em;line-height:1;}
+.metric-unit{font-size:.55em;letter-spacing:0;font-weight:600;}
+.metric-teal{color:var(--teal);}
+.metric-label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:10px;}
+/* CTA SECTION */
+.cta-wrap{text-align:center;max-width:640px;margin:0 auto;}
+.cta-hl{font-family:'Spectral',serif;font-size:52px;font-weight:300;line-height:1.1;color:#fff;letter-spacing:-.025em;margin-bottom:20px;}
+.cta-hl em{font-style:italic;font-weight:200;color:rgba(255,255,255,.65);}
+.cta-sub{font-size:17px;color:rgba(255,255,255,.50);line-height:1.65;margin-bottom:40px;}
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.40);letter-spacing:.01em;transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:'Spectral',serif;font-size:16px;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+/* RESPONSIVE */
+@media(max-width:1100px){:root{--pad:48px;}.page-hl{font-size:48px;}.grid-2{grid-template-columns:1fr;gap:36px;}}
+@media(max-width:768px){:root{--pad:24px;}.nav-link{display:none;}.grid-3{grid-template-columns:1fr;}.grid-2-even{grid-template-columns:1fr;}.metrics{flex-direction:column;}.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+/* CHAT WIDGET — Challenge Us page only */
+.fc-fab{position:fixed;right:28px;bottom:28px;z-index:200;width:56px;height:56px;border-radius:50%;
+  background:var(--teal);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 12px 28px rgba(10,22,40,.22);transition:transform .18s,background .2s;}
+.fc-fab:hover{background:var(--teal-h);transform:translateY(-2px);}
+.fc-panel{position:fixed;right:28px;bottom:98px;z-index:200;width:380px;max-width:calc(100vw - 40px);
+  height:520px;max-height:calc(100vh - 140px);background:#fff;border:.5px solid var(--border);
+  border-radius:12px;box-shadow:0 24px 64px rgba(10,22,40,.28);display:flex;flex-direction:column;overflow:hidden;}
+.fc-panel[hidden]{display:none;}
+.fc-header{background:var(--navy);color:#fff;padding:16px 18px;display:flex;align-items:center;
+  justify-content:space-between;font-family:'Spectral',serif;font-size:17px;flex-shrink:0;}
+.fc-close{background:none;border:0;color:rgba(255,255,255,.6);font-size:22px;line-height:1;cursor:pointer;padding:0;}
+.fc-close:hover{color:#fff;}
+.fc-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:var(--warm);}
+.fc-bubble{max-width:85%;padding:10px 14px;border-radius:10px;font-size:14px;line-height:1.55;white-space:pre-wrap;}
+.fc-bubble.user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:2px;}
+.fc-bubble.assistant{align-self:flex-start;background:#fff;color:var(--body);border:.5px solid var(--border);border-bottom-left-radius:2px;}
+.fc-bubble.error{align-self:flex-start;background:#fff;color:#B4432C;border:.5px solid #E8C9C2;}
+.fc-bubble.thinking{display:flex;align-items:center;gap:4px;padding:14px 16px;}
+.fc-bubble.thinking .dot{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:fc-bounce 1.2s infinite ease-in-out;}
+.fc-bubble.thinking .dot:nth-child(2){animation-delay:.15s;}
+.fc-bubble.thinking .dot:nth-child(3){animation-delay:.3s;}
+@keyframes fc-bounce{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+@media(prefers-reduced-motion:reduce){.fc-bubble.thinking .dot{animation:none;opacity:.6;}}
+.fc-composer{display:flex;gap:8px;padding:14px;border-top:.5px solid var(--border);background:#fff;flex-shrink:0;}
+.fc-input{flex:1;resize:none;border:.5px solid var(--border);border-radius:8px;padding:10px 12px;
+  font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--navy);outline:none;max-height:96px;}
+.fc-input:focus{border-color:var(--teal);}
+.fc-send{width:38px;height:38px;border-radius:8px;border:0;background:var(--teal);color:var(--navy);
+  cursor:pointer;font-size:16px;flex-shrink:0;}
+.fc-send:hover{background:var(--teal-h);}
+.fc-send:disabled{opacity:.4;cursor:default;}
+/* form-fill highlight pulse, reuses .form-input already defined above */
+.form-input.fc-just-filled{border-color:var(--teal);background:rgba(0,214,179,.10);transition:background 1.4s ease,border-color 1.4s ease;}
+@media(max-width:480px){.fc-panel{right:14px;left:14px;width:auto;bottom:90px;}.fc-fab{right:20px;bottom:20px;}}
+</style>
+</head>
+<body><nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="30" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links"><a href="work.html" class="nav-link">Work</a><a href="what-we-do.html" class="nav-link">What We Do</a><a href="about.html" class="nav-link">About</a><a href="insights.html" class="nav-link">Insights</a><a href="challenge-us.html" class="nav-cta">Challenge Us</a></div>
+</nav>
+<main>
+<section class="section-lg sw" aria-label="Challenge us form" style="padding-top:80px;">
+  <div class="container">
+    <div class="grid-2">
+
+      <div class="sa">
+        <span class="label">Challenge Us</span>
+        <h1 style="font-family:'Spectral',serif;font-size:52px;font-weight:300;line-height:1.06;color:var(--navy);letter-spacing:-.025em;margin-bottom:20px;">Tell us what you&rsquo;re<br><em style="font-weight:200;color:rgba(10,22,40,.5);">up against.</em></h1>
+        <p style="font-size:17px;line-height:1.72;color:var(--body);margin-bottom:36px;">No lengthy brief required. If you know the decision you&rsquo;re trying to make, that&rsquo;s enough to start.</p>
+
+        <div style="background:var(--warm);border-radius:8px;padding:28px 28px 32px;margin-bottom:32px;">
+          <p style="font-size:13px;font-weight:600;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;">What happens next</p>
+          <p style="font-size:15px;line-height:1.68;color:var(--body);">Submit the form. Someone from our team will get back to you within 48 hours to learn more about your challenge and figure out next steps together.</p>
+        </div>
+
+        <div style="border-top:.5px solid var(--border);padding-top:28px;">
+          <p style="font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;">Prefer direct contact?</p>
+          <div class="contact-item"><a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a></div>
+          <div class="contact-item"><a href="tel:+16123263993">(612) 326-3993</a></div>
+        </div>
+      </div>
+
+      <div class="sa s1">
+        <form id="challenge-form" style="background:var(--warm);border:.5px solid var(--border);border-radius:8px;padding:40px 36px 44px;">
+
+          <div class="form-field">
+            <label class="form-label" for="name">Your Name</label>
+            <input id="name" name="name" type="text" class="form-input" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="email">Email</label>
+            <input id="email" name="email" type="email" class="form-input" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="company">Company Name</label>
+            <input id="company" name="company" type="text" class="form-input">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="position">Your Position</label>
+            <input id="position" name="position" type="text" class="form-input">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="challenge">What&rsquo;s the challenge?</label>
+            <textarea id="challenge" name="challenge" class="form-input form-textarea" placeholder="What decision are you facing? What do you need to know? What&rsquo;s the timeline?" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn" style="width:100%;text-align:center;cursor:pointer;border:none;font-family:'IBM Plex Sans',sans-serif;">Send the Challenge</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="22" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="work.html" class="footer-link">Work</a>
+        <a href="what-we-do.html" class="footer-link">What We Do</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+        <a href="tel:+16123263993">(612) 326-3993</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+      </div>
+    </div>
+    <div class="footer-close">
+      <p class="footer-tagline">Clarity Beneath the Surface</p>
+      <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+    </div>
+  </div>
+</footer>
+
+<button id="fathom-chat-fab" class="fc-fab" type="button" aria-label="Chat with Fathom" aria-expanded="false">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M4 4h16v12H8l-4 4V4z" stroke="#0A1628" stroke-width="1.6" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<div id="fathom-chat-panel" class="fc-panel" hidden>
+  <div class="fc-header">
+    <span class="fc-title">Talk it through</span>
+    <button class="fc-close" type="button" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="fc-messages" id="fc-messages" aria-live="polite"></div>
+  <div class="fc-composer">
+    <textarea id="fc-input" class="fc-input" placeholder="What's the challenge?" rows="1"></textarea>
+    <button id="fc-send" class="fc-send" type="button" aria-label="Send">&rarr;</button>
+  </div>
+</div>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.1});
+document.querySelectorAll('.sa').forEach(el=>io.observe(el));
+</script>
+<script>
+// ── CHAT WIDGET + FORM SUBMISSION ──────────────────────────────
+// Chat talks to the Worker's /chat endpoint (stateless -- the full
+// message history is resent each turn) and, when the model has
+// captured fields, writes them into the real form below for the
+// visitor to review. The agent never submits on its own; only the
+// real submit button (rewired to POST /submit) does that.
+const CHAT_API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8787'
+  : 'https://fathom-website-chat-agent.polished-resonance-6f57.workers.dev'; // TODO: swap to a custom domain (e.g. chat-api.fathomresearch.ai) once that's set up — see wrangler.toml notes
+
+class ChallengeChat{
+  constructor(){
+    this.fab=document.getElementById('fathom-chat-fab');
+    this.panel=document.getElementById('fathom-chat-panel');
+    this.messagesEl=document.getElementById('fc-messages');
+    this.input=document.getElementById('fc-input');
+    this.sendBtn=document.getElementById('fc-send');
+    this.closeBtn=this.panel.querySelector('.fc-close');
+    this.history=[];
+    this.busy=false;
+    this._bind();
+  }
+  _bind(){
+    this.fab.addEventListener('click',()=>this.toggle());
+    this.closeBtn.addEventListener('click',()=>this.toggle(false));
+    this.sendBtn.addEventListener('click',()=>this.send());
+    this.input.addEventListener('keydown',e=>{
+      if(e.key==='Enter' && !e.shiftKey){e.preventDefault();this.send();}
+    });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape' && !this.panel.hidden) this.toggle(false);
+    });
+  }
+  toggle(force){
+    const open = force ?? this.panel.hidden;
+    this.panel.hidden = !open;
+    this.fab.setAttribute('aria-expanded', String(open));
+    if(open && !this.history.length){
+      this._appendBubble('assistant',
+        "Hey — tell me what you're up against and I'll get the basics down so someone can follow up.");
+    }
+    if(open) this.input.focus();
+  }
+  async send(){
+    const text=this.input.value.trim();
+    if(!text || this.busy) return;
+    this.input.value='';
+    this._appendBubble('user',text);
+    this.history.push({role:'user',content:text});
+    this._setBusy(true);
+    const thinkingEl=this._appendThinking();
+    try{
+      const res=await fetch(`${CHAT_API_BASE}/chat`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({messages:this.history})
+      });
+      if(!res.ok) throw new Error('bad response');
+      const data=await res.json();
+      this.history.push({role:'assistant',content:data.reply});
+      this._resolveBubble(thinkingEl,'assistant',data.reply);
+      if(data.formFill) this._applyFormFill(data.formFill);
+    }catch(err){
+      this._resolveBubble(thinkingEl,'error',
+        "Something went sideways on our end — you can also just fill out the form directly.");
+    }finally{
+      this._setBusy(false);
+    }
+  }
+  _setBusy(busy){
+    this.busy=busy;
+    this.sendBtn.disabled=busy;
+  }
+  _appendBubble(role,text){
+    const el=document.createElement('div');
+    el.className=`fc-bubble ${role}`;
+    el.textContent=text;
+    this.messagesEl.appendChild(el);
+    this.messagesEl.scrollTop=this.messagesEl.scrollHeight;
+    return el;
+  }
+  // Shows an animated "..." bubble immediately, standing in for the real
+  // reply so the visitor knows their message was received while we wait
+  // on the Worker/Claude round trip.
+  _appendThinking(){
+    const el=document.createElement('div');
+    el.className='fc-bubble assistant thinking';
+    el.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    this.messagesEl.appendChild(el);
+    this.messagesEl.scrollTop=this.messagesEl.scrollHeight;
+    return el;
+  }
+  // Overwrites the thinking bubble in place with the real reply (or error)
+  // rather than appending a separate bubble alongside it.
+  _resolveBubble(el,role,text){
+    el.className=`fc-bubble ${role}`;
+    el.textContent=text;
+    this.messagesEl.scrollTop=this.messagesEl.scrollHeight;
+  }
+  _applyFormFill(fields){
+    const ids=['name','email','company','position','challenge'];
+    let firstFilled=null;
+    for(const key of ids){
+      const value=fields[key];
+      if(!value) continue;
+      const el=document.getElementById(key);
+      if(!el) continue;
+      el.value=value;
+      el.classList.add('fc-just-filled');
+      setTimeout(()=>el.classList.remove('fc-just-filled'),1600);
+      firstFilled ??= el;
+    }
+    if(firstFilled) firstFilled.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+if(document.getElementById('fathom-chat-fab')){
+  new ChallengeChat();
+}
+
+const challengeForm=document.getElementById('challenge-form');
+if(challengeForm){
+  challengeForm.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const submitBtn=challengeForm.querySelector('button[type="submit"]');
+    const payload={
+      name:document.getElementById('name').value.trim(),
+      email:document.getElementById('email').value.trim(),
+      company:document.getElementById('company').value.trim(),
+      position:document.getElementById('position').value.trim(),
+      challenge:document.getElementById('challenge').value.trim()
+    };
+    if(!payload.name || !payload.email || !payload.challenge) return;
+    submitBtn.disabled=true;
+    submitBtn.textContent='Sending...';
+    try{
+      const res=await fetch(`${CHAT_API_BASE}/submit`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      const data=await res.json();
+      if(!data.ok) throw new Error(data.error || 'submit failed');
+      challengeForm.innerHTML='<p style="font-family:\'Spectral\',serif;font-size:20px;color:var(--navy);">Got it. We\'ll be in touch within 48 hours.</p>';
+    }catch(err){
+      submitBtn.disabled=false;
+      submitBtn.textContent='Send the Challenge';
+    }
+  });
+}
+</script>
+</body></html>

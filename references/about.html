@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Fathom Research & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:#fff;color:#2C3E50;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --navy:#0A1628;--teal:#00D6B3;--teal-h:#009E85;
+  --white:#fff;--warm:#F8F7F4;--body:#2C3E50;
+  --muted:#6B7280;--border:#ECEAE6;--bdr:rgba(255,255,255,.08);
+  --max:1200px;--pad:80px;
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.s1{transition-delay:.08s;} .s2{transition-delay:.16s;} .s3{transition-delay:.24s;}
+.s4{transition-delay:.32s;} .s5{transition-delay:.40s;} .s6{transition-delay:.48s;}
+.label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+.label::before{content:'';display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;}
+.label-m{color:var(--muted);} .label-m::before{background:var(--muted);}
+.section{padding:96px var(--pad);}
+.section-lg{padding:120px var(--pad);}
+.section-sm{padding:56px var(--pad);}
+.sn{background:var(--navy);color:#fff;}
+.sw{background:#fff;color:var(--navy);}
+.swm{background:var(--warm);color:var(--navy);}
+.container{max-width:var(--max);margin:0 auto;}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:14px 32px;border-radius:4px;letter-spacing:.025em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-h);transform:translateY(-1px);}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
+.nav-logo-sub{font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nl{font-size:14px;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
+.nl:hover{color:rgba(255,255,255,.92);}
+.nl.active{color:#fff;font-weight:500;}
+.nc{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nc:hover{background:var(--teal-h);}
+
+/* ── DECLARATION — the three radicals ── */
+.declaration{min-height:calc(100vh - 72px);display:flex;flex-direction:column;padding:56px 0 0;background:var(--navy);position:relative;overflow:hidden;}
+.declaration .inner{padding:0 var(--pad);}
+.declaration .container{max-width:100%;padding:0;margin:0;flex:1;display:flex;flex-direction:column;}
+/* Radical stack — bars bleed off right edge */
+.radical-stack{margin-bottom:28px;}
+.radical{display:flex;align-items:center;gap:28px;margin-bottom:10px;}
+.radical:last-child{margin-bottom:0;}
+.radical-text{font-family:'Spectral',serif;font-size:68px;font-weight:400;line-height:1;color:#fff;letter-spacing:-.025em;white-space:nowrap;flex-shrink:0;}
+.radical-text em{font-style:italic;font-weight:300;color:var(--teal);}
+/* The bar: height matches cap height of the type, bleeds past right edge */
+.radical-bar{height:46px;background:var(--teal);flex:1;min-width:80px;margin-right:calc(-1 * var(--pad));}
+.declaration-body{max-width:calc(600px + var(--pad));padding:0 var(--pad);}
+.declaration-body p{font-size:18px;line-height:1.72;color:rgba(255,255,255,.55);margin-bottom:16px;}
+.declaration-body p+p{margin-top:0;}
+
+/* ── TEAM ── */
+/* MEET-THE-TEAM tab — teal cue at the bottom of the navy hero, same width as the spine/pic below */
+.meet-tab{width:calc((100% - 2*var(--pad) - 5*40px) / 6);height:46px;margin:auto 0 0 var(--pad);background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
+/* THE TEAM — full-height teal spine (= pic width) bleeds top & bottom; founder + 5 members on one aligned baseline */
+.team{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--warm);overflow:hidden;}
+.team::before{content:'';position:absolute;top:0;bottom:0;left:var(--pad);width:calc((100% - 2*var(--pad) - 5*40px) / 6);background:var(--teal);z-index:0;}
+.team-inner{position:relative;z-index:1;display:grid;grid-template-columns:calc((100% - 5*40px) / 6) 1fr;gap:40px;align-items:start;padding:64px var(--pad);}
+/* Photo placeholders — fill their column so every pic is the same width and top-aligned */
+.ph-block{aspect-ratio:4/5;border-radius:3px;background:linear-gradient(145deg,#13294d,#0A1628);display:flex;align-items:center;justify-content:center;}
+.ph-initials{font-family:'Spectral',serif;font-size:22px;font-weight:300;color:rgba(0,214,179,.5);letter-spacing:.06em;}
+/* Founder — on the teal spine, light type; label floats above the pic at the same 16px gap the names sit below */
+.founder-col{position:relative;text-align:center;}
+.founder-col-role{position:absolute;left:0;right:0;bottom:100%;margin-bottom:16px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.08em;}
+.founder-col-ph{width:100%;margin:0 0 16px;}
+.founder-col-name{font-family:'Spectral',serif;font-size:24px;font-weight:400;color:#fff;letter-spacing:-.02em;}
+/* Member row */
+.team-row{display:grid;grid-template-columns:repeat(5,1fr);gap:40px;}
+.tm{text-align:center;}
+.tm-photo-ph{width:100%;margin-bottom:16px;}
+.tm-name{font-family:'Spectral',serif;font-size:19px;font-weight:400;color:var(--navy);margin-bottom:5px;letter-spacing:-.01em;}
+.tm-role{font-size:12px;font-weight:400;color:var(--muted);line-height:1.5;}
+
+/* ── VALUES ── */
+.values-intro{max-width:680px;margin-bottom:64px;}
+.values-hl{font-family:'Spectral',serif;font-size:44px;font-weight:400;line-height:1.1;color:#fff;letter-spacing:-.015em;margin-bottom:20px;}
+.values-sub{font-size:17px;line-height:1.72;color:rgba(255,255,255,.55);}
+/* TENSION PAIRS */
+.tensions{margin-bottom:96px;}
+.tension{padding:34px 0;border-top:.5px solid rgba(255,255,255,.12);display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
+.tension:last-child{border-bottom:.5px solid rgba(255,255,255,.12);}
+.tension-pair{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;}
+.tension-word{font-family:'Spectral',serif;font-size:40px;font-weight:300;color:#fff;letter-spacing:-.02em;line-height:1.05;}
+.tension-and{font-family:'Spectral',serif;font-size:24px;font-style:italic;font-weight:300;color:var(--teal);}
+.tension-note{font-size:15px;line-height:1.65;color:rgba(255,255,255,.50);max-width:380px;justify-self:end;text-align:right;}
+/* SUPPORTING CHAPTERS */
+.chapters-wrap{position:relative;padding-top:40px;margin-top:8px;}
+/* Refined teal bar — introduces the "how" chapters. Thin, full content width. */
+.chapters-bar{height:6px;background:var(--teal);border-radius:3px;margin-bottom:40px;width:100%;}
+.chapters-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,214,179,.75);margin-bottom:40px;}
+.chapters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;}
+.chapter-num{font-family:'Spectral',serif;font-size:15px;font-weight:300;color:rgba(0,214,179,.6);margin-bottom:18px;letter-spacing:.04em;}
+.chapter-title{font-family:'Spectral',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:18px;letter-spacing:-.01em;}
+.chapter-point{padding-top:16px;border-top:.5px solid rgba(255,255,255,.1);margin-top:16px;}
+.chapter-point:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+.chapter-point-name{font-size:14px;font-weight:600;color:rgba(255,255,255,.92);margin-bottom:6px;letter-spacing:.01em;}
+.chapter-point-body{font-size:14px;line-height:1.62;color:rgba(255,255,255,.5);}
+
+/* ── AI SECTION ── */
+.ai-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center;}
+.ai-hl{font-family:'Spectral',serif;font-size:40px;font-weight:300;line-height:1.08;color:var(--navy);letter-spacing:-.02em;}
+.ai-hl em{font-style:italic;font-weight:300;color:rgba(10,22,40,.5);}
+.ai-body{font-size:17px;line-height:1.75;color:var(--body);}
+.ai-body p+p{margin-top:16px;}
+.ai-body strong{color:var(--navy);font-weight:600;}
+
+/* ── CTA ── */
+.cta-inner{text-align:center;max-width:580px;margin:0 auto;}
+.cta-hl{font-family:'Spectral',serif;font-size:48px;font-weight:300;line-height:1.1;color:#fff;letter-spacing:-.025em;margin-bottom:18px;}
+.cta-hl em{font-style:italic;font-weight:200;color:rgba(255,255,255,.60);}
+.cta-sub{font-size:17px;color:rgba(255,255,255,.48);line-height:1.65;margin-bottom:36px;}
+
+/* ── FOOTER ── */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:'Spectral',serif;font-size:16px;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+
+@media(max-width:1100px){
+  :root{--pad:48px;}
+  .team::before{display:none;}
+  .team-inner{grid-template-columns:1fr;gap:44px;padding:56px var(--pad) 72px;}
+  .team-row{grid-template-columns:repeat(3,1fr);gap:32px 28px;}
+  .founder-col{background:var(--teal);max-width:300px;margin:0 auto;padding:34px 28px 32px;border-radius:3px;}
+  .founder-col-role{position:static;margin-bottom:16px;}
+  .founder-col-ph{width:160px;margin:0 auto 16px;}
+  .meet-tab{width:220px;}
+  .radical-text{font-size:48px;}
+  .radical-bar{height:34px;}
+  .ai-grid{grid-template-columns:1fr;gap:36px;}
+  .chapters{grid-template-columns:1fr;gap:40px;}
+  .tension{grid-template-columns:1fr;gap:12px;}
+  .tension-note{text-align:left;justify-self:start;}
+  .tension-word{font-size:32px;}
+}
+@media(max-width:768px){
+  :root{--pad:24px;}
+  .nl{display:none;}
+  .team-inner{gap:36px;padding:48px var(--pad) 64px;}
+  .team-row{grid-template-columns:repeat(2,1fr);gap:30px 22px;}
+  .founder-col{max-width:320px;}
+  .founder-col-name{font-size:23px;}
+  .radical-text{font-size:34px;}
+  .radical-bar{height:24px;gap:16px;}
+  .radical{gap:16px;}
+  .footer-inner{grid-template-columns:1fr;}
+  .footer-contact{text-align:left;}
+  .values-hl{font-size:32px;}
+  .tension-word{font-size:28px;}
+  .cta-hl{font-size:36px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="30" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nl">Work</a>
+    <a href="what-we-do.html" class="nl">What We Do</a>
+    <a href="about.html" class="nl active">About</a>
+    <a href="insights.html" class="nl">Insights</a>
+    <a href="challenge-us.html" class="nc">Challenge Us</a>
+  </div>
+</nav>
+
+<!-- THE DECLARATION -->
+<section class="declaration" aria-label="Who we are">
+  <div class="container">
+    <div class="inner"><span class="label sa">About Fathom</span></div>
+    <div class="radical-stack sa s1">
+      <div class="radical"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>humanity.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+      <div class="radical"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>authenticity.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+      <div class="radical"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>honesty.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+    </div>
+    <div class="declaration-body sa s2">
+      <p>These aren&rsquo;t values on a poster. They&rsquo;re how we actually work — with our clients, with each other, and with the data in front of us.</p>
+      <p>We built Fathom because research was broken and everyone knew it. Too slow. Too expensive. Delivered as a document rather than a direction. We saw teams making decisions without confidence — not because the data didn&rsquo;t exist, but because no one had turned it into something useful in time.</p>
+    </div>
+    <div class="meet-tab sa s3">Meet the team</div>
+  </div>
+</section>
+
+<!-- THE TEAM -->
+<section class="team" aria-label="Meet the team">
+  <div class="team-inner sa">
+    <div class="founder-col">
+      <span class="founder-col-role">Founder &amp; CEO</span>
+      <div class="ph-block founder-col-ph"><span class="ph-initials">DB</span></div>
+      <h3 class="founder-col-name">Danni Bayn</h3>
+    </div>
+    <div class="team-row">
+      <div class="tm sa s1">
+        <div class="ph-block tm-photo-ph"><span class="ph-initials">TC</span></div>
+        <h4 class="tm-name">Tom Colville</h4>
+        <p class="tm-role">Director of Analytics</p>
+      </div>
+      <div class="tm sa s2">
+        <div class="ph-block tm-photo-ph"><span class="ph-initials">KW</span></div>
+        <h4 class="tm-name">Kelvin Wong</h4>
+        <p class="tm-role">Manager, Consumer Insights &amp; Analytics</p>
+      </div>
+      <div class="tm sa s3">
+        <div class="ph-block tm-photo-ph"><span class="ph-initials">MI</span></div>
+        <h4 class="tm-name">Marcel Iam</h4>
+        <p class="tm-role">Manager, Consumer Insights &amp; Market Research</p>
+      </div>
+      <div class="tm sa s4">
+        <div class="ph-block tm-photo-ph"><span class="ph-initials">PG</span></div>
+        <h4 class="tm-name">Preeti Ganesh</h4>
+        <p class="tm-role">AI Strategist / Insights Analyst</p>
+      </div>
+      <div class="tm sa s5">
+        <div class="ph-block tm-photo-ph"><span class="ph-initials">NP</span></div>
+        <h4 class="tm-name">Namasya Patel</h4>
+        <p class="tm-role">AI Strategist / Insights Analyst</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK — VALUES -->
+<section class="section-lg sn" style="border-top:.5px solid rgba(255,255,255,.07);" aria-label="How we work">
+  <div class="container">
+    <div class="values-intro sa">
+      <span class="label">How we work</span>
+      <h2 class="values-hl">Most research firms<br>make you choose. We don&rsquo;t.</h2>
+      <p class="values-sub">Everything about how Fathom works comes down to refusing a trade-off that everyone else accepts.</p>
+    </div>
+
+    <!-- THE TENSION PAIRS -->
+    <div class="tensions sa s1">
+      <div class="tension">
+        <div class="tension-pair">
+          <span class="tension-word">Fast</span>
+          <span class="tension-and">and</span>
+          <span class="tension-word">rigorous</span>
+        </div>
+        <p class="tension-note">Most firms make you pick one. We built Fathom because that choice is false &mdash; speed is a discipline, not a shortcut.</p>
+      </div>
+      <div class="tension">
+        <div class="tension-pair">
+          <span class="tension-word">AI-powered</span>
+          <span class="tension-and">and</span>
+          <span class="tension-word">human-led</span>
+        </div>
+        <p class="tension-note">The machine accelerates the work. The judgment &mdash; the so-what, the recommendation &mdash; stays ours.</p>
+      </div>
+      <div class="tension">
+        <div class="tension-pair">
+          <span class="tension-word">Confident</span>
+          <span class="tension-and">and</span>
+          <span class="tension-word">honest</span>
+        </div>
+        <p class="tension-note">We stand behind our work with authority &mdash; and we tell you plainly what we don&rsquo;t yet know.</p>
+      </div>
+    </div>
+
+    <!-- THE HOW — three chapters that explain the tensions -->
+    <div class="sa s2 chapters-wrap">
+      <div class="chapters-bar" aria-hidden="true"></div>
+      <p class="chapters-label">How we hold those together</p>
+      <div class="chapters">
+
+        <div>
+          <p class="chapter-num">01 &mdash; How we move</p>
+          <h3 class="chapter-title">Speed is a discipline.</h3>
+          <div class="chapter-point">
+            <p class="chapter-point-name">Bias toward progress.</p>
+            <p class="chapter-point-body">We move when we have enough to move. Research that arrives after the decision is archaeology.</p>
+          </div>
+          <div class="chapter-point">
+            <p class="chapter-point-name">Recommendations, not readouts.</p>
+            <p class="chapter-point-body">Every engagement ends with a clear point of view on what to do next. The recommendation is the job.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="chapter-num">02 &mdash; How we grow</p>
+          <h3 class="chapter-title">The best way isn&rsquo;t fixed.</h3>
+          <div class="chapter-point">
+            <p class="chapter-point-name">We&rsquo;re all learning.</p>
+            <p class="chapter-point-body">Heavily invested in training and staying on the cutting edge of new tools and methods.</p>
+          </div>
+          <div class="chapter-point">
+            <p class="chapter-point-name">We experiment constantly.</p>
+            <p class="chapter-point-body">Always testing new and better ways, because the field keeps moving and so do we.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="chapter-num">03 &mdash; What we owe you</p>
+          <h3 class="chapter-title">Honesty and partnership.</h3>
+          <div class="chapter-point">
+            <p class="chapter-point-name">Honest about uncertainty.</p>
+            <p class="chapter-point-body">Nobody can guarantee 100% success. If we don&rsquo;t know, we say so. No false confidence.</p>
+          </div>
+          <div class="chapter-point">
+            <p class="chapter-point-name">Collaborative by design.</p>
+            <p class="chapter-point-body">We work alongside your team, not at arm&rsquo;s length. The conversation goes both ways.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="section swm" aria-label="AI and human judgment">
+  <div class="container">
+    <div class="ai-grid">
+      <div class="sa">
+        <span class="label label-m">AI &amp; human judgment</span>
+        <h2 class="ai-hl">AI accelerates.<br><em>Humans decide.</em></h2>
+      </div>
+      <div class="ai-body sa s1">
+        <p>We use AI to process, synthesise, and identify patterns at a speed that would otherwise take weeks. <strong>What AI cannot do is decide what matters.</strong> It cannot understand the strategic context, know which insight will change something for your business, or make a recommendation you can stand behind in a room.</p>
+        <p>That&rsquo;s what our researchers do. AI is the accelerator. Human judgment is the engine.</p>
+        <p>The result: you don&rsquo;t wait for the analysis. You get straight to the conversation about what to do with it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-lg sn" style="border-top:.5px solid rgba(255,255,255,.07);" aria-label="Work with us">
+  <div class="container">
+    <div class="cta-inner sa">
+      <h2 class="cta-hl">Tell us what you&rsquo;re<br><em>up against.</em></h2>
+      <p class="cta-sub">If you know the decision you&rsquo;re trying to make, that&rsquo;s enough to start.</p>
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="22" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="work.html" class="footer-link">Work</a>
+        <a href="what-we-do.html" class="footer-link">What We Do</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="insights.html" class="footer-link">Insights</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+        <a href="tel:+16123263993">(612) 326-3993</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+      </div>
+    </div>
+    <div class="footer-close">
+      <p class="footer-tagline">Clarity Beneath the Surface</p>
+      <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.1});
+document.querySelectorAll('.sa').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

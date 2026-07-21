@@ -154,6 +154,129 @@ a{text-decoration:none;color:inherit;}
   height:520px;max-height:calc(100vh - 140px);background:#fff;border:.5px solid var(--border);
   border-radius:12px;box-shadow:0 24px 64px rgba(10,22,40,.28);display:flex;flex-direction:column;overflow:hidden;}
 .fc-panel[hidden]{display:none;}
+  /* CHAT PROMPT */
+.fc-prompt{
+  position:fixed;
+  right:98px;
+  bottom:28px;
+  z-index:199;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:310px;
+  padding:15px 18px;
+  background:#fff;
+  border:.5px solid var(--border);
+  border-radius:10px;
+  box-shadow:0 12px 32px rgba(10,22,40,.16);
+  cursor:pointer;
+  text-align:left;
+  font-family:'IBM Plex Sans',sans-serif;
+  transition:
+    transform .2s cubic-bezier(.25,.46,.45,.94),
+    box-shadow .2s,
+    border-color .2s,
+    opacity .2s;
+}
+
+.fc-prompt:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 40px rgba(10,22,40,.22);
+  border-color:rgba(0,214,179,.55);
+}
+
+.fc-prompt-icon{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:rgba(0,214,179,.14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.fc-prompt-copy{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.fc-prompt-question{
+  font-size:13px;
+  line-height:1.4;
+  color:var(--muted);
+}
+
+.fc-prompt-action{
+  font-size:14px;
+  line-height:1.35;
+  font-weight:600;
+  color:var(--navy);
+}
+
+.fc-prompt:hover .fc-prompt-action{
+  color:var(--teal-h);
+}
+
+/* Small pointer connecting the prompt to the chat button */
+.fc-prompt::after{
+  content:'';
+  position:absolute;
+  right:-7px;
+  bottom:20px;
+  width:14px;
+  height:14px;
+  background:#fff;
+  border-top:.5px solid var(--border);
+  border-right:.5px solid var(--border);
+  transform:rotate(45deg);
+}
+
+.fc-prompt.is-hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(6px);
+}
+
+/* Make the floating chat button more noticeable */
+.fc-fab{
+  animation:fc-fab-pulse 2.8s ease-in-out 1.2s 3;
+}
+
+@keyframes fc-fab-pulse{
+  0%,100%{
+    box-shadow:0 12px 28px rgba(10,22,40,.22);
+  }
+  50%{
+    box-shadow:
+      0 12px 28px rgba(10,22,40,.22),
+      0 0 0 9px rgba(0,214,179,.16);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fc-fab{
+    animation:none;
+  }
+}
+
+@media(max-width:620px){
+  .fc-prompt{
+    right:20px;
+    bottom:88px;
+    width:min(310px,calc(100vw - 40px));
+  }
+
+  .fc-prompt::after{
+    right:22px;
+    bottom:-7px;
+    border-top:0;
+    border-left:0;
+    border-right:.5px solid var(--border);
+    border-bottom:.5px solid var(--border);
+  }
+}
 .fc-header{background:var(--navy);color:#fff;padding:16px 18px;display:flex;align-items:center;
   justify-content:space-between;font-family:'Spectral',serif;font-size:17px;flex-shrink:0;}
 .fc-close{background:none;border:0;color:rgba(255,255,255,.6);font-size:22px;line-height:1;cursor:pointer;padding:0;}
@@ -273,6 +396,33 @@ a{text-decoration:none;color:inherit;}
   </div>
 </footer>
 
+  <button
+  id="fathom-chat-prompt"
+  class="fc-prompt"
+  type="button"
+  aria-label="Talk to our agent about your request"
+>
+  <span class="fc-prompt-icon" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M4 4h16v12H8l-4 4V4z"
+        stroke="#00A98F"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </span>
+
+  <span class="fc-prompt-copy">
+    <span class="fc-prompt-question">
+      Want to chat through your request first?
+    </span>
+    <span class="fc-prompt-action">
+      Talk to our agent &rarr;
+    </span>
+  </span>
+</button>
+  
 <button id="fathom-chat-fab" class="fc-fab" type="button" aria-label="Chat with Fathom" aria-expanded="false">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path d="M4 4h16v12H8l-4 4V4z" stroke="#0A1628" stroke-width="1.6" stroke-linejoin="round"/>
@@ -309,66 +459,129 @@ const CHAT_API_BASE = (location.hostname === 'localhost' || location.hostname ==
 class ChallengeChat{
   constructor(){
     this.fab=document.getElementById('fathom-chat-fab');
+    this.prompt=document.getElementById('fathom-chat-prompt');
     this.panel=document.getElementById('fathom-chat-panel');
     this.messagesEl=document.getElementById('fc-messages');
     this.input=document.getElementById('fc-input');
     this.sendBtn=document.getElementById('fc-send');
     this.closeBtn=this.panel.querySelector('.fc-close');
+
     this.history=[];
     this.busy=false;
+    this.welcomeShown=false;
+
     this._bind();
   }
+
+  _dismissPrompt(){
+  if(!this.prompt) return;
+
+  this.prompt.remove();
+  this.prompt=null;
+}
+
   _bind(){
-    this.fab.addEventListener('click',()=>this.toggle());
+    this.fab.addEventListener('click',()=>{
+      this._dismissPrompt();
+      this.toggle();
+    });
+
+    if(this.prompt){
+      this.prompt.addEventListener('click',()=>{
+        this._dismissPrompt();
+        this.toggle(true);
+      });
+    }
+
     this.closeBtn.addEventListener('click',()=>this.toggle(false));
     this.sendBtn.addEventListener('click',()=>this.send());
+
     this.input.addEventListener('keydown',e=>{
-      if(e.key==='Enter' && !e.shiftKey){e.preventDefault();this.send();}
+      if(e.key==='Enter' && !e.shiftKey){
+        e.preventDefault();
+        this.send();
+      }
     });
+
     document.addEventListener('keydown',e=>{
-      if(e.key==='Escape' && !this.panel.hidden) this.toggle(false);
+      if(e.key==='Escape' && !this.panel.hidden){
+        this.toggle(false);
+      }
     });
   }
+
   toggle(force){
-    const open = force ?? this.panel.hidden;
-    this.panel.hidden = !open;
-    this.fab.setAttribute('aria-expanded', String(open));
-    if(open && !this.history.length){
-      this._appendBubble('assistant',
-        "Hey — tell me what you're up against and I'll get the basics down so someone can follow up.");
+    const open=force ?? this.panel.hidden;
+
+    this.panel.hidden=!open;
+    this.fab.setAttribute('aria-expanded',String(open));
+
+    if(open && !this.welcomeShown){
+      this._appendBubble(
+        'assistant',
+        "Hey — tell me what you're up against and I'll get the basics down so someone can follow up."
+      );
+
+      this.welcomeShown=true;
     }
-    if(open) this.input.focus();
+
+    if(open){
+      this.input.focus();
+    }
   }
+
   async send(){
     const text=this.input.value.trim();
     if(!text || this.busy) return;
+
     this.input.value='';
     this._appendBubble('user',text);
     this.history.push({role:'user',content:text});
     this._setBusy(true);
+
     const thinkingEl=this._appendThinking();
+
     try{
       const res=await fetch(`${CHAT_API_BASE}/chat`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({messages:this.history})
       });
+
       if(!res.ok) throw new Error('bad response');
+
       const data=await res.json();
-      this.history.push({role:'assistant',content:data.reply});
-      this._resolveBubble(thinkingEl,'assistant',data.reply);
-      if(data.formFill) this._applyFormFill(data.formFill);
+
+      this.history.push({
+        role:'assistant',
+        content:data.reply
+      });
+
+      this._resolveBubble(
+        thinkingEl,
+        'assistant',
+        data.reply
+      );
+
+      if(data.formFill){
+        this._applyFormFill(data.formFill);
+      }
     }catch(err){
-      this._resolveBubble(thinkingEl,'error',
-        "Something went sideways on our end — you can also just fill out the form directly.");
+      this._resolveBubble(
+        thinkingEl,
+        'error',
+        "Something went sideways on our end — you can also just fill out the form directly."
+      );
     }finally{
       this._setBusy(false);
     }
   }
+
   _setBusy(busy){
     this.busy=busy;
     this.sendBtn.disabled=busy;
   }
+
   _appendBubble(role,text){
     const el=document.createElement('div');
     el.className=`fc-bubble ${role}`;
@@ -377,38 +590,60 @@ class ChallengeChat{
     this.messagesEl.scrollTop=this.messagesEl.scrollHeight;
     return el;
   }
-  // Shows an animated "..." bubble immediately, standing in for the real
-  // reply so the visitor knows their message was received while we wait
-  // on the Worker/Claude round trip.
+
   _appendThinking(){
     const el=document.createElement('div');
     el.className='fc-bubble assistant thinking';
-    el.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    el.innerHTML=
+      '<span class="dot"></span>' +
+      '<span class="dot"></span>' +
+      '<span class="dot"></span>';
+
     this.messagesEl.appendChild(el);
     this.messagesEl.scrollTop=this.messagesEl.scrollHeight;
     return el;
   }
-  // Overwrites the thinking bubble in place with the real reply (or error)
-  // rather than appending a separate bubble alongside it.
+
   _resolveBubble(el,role,text){
     el.className=`fc-bubble ${role}`;
     el.textContent=text;
     this.messagesEl.scrollTop=this.messagesEl.scrollHeight;
   }
+
   _applyFormFill(fields){
-    const ids=['name','email','company','position','challenge'];
+    const ids=[
+      'name',
+      'email',
+      'company',
+      'position',
+      'challenge'
+    ];
+
     let firstFilled=null;
+
     for(const key of ids){
       const value=fields[key];
       if(!value) continue;
+
       const el=document.getElementById(key);
       if(!el) continue;
+
       el.value=value;
       el.classList.add('fc-just-filled');
-      setTimeout(()=>el.classList.remove('fc-just-filled'),1600);
+
+      setTimeout(()=>{
+        el.classList.remove('fc-just-filled');
+      },1600);
+
       firstFilled ??= el;
     }
-    if(firstFilled) firstFilled.scrollIntoView({behavior:'smooth',block:'center'});
+
+    if(firstFilled){
+      firstFilled.scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      });
+    }
   }
 }
 

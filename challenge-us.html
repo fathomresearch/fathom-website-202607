@@ -297,14 +297,17 @@ document.querySelectorAll('.sa').forEach(el=>io.observe(el));
 </script>
 <script>
 // ── CHAT WIDGET + FORM SUBMISSION ──────────────────────────────
-// Chat talks to the Worker's /chat endpoint (stateless -- the full
-// message history is resent each turn) and, when the model has
+// Chat talks to the Worker's /chat endpoint. The full message history is
+// resent each turn, while the Worker-issued conversation ID and successful
+// history are kept in sessionStorage so a same-tab refresh can resume them.
+// When the model has
 // captured fields, writes them into the real form below for the
 // visitor to review. The agent never submits on its own; only the
 // real submit button (rewired to POST /submit) does that.
 const CHAT_API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
   ? 'http://localhost:8787'
   : 'https://fathom-website-chat-agent.polished-resonance-6f57.workers.dev'; // TODO: swap to a custom domain (e.g. chat-api.fathomresearch.ai) once that's set up — see wrangler.toml notes
+const CHAT_SESSION_KEY='fathom-challenge-chat-v1';
 
 class ChallengeChat{
   constructor(){
@@ -315,8 +318,47 @@ class ChallengeChat{
     this.sendBtn=document.getElementById('fc-send');
     this.closeBtn=this.panel.querySelector('.fc-close');
     this.history=[];
+    this.conversationId=null;
     this.busy=false;
+    this._restoreSession();
+    this._renderHistory();
     this._bind();
+  }
+  _restoreSession(){
+    try{
+      const stored=JSON.parse(sessionStorage.getItem(CHAT_SESSION_KEY));
+      const validHistory=Array.isArray(stored?.history) && stored.history.every(message=>
+        message && (message.role==='user' || message.role==='assistant') &&
+        typeof message.content==='string' && message.content.trim()
+      );
+      if(validHistory && typeof stored.conversationId==='string'){
+        this.history=stored.history;
+        this.conversationId=stored.conversationId;
+      }else if(stored){
+        sessionStorage.removeItem(CHAT_SESSION_KEY);
+      }
+    }catch(err){
+      // Storage can be unavailable or contain stale/corrupt data. In either
+      // case, starting a clean chat is safer than sending mismatched history.
+      try{sessionStorage.removeItem(CHAT_SESSION_KEY);}catch(storageErr){}
+    }
+  }
+  _saveSession(){
+    if(!this.conversationId) return;
+    try{
+      sessionStorage.setItem(CHAT_SESSION_KEY,JSON.stringify({
+        conversationId:this.conversationId,
+        history:this.history
+      }));
+    }catch(err){}
+  }
+  _clearSession(){
+    this.history=[];
+    this.conversationId=null;
+    try{sessionStorage.removeItem(CHAT_SESSION_KEY);}catch(err){}
+  }
+  _renderHistory(){
+    this.history.forEach(message=>this._appendBubble(message.role,message.content));
   }
   _bind(){
     this.fab.addEventListener('click',()=>this.toggle());
@@ -351,16 +393,31 @@ class ChallengeChat{
       const res=await fetch(`${CHAT_API_BASE}/chat`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({messages:this.history})
+        body:JSON.stringify({
+          messages:this.history,
+          ...(this.conversationId ? {conversationId:this.conversationId} : {})
+        })
       });
-      if(!res.ok) throw new Error('bad response');
       const data=await res.json();
+      if(!res.ok){
+        const error=new Error(data.message || 'Something went wrong');
+        error.code=data.error;
+        throw error;
+      }
+      this.conversationId=data.conversationId;
       this.history.push({role:'assistant',content:data.reply});
+      this._saveSession();
       this._resolveBubble(thinkingEl,'assistant',data.reply);
       if(data.formFill) this._applyFormFill(data.formFill);
     }catch(err){
+      // The Worker only accepts successful turns as part of its authoritative
+      // history. Remove this failed turn so the next attempt stays in sync.
+      this.history.pop();
+      if(['invalid_conversation','conversation_expired','conversation_out_of_sync'].includes(err.code)){
+        this._clearSession();
+      }
       this._resolveBubble(thinkingEl,'error',
-        "Something went sideways on our end — you can also just fill out the form directly.");
+        err.message || "Something went sideways on our end — you can also just fill out the form directly.");
     }finally{
       this._setBusy(false);
     }

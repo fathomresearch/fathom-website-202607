@@ -196,6 +196,48 @@ a{text-decoration:none;color:inherit;}
 .metric-label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:10px;}
 @media(max-width:900px){.prop-grid{grid-template-columns:1fr;gap:32px;}.metrics{flex-direction:column;}.metric,.metric+.metric{padding:20px 0;border-left:none;border-top:1px solid var(--border);}}
 
+/* ── CLIENT LOGO WALL ── */
+.clients{padding:96px var(--pad) 104px;background:var(--warm);border-top:1px solid var(--border);position:relative;z-index:1;overflow:hidden;}
+.clients-intro{display:grid;grid-template-columns:4fr 8fr;gap:32px;align-items:end;margin-bottom:52px;}
+.clients-intro .label{margin-bottom:7px;}
+.clients-title{max-width:680px;font-family:'Spectral',serif;font-size:clamp(36px,4vw,52px);font-weight:300;
+  line-height:1.08;letter-spacing:-.025em;color:var(--navy);}
+.clients-title em{font-weight:300;color:var(--teal-h);}
+.clients-rail{position:relative;list-style:none;display:grid;grid-template-columns:1.05fr 1.25fr 1.8fr 1.2fr;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.clients-rail::before{content:'';position:absolute;z-index:2;left:0;right:0;top:-1px;height:1px;background:var(--teal);
+  transform:scaleX(0);transform-origin:left;transition:transform 1.35s .25s cubic-bezier(.22,1,.36,1);}
+.clients-rail.in::before{transform:scaleX(1);}
+.client{--logo-w:170px;--logo-h:64px;position:relative;min-width:0;height:168px;padding:30px;
+  display:flex;align-items:center;justify-content:center;}
+.client+.client{border-left:1px solid var(--border);}
+.client img{display:block;width:min(100%,var(--logo-w));height:auto;max-height:var(--logo-h);object-fit:contain;
+  filter:grayscale(1) contrast(1.08);opacity:.72;transition:filter .28s,opacity .28s;}
+.client--highdive{--logo-w:150px;--logo-h:74px;}
+.client--out{--logo-w:184px;--logo-h:62px;}
+.client--scout{--logo-w:215px;--logo-h:36px;}
+.client--work{--logo-w:156px;--logo-h:66px;}
+@media(hover:hover){.client:hover img{filter:grayscale(0) contrast(1);opacity:1;}}
+@media(max-width:820px){
+  .clients{padding-top:76px;padding-bottom:84px;}
+  .clients-intro{grid-template-columns:1fr;gap:18px;margin-bottom:40px;}
+  .clients-intro .label{margin-bottom:0;}
+  .clients-rail{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .client{height:138px;padding:24px;}
+  .client:nth-child(3){border-left:0;}
+  .client:nth-child(n+3){border-top:1px solid var(--border);}
+}
+@media(max-width:420px){
+  .clients{padding-top:64px;padding-bottom:72px;}
+  .clients-title{font-size:34px;}
+  .client{height:124px;padding-left:18px;padding-right:18px;}
+  .client--highdive{--logo-w:112px;--logo-h:58px;}
+  .client--out{--logo-w:132px;--logo-h:48px;}
+  .client--scout{--logo-w:145px;--logo-h:30px;}
+  .client--work{--logo-w:112px;--logo-h:52px;}
+}
+@media(prefers-reduced-motion:reduce){.clients-rail::before{transition:none;}.client img{transition:none;}}
+
 .sa{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
 .sa.in{opacity:1;transform:none;}
 .s1{transition-delay:.1s;}.s2{transition-delay:.2s;}.s3{transition-delay:.3s;}
@@ -276,6 +318,21 @@ a{text-decoration:none;color:inherit;}
       <div class="metric sa s2"><div class="metric-num">2&ndash;3<span class="unit"> wks</span></div><div class="metric-label">Full strategic study</div></div>
       <div class="metric sa s3"><div class="metric-num teal">100<span class="unit">%</span></div><div class="metric-label">Recommendations, not readouts</div></div>
     </div>
+  </div>
+</section>
+
+<section class="clients" aria-labelledby="clients-title">
+  <div class="container">
+    <div class="clients-intro sa">
+      <span class="label">Selected collaborations</span>
+      <h2 class="clients-title" id="clients-title">Trusted by teams doing <em>work that matters.</em></h2>
+    </div>
+    <ul class="clients-rail sa s1" role="list">
+      <li class="client client--highdive"><img src="images/client-logos/Highdive_logo.png" width="936" height="490" alt="Highdive" loading="lazy" decoding="async"></li>
+      <li class="client client--out"><img src="images/client-logos/Outleadership_logo.png" width="756" height="252" alt="Out Leadership" loading="lazy" decoding="async"></li>
+      <li class="client client--scout"><img src="images/client-logos/scoutlab-logo-black.svg" width="215" height="21" alt="Scout Lab" loading="lazy" decoding="async"></li>
+      <li class="client client--work"><img src="images/client-logos/svg-logo.svg" width="272" height="86" alt="Do The Werq" loading="lazy" decoding="async"></li>
+    </ul>
   </div>
 </section>
 

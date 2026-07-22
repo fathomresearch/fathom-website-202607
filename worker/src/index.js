@@ -1,24 +1,11 @@
 import { runTurn } from "./anthropic.js";
+import { saveTranscriptTurn } from "./transcripts.js";
 export { IpUsageLimiter } from "./usage-limiter.js";
 
 const JSON_HEADERS = { "content-type": "application/json" };
 
 function isAllowedOrigin(origin, env) {
   if (!origin) return false;
-
-  // ============================================================
-  // TEMPORARY — INTERNAL TEAM TESTING ONLY. REMOVE BEFORE LAUNCH.
-  // ============================================================
-  // Browsers send Origin: "null" for pages opened directly as a local file
-  // (file://...), which lets the team open challenge-us.html by double-click
-  // and still have it talk to this Worker, no local server needed. Real site
-  // visitors never send Origin: null (only local file:// pages do), so this
-  // doesn't weaken anything for them -- but while this is in place, ANY local
-  // file on ANY machine can also call this Worker and read the response, not
-  // just this one. Delete this block (and this comment) before the site goes
-  // to production / real publication.
-  if (origin === "null") return true;
-  // ============================================================
 
   const allowed = (env.ALLOWED_ORIGINS || "")
     .split(",")
@@ -153,6 +140,22 @@ async function handleChat(request, env, cors) {
 
   try {
     const result = await runTurn(env, body.messages);
+
+    // Transcript storage is deliberately non-blocking for the visitor: a D1
+    // outage should be visible in logs, but must never take down the chat.
+    try {
+      await saveTranscriptTurn(env.CHAT_TRANSCRIPTS, {
+        conversationId: usageResult.conversationId,
+        turnNumber: usageResult.userTurns,
+        userMessage: body.messages.at(-1).content,
+        assistantMessage: result.reply,
+        formFill: result.formFill,
+        createdAt: new Date(now).toISOString(),
+      });
+    } catch (transcriptError) {
+      console.error("transcript storage error", transcriptError);
+    }
+
     return json(
       {
         ...result,

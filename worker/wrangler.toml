@@ -30,3 +30,8 @@ class_name = "IpUsageLimiter"
 [exports.IpUsageLimiter]
 type = "durable-object"
 storage = "sqlite"
+
+[[d1_databases]]
+binding = "CHAT_TRANSCRIPTS"
+database_name = "fathom-chat-transcripts"
+database_id = "de9a85c9-ada7-4181-88ac-374893cf228d"

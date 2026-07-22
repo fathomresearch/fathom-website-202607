@@ -25,6 +25,8 @@
        Rail         {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{TURNAROUND}}
        Timeline     repeat .beat: {{STAMP}} {{BEAT_TITLE}} {{BEAT_BODY}}
        The move     {{MOVE_LINE}}  (what let you move that fast)
+                    + the lane chart (process layer): .lane-bar left/width are
+                    % of the elapsed window — overlap is the whole point
        Delivered    {{DELIVERED_LINE}} {{DELIVERED_STAT}} {{DELIVERED_LABEL}}
      ============================================================ -->
 
@@ -141,6 +143,28 @@ a{color:inherit;text-decoration:none;}
 .move-inner .section-mark{justify-content:center;margin-bottom:34px;}
 .move-line{font-family:var(--serif);font-weight:300;font-size:clamp(26px,4vw,50px);line-height:1.2;letter-spacing:-.02em;color:var(--ink);text-wrap:balance;}
 .move-line em{font-style:italic;color:var(--teal-dim);}
+
+/* the process layer: what the speed actually was. Five workstreams
+   overlapped, not five workstreams hurried. Bars are % of elapsed. */
+.lanes{max-width:960px;margin:clamp(54px,8vh,88px) auto 0;text-align:left;}
+.lanes-ruler,.lane{display:grid;grid-template-columns:minmax(110px,168px) 1fr;gap:clamp(16px,2.4vw,32px);align-items:center;}
+.lanes-ruler{margin-bottom:16px;}
+.lanes-k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dim);}
+.ruler-track{position:relative;height:14px;}
+.ruler-track span{position:absolute;top:0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);transform:translateX(-50%);}
+.ruler-track span:first-child{transform:none;}
+.ruler-track span:last-child{transform:translateX(-100%);}
+.lane + .lane{margin-top:11px;}
+.lane-k{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);}
+.lane-track{position:relative;height:26px;
+  background-image:linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line));
+  background-size:100% 1px,1px 100%,1px 100%;background-position:0 50%,33.333% 0,66.667% 0;background-repeat:no-repeat;}
+.lane-bar{position:absolute;top:5px;height:16px;border-radius:3px;background:var(--teal);}
+.lane-bar.ahead{background:rgba(0,214,179,.38);}
+.lane-note{max-width:64ch;margin-top:30px;font-size:15.5px;line-height:1.75;color:var(--body);}
+.lane-note b{color:var(--ink);font-weight:600;}
+.lane-note i{font-style:normal;color:var(--muted);}
+@media(max-width:640px){.lanes-ruler,.lane{grid-template-columns:1fr;gap:5px;}.lane-track{height:22px;}.lane + .lane{margin-top:16px;}}
 
 /* DELIVERED */
 .delivered{background:var(--navy-deep);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
@@ -289,6 +313,19 @@ a{color:inherit;text-decoration:none;}
   <div class="move-inner sa">
     <div class="section-mark">How it was possible</div>
     <p class="move-line">{{MOVE_LINE}} <em>&mdash; the one thing that turned six weeks into seventy-two hours without cutting the rigor.</em></p>
+  </div>
+  <!-- the process layer: how seventy-two hours was actually possible -->
+  <div class="lanes sa">
+    <div class="lanes-ruler">
+      <div class="lanes-k">What ran at once</div>
+      <div class="ruler-track"><span style="left:0">H+0</span><span style="left:33.333%">H+24</span><span style="left:66.667%">H+48</span><span style="left:100%">H+72</span></div>
+    </div>
+    <div class="lane"><div class="lane-k">Sample &amp; recruit</div><div class="lane-track"><div class="lane-bar" style="left:0;width:19.4%"></div></div></div>
+    <div class="lane"><div class="lane-k">Instrument</div><div class="lane-track"><div class="lane-bar" style="left:2.8%;width:19.4%"></div></div></div>
+    <div class="lane"><div class="lane-k">In field</div><div class="lane-track"><div class="lane-bar" style="left:19.4%;width:36.2%"></div></div></div>
+    <div class="lane"><div class="lane-k">Analysis frame</div><div class="lane-track"><div class="lane-bar ahead" style="left:8.3%;width:52.8%"></div></div></div>
+    <div class="lane"><div class="lane-k">Write &amp; deliver</div><div class="lane-track"><div class="lane-bar" style="left:52.8%;width:47.2%"></div></div></div>
+    <p class="lane-note">Nothing here is done faster than it would normally be done. <b>It is done at the same time.</b> The analysis frame &mdash; tables, cuts, the shape of the argument &mdash; is built against dummy data while fielding is still open <i>(the lighter bar)</i>, so the real data drops into a finished structure instead of starting a new job. Run end to end, these five workstreams take six weeks. Most of that six weeks is waiting.</p>
   </div>
 </section>
 

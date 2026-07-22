@@ -27,6 +27,8 @@
        Layers    repeat .layer: {{LAYER_LABEL}} {{LAYER_TITLE}} {{LAYER_BODY}}
        Surface   {{SURFACE_LINE}}  (the clarity brought up)
        Outcome   {{OUTCOME_STAT}} {{OUTCOME_STAT_LABEL}}
+       Method       the instrument scale (process layer): what each method
+                    reaches at each depth — .mark blocks, depth in fathoms
      ============================================================ -->
 
 <style>
@@ -128,6 +130,27 @@ a{color:inherit;text-decoration:none;}
 .surfacing-inner .section-mark{justify-content:center;margin-bottom:40px;}
 .surfacing-line{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.6vw,62px);line-height:1.12;letter-spacing:-.025em;color:var(--ink);text-wrap:balance;}
 .surfacing-line em{font-style:italic;color:var(--teal-dim);}
+
+/* ============================================================
+   HOW FAR WE GO — the process layer, carried by the same depth
+   metaphor as the page: each instrument plotted at the depth it
+   actually reaches. Method only.
+   ============================================================ */
+.depths{background:var(--warm);color:var(--ink);padding:clamp(80px,13vh,150px) var(--pad);border-top:.5px solid var(--line);}
+.depths-inner{max-width:var(--max);margin:0 auto;}
+.depths-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:21ch;margin:22px 0 clamp(44px,7vh,70px);}
+.mark{display:grid;grid-template-columns:clamp(64px,8vw,104px) 1fr;gap:clamp(20px,3vw,38px);}
+.mark-d{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dim);text-align:right;padding-top:1px;}
+.mark-c{position:relative;border-left:2px solid var(--line);padding:0 0 clamp(34px,5.5vh,54px) clamp(24px,3vw,36px);}
+.mark-c::before{content:'';position:absolute;left:-10px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--warm);border:2px solid currentColor;}
+.m1 .mark-c{border-left-color:rgba(0,214,179,.5);color:var(--teal);}
+.m2 .mark-c{border-left-color:rgba(0,158,133,.55);color:var(--teal-dim);}
+.m3 .mark-c{border-left-color:rgba(18,42,68,.4);color:var(--navy-mid);}
+.m4 .mark-c{border-left-color:transparent;color:var(--navy);padding-bottom:0;}
+.mark-t{font-family:var(--serif);font-weight:400;font-size:clamp(19px,2.1vw,25px);line-height:1.24;letter-spacing:-.012em;color:var(--ink);margin-bottom:11px;}
+.mark-b{font-size:15.5px;line-height:1.74;color:var(--body);max-width:58ch;}
+.mark-stop{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--struck);border:1px solid var(--line);border-radius:100px;padding:5px 13px;}
+@media(max-width:560px){.mark{grid-template-columns:1fr;gap:8px;}.mark-d{text-align:left;}.mark-c{padding-left:26px;}}
 
 /* OUTCOME */
 .outcome{background:var(--navy);color:#fff;padding:clamp(64px,10vh,110px) var(--pad);}
@@ -277,6 +300,45 @@ a{color:inherit;text-decoration:none;}
   <div class="surfacing-inner sa">
     <div class="section-mark">Surfaced</div>
     <p class="surfacing-line">{{SURFACE_LINE}} <em>&mdash; the clarity that was always down there, brought up where a decision could use it.</em></p>
+  </div>
+</section>
+
+<!-- HOW FAR WE GO — process layer (method only; no client findings) -->
+<section class="depths" aria-label="How far we go">
+  <div class="depths-inner">
+    <div class="sa">
+      <div class="section-mark">How far we go</div>
+      <h2 class="depths-h">Depth isn&rsquo;t a longer interview. It&rsquo;s a different instrument at each level.</h2>
+    </div>
+    <div class="mark m1 sa">
+      <div class="mark-d">0 fm</div>
+      <div class="mark-c">
+        <div class="mark-t">What people will tell you</div>
+        <p class="mark-b">Claimed behaviour, stated preference, ranked reasons. It is real data and it is the cheapest to collect, which is exactly why so much research ends here.</p>
+        <span class="mark-stop">Where most studies stop</span>
+      </div>
+    </div>
+    <div class="mark m2 sa">
+      <div class="mark-d">60 fm</div>
+      <div class="mark-c">
+        <div class="mark-t">What they mean by it</div>
+        <p class="mark-b">Laddering and projective interviewing &mdash; the same ground approached from four directions until the answer stops being tidy. The untidy version is the useful one.</p>
+      </div>
+    </div>
+    <div class="mark m3 sa">
+      <div class="mark-d">140 fm</div>
+      <div class="mark-c">
+        <div class="mark-t">What they actually do</div>
+        <p class="mark-b">Observation in context, plus behavioural data where it exists. Stated and actual behaviour diverge in every category we have worked in; the size of that gap is a finding on its own.</p>
+      </div>
+    </div>
+    <div class="mark m4 sa">
+      <div class="mark-d">240 fm</div>
+      <div class="mark-c">
+        <div class="mark-t">Why the two disagree</div>
+        <p class="mark-b">The floor is the reconciliation, and it only holds if it explains all three layers above it. An explanation that fits one layer is a quote. One that fits all of them is something you can build on.</p>
+      </div>
+    </div>
   </div>
 </section>
 

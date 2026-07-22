@@ -70,15 +70,15 @@ a{color:inherit;text-decoration:none;}
 @media(max-width:860px){.nav-link{display:none;}}
 
 /* ============================================================
-   COVER — state the untested premise. A "hypothesis" stamp.
+   COVER — shared case-study hero and dossier shell.
    ============================================================ */
 .cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
 .cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 90% at 80% 0%, rgba(0,214,179,.10), transparent 55%);}
 .cover-inner{position:relative;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
-.stamp-h{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,214,179,.4);border-radius:3px;padding:8px 14px;margin-bottom:30px;}
-.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:var(--teal);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+.cover-eyebrow .idx{color:rgba(255,255,255,.4);}
 .cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
-.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:16ch;margin-bottom:28px;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:20ch;margin-bottom:28px;}
 .cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
 .cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
 .dossier{border-top:1px solid var(--bdr);background:var(--navy);}
@@ -188,12 +188,11 @@ a{color:inherit;text-decoration:none;}
 
 <main>
 
-<!-- COVER — the untested premise -->
+<!-- COVER -->
 <header class="cover">
   <div class="cover-inner">
-    <span class="stamp-h">Hypothesis · Untested</span>
     <div class="cover-eyebrow">
-      <span>Case {{CASE_INDEX}}</span>
+      <span class="idx">Case {{CASE_INDEX}}</span>
       <span class="dot" aria-hidden="true"></span>
       <span>{{SECTOR}}</span>
       <span class="dot" aria-hidden="true"></span>

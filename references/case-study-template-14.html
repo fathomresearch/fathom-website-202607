@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 14 — "The Trade-Off"
+     Fathom Research & Strategy
+
+     For CONJOINT / PRICING cases: people can't have everything, and
+     what they give up to get something is the only honest measure of
+     what it is worth. Signature = THE TARIFF, every attribute priced
+     in one currency and set as a rate card.
+
+     Process layer = THE CHOICE CARD: one screen from the instrument,
+     reproduced, plus why we never ask what anyone would pay.
+
+     Device discipline: cards in the method, a list in the signature,
+     a one-dimensional scale in the outcome. Nothing is drawn twice.
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Setup     {{SETUP_LEAD}}
+       Method    per .card: the attribute rows and the price. .card.chosen
+                 marks the option this respondent picked. Keep the
+                 "none of these" row — the note explains why.
+       Tariff    per .rate-row: {{FEATURE}} and its value. Positive above
+                 the .rate-split, negative below. .rate-row.top gets the
+                 emphasis; keep exactly one per side.
+       Call      {{CONFIG_LINE}}  (the specification that won)
+       Outcome   {{PRICE}} plus the band: .oc-hold is the range where
+                 share is stable (left/width as % of the scale) and
+                 .oc-mark is the chosen price. {{OUTCOME_STAT_LABEL}}
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:15ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+
+/* THE SETUP */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   THE CHOICE CARD — the process layer. The instrument itself,
+   reproduced: three options, a real trade in every row, and the
+   "none" escape that most studies quietly delete.
+   ============================================================ */
+.task{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.task-inner{max-width:var(--max);margin:0 auto;}
+.task-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:#fff;max-width:20ch;margin:22px 0 clamp(40px,6vh,62px);}
+.task-q{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px;}
+.card-set{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,26px);max-width:940px;}
+.card{border:1px solid var(--bdr);background:rgba(255,255,255,.03);padding:clamp(18px,2.4vw,26px);}
+.card.chosen{border-color:rgba(0,214,179,.5);background:rgba(0,214,179,.07);}
+.card-k{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px;}
+.card.chosen .card-k{color:var(--teal);}
+.card-tag{font-size:8.5px;letter-spacing:.14em;border:1px solid rgba(0,214,179,.5);border-radius:100px;padding:3px 9px;color:var(--teal);}
+.card-row{padding:9px 0;border-top:1px solid var(--bdr);}
+.card-a{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px;}
+.card-v{font-size:14.5px;line-height:1.4;color:rgba(255,255,255,.8);}
+.card-price{margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr);font-family:var(--serif);font-weight:300;font-size:clamp(24px,3vw,34px);line-height:1;color:#fff;}
+.card.chosen .card-price{color:var(--teal);}
+.task-none{display:flex;align-items:center;gap:13px;max-width:940px;margin-top:14px;border:1px dashed var(--bdr);padding:15px 20px;font-size:14.5px;color:rgba(255,255,255,.42);}
+.task-none i{flex:none;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.28);}
+.task-notes{margin-top:clamp(38px,6vh,60px);border-top:1px solid var(--bdr);padding-top:30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);}
+.task-notes p{font-size:16px;line-height:1.78;color:rgba(255,255,255,.6);}
+.task-notes b{color:#fff;font-weight:500;}
+@media(max-width:700px){.card-set{grid-template-columns:1fr;}.task-notes{grid-template-columns:1fr;gap:20px;}}
+
+/* ============================================================
+   THE TARIFF — signature. Conjoint's actual output is an exchange
+   rate, so it is set as a rate card: every feature in one
+   currency, positives above the line and costs below it.
+   ============================================================ */
+.tariff{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.tariff-inner{max-width:var(--max);margin:0 auto;}
+.tariff-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:19ch;margin:22px 0 clamp(44px,7vh,68px);}
+.rate{max-width:840px;margin:0 auto;}
+.rate-row{display:flex;align-items:baseline;gap:14px;padding:clamp(11px,1.7vh,17px) 0;}
+.rate-n{font-family:var(--serif);font-weight:400;font-size:clamp(17px,2vw,23px);line-height:1.25;letter-spacing:-.01em;color:var(--ink);}
+.rate-d{flex:1;min-width:20px;border-bottom:1px dotted var(--line);transform:translateY(-5px);}
+.rate-v{font-family:var(--serif);font-weight:300;font-size:clamp(19px,2.4vw,28px);line-height:1;color:var(--teal-dim);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.rate-row.top .rate-n{font-weight:500;}
+.rate-row.top .rate-v{font-size:clamp(26px,3.6vw,42px);}
+.rate-row.neg .rate-n,.rate-row.neg .rate-v{color:var(--struck);}
+.rate-row.neg.top .rate-v{color:var(--ink);}
+.rate-split{display:flex;align-items:center;gap:18px;margin:clamp(20px,3.4vh,32px) 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+.rate-split::before,.rate-split::after{content:'';flex:1;height:1px;background:var(--line);}
+.rate-foot{max-width:840px;margin:clamp(38px,6vh,58px) auto 0;border-top:1px solid var(--line);padding-top:28px;font-size:16.5px;line-height:1.78;color:var(--body);}
+.rate-foot b{color:var(--ink);font-weight:600;}
+@media(max-width:520px){.rate-row{flex-wrap:wrap;gap:4px 12px;}.rate-d{order:3;width:100%;flex:none;}}
+
+/* THE CALL — the specification that won */
+.call{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.call-inner{max-width:900px;margin:0 auto;text-align:center;}
+.call-inner .section-mark{justify-content:center;margin-bottom:36px;}
+.call-line{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4.4vw,58px);line-height:1.14;letter-spacing:-.025em;color:#fff;text-wrap:balance;}
+.call-line em{font-style:italic;color:var(--teal);}
+/* ============================================================
+   OUTCOME — the family frame: navy ground, the mark, one mono
+   label. What sits inside is chosen per case, and never re-uses
+   the geometry the signature already spent.
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:44ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:30px;}}
+
+/* the price, and the band it holds across — a one-dimensional scale,
+   a geometry this page has not used. The band is the real answer. */
+.outcome-inner{grid-template-columns:minmax(0,.55fr) minmax(0,1fr);align-items:center;}
+.oc-price{font-family:var(--serif);font-weight:200;font-size:clamp(56px,8vw,116px);line-height:.84;letter-spacing:-.035em;color:var(--teal);font-variant-numeric:tabular-nums;}
+.oc-band{max-width:440px;margin-bottom:22px;}
+.oc-bandk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+.oc-scale{position:relative;height:30px;}
+.oc-scale::before{content:'';position:absolute;left:0;right:0;top:14px;height:1px;background:rgba(255,255,255,.16);}
+.oc-hold{position:absolute;top:11px;height:7px;border-radius:4px;background:rgba(0,214,179,.32);}
+.oc-mark{position:absolute;top:5px;width:2px;height:19px;background:var(--teal);transform:translateX(-50%);}
+.oc-ends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:rgba(255,255,255,.32);}
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">Everyone wants everything. <em>Nobody buys everything.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on the pricing argument that could not be settled, because it was being had about the wrong thing.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE SETUP -->
+<section class="setup" aria-label="The setup">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The setup</div>
+      <p class="lead">They asked what to charge. <em>The answer was what to include.</em></p>
+    </div>
+    <div class="prose sa d1">
+      <p>{{SETUP_LEAD}} &mdash; the pricing question arrived the way it always does: a number, a deadline, and three internal factions each certain about a different figure.</p>
+      <p>A price on its own is unanswerable. The same &pound;34 is expensive for one specification and a bargain for another, and the only people who can settle which it is are the ones choosing between real alternatives with real money attached. <strong>So we stopped asking about price, and started making people choose.</strong></p>
+      <p>What comes back is not a price. It is an exchange rate &mdash; how much of one thing people will give up to get more of another &mdash; and once you have that, the price mostly sets itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE CHOICE CARD — process layer (method only; no client findings) -->
+<section class="task" aria-label="How the question was asked">
+  <div class="task-inner">
+    <div class="sa">
+      <div class="section-mark">How the question was asked</div>
+      <h2 class="task-h">We never asked anyone what they would pay.</h2>
+    </div>
+    <div class="sa">
+      <p class="task-q">Task 7 of 12 &mdash; as it appeared on screen</p>
+      <div class="card-set">
+        <div class="card">
+          <div class="card-k"><span>Option A</span></div>
+          <div class="card-row"><div class="card-a">Delivery</div><div class="card-v">5 days</div></div>
+          <div class="card-row"><div class="card-a">Warranty</div><div class="card-v">1 year</div></div>
+          <div class="card-row"><div class="card-a">Packaging</div><div class="card-v">Standard</div></div>
+          <div class="card-row"><div class="card-a">Label</div><div class="card-v">Own brand</div></div>
+          <div class="card-price">&pound;29</div>
+        </div>
+        <div class="card chosen">
+          <div class="card-k"><span>Option B</span><span class="card-tag">Chosen</span></div>
+          <div class="card-row"><div class="card-a">Delivery</div><div class="card-v">2 days</div></div>
+          <div class="card-row"><div class="card-a">Warranty</div><div class="card-v">1 year</div></div>
+          <div class="card-row"><div class="card-a">Packaging</div><div class="card-v">Recycled</div></div>
+          <div class="card-row"><div class="card-a">Label</div><div class="card-v">Manufacturer</div></div>
+          <div class="card-price">&pound;38</div>
+        </div>
+        <div class="card">
+          <div class="card-k"><span>Option C</span></div>
+          <div class="card-row"><div class="card-a">Delivery</div><div class="card-v">3 days</div></div>
+          <div class="card-row"><div class="card-a">Warranty</div><div class="card-v">3 years</div></div>
+          <div class="card-row"><div class="card-a">Packaging</div><div class="card-v">Standard</div></div>
+          <div class="card-row"><div class="card-a">Label</div><div class="card-v">Manufacturer</div></div>
+          <div class="card-price">&pound;34</div>
+        </div>
+      </div>
+      <div class="task-none"><i aria-hidden="true"></i><span>None of these &mdash; I would buy nothing today</span></div>
+    </div>
+    <div class="task-notes sa">
+      <p><b>Stated willingness-to-pay is a number people invent to sound reasonable.</b> Asked directly, everyone is a careful shopper. Asked to choose, they behave like themselves. Twelve of these per respondent, every one a genuine trade: the fast delivery and the low price are never on the same card, and a choice still has to be made.</p>
+      <p><b>The &ldquo;none&rdquo; option never comes out.</b> Delete it and every respondent is forced into a preference they may not hold, which quietly inflates every share estimate that follows. The design is balanced so each level appears equally often and no two attributes travel together &mdash; otherwise the model cannot tell which of the two a person was answering.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE TARIFF — signature -->
+<section class="tariff" aria-label="The exchange rate">
+  <div class="tariff-inner">
+    <div class="sa">
+      <div class="section-mark">The exchange rate</div>
+      <h2 class="tariff-h">What every feature is worth, in money.</h2>
+    </div>
+    <div class="rate sa">
+      <div class="rate-row top"><span class="rate-n">Two-day delivery</span><span class="rate-d" aria-hidden="true"></span><span class="rate-v">+&pound;4.20</span></div>
+      <div class="rate-row"><span class="rate-n">Three-year warranty</span><span class="rate-d" aria-hidden="true"></span><span class="rate-v">+&pound;3.60</span></div>
+      <div class="rate-row"><span class="rate-n">A named delivery day</span><span class="rate-d" aria-hidden="true"></span><span class="rate-v">+&pound;2.40</span></div>
+      <div class="rate-row"><span class="rate-n">Recycled packaging</span><span class="rate-d" aria-hidden="true"></span><span class="rate-v">+&pound;0.30</span></div>
+      <div class="rate-split">What has to be paid for</div>
+      <div class="rate-row neg"><span class="rate-n">Carrying the retailer&rsquo;s own label</span><span class="rate-d" aria-hidden="true"></span><span class="rate-v">&minus;&pound;3.10</span></div>
+      <div class="rate-row neg top"><span class="rate-n">Requiring an account at checkout</span><span class="rate-d" aria-hidden="true"></span><span class="rate-v">&minus;&pound;5.80</span></div>
+    </div>
+    <p class="rate-foot sa">Nobody was asked what they would pay for any of this. Every price here falls out of what people chose when they had to give something up, which is why the list rarely matches what the same people say in a survey. <b>Read as an exchange rate: two days of delivery are worth more than three years of warranty</b> &mdash; and asking for an account at checkout costs more than every improvement above the line is worth.</p>
+  </div>
+</section>
+
+<!-- THE CALL -->
+<section class="call" aria-label="The call">
+  <div class="call-inner sa">
+    <div class="section-mark">The call</div>
+    <p class="call-line">{{CONFIG_LINE}} <em>&mdash; the winning specification was not a compromise between the three factions. It was the one nobody in the room had proposed.</em></p>
+  </div>
+</section>
+
+<!-- OUTCOME — the price, and the band it holds -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <div class="oc-price">&pound;34</div><!-- swap: {{PRICE}} — keep it short, renders huge -->
+    <div>
+      <div class="oc-band">
+        <div class="oc-bandk">Share holds anywhere in here</div>
+        <div class="oc-scale" aria-hidden="true">
+          <span class="oc-hold" style="left:31.8%;width:27.3%"></span>
+          <span class="oc-mark" style="left:45.5%"></span>
+        </div>
+        <div class="oc-ends"><span>&pound;24</span><span>&pound;46</span></div>
+      </div>
+      <p class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; and the band is the more useful half of the answer: knowing where the edge is matters more than the exact number in front of it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Still arguing about the price? <em>Ask a better question.</em></h2>
+    <p>If you can name the features you are arguing over, that is enough to start.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

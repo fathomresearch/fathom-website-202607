@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 12 — "The Leak"
+     Fathom Research & Strategy
+
+     For FUNNEL / DROP-OFF cases: interest was never the problem —
+     people are being lost at one identifiable step. Signature = a
+     funnel with the biggest drop lit up.
+
+     Process layer = THE RECONCILIATION: before a funnel can be
+     measured, everyone has to agree what a step is. Three systems,
+     three numbers for the same step, reconciled to one base.
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Setup     {{SETUP_LEAD}}  (the traffic-is-fine opening)
+       Method    per .rec-src: system name, its number, what it counts.
+                 .rec-agreed holds the reconciled base.
+       Funnel    per .step: {{STEP_NAME}} {{STEP_PCT}} {{STEP_NOTE}}
+                 Bar width = inline width % on .step-bar (share of the
+                 top of the funnel). .step.leak marks the big drop.
+       Leak      {{LEAK_LINE}}  (the step to fix)
+       Outcome   the arithmetic line in .oc-sum (same base in, more
+                 out) + {{OUTCOME_STAT_LABEL}}. No second bar chart —
+                 the funnel is drawn once, in the signature.
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:15ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+
+/* THE SETUP — plenty of interest, nothing to show for it */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   THE RECONCILIATION — the process layer. Day one of a funnel
+   study is never measurement; it is getting three systems to
+   agree what a step is. Three numbers, braced into one base.
+   ============================================================ */
+.rec{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.rec-inner{max-width:var(--max);margin:0 auto;}
+.rec-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:#fff;max-width:21ch;margin:22px 0 clamp(44px,7vh,70px);}
+.rec-grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(48px,6vw,92px) minmax(0,.85fr);align-items:center;}
+.rec-srcs{display:grid;gap:18px;}
+.rec-src{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;border-bottom:1px solid var(--bdr);padding-bottom:16px;}
+.rec-src:last-child{border-bottom:0;padding-bottom:0;}
+.rec-k{font-size:15px;line-height:1.5;color:rgba(255,255,255,.72);}
+.rec-k small{display:block;font-size:12.5px;color:rgba(255,255,255,.38);margin-top:4px;}
+.rec-n{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3vw,36px);line-height:1;color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums;}
+.rec-brace{align-self:stretch;min-height:150px;}
+.rec-brace svg{display:block;width:100%;height:100%;}
+.rec-agreed{border:1px solid rgba(0,214,179,.35);background:rgba(0,214,179,.06);padding:clamp(22px,3vw,32px);}
+.rec-agreed-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+.rec-agreed-n{font-family:var(--serif);font-weight:200;font-size:clamp(40px,5vw,66px);line-height:.95;letter-spacing:-.03em;color:var(--teal);font-variant-numeric:tabular-nums;margin-bottom:14px;}
+.rec-agreed-b{font-size:14.5px;line-height:1.68;color:rgba(255,255,255,.62);}
+.rec-foot{margin-top:clamp(38px,6vh,60px);border-top:1px solid var(--bdr);padding-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);}
+.rec-foot p{font-size:16px;line-height:1.78;color:rgba(255,255,255,.6);}
+.rec-foot b{color:#fff;font-weight:500;}
+@media(max-width:860px){.rec-grid{grid-template-columns:1fr;gap:28px;}.rec-brace{display:none;}.rec-foot{grid-template-columns:1fr;gap:20px;}}
+
+/* ============================================================
+   THE FUNNEL — signature. Bars narrowing down the page, each
+   labelled with what survives it; the big drop is lit and the
+   loss between steps is called out in the gap itself.
+   ============================================================ */
+.funnel{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.funnel-inner{max-width:var(--max);margin:0 auto;}
+.funnel-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:20ch;margin:22px 0 clamp(44px,7vh,70px);}
+.steps{max-width:1000px;}
+.step{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:center;}
+.step-k{text-align:right;}
+.step-name{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);}
+.step-note{font-size:13px;line-height:1.55;color:var(--muted);margin-top:6px;}
+.step-bar{position:relative;height:clamp(46px,6vw,62px);background:var(--teal-dim);border-radius:3px;display:flex;align-items:center;padding:0 18px;}
+.step.leak .step-bar{background:var(--navy);}
+.step-pct{font-family:var(--serif);font-weight:300;font-size:clamp(20px,2.2vw,27px);color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+.drop{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:clamp(18px,3vw,36px);}
+.drop-v{grid-column:2;display:flex;align-items:center;gap:12px;padding:9px 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.drop-v::before{content:'';width:1px;height:22px;background:var(--line);margin-left:18px;}
+.drop.big .drop-v{color:var(--teal-dim);}
+.drop.big .drop-v::before{background:var(--teal);height:30px;}
+.funnel-read{margin-top:clamp(40px,6vh,62px);border-top:1px solid var(--line);padding-top:28px;font-size:16.5px;line-height:1.78;color:var(--body);max-width:74ch;}
+.funnel-read b{color:var(--ink);font-weight:600;}
+@media(max-width:640px){.step,.drop{grid-template-columns:1fr;gap:8px;}.step-k{text-align:left;}.drop-v{grid-column:1;}.drop-v::before{margin-left:0;}}
+
+/* THE LEAK — the one step to fix */
+.leak-sec{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.leak-inner{max-width:900px;margin:0 auto;text-align:center;}
+.leak-inner .section-mark{justify-content:center;margin-bottom:36px;}
+.leak-line{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4.4vw,58px);line-height:1.14;letter-spacing:-.025em;color:#fff;text-wrap:balance;}
+.leak-line em{font-style:italic;color:var(--teal);}
+/* ============================================================
+   OUTCOME — the signature, resolved. The case closes on the same
+   instrument it was argued with, showing the repair rather than
+   claiming it. Shared across the family: navy ground, the mark,
+   one mono label. The figure itself is per-template.
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(30px,5vw,72px);align-items:center;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:40ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:34px;}}
+/* the arithmetic — a sentence, not a second set of bars. The funnel
+   is charted once, above; here the same fact is simply counted. */
+.outcome-inner{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:end;}
+.oc-sum{font-family:var(--serif);font-weight:200;font-size:clamp(28px,4.2vw,60px);line-height:1.06;letter-spacing:-.03em;color:rgba(255,255,255,.45);text-wrap:balance;}
+.oc-sum em{font-style:normal;color:var(--teal);}
+.oc-sum b{font-weight:200;color:#fff;}
+
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">You don&rsquo;t have a demand problem. <em>You have a door problem.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on the step where the people you already paid for quietly leave.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE SETUP -->
+<section class="setup" aria-label="The setup">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The setup</div>
+      <p class="lead">Traffic was up. Awareness was up. <em>Nothing else was.</em></p>
+    </div>
+    <div class="prose sa d1">
+      <p>{{SETUP_LEAD}} &mdash; the top of the funnel had been fed for two years, and the number at the bottom had barely moved. The instinct in the room was to feed it harder.</p>
+      <p>That instinct is expensive and it is usually wrong. <strong>A funnel that leaks doesn&rsquo;t need more poured into it.</strong> Every extra visitor arrives at the same broken step, drops out at the same rate, and costs the same to acquire &mdash; so spending more buys a proportionally bigger loss.</p>
+      <p>The useful question isn&rsquo;t how many people start. It&rsquo;s where the ones who started stop, and whether that step is losing people for a reason anyone has actually looked at.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE RECONCILIATION — process layer (method only; no client findings) -->
+<section class="rec" aria-label="How the funnel was defined">
+  <div class="rec-inner">
+    <div class="sa">
+      <div class="section-mark">How the funnel was defined</div>
+      <h2 class="rec-h">Three systems, one step, three different numbers. That is where the work starts.</h2>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-srcs sa">
+        <div class="rec-src">
+          <div class="rec-k">Web analytics<small>Counts sessions, and counts the same person twice</small></div>
+          <div class="rec-n">4,512</div>
+        </div>
+        <div class="rec-src">
+          <div class="rec-k">CRM<small>Counts records, and only once they&rsquo;re complete</small></div>
+          <div class="rec-n">3,880</div>
+        </div>
+        <div class="rec-src">
+          <div class="rec-k">The board deck<small>Counts whichever of the two was reported that quarter</small></div>
+          <div class="rec-n">4,200</div>
+        </div>
+      </div>
+      <div class="rec-brace sa d1" aria-hidden="true">
+        <svg viewBox="0 0 100 200" preserveAspectRatio="none" role="presentation">
+          <path d="M14 6 C48 6 34 92 72 100 C34 108 48 194 14 194" fill="none"
+                stroke="rgba(0,214,179,.4)" stroke-width="1.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+          <path d="M72 100 H100" fill="none" stroke="rgba(0,214,179,.4)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+        </svg>
+      </div>
+      <div class="rec-agreed sa d2">
+        <div class="rec-agreed-k">One agreed base</div>
+        <div class="rec-agreed-n">3,880</div>
+        <p class="rec-agreed-b">Deduplicated to people, not sessions, and counted at the same moment in every system. Written down, signed off, and used for every figure that follows.</p>
+      </div>
+    </div>
+    <div class="rec-foot sa">
+      <p><b>Until the base is agreed, a drop-off rate is an opinion.</b> Most funnel arguments we walk into are not disagreements about customers at all &mdash; they are two teams comparing numbers that were never counting the same thing. We reconcile first, in public, and we take the most conservative definition rather than the most flattering one.</p>
+      <p><b>Then we instrument the gaps.</b> Systems record what they were built to bill for, which is rarely where people give up. Any step the stack can&rsquo;t see gets covered another way &mdash; session replay, a short intercept, or a call to the people who abandoned it &mdash; before it is allowed into the chart.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE FUNNEL — signature -->
+<section class="funnel" aria-label="The funnel">
+  <div class="funnel-inner">
+    <div class="sa">
+      <div class="section-mark">Where they go</div>
+      <h2 class="funnel-h">Everyone who started, and where they stopped.</h2>
+    </div>
+    <div class="steps sa">
+      <div class="step">
+        <div class="step-k"><div class="step-name">Arrived</div><p class="step-note">Landed with intent, from any source</p></div>
+        <div class="step-bar" style="width:100%"><span class="step-pct">100%</span></div>
+      </div>
+      <div class="drop"><div class="drop-v">&minus;18% &middot; bounced before anything loaded</div></div>
+      <div class="step">
+        <div class="step-k"><div class="step-name">Browsed</div><p class="step-note">Looked at more than one thing</p></div>
+        <div class="step-bar" style="width:82%"><span class="step-pct">82%</span></div>
+      </div>
+      <div class="drop"><div class="drop-v">&minus;20% &middot; looked, didn&rsquo;t choose</div></div>
+      <div class="step">
+        <div class="step-k"><div class="step-name">Chose</div><p class="step-note">Put something in the basket</p></div>
+        <div class="step-bar" style="width:62%"><span class="step-pct">62%</span></div>
+      </div>
+      <div class="drop big"><div class="drop-v">&minus;41% &middot; the leak &mdash; abandoned at the form</div></div>
+      <div class="step leak">
+        <div class="step-k"><div class="step-name">Registered</div><p class="step-note">Handed over an account and a password</p></div>
+        <div class="step-bar" style="width:21%"><span class="step-pct">21%</span></div>
+      </div>
+      <div class="drop"><div class="drop-v">&minus;3% &middot; payment declined or withdrawn</div></div>
+      <div class="step">
+        <div class="step-k"><div class="step-name">Paid</div><p class="step-note">Completed, money taken</p></div>
+        <div class="step-bar" style="width:18%"><span class="step-pct">18%</span></div>
+      </div>
+    </div>
+    <p class="funnel-read sa">Four of the five drops are ordinary &mdash; every funnel in the category loses people browsing, and losing a fifth of browsers before they choose is unremarkable. <b>One drop is not ordinary.</b> Two thirds of the people who had already chosen something walked away at the step immediately after choosing it, which is the one place in the sequence where intent is highest and the reason for leaving cannot be lack of interest.</p>
+  </div>
+</section>
+
+<!-- THE LEAK -->
+<section class="leak-sec" aria-label="The leak">
+  <div class="leak-inner sa">
+    <div class="section-mark">The leak</div>
+    <p class="leak-line">{{LEAK_LINE}} <em>&mdash; they weren&rsquo;t deciding whether to buy. They&rsquo;d decided. They were deciding whether to make an account.</em></p>
+  </div>
+</section>
+<!-- OUTCOME — the arithmetic (the funnel is charted once, above) -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <p class="oc-sum">The same <b>3,880</b> people in. <em>1,130 more</em> out the other end.</p>
+    <p class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; completion at the broken step, 21% to 50%. Nothing was added at the top of the funnel; the step stopped asking for an account.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Pouring more in and watching it drain? <em>Let&rsquo;s find the hole.</em></h2>
+    <p>You don&rsquo;t need clean analytics to start. Knowing the numbers disagree is enough.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

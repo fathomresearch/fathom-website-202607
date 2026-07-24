@@ -40,13 +40,14 @@ a{text-decoration:none;color:inherit;}
 /* ── NAV ── */
 .nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
 .nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
+.nav-logo svg{display:block;width:auto;height:28px;}
 .nav-logo-sub{font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
 .nav-links{display:flex;align-items:center;gap:36px;}
-.nl{font-size:14px;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
-.nl:hover{color:rgba(255,255,255,.92);}
-.nl.active{color:#fff;font-weight:500;}
-.nc{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
-.nc:hover{background:var(--teal-h);}
+.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
+.nav-link:hover{color:rgba(255,255,255,.92);}
+.nav-link.active{color:rgba(255,255,255,.92);font-weight:500;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-h);}
 
 /* ── DECLARATION — the three radicals ── */
 .declaration{min-height:calc(100vh - 72px);display:flex;flex-direction:column;padding:56px 0 0;background:var(--navy);position:relative;overflow:hidden;}
@@ -158,7 +159,7 @@ a{text-decoration:none;color:inherit;}
 }
 @media(max-width:768px){
   :root{--pad:24px;}
-  .nl{display:none;}
+  .nav-link{display:none;}
   .team-inner{gap:36px;padding:48px var(--pad) 64px;}
   .team-row{grid-template-columns:repeat(2,1fr);gap:30px 22px;}
   .founder-col{max-width:320px;}
@@ -177,17 +178,16 @@ a{text-decoration:none;color:inherit;}
 <body>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+<nav class="nav" aria-label="Main navigation">
+  <a href="./index.html" class="nav-logo" aria-label="Fathom home">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="30" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
     <span class="nav-logo-sub">Research &amp; Strategy</span>
   </a>
   <div class="nav-links">
-    <a href="work.html" class="nl">Work</a>
-    <a href="what-we-do.html" class="nl">What We Do</a>
-    <a href="about.html" class="nl active">About</a>
-    <a href="insights.html" class="nl">Insights</a>
-    <a href="challenge-us.html" class="nc">Challenge Us</a>
+    <a href="work.html" class="nav-link">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link active">About</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
   </div>
 </nav>
 
@@ -376,7 +376,6 @@ a{text-decoration:none;color:inherit;}
         <a href="work.html" class="footer-link">Work</a>
         <a href="what-we-do.html" class="footer-link">What We Do</a>
         <a href="about.html" class="footer-link">About</a>
-        <a href="insights.html" class="footer-link">Insights</a>
       </nav>
       <div class="footer-contact">
         <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>

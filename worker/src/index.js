@@ -1,5 +1,6 @@
 import { runTurn } from "./anthropic.js";
 import { saveTranscriptTurn } from "./transcripts.js";
+import { deliverPendingTranscripts } from "./slack-transcripts.js";
 export { IpUsageLimiter } from "./usage-limiter.js";
 
 const JSON_HEADERS = { "content-type": "application/json" };
@@ -236,5 +237,14 @@ export default {
     }
 
     return json({ error: "Not found" }, 404, cors);
+  },
+
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil(
+      deliverPendingTranscripts(env).catch((error) => {
+        console.error("Slack transcript delivery failed", error);
+        throw error;
+      }),
+    );
   },
 };

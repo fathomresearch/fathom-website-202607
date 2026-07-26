@@ -70,21 +70,14 @@ a{text-decoration:none;color:inherit;}
 .declaration-body p+p{margin-top:0;}
 
 /* ── TEAM ── */
-/* MEET-THE-TEAM tab — teal cue at the bottom of the navy hero, same width as the spine/pic below */
+/* MEET-THE-TEAM tab — teal cue at the bottom of the navy hero */
 .meet-tab{width:calc((100% - 2*var(--pad) - 5*40px) / 6);height:46px;margin:auto 0 0 var(--pad);background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
-/* THE TEAM — full-height teal spine (= pic width) bleeds top & bottom; founder + 6 members on one aligned baseline */
+/* THE TEAM */
 .team{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--warm);overflow:hidden;}
-.team::before{content:'';position:absolute;top:0;bottom:0;left:var(--pad);width:calc((100% - 2*var(--pad) - 6*40px) / 7);background:var(--teal);z-index:0;}
-.team-inner{position:relative;z-index:1;display:grid;grid-template-columns:calc((100% - 6*40px) / 7) 1fr;gap:40px;align-items:start;padding:64px var(--pad);}
+.team-inner{position:relative;z-index:1;padding:64px var(--pad);}
 /* Team photos — fill their column so every pic is the same width and top-aligned */
 .tm-photo{aspect-ratio:4/5;border-radius:3px;object-fit:cover;display:block;width:100%;background:linear-gradient(145deg,#13294d,#0A1628);}
-/* Founder — on the teal spine, light type; label floats above the pic at the same 16px gap the names sit below */
-.founder-col{position:relative;text-align:center;}
-.founder-col-role{position:absolute;left:0;right:0;bottom:100%;margin-bottom:16px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.08em;}
-.founder-col-ph{width:100%;margin:0 0 16px;}
-.founder-col-name{font-family:'Spectral',serif;font-size:24px;font-weight:400;color:#fff;letter-spacing:-.02em;}
-/* Member row */
-.team-row{display:grid;grid-template-columns:repeat(6,1fr);gap:40px;}
+.team-row{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
 .tm{text-align:center;}
 .tm-photo-ph{width:100%;margin-bottom:16px;}
 .tm-name{font-family:'Spectral',serif;font-size:19px;font-weight:400;color:var(--navy);margin-bottom:5px;letter-spacing:-.01em;}
@@ -146,12 +139,8 @@ a{text-decoration:none;color:inherit;}
 
 @media(max-width:1100px){
   :root{--pad:48px;}
-  .team::before{display:none;}
-  .team-inner{grid-template-columns:1fr;gap:44px;padding:56px var(--pad) 72px;}
+  .team-inner{padding:56px var(--pad) 72px;}
   .team-row{grid-template-columns:repeat(3,1fr);gap:32px 28px;}
-  .founder-col{background:var(--teal);max-width:300px;margin:0 auto;padding:34px 28px 32px;border-radius:3px;}
-  .founder-col-role{position:static;margin-bottom:16px;}
-  .founder-col-ph{margin:0 auto 16px;}
   .meet-tab{width:220px;}
   .radical-text{font-size:48px;}
   .radical-bar{height:34px;}
@@ -164,10 +153,8 @@ a{text-decoration:none;color:inherit;}
 @media(max-width:768px){
   :root{--pad:24px;}
   .nav-link{display:none;}
-  .team-inner{gap:36px;padding:48px var(--pad) 64px;}
+  .team-inner{padding:48px var(--pad) 64px;}
   .team-row{grid-template-columns:repeat(2,1fr);gap:30px 22px;}
-  .founder-col{max-width:320px;}
-  .founder-col-name{font-size:23px;}
   .radical-text{font-size:34px;}
   .radical-bar{height:24px;gap:16px;}
   .radical{gap:16px;}

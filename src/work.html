@@ -102,10 +102,6 @@ a{text-decoration:none;color:inherit;}
 .wk-feat .wk-hook{font-size:31px;}
 .wk-sec .wk-hook{font-size:22px;}
 .wk-brief{font-size:14px;line-height:1.62;color:rgba(255,255,255,.58);margin-top:16px;max-width:440px;}
-.wk-soon{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;}
-.wk-soon-cat{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;}
-.wk-soon-title{font-family:'Spectral',serif;font-size:22px;font-weight:400;color:var(--navy);margin-bottom:8px;}
-.wk-soon-note{font-size:14px;color:var(--muted);}
 .offering{padding:32px 0;border-top:.5px solid var(--border);}
 .offering-header{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:12px;}
 .offering-name{font-family:'Spectral',serif;font-size:24px;font-weight:400;color:var(--navy);letter-spacing:-.01em;}
@@ -172,7 +168,7 @@ a{text-decoration:none;color:inherit;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
 /* RESPONSIVE */
 @media(max-width:1100px){:root{--pad:48px;}.page-hl{font-size:48px;}.grid-2{grid-template-columns:1fr;gap:36px;}}
-@media(max-width:768px){:root{--pad:24px;}.nav-link{display:none;}.grid-3{grid-template-columns:1fr;}.grid-2-even{grid-template-columns:1fr;}.metrics{flex-direction:column;}.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}.wk-mag{grid-template-columns:1fr;grid-template-rows:auto;min-height:0;}.wk-feat{grid-row:auto;min-height:300px;}.wk-sec{min-height:220px;}.wk-soon{grid-template-columns:1fr;gap:36px;}}
+@media(max-width:768px){:root{--pad:24px;}.nav-link{display:none;}.grid-3{grid-template-columns:1fr;}.grid-2-even{grid-template-columns:1fr;}.metrics{flex-direction:column;}.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}.wk-mag{grid-template-columns:1fr;grid-template-rows:auto;min-height:0;}.wk-feat{grid-row:auto;min-height:300px;}.wk-sec{min-height:220px;}}
 </style>
 </head>
 <body>{% include "header.njk" %}
@@ -214,28 +210,6 @@ a{text-decoration:none;color:inherit;}
         <h2 class="wk-hook">The segment everyone ignored was the biggest opportunity</h2>
       <a class="wk-link-overlay" href="/cases/wealth/" aria-label="Read the case"></a></article>
     </div>
-</section>
-
-<section class="section sw" aria-label="Case studies coming">
-  <div class="container">
-    <div class="wk-soon">
-      <div class="sa s1">
-        <p class="wk-soon-cat">Direct Client</p>
-        <p class="wk-soon-title">Case study coming</p>
-        <p class="wk-soon-note">BetMGM</p>
-      </div>
-      <div class="sa s2">
-        <p class="wk-soon-cat">Agency Partnership</p>
-        <p class="wk-soon-title">Case study coming</p>
-        <p class="wk-soon-note">High Dive &middot; Scout Lab</p>
-      </div>
-      <div class="sa s3">
-        <p class="wk-soon-cat">Pro Bono</p>
-        <p class="wk-soon-title">Case study coming</p>
-        <p class="wk-soon-note">Out Leadership</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <section class="section-lg sn" aria-label="Challenge us">

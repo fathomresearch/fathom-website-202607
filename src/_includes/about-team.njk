@@ -1,0 +1,21 @@
+<section class="team" aria-label="Meet the team">
+  <div class="team-inner sa">
+    {% for employee in collections.employees %}
+      {% if loop.first %}
+    <div class="founder-col">
+      <span class="founder-col-role">{{ employee.data.role }}</span>
+      <img class="tm-photo founder-col-ph" src="{{ employee.data.image }}" alt="{{ employee.data.name }}">
+      <h3 class="founder-col-name">{{ employee.data.name }}</h3>
+    </div>
+    <div class="team-row">
+      {% else %}
+      <div class="tm sa s{{ loop.index0 }}">
+        <img class="tm-photo tm-photo-ph" src="{{ employee.data.image }}" alt="{{ employee.data.name }}">
+        <h4 class="tm-name">{{ employee.data.name }}</h4>
+        <p class="tm-role">{{ employee.data.role }}</p>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</section>

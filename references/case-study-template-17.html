@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 17 — "The Signal"
+     Fathom Research & Strategy
+
+     For SOCIAL LISTENING / CULTURE cases: nobody was asked anything —
+     the study is what people were already saying, unprompted.
+     Signature = THE WALL, emergent themes as real verbatims, sized by
+     volume and tinted by sentiment.
+
+     Deliberately not an axis and not a chart. Three of the recent
+     templates lean on one-dimensional scales; here the evidence is
+     language, so it is set as language. Type SIZE carries rough volume
+     (exact % on every card, so size never has to be read precisely) and
+     COLOUR carries sentiment (always with a +/-/. marker and a word —
+     never colour alone).
+
+     Process layer = READING THE ROOM: specimen strings showing where an
+     automated sentiment score goes wrong, and how the set is coded.
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Setup     {{SETUP_LEAD}}
+       Method    per .spec-item: {{STRING}} the machine read (.m, struck)
+                 and the coded read (.h) with the reason (.why).
+       Wall      per .qt: {{VERBATIM}}, sentiment class pos|neg|neu,
+                 size class lg|md|sm (by volume), {{THEME}} + {{VOL}}.
+                 Keep exactly one marker glyph per card; volumes are
+                 share of unprompted conversation, top themes only.
+       Read      {{CULTURE_LINE}}
+       Outcome   {{SHIPPED_LINE}} — the verbatim that became the line;
+                 {{OUTCOME_STAT_LABEL}} says what it replaced.
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:15ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+
+/* THE SETUP */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   READING THE ROOM — the process layer. Not a chart: specimen
+   strings, each with the automated sentiment read struck out and
+   the human-coded read beside it. The reason a raw score lies.
+   ============================================================ */
+.hear{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.hear-inner{max-width:var(--max);margin:0 auto;}
+.hear-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:#fff;max-width:22ch;margin:22px 0 clamp(40px,6vh,60px);}
+.spec{max-width:960px;}
+.spec-item{padding:clamp(20px,3vh,30px) 0;border-top:1px solid var(--bdr);}
+.spec-item:first-child{border-top:0;padding-top:0;}
+.spec-q{font-family:var(--serif);font-weight:300;font-size:clamp(21px,2.7vw,32px);line-height:1.3;letter-spacing:-.015em;color:#fff;margin-bottom:18px;}
+.spec-tag{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;}
+.spec-tag .m{color:var(--struck);text-decoration:line-through;text-decoration-color:rgba(139,150,163,.6);}
+.spec-tag .ar{color:rgba(255,255,255,.3);}
+.spec-tag .h{color:var(--teal);}
+.spec-tag .why{font-family:var(--sans);font-size:13.5px;letter-spacing:0;color:rgba(255,255,255,.5);}
+.spec-tag .why::before{content:'— ';}
+.hear-note{margin-top:clamp(38px,6vh,60px);border-top:1px solid var(--bdr);padding-top:30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);}
+.hear-note p{font-size:16px;line-height:1.78;color:rgba(255,255,255,.6);}
+.hear-note b{color:#fff;font-weight:500;}
+@media(max-width:760px){.hear-note{grid-template-columns:1fr;gap:20px;}}
+
+/* ============================================================
+   THE WALL — signature. The overheard lines, as cards: the louder
+   the theme, the bigger the card; the tint is sentiment. A quote
+   wall, not a word cloud — capped, legible, exact % on every card.
+   ============================================================ */
+.wall-sec{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.wall-inner{max-width:var(--max);margin:0 auto;}
+.wall-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:19ch;margin:22px 0 clamp(20px,3vh,30px);}
+.wall-key{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:clamp(36px,5vh,52px);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.wall-key span{display:inline-flex;align-items:center;gap:8px;}
+.wall-key i{width:9px;height:9px;border-radius:2px;}
+.k-pos i{background:var(--teal-dim);} .k-neg i{background:var(--struck);} .k-neu i{background:var(--line);}
+.wall{display:flex;flex-wrap:wrap;gap:clamp(12px,1.6vw,18px);}
+.qt{flex:1 1 260px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--line);padding:clamp(18px,2.4vw,26px);display:flex;flex-direction:column;gap:14px;}
+.qt.lg{flex-basis:500px;flex-grow:2.4;} .qt.md{flex-basis:320px;flex-grow:1.4;} .qt.sm{flex-basis:230px;}
+.qt.pos{border-left-color:var(--teal-dim);} .qt.neg{border-left-color:var(--struck);} .qt.neu{border-left-color:var(--muted);}
+.qt-t{font-family:var(--serif);font-weight:300;line-height:1.28;letter-spacing:-.015em;color:var(--ink);}
+.qt.lg .qt-t{font-size:clamp(24px,3.2vw,40px);}
+.qt.md .qt-t{font-size:clamp(19px,2.2vw,26px);}
+.qt.sm .qt-t{font-size:clamp(16px,1.8vw,19px);}
+.qt-m{margin-top:auto;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.qt-s{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;font-size:12px;font-weight:700;flex:none;}
+.qt.pos .qt-s{background:rgba(0,158,133,.14);color:var(--teal-dim);}
+.qt.neg .qt-s{background:rgba(139,150,163,.18);color:var(--struck);}
+.qt.neu .qt-s{background:var(--line);color:var(--muted);}
+.qt-th{color:var(--ink);}
+.qt-v{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--teal-dim);}
+.qt.neg .qt-v{color:var(--struck);} .qt.neu .qt-v{color:var(--muted);}
+.wall-foot{margin-top:clamp(40px,6vh,58px);border-top:1px solid var(--line);padding-top:28px;font-size:16.5px;line-height:1.78;color:var(--body);max-width:78ch;}
+.wall-foot b{color:var(--ink);font-weight:600;}
+
+/* THE READ */
+.read{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.read-inner{max-width:900px;margin:0 auto;text-align:center;}
+.read-inner .section-mark{justify-content:center;margin-bottom:36px;}
+.read-line{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4.4vw,58px);line-height:1.14;letter-spacing:-.025em;color:#fff;text-wrap:balance;}
+.read-line em{font-style:italic;color:var(--teal);}
+/* ============================================================
+   OUTCOME — the family frame: navy ground, the mark, one mono
+   label. What sits inside is chosen per case, and never re-uses
+   the geometry the signature already spent.
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:44ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:30px;}}
+
+/* one line, elevated — the sentence a customer already said. Refers to
+   the wall (many voices) in a different register (one voice, chosen). */
+.outcome-inner{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);align-items:center;}
+.oc-said{font-family:var(--serif);font-weight:200;font-size:clamp(30px,4.8vw,64px);line-height:1.08;letter-spacing:-.03em;color:#fff;text-wrap:balance;}
+.oc-said .qm{color:var(--teal);font-style:normal;}
+.oc-src{margin-top:22px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-dim);}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:28px;}}
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">Nobody asked them. <em>They told us anyway.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on the story the brand was telling, and the different one the market had already written.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE SETUP -->
+<section class="setup" aria-label="The setup">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The setup</div>
+      <p class="lead">The brand had a story. <em>The market had a better one, and it was already public.</em></p>
+    </div>
+    <div class="prose sa d1">
+      <p>{{SETUP_LEAD}} &mdash; the brief wanted to know how a set of messages was landing. The messages were the brand&rsquo;s: performance, ecosystem, value, the three things every deck in the category leads with.</p>
+      <p><strong>A survey can only return answers to questions you already thought to ask.</strong> Ask people to rate your three messages and they will rate your three messages, and you will never learn that the conversation they are actually having is about a fourth thing you have never mentioned. To find that, you cannot ask. You have to listen to what is said when no researcher is in the room.</p>
+      <p>So we took eighteen months of unprompted, public conversation &mdash; not a panel, not a prompt, just people talking to each other &mdash; and read what they brought up on their own.</p>
+    </div>
+  </div>
+</section>
+
+<!-- READING THE ROOM — process layer (method only; no client findings) -->
+<section class="hear" aria-label="How the conversation was read">
+  <div class="hear-inner">
+    <div class="sa">
+      <div class="section-mark">How the conversation was read</div>
+      <h2 class="hear-h">A machine counts words. It does not know when you are joking.</h2>
+    </div>
+    <div class="spec sa">
+      <div class="spec-item">
+        <p class="spec-q">&ldquo;great. another update that breaks the one thing I used.&rdquo;</p>
+        <div class="spec-tag"><span class="m">Positive</span><span class="ar" aria-hidden="true">&rarr;</span><span class="h">Coded negative</span><span class="why">&ldquo;great&rdquo; is sarcasm; the sentence is a complaint</span></div>
+      </div>
+      <div class="spec-item">
+        <p class="spec-q">&ldquo;not the worst thing I&rsquo;ve paid for this year, honestly.&rdquo;</p>
+        <div class="spec-tag"><span class="m">Negative</span><span class="ar" aria-hidden="true">&rarr;</span><span class="h">Coded mildly positive</span><span class="why">a double negative and a hedge, read as faint praise</span></div>
+      </div>
+      <div class="spec-item">
+        <p class="spec-q">&ldquo;ok this is genuinely sick, I&rsquo;d die for the little guy.&rdquo;</p>
+        <div class="spec-tag"><span class="m">Negative</span><span class="ar" aria-hidden="true">&rarr;</span><span class="h">Coded strongly positive</span><span class="why">&ldquo;sick&rdquo; and &ldquo;die&rdquo; are affection in this register</span></div>
+      </div>
+    </div>
+    <div class="hear-note sa">
+      <p><b>An automated sentiment score is a starting point, not a finding.</b> Off-the-shelf tools miss sarcasm, negation and in-group slang &mdash; the three things people use most when they actually care. We hand-code a representative sample, train the model on that, and then a human audits the confident-but-wrong tail, because that is precisely where the interesting lines hide.</p>
+      <p><b>And we bound the universe before we count it.</b> Bots and repost chains are removed, and so is the brand&rsquo;s own output and its PR pickup &mdash; otherwise you spend the study listening to yourself and mistaking it for the market. What is left is people, talking unprompted, to each other.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE WALL — signature -->
+<section class="wall-sec" aria-label="The conversation, unprompted">
+  <div class="wall-inner">
+    <div class="sa">
+      <div class="section-mark">The conversation, unprompted</div>
+      <h2 class="wall-h">What they said when nobody was asking.</h2>
+      <div class="wall-key" aria-hidden="true">
+        <span class="k-pos"><i></i>Positive</span>
+        <span class="k-neg"><i></i>Negative</span>
+        <span class="k-neu"><i></i>Mixed</span>
+        <span>Card size &middot; share of unprompted conversation</span>
+      </div>
+    </div>
+    <div class="wall sa">
+      <div class="qt neg lg">
+        <p class="qt-t">&ldquo;honestly the battery is the only reason I haven&rsquo;t told everyone to buy one.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">&ndash;</span><span class="qt-th">Battery anxiety</span><span class="qt-v">23%</span></div>
+      </div>
+      <div class="qt neg md">
+        <p class="qt-t">&ldquo;the setup made me feel stupid, and I do this for a living.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">&ndash;</span><span class="qt-th">Onboarding friction</span><span class="qt-v">18%</span></div>
+      </div>
+      <div class="qt pos md">
+        <p class="qt-t">&ldquo;I&rsquo;d genuinely die for the little guy.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">+</span><span class="qt-th">Attachment</span><span class="qt-v">12%</span></div>
+      </div>
+      <div class="qt pos sm">
+        <p class="qt-t">&ldquo;support replied at 11pm. who does that.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">+</span><span class="qt-th">Support surprise</span><span class="qt-v">9%</span></div>
+      </div>
+      <div class="qt neu sm">
+        <p class="qt-t">&ldquo;not the worst update, the ui got cleaner tbh.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">&middot;</span><span class="qt-th">UI polish</span><span class="qt-v">6%</span></div>
+      </div>
+      <div class="qt neg sm">
+        <p class="qt-t">&ldquo;why is it always an account for everything.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">&ndash;</span><span class="qt-th">Account fatigue</span><span class="qt-v">5%</span></div>
+      </div>
+      <div class="qt pos sm">
+        <p class="qt-t">&ldquo;showed my mum, she got it instantly.&rdquo;</p>
+        <div class="qt-m"><span class="qt-s" aria-hidden="true">+</span><span class="qt-th">Intuitiveness</span><span class="qt-v">4%</span></div>
+      </div>
+    </div>
+    <p class="wall-foot sa">Performance, ecosystem, value &mdash; the brand&rsquo;s own three messages &mdash; appear nowhere on this wall. <b>The loudest half of the conversation is emotional and experiential</b>: what it is like to live with the thing, not what it scores on a spec sheet. The complaints are specific enough to fix and the affection is specific enough to build on, and neither would have surfaced from a survey that asked about the three things the brand already believed.</p>
+  </div>
+</section>
+
+<!-- THE READ -->
+<section class="read" aria-label="The read">
+  <div class="read-inner sa">
+    <div class="section-mark">The read</div>
+    <p class="read-line">{{CULTURE_LINE}} <em>&mdash; people were not rating the product. They were describing a relationship with it.</em></p>
+  </div>
+</section>
+
+<!-- OUTCOME — one overheard line, elevated (the wall, in a single voice) -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <div>
+      <p class="oc-said"><span class="qm" aria-hidden="true">&ldquo;</span>{{SHIPPED_LINE}}<span class="qm" aria-hidden="true">&rdquo;</span></p>
+      <p class="oc-src">Overheard in the data &middot; not written in a room</p>
+    </div>
+    <p class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; the platform line was a customer&rsquo;s own sentence, lightly edited. It replaced a tagline three agencies had been asked to write and none had landed.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Sure what your market thinks? <em>Go and hear it.</em></h2>
+    <p>You don&rsquo;t need a question for this one. If people are talking about you anywhere, that is enough to start.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

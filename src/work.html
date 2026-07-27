@@ -10,7 +10,7 @@ permalink: work/index.html
 <title>Work — Fathom Research & Strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -108,6 +108,21 @@ a{text-decoration:none;color:inherit;}
 .offering-time{font-size:12px;font-weight:600;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;}
 .offering-body{font-size:16px;line-height:1.72;color:var(--body);}
 .offering-tag{display:inline-block;font-size:11px;font-weight:500;color:var(--muted);background:var(--warm);border:.5px solid var(--border);padding:4px 12px;border-radius:100px;margin-top:12px;letter-spacing:.04em;}
+/* WHAT WE BRING — contained, name-led triptych */
+.wkb-hl{font-family:'Spectral',serif;font-weight:300;font-size:clamp(30px,3.4vw,46px);line-height:1.18;color:var(--navy);letter-spacing:-.02em;max-width:660px;margin-bottom:0;}
+.wkb-hl em{font-style:italic;font-weight:200;color:var(--teal-h);}
+.wkr-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border-top:2px solid var(--teal);margin-top:64px;}
+.wkr-col{background:#fff;position:relative;overflow:hidden;padding:44px 40px 36px;}
+.wkr-mark{position:absolute;right:6px;top:-14px;font-family:'Spectral',serif;font-weight:300;font-size:150px;line-height:1;color:rgba(10,22,40,.045);z-index:0;pointer-events:none;user-select:none;}
+.wkr-name{position:relative;z-index:1;font-family:'Spectral',serif;font-size:clamp(28px,2.4vw,38px);font-weight:400;color:var(--navy);letter-spacing:-.01em;line-height:1.12;margin-bottom:18px;}
+.wkr-hook{position:relative;z-index:1;font-family:'Spectral',serif;font-style:italic;font-size:19px;font-weight:400;line-height:1.3;margin-bottom:18px;}
+.wkr-c-direct{color:var(--teal-h);}
+.wkr-c-agency{color:var(--muted);}
+.wkr-c-probono{color:#00806c;}
+.wkr-body{position:relative;z-index:1;font-size:15px;line-height:1.72;color:var(--body);max-width:320px;margin-bottom:26px;}
+.wkr-note{position:relative;z-index:1;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.015em;color:var(--muted);padding-top:18px;border-top:.5px solid var(--border);}
+@media(max-width:900px){.wkr-mark{display:none;}}
+@media(max-width:768px){.wkr-row{grid-template-columns:1fr;}.wkr-col{padding:36px 4px 32px;}.wkr-body{max-width:none;}}
 /* PRINCIPLES */
 .principle{padding:32px 0;border-top:.5px solid var(--border);}
 .principle-name{font-family:'Spectral',serif;font-size:20px;font-weight:400;color:var(--navy);margin-bottom:10px;}
@@ -181,15 +196,32 @@ a{text-decoration:none;color:inherit;}
   </div>
 </header>
 
-<section class="section swm" aria-label="Our point of view on data">
+<section class="section sw" aria-label="Who we work with">
   <div class="container">
-    <div style="max-width:720px;margin:0 auto;text-align:center;">
-      <span class="label sa">Our point of view</span>
-      <h2 class="sa s1" style="font-family:'Spectral',serif;font-weight:300;font-style:italic;font-size:clamp(26px,3.4vw,42px);line-height:1.34;color:var(--navy);letter-spacing:-.01em;margin-bottom:28px;">Data isn&rsquo;t just proof, it&rsquo;s permission.</h2>
-      <div class="sa s2" style="font-size:17px;line-height:1.75;color:var(--body);">
-        <p>Most research treats numbers as evidence &mdash; something to point to after a decision&rsquo;s already been made, in case it needs defending. We treat them as what makes the decision possible in the first place.</p>
-        <p style="margin-top:16px;">A statistically sound read isn&rsquo;t a formality. It&rsquo;s what lets you walk into the room and commit &mdash; not hedge, not caveat, commit. We don&rsquo;t round up, and we don&rsquo;t cherry-pick the cut that tells the story you wanted. The number has to earn the recommendation. That&rsquo;s the whole discipline.</p>
-      </div>
+    <span class="label sa">Three Ways In</span>
+    <h2 class="wkb-hl sa s1">However you found us,<br><em>there&rsquo;s a way in.</em></h2>
+    <div class="wkr-row">
+      <article class="wkr-col sa s2">
+        <span class="wkr-mark" aria-hidden="true">D</span>
+        <h3 class="wkr-name">Direct Client</h3>
+        <p class="wkr-hook wkr-c-direct">Confidence to commit.</p>
+        <p class="wkr-body">A research partner who gives you a number you can walk into the room and act on &mdash; not a deck you have to defend afterward.</p>
+        <p class="wkr-note">Scoped engagements, typically 4&ndash;10 weeks.</p>
+      </article>
+      <article class="wkr-col sa s3">
+        <span class="wkr-mark" aria-hidden="true">A</span>
+        <h3 class="wkr-name">Agency Partnership</h3>
+        <p class="wkr-hook wkr-c-agency">Capacity without the seams.</p>
+        <p class="wkr-body">An embedded bench that scales with your workload and folds into your deliverable. Your client never has to know we were in the room.</p>
+        <p class="wkr-note">White-labeled. NDA standard, no exceptions.</p>
+      </article>
+      <article class="wkr-col sa s4">
+        <span class="wkr-mark" aria-hidden="true">P</span>
+        <h3 class="wkr-name">Pro Bono</h3>
+        <p class="wkr-hook wkr-c-probono">Evidence for the harder argument.</p>
+        <p class="wkr-body">For causes whose ambition has outgrown their budget &mdash; the same rigor we charge six figures for elsewhere, aimed at whichever fight actually needs it.</p>
+        <p class="wkr-note">A handful of organizations a year, chosen by us.</p>
+      </article>
     </div>
   </div>
 </section>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 19 — "The Tension"
+     Fathom Research & Strategy
+
+     For PARADOX / TENSION cases: customers want two things that are
+     supposed to cancel out. Signature = THE IMPOSSIBLE MIDDLE, an
+     overlap whose intersection is where the market actually is.
+
+     Deliberately NOT a slider or a 2-axis map: a slider assumes the
+     trade-off the research disproves, and the positioning quadrant is
+     template 8's device. The honest shape for "wants both at once" is a
+     set overlap, which nothing else in the library uses.
+
+     Process layer = A TENSION, OR TWO TRIBES: the check that it is one
+     paradoxical customer and not two different customers averaged.
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Setup     {{SETUP_LEAD}}
+       Method    the two method notes; keep the "within the person"
+                 point — it is the whole distinction.
+       Overlap   the two desires (.vl.name-a / .name-b) and three region
+                 shares (.only-a / .both / .only-b). The exclusive regions
+                 sum to 100; .both is the plurality and the finding. The
+                 paradox verbatim in .venn-quote proves one mouth holds both.
+       Resolve   {{RESOLUTION_LINE}}
+       Outcome   {{OUTCOME_FROM}} to {{OUTCOME_TO}} products;
+                 {{OUTCOME_STAT_LABEL}}.
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:15ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+
+/* THE SETUP */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   A TENSION, OR TWO TRIBES — the process layer. On the average a
+   paradox and a plain split look identical; the whole method is
+   telling them apart before you try to resolve anything.
+   ============================================================ */
+.tribe{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.tribe-inner{max-width:var(--max);margin:0 auto;}
+.tribe-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:#fff;max-width:20ch;margin:22px 0 clamp(30px,4.5vh,44px);}
+.tribe-lead{max-width:64ch;font-size:16.5px;line-height:1.72;color:rgba(255,255,255,.62);margin-bottom:clamp(40px,6vh,58px);}
+.tribe-lead b{color:#fff;font-weight:500;}
+.tribe-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(0px,0vw,0px);max-width:1000px;border:1px solid var(--bdr);}
+.tribe-cell{padding:clamp(24px,3.2vw,38px);}
+.tribe-cell + .tribe-cell{border-left:1px solid var(--bdr);}
+.tribe-cell .tk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;}
+.tribe-cell.real .tk{color:var(--teal);}
+.tribe-cell.fake .tk{color:var(--struck);}
+.tribe-cell .tt{font-family:var(--serif);font-weight:400;font-size:clamp(18px,2vw,23px);line-height:1.28;color:#fff;margin-bottom:12px;}
+.tribe-cell p{font-size:14.5px;line-height:1.66;color:rgba(255,255,255,.55);}
+.tribe-verdict{max-width:1000px;margin-top:14px;border:1px solid var(--bdr);border-top:0;padding:clamp(18px,2.6vw,26px) clamp(24px,3.2vw,38px);display:flex;align-items:baseline;gap:14px;background:rgba(0,214,179,.04);}
+.tribe-verdict .vk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);flex:none;}
+.tribe-verdict p{font-size:15px;line-height:1.6;color:rgba(255,255,255,.7);}
+.tribe-verdict b{color:#fff;font-weight:500;}
+.tribe-note{margin-top:clamp(38px,6vh,60px);border-top:1px solid var(--bdr);padding-top:30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);}
+.tribe-note p{font-size:16px;line-height:1.78;color:rgba(255,255,255,.6);}
+.tribe-note b{color:#fff;font-weight:500;}
+@media(max-width:700px){.tribe-two{grid-template-columns:1fr;}.tribe-cell + .tribe-cell{border-left:0;border-top:1px solid var(--bdr);}.tribe-note{grid-template-columns:1fr;gap:20px;}}
+
+/* ============================================================
+   THE IMPOSSIBLE MIDDLE — signature. Two desires as overlapping
+   fields; the intersection is filled and holds the plurality.
+   A slider is refused on purpose: you can't sit at both ends of a
+   line, but you can want both, and most people did.
+   ============================================================ */
+.venn-sec{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.venn-inner{max-width:var(--max);margin:0 auto;}
+.venn-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:18ch;margin:22px 0 clamp(30px,4.5vh,46px);}
+.venn-wrap{max-width:900px;margin:0 auto;}
+.venn{position:relative;aspect-ratio:100/60;}
+.venn svg{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.vl{position:absolute;transform:translate(-50%,-50%);text-align:center;width:34%;}
+.vl-k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.vl-v{font-family:var(--serif);font-weight:300;font-size:clamp(22px,3vw,38px);line-height:1;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums;}
+.vl-t{margin-top:5px;font-size:12.5px;line-height:1.4;color:var(--muted);}
+.vl.both{width:26%;}
+.vl.both .vl-k{color:var(--teal-dim);}
+.vl.both .vl-v{color:var(--teal-dim);font-weight:400;font-size:clamp(30px,4.4vw,58px);}
+.vl.both .vl-t{color:var(--ink);}
+.vl.name-a,.vl.name-b{width:30%;}
+.vl.name-a .vl-nm,.vl.name-b .vl-nm{font-family:var(--serif);font-weight:400;font-size:clamp(16px,1.9vw,22px);line-height:1.2;color:var(--ink);}
+.vl.name-a .vl-sub,.vl.name-b .vl-sub{margin-top:5px;font-size:12.5px;line-height:1.45;color:var(--muted);}
+.venn-quote{max-width:640px;margin:clamp(30px,4.5vh,48px) auto 0;text-align:center;font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(19px,2.5vw,28px);line-height:1.4;letter-spacing:-.015em;color:var(--ink);text-wrap:balance;}
+.venn-quote .qm{color:var(--teal-dim);font-style:normal;}
+.venn-src{margin-top:14px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+.venn-foot{max-width:78ch;margin:clamp(40px,6vh,58px) auto 0;border-top:1px solid var(--line);padding-top:28px;font-size:16.5px;line-height:1.78;color:var(--body);}
+.venn-foot b{color:var(--ink);font-weight:600;}
+@media(max-width:620px){
+  .venn{aspect-ratio:74/100;}
+  .vl.name-a{left:50%!important;top:9%!important;width:80%;}
+  .vl.name-b{left:50%!important;top:91%!important;width:80%;}
+  .vl.only-a{left:50%!important;top:30%!important;width:70%;}
+  .vl.only-b{left:50%!important;top:70%!important;width:70%;}
+  .vl.both{left:50%!important;top:50%!important;width:70%;}
+}
+
+/* THE RESOLUTION */
+.resolve{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.resolve-inner{max-width:940px;margin:0 auto;text-align:center;}
+.resolve-inner .section-mark{justify-content:center;margin-bottom:36px;}
+.resolve-line{font-family:var(--serif);font-weight:300;font-size:clamp(28px,4.4vw,58px);line-height:1.14;letter-spacing:-.025em;color:#fff;text-wrap:balance;}
+.resolve-line em{font-style:italic;color:var(--teal);}
+/* ============================================================
+   OUTCOME — the family frame: navy ground, the mark, one mono
+   label. What sits inside is chosen per case, and never re-uses
+   the geometry the signature already spent.
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:44ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:30px;}}
+
+/* two planned products became one — the middle, built. Refers to the
+   overlap as a product decision, not by redrawing it. */
+.outcome-inner{grid-template-columns:minmax(0,.6fr) minmax(0,1fr);align-items:center;}
+.oc-merge{display:flex;align-items:center;gap:clamp(14px,2vw,26px);font-family:var(--serif);font-weight:200;line-height:.82;letter-spacing:-.04em;color:var(--teal);font-variant-numeric:tabular-nums;}
+.oc-merge .n{font-size:clamp(58px,8.5vw,128px);}
+.oc-merge .n.was{color:rgba(255,255,255,.32);}
+.oc-merge .ar{font-size:clamp(26px,3.4vw,46px);color:rgba(255,255,255,.4);}
+.oc-merge-k{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.oc-after{margin-top:22px;padding-top:18px;border-top:1px solid var(--bdr);font-size:15px;line-height:1.7;color:rgba(255,255,255,.42);max-width:46ch;}
+.oc-after b{color:rgba(255,255,255,.75);font-weight:500;}
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">Told to pick a side. <em>Their customers wouldn&rsquo;t.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on the two things people wanted that were never supposed to fit in the same sentence.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE SETUP -->
+<section class="setup" aria-label="The setup">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The setup</div>
+      <p class="lead">The brief offered a choice: simple or powerful. <em>Pick a lane.</em></p>
+    </div>
+    <div class="prose sa d1">
+      <p>{{SETUP_LEAD}} &mdash; the whole category had lined up along one axis, effortless and mass at one end, hands-on and premium at the other, and the question on the table was which end to own. Everyone assumed you had to choose, because the two ends feel like opposites.</p>
+      <p><strong>But &ldquo;feels like opposites&rdquo; is a designer&rsquo;s problem, not a customer&rsquo;s.</strong> People hold contradictions comfortably. They want the indulgent thing that is also virtuous, the powerful tool that is also effortless, the personal service that also leaves them alone. The opposition is real on the org chart and in the product roadmap. It is not always real in the customer&rsquo;s head.</p>
+      <p>So the first job was not to resolve the tension. It was to find out whether the customer felt it as a tension at all.</p>
+    </div>
+  </div>
+</section>
+
+<!-- A TENSION, OR TWO TRIBES — process layer (method only; no client findings) -->
+<section class="tribe" aria-label="A tension, or two tribes">
+  <div class="tribe-inner">
+    <div class="sa">
+      <div class="section-mark">Before you resolve it, prove it</div>
+      <h2 class="tribe-h">A paradox and a plain disagreement look identical on the average.</h2>
+      <p class="tribe-lead sa">Say the data shows both ends scoring high. There are two completely different worlds that produce that exact result &mdash; and <b>the average is precisely where the difference hides.</b> Getting this wrong sends a business off to build the wrong thing with total confidence.</p>
+    </div>
+    <div class="sa">
+      <div class="tribe-two">
+        <div class="tribe-cell fake">
+          <div class="tk">If it&rsquo;s two tribes</div>
+          <div class="tt">Half want one end, half want the other</div>
+          <p>Two groups, each happy at a pole, averaged into a middle nobody occupies. This is a segmentation, and the answer is two offers &mdash; or a clear choice of who to serve.</p>
+        </div>
+        <div class="tribe-cell real">
+          <div class="tk">If it&rsquo;s a tension</div>
+          <div class="tt">The same person wants both at once</div>
+          <p>One head holding both desires, refusing to trade either away. This is a genuine paradox, and the answer is one product clever enough to hold it.</p>
+        </div>
+      </div>
+      <div class="tribe-verdict">
+        <span class="vk">The test</span>
+        <p>Measure <b>within the person, not across the sample.</b> A forced trade-off, run individual by individual, shows whether the contradiction lives in one head &mdash; and in a constant-sum task, the people who will not move points off either pole are the signature of a real tension.</p>
+      </div>
+    </div>
+    <div class="tribe-note sa">
+      <p><b>We report a split as a split.</b> If the two desires turn out to belong to two tribes, we say so plainly and hand back a segmentation, rather than dressing two customers up as one interesting paradox. A misdiagnosed tension is the most expensive kind of wrong, because it feels like insight.</p>
+      <p><b>And a real tension is not a weakness to smooth over.</b> It is the most defensible position in a market, because resolving it is hard and rivals have all quietly picked a side. The tension, once proven, is the opportunity &mdash; not the problem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE IMPOSSIBLE MIDDLE — signature -->
+<section class="venn-sec" aria-label="The impossible middle">
+  <div class="venn-inner">
+    <div class="sa">
+      <div class="section-mark">Where they actually are</div>
+      <h2 class="venn-h">The place they were told couldn&rsquo;t exist.</h2>
+    </div>
+    <div class="venn-wrap sa">
+      <div class="venn">
+        <svg viewBox="0 0 100 60" role="img" aria-label="Two overlapping circles. Left: wants it effortless. Right: wants control. 23% want only effortless, 29% want only control, and 48% — the largest group — want both at once.">
+          <defs><clipPath id="lensA"><circle cx="38" cy="30" r="25"/></clipPath></defs>
+          <circle cx="62" cy="30" r="25" fill="rgba(0,214,179,.16)" clip-path="url(#lensA)"/>
+          <circle cx="38" cy="30" r="25" fill="none" stroke="#009E85" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+          <circle cx="62" cy="30" r="25" fill="none" stroke="#8b96a3" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <div class="vl name-a" style="left:26%;top:15%">
+          <div class="vl-nm">Do it for me</div>
+          <div class="vl-sub">effortless, no thinking</div>
+        </div>
+        <div class="vl name-b" style="left:74%;top:15%">
+          <div class="vl-nm">Let me steer</div>
+          <div class="vl-sub">control, nothing hidden</div>
+        </div>
+        <div class="vl only-a" style="left:22%;top:60%">
+          <div class="vl-k">Only this</div>
+          <div class="vl-v">23%</div>
+        </div>
+        <div class="vl only-b" style="left:78%;top:60%">
+          <div class="vl-k">Only this</div>
+          <div class="vl-v">29%</div>
+        </div>
+        <div class="vl both" style="left:50%;top:47%">
+          <div class="vl-k">Want both</div>
+          <div class="vl-v">48%</div>
+          <div class="vl-t">the largest group</div>
+        </div>
+      </div>
+      <p class="venn-quote"><span class="qm" aria-hidden="true">&ldquo;</span>Don&rsquo;t make me think about it. But don&rsquo;t you dare decide anything important without me.<span class="qm" aria-hidden="true">&rdquo;</span></p>
+      <p class="venn-src">One respondent &middot; one breath</p>
+    </div>
+    <p class="venn-foot sa">For a decade the brand had chosen a lobe, and so had every rival &mdash; which is exactly why the middle was empty. <b>Nearly half the market wanted both at once, and no one was building for them.</b> The unserved space was not a sliver at one of the edges, where everyone was looking. It was the overlap in the centre that the whole category had been told could not exist.</p>
+  </div>
+</section>
+
+<!-- THE RESOLUTION -->
+<section class="resolve" aria-label="The resolution">
+  <div class="resolve-inner sa">
+    <div class="section-mark">The resolution</div>
+    <p class="resolve-line">{{RESOLUTION_LINE}} <em>&mdash; the winning position was never a point on the line. It was the refusal to draw one.</em></p>
+  </div>
+</section>
+
+<!-- OUTCOME — two planned products became one (the middle, built) -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <div>
+      <div class="oc-merge"><span class="n was">2</span><span class="ar" aria-hidden="true">&rarr;</span><span class="n">1</span></div>
+      <div class="oc-merge-k">product lines, collapsed into one</div>
+    </div>
+    <div>
+      <p class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; two ranges had been scoped, one for each end of the axis. The research collapsed them into a single offer built for the half of the market that wanted both.</p>
+      <p class="oc-after">The middle was never a compromise between the two ends. <b>It was a third thing that made the choice disappear</b> &mdash; and the position no rival could copy without abandoning the side they had spent years defending.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Been told to pick a side? <em>Check whether your customers agree.</em></h2>
+    <p>If two things your market wants seem to cancel out, that contradiction is the place to start.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

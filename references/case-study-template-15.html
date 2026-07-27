@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{CASE_TITLE}} — Fathom Research &amp; Strategy</title>
+<meta name="description" content="{{CASE_META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 15 — "The Tournament"
+     Fathom Research & Strategy
+
+     For MESSAGE / CLAIM TESTING cases: a longlist, a room full of
+     opinions, and no way to choose. Signature = THE CLAIMS, JUDGED —
+     the copy set at full size, each line marked with how many picked
+     it best against how many picked it worst.
+
+     Deliberately NOT a bracket. MaxDiff runs every claim against every
+     other across many sets; drawing knockout rounds would illustrate a
+     method that never took place.
+
+     Process layer = THE COPY STANDARD: the same claim as submitted and
+     as tested, with every edit named — the unglamorous half that
+     decides whether the result means anything.
+
+     TOKEN KEY
+       Cover     {{CASE_INDEX}} {{SECTOR}} {{PROJECT_TYPE}}
+                 {{CASE_TITLE}} {{CASE_DECK}}
+       Rail      {{CLIENT}} {{INDUSTRY}} {{ENGAGEMENT}} {{OUTPUT}}
+       Setup     {{SETUP_LEAD}}
+       Method    .spec-row.raw / .spec-row.set hold the same claim before
+                 and after normalising; .spec-edits lists what changed.
+       Claims    per .claim: the line, then the mark, then "best / worst".
+                 Mark widths are HALF the percentage (the centre line is
+                 50%): 41% chosen => width:20.5%. .claim.win is the
+                 survivor, .claim.split the polarising one, .claim.out
+                 the rejected tail.
+       Winner    {{WINNING_CLAIM}}
+       Outcome   {{OUTCOME_RANK}} {{OUTCOME_STAT_LABEL}}
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:15ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+
+/* THE SETUP */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   THE COPY STANDARD — the process layer. Not a chart: an editing
+   artifact. The same claim as it arrived and as it was tested,
+   with every edit named and justified.
+   ============================================================ */
+.std{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.std-inner{max-width:var(--max);margin:0 auto;}
+.std-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:#fff;max-width:23ch;margin:22px 0 clamp(40px,6vh,62px);}
+.std-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(34px,6vw,80px);align-items:start;}
+.spec-row{padding:22px 0;border-top:1px solid var(--bdr);}
+.spec-row:first-child{border-top:0;padding-top:0;}
+.spec-k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px;}
+.spec-row.raw .spec-k{color:rgba(255,255,255,.3);}
+.spec-row.set .spec-k{color:var(--teal);}
+.spec-v{font-family:var(--serif);font-weight:300;line-height:1.34;letter-spacing:-.015em;}
+.spec-row.raw .spec-v{font-size:clamp(18px,2vw,23px);color:rgba(255,255,255,.38);}
+.spec-row.set .spec-v{font-size:clamp(22px,2.8vw,34px);color:#fff;}
+.spec-edits{list-style:none;display:grid;gap:13px;}
+.spec-edits li{position:relative;padding-left:26px;font-size:15px;line-height:1.66;color:rgba(255,255,255,.6);}
+.spec-edits li::before{content:'';position:absolute;left:0;top:10px;width:11px;height:1px;background:var(--teal);}
+.std-note{margin-top:clamp(34px,5vh,52px);border-top:1px solid var(--bdr);padding-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);}
+.std-note p{font-size:16px;line-height:1.78;color:rgba(255,255,255,.6);}
+.std-note b{color:#fff;font-weight:500;}
+@media(max-width:820px){.std-grid,.std-note{grid-template-columns:1fr;gap:32px;}}
+
+/* ============================================================
+   THE CLAIMS, JUDGED — signature. In message testing the words
+   ARE the finding, so the copy is set at reading size and the
+   evidence rides beside it: chosen to the right of the centre
+   line, thrown out to the left.
+   ============================================================ */
+.ring{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.ring-inner{max-width:var(--max);margin:0 auto;}
+.ring-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:20ch;margin:22px 0 clamp(40px,6vh,60px);}
+.claims{max-width:1040px;}
+.claim,.claim-head{display:grid;grid-template-columns:minmax(0,1fr) clamp(132px,17vw,210px) clamp(62px,7vw,78px);gap:clamp(16px,3vw,38px);align-items:center;}
+.claim-head{padding-bottom:12px;}
+.claim-head span{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+.claim-head .ends{display:flex;justify-content:space-between;}
+.claim-head .sc{text-align:right;}
+.claim{padding:clamp(15px,2.2vh,22px) 0;border-top:1px solid var(--line);}
+.claim-t{font-family:var(--serif);font-weight:300;font-size:clamp(17px,2.1vw,25px);line-height:1.3;letter-spacing:-.015em;color:var(--body);}
+.claim.win{border-top-color:var(--teal);}
+.claim.win .claim-t{color:var(--ink);font-weight:400;}
+.claim.out .claim-t{color:var(--struck);}
+.claim-n{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dim);}
+.claim.split .claim-n{color:var(--struck);}
+.mark{position:relative;height:20px;}
+.mark::before{content:'';position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--line);}
+.mark i{position:absolute;top:4px;height:12px;border-radius:2px;}
+.mark i.best{left:50%;background:var(--teal-dim);}
+.mark i.worst{right:50%;background:var(--struck);opacity:.45;}
+.claim.win .mark i.best{background:var(--teal);}
+.claim-s{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;}
+.claim.win .claim-s{color:var(--teal-dim);}
+.ring-foot{max-width:1040px;margin:clamp(38px,6vh,58px) 0 0;border-top:1px solid var(--line);padding-top:28px;font-size:16.5px;line-height:1.78;color:var(--body);max-width:76ch;}
+.ring-foot b{color:var(--ink);font-weight:600;}
+@media(max-width:680px){
+  .claim,.claim-head{grid-template-columns:1fr auto;gap:12px 18px;}
+  .claim .mark{grid-column:1;}
+  .claim-head .ends{grid-column:1;}
+  .claim-t{grid-column:1 / -1;}
+}
+
+/* THE WINNER */
+.winner{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.winner-inner{max-width:960px;margin:0 auto;text-align:center;}
+.winner-inner .section-mark{justify-content:center;margin-bottom:38px;}
+.winner-line{font-family:var(--serif);font-weight:300;font-size:clamp(30px,5vw,68px);line-height:1.1;letter-spacing:-.03em;color:#fff;text-wrap:balance;}
+.winner-line em{font-style:italic;color:var(--teal);}
+.winner-sub{margin-top:30px;font-size:16px;line-height:1.7;color:rgba(255,255,255,.45);max-width:52ch;margin-left:auto;margin-right:auto;}
+/* ============================================================
+   OUTCOME — the family frame: navy ground, the mark, one mono
+   label. What sits inside is chosen per case, and never re-uses
+   the geometry the signature already spent.
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:44ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:30px;}}
+
+/* a rank, not a lift — the only number this case needs */
+.outcome-inner{grid-template-columns:minmax(0,.5fr) minmax(0,1fr);align-items:start;}
+.oc-rank{font-family:var(--serif);font-weight:200;font-size:clamp(64px,9vw,132px);line-height:.82;letter-spacing:-.04em;color:var(--teal);}
+.oc-rank sup{font-size:.42em;font-weight:300;vertical-align:super;letter-spacing:0;}
+.oc-after{margin-top:22px;padding-top:18px;border-top:1px solid var(--bdr);font-size:15px;line-height:1.7;color:rgba(255,255,255,.42);max-width:46ch;}
+.oc-after b{color:rgba(255,255,255,.75);font-weight:500;}
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{SECTOR}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{PROJECT_TYPE}}</span>
+    </div>
+    <h1 class="cover-title">Eighteen lines. <em>One survived contact with anybody.</em></h1>
+    <p class="cover-deck">{{CASE_DECK}} &mdash; one line on the claim the room had already chosen, and where it actually finished.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">{{CLIENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">{{INDUSTRY}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">{{ENGAGEMENT}}</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">{{OUTPUT}}</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE SETUP -->
+<section class="setup" aria-label="The setup">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The setup</div>
+      <p class="lead">Eighteen messages. Eleven opinions. <em>And a deadline.</em></p>
+    </div>
+    <div class="prose sa d1">
+      <p>{{SETUP_LEAD}} &mdash; the campaign arrived with eighteen candidate lines and a room in which everyone had a favourite. The usual tie-breaker in that room is seniority.</p>
+      <p>Rating each line out of ten does not settle it. Everything comes back liked, the gaps between them are inside the margin of error, and the winner turns out to be whichever line was read first. <strong>What separates messages is being made to choose &mdash; and being made to name the one you would throw out.</strong></p>
+      <p>Which is the part most message testing skips. The useful thing to know about a claim is rarely how many people love it. It is how many people it loses.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE COPY STANDARD — process layer (method only; no client findings) -->
+<section class="std" aria-label="Before anything was tested">
+  <div class="std-inner">
+    <div class="sa">
+      <div class="section-mark">Before anything was tested</div>
+      <h2 class="std-h">You cannot test an idea and a piece of copywriting at the same time.</h2>
+    </div>
+    <div class="std-grid">
+      <div class="sa">
+        <div class="spec-row raw">
+          <div class="spec-k">As submitted</div>
+          <p class="spec-v">Our new XR-9 formula lasts up to 3&times; longer than the leading brands* &mdash; and it&rsquo;s now available in 12 new scents!</p>
+        </div>
+        <div class="spec-row set">
+          <div class="spec-k">As tested</div>
+          <p class="spec-v">Lasts three times longer than the leading brand.</p>
+        </div>
+      </div>
+      <ul class="spec-edits sa d1">
+        <li>Brand and product names removed. Left in, the test measures brand equity and reports it as a claim result.</li>
+        <li>Cut to a single idea &mdash; a line carrying two claims cannot tell you which of them people answered.</li>
+        <li>Length matched to every other claim in the set, within two words. Longer lines win on presence alone.</li>
+        <li>Superlatives, asterisks and exclamation marks stripped from all eighteen, or from none of them.</li>
+        <li>Register levelled: same tense, same person, same reading age, so tone is not silently on trial.</li>
+      </ul>
+    </div>
+    <div class="std-note sa">
+      <p><b>All eighteen went through this before any of them met a respondent.</b> It is the least glamorous half of message testing and the half that decides whether the results mean anything &mdash; skip it and the winning line is simply the one that happened to be written best.</p>
+      <p><b>Then the design does the rest.</b> Each respondent sees six sets of four claims and names the best and the worst in each. Across the sample every claim appears equally often, and against every other claim about equally often. Nobody is shown all eighteen at once: a list of eighteen is a memory test, and the answer is whatever sat at the top.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE CLAIMS, JUDGED — signature -->
+<section class="ring" aria-label="The claims, judged">
+  <div class="ring-inner">
+    <div class="sa">
+      <div class="section-mark">In the ring</div>
+      <h2 class="ring-h">Every line, and what it cost to say it.</h2>
+    </div>
+    <div class="claims sa">
+      <div class="claim-head">
+        <span>The claim, as tested</span>
+        <span class="ends"><span>&larr; Thrown out</span><span>Chosen &rarr;</span></span>
+        <span class="sc">Best / worst</span>
+      </div>
+      <div class="claim win">
+        <div class="claim-t">&ldquo;Built to outlast the guarantee.&rdquo;<span class="claim-n">Chosen most, rejected least &mdash; the only line to manage both</span></div>
+        <div class="mark" aria-hidden="true"><i class="worst" style="width:3%"></i><i class="best" style="width:20.5%"></i></div>
+        <div class="claim-s">41 / 6</div>
+      </div>
+      <div class="claim split">
+        <div class="claim-t">&ldquo;The last one you&rsquo;ll need to buy.&rdquo;<span class="claim-n">As many people threw this out as picked it</span></div>
+        <div class="mark" aria-hidden="true"><i class="worst" style="width:11%"></i><i class="best" style="width:16.5%"></i></div>
+        <div class="claim-s">33 / 22</div>
+      </div>
+      <div class="claim">
+        <div class="claim-t">&ldquo;Made for people who read the manual.&rdquo;</div>
+        <div class="mark" aria-hidden="true"><i class="worst" style="width:4.5%"></i><i class="best" style="width:12%"></i></div>
+        <div class="claim-s">24 / 9</div>
+      </div>
+      <div class="claim">
+        <div class="claim-t">&ldquo;Twice the life. Same price.&rdquo;</div>
+        <div class="mark" aria-hidden="true"><i class="worst" style="width:7%"></i><i class="best" style="width:10.5%"></i></div>
+        <div class="claim-s">21 / 14</div>
+      </div>
+      <div class="claim out">
+        <div class="claim-t">&ldquo;Engineered in Sheffield since 1946.&rdquo;</div>
+        <div class="mark" aria-hidden="true"><i class="worst" style="width:9.5%"></i><i class="best" style="width:6%"></i></div>
+        <div class="claim-s">12 / 19</div>
+      </div>
+      <div class="claim out">
+        <div class="claim-t">&ldquo;The smart choice for modern living.&rdquo;</div>
+        <div class="mark" aria-hidden="true"><i class="worst" style="width:19%"></i><i class="best" style="width:2%"></i></div>
+        <div class="claim-s">4 / 38</div>
+      </div>
+    </div>
+    <p class="ring-foot sa">Ranked on how often it was picked best, the second line looks like a contender. <b>Ranked on how often it was picked worst, it is the riskiest thing in the set</b> &mdash; a third of people actively rejected it, and a claim that divides a room in research divides a market in the wild. The line that won did not win on enthusiasm. It won by being the only one almost nobody wanted to throw away.</p>
+  </div>
+</section>
+
+<!-- THE WINNER -->
+<section class="winner" aria-label="The winner">
+  <div class="winner-inner sa">
+    <div class="section-mark">Left standing</div>
+    <p class="winner-line">&ldquo;{{WINNING_CLAIM}}&rdquo;</p>
+    <p class="winner-sub">Illustrative default: &ldquo;Built to outlast the guarantee.&rdquo; &mdash; chosen by 41%, rejected by 6%, and written by nobody in the room that had been arguing.</p>
+  </div>
+</section>
+
+<!-- OUTCOME — a rank, not a lift -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <div class="oc-rank">9<sup>th</sup></div><!-- swap: {{OUTCOME_RANK}} -->
+    <div>
+      <p class="lbl">{{OUTCOME_STAT_LABEL}} &mdash; where the line the room had already agreed on actually finished, out of eighteen.</p>
+      <p class="oc-after">It had been through four rounds of internal review and was three weeks from production. <b>The test cost less than the artwork</b> for the version that never ran.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Deciding a line by who says it loudest? <em>Put them in the ring.</em></h2>
+    <p>Bring the whole longlist. Eighteen is not too many, and the weak ones are useful.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

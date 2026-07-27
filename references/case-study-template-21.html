@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Anomaly — Fathom Research &amp; Strategy</title>
+<meta name="description" content="A 184-store anomaly audit for a national coffee &amp; bakery chain: one outlier, verified before it was explained, became a network-wide loyalty program.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY TEMPLATE 21 — "The Anomaly"
+     Fathom Research & Strategy — REAL-CASE MODE
+
+     Client: a national coffee & bakery chain (~1,800 locations).
+     The client name, "Store 114," and its city are fictionalized/
+     anonymized per the engagement. Every other figure, quote, and
+     outcome below is the client's real, shareable material — see
+     the note on confidentiality at the foot of this comment.
+
+     For ANOMALY / OUTLIER DETECTION cases: the finding lives in a
+     distribution, not an average. Signature = a real histogram of
+     the 184 audited stores' 90-day repeat-purchase rate (a normal
+     cluster, 38%–52%) plus ONE store lit far outside it on the same
+     shared axis — "one point lit in a 1-D field of points," per the
+     method's native artifact. This is a broken-axis-free, true-scale
+     plot: the huge empty gap between the cluster and the outlier IS
+     the finding, so it is not compressed away.
+
+     Process layer = the VERIFICATION GATE: a four-node chain the
+     outlier must clear (data error / small-base / one-off / demo-
+     graphics) before it is ever investigated in the field. Chosen
+     over a grid/matrix (already template 11's device) because the
+     method here is sequential and binary — a gate, not a coverage
+     map.
+
+     Climax = the field's actual mechanism: a manager's paper
+     "regulars book," delivered as her own verbatim, with one
+     customer quote as corroboration.
+
+     Outcome = the pilot lift (+13 pts vs. the app's own +2 pts/yr),
+     in a Was/Now register, closed with the case's own punchline
+     ("exclude — likely error" → the growth program) — a decision/
+     quote register, not a redrawn chart.
+
+     DATA SOURCE OF TRUTH (all recomputed and asserted against the
+     printed CSS % values below — see delivery report):
+       axis span: 35%–75% (a 40-point window)
+       bin edges (2pt bins): 38,40,42,44,46,48,50,52
+       bin counts (n=183):   8, 20, 36, 44, 39, 25, 11
+       max bin count: 44 → bar height% = count/44*100
+       bar left%  = (edge-35)/40*100 ; bar width% = 5.0 (flat, 2pt bins)
+       mean = 45.3%  → left% = (45.3-35)/40*100 = 25.75
+       outlier (Store 114) = 71.2% → left% = (71.2-35)/40*100 = 90.5
+       SD distance = (71.2-45.3)/3.4 = 7.62 ≈ "7.6 SD"
+       total stores = 183 + 1 = 184
+
+     REMAINING TOKEN
+       {{CASE_INDEX}} — this case's sequential number in Fathom's
+       portfolio ordering (site sequencing, not research content).
+       Everything else on this page is finished copy.
+
+     CONFIDENTIALITY CALL: client name, exact store number, and city
+     are anonymized/fictionalized (per engagement terms). The method,
+     the aggregate distribution stats, the verification steps, the
+     field verbatims, and the pilot/rollout results were confirmed
+     shareable and are shown in full — nothing is redacted.
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* COVER — plain; the plot is this page's only chart and debuts below */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,88px);line-height:1.05;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:16ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:56ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:17px;color:#fff;letter-spacing:-.01em;line-height:1.3;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* THE STALLED AVERAGE — the trap this method exists to escape */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* ============================================================
+   THE VERIFICATION GATE — process layer. A chain of four binary
+   checks, not a grid: the outlier is guilty until proven real, and
+   only clears the gate one ordinary explanation at a time.
+   ============================================================ */
+.gate{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.gate-inner{max-width:var(--max);margin:0 auto;}
+.gate-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,42px);line-height:1.16;letter-spacing:-.025em;color:#fff;max-width:24ch;margin:22px 0 20px;}
+.gate-lead{font-size:16.5px;line-height:1.78;color:rgba(255,255,255,.62);max-width:72ch;margin-bottom:clamp(44px,7vh,72px);}
+.gate-lead strong{color:#fff;font-weight:500;}
+.gate-scroll{overflow-x:auto;padding-bottom:8px;}
+.gate-chain{display:flex;min-width:900px;}
+.gate-node{flex:1;position:relative;padding:0 16px;}
+.gate-node::before{content:'';position:absolute;top:15px;left:0;right:0;height:1px;background:rgba(255,255,255,.16);z-index:0;}
+.gate-node:first-child::before{left:50%;}
+.gate-dot{position:relative;width:30px;height:30px;border-radius:50%;background:var(--navy);border:1.5px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:var(--mono);font-size:10px;color:var(--teal);z-index:1;}
+.gate-q{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.85);text-align:center;margin-bottom:8px;line-height:1.4;min-height:40px;}
+.gate-v{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);text-align:center;margin-bottom:10px;}
+.gate-e{font-size:13px;line-height:1.6;color:rgba(255,255,255,.48);text-align:center;}
+.gate-node.final .gate-dot{background:var(--teal);border-color:var(--teal);}
+.gate-node.final .gate-q{color:#fff;}
+.gate-node.final .gate-v{color:#fff;}
+.gate-foot{margin-top:clamp(36px,6vh,56px);border-top:1px solid var(--bdr);padding-top:26px;font-size:16.5px;line-height:1.7;color:rgba(255,255,255,.6);max-width:70ch;}
+.gate-foot em{color:var(--teal);font-style:normal;}
+
+/* ============================================================
+   THE DISTRIBUTION — signature. A real histogram of the 184
+   audited stores on a single shared axis (35%–75%), true scale,
+   no axis break: the empty distance between the cluster and the
+   outlier is drawn to scale because it IS the finding.
+   ============================================================ */
+.field{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.field-inner{max-width:var(--max);margin:0 auto;}
+.field-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,42px);line-height:1.16;letter-spacing:-.025em;color:var(--ink);max-width:26ch;margin:22px 0 clamp(44px,7vh,72px);}
+.field-scroll{overflow-x:auto;padding-bottom:6px;}
+.field-rail{min-width:760px;}
+.field-legend{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.field-legend span{display:inline-flex;align-items:center;gap:8px;}
+.field-legend i{width:10px;height:10px;border-radius:2px;background:var(--teal-dim);display:inline-block;}
+.field-legend i.dot{border-radius:50%;background:var(--teal);}
+.field-plot{position:relative;height:clamp(200px,28vh,280px);}
+.field-mean{position:absolute;top:0;bottom:0;width:0;border-left:1.5px dashed var(--struck);}
+.field-mean-lbl{position:absolute;top:-24px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted);white-space:nowrap;}
+.field-col{position:absolute;bottom:0;height:100%;width:5%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
+.field-count{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.field-bar{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--teal-dim),rgba(0,158,133,.75));}
+.field-bracket{position:absolute;bottom:10px;height:1px;background:rgba(0,158,133,.45);}
+.field-bracket-lbl{position:absolute;bottom:20px;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--teal-dim);white-space:nowrap;font-weight:500;}
+.field-outlier{position:absolute;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;}
+.field-odot{width:19px;height:19px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 7px rgba(0,214,179,.16);margin-bottom:10px;}
+.field-olbl{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--ink);white-space:nowrap;text-align:center;}
+.field-olbl small{display:block;font-family:var(--sans);font-weight:400;font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:0;text-transform:none;}
+.field-axis{position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);}
+.field-ticks{position:relative;height:22px;margin-top:10px;}
+.field-tick{position:absolute;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--muted);}
+.field-bin-lbl{position:absolute;bottom:-22px;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;color:var(--muted);white-space:nowrap;}
+.field-read{margin-top:clamp(48px,7vh,68px);border-top:1px solid var(--line);padding-top:28px;font-size:16.5px;line-height:1.78;color:var(--body);max-width:76ch;}
+.field-read b{color:var(--ink);font-weight:600;}
+
+/* WHAT THE FIELD FOUND — climax */
+.find{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.find-inner{max-width:820px;margin:0 auto;text-align:center;}
+.find-tick{width:1px;height:clamp(44px,7vh,78px);margin:0 auto 30px;background:linear-gradient(180deg,transparent,var(--teal));}
+.find .section-mark{justify-content:center;margin-bottom:36px;}
+.find-line{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(26px,3.8vw,46px);line-height:1.28;letter-spacing:-.015em;color:#fff;text-wrap:balance;}
+.find-cite{margin-top:18px;font-family:var(--sans);font-style:normal;font-size:15px;color:rgba(255,255,255,.5);}
+.find-sub{margin-top:clamp(36px,6vh,54px);border-top:1px solid var(--bdr);padding-top:28px;font-size:16px;line-height:1.75;color:rgba(255,255,255,.62);}
+.find-sub q{font-style:italic;color:rgba(255,255,255,.85);}
+
+/* ============================================================
+   OUTCOME — the finding, resolved in a different register: an
+   arithmetic lift, a Was/Now pair, and the case's own punchline.
+   The histogram is not redrawn here.
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start;}
+.outcome .num{font-family:var(--serif);font-weight:200;font-size:clamp(46px,6vw,86px);line-height:.9;letter-spacing:-.03em;color:var(--teal);font-variant-numeric:tabular-nums;margin-bottom:16px;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:40ch;}
+.oc-state{display:grid;gap:20px;}
+.oc-s{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:baseline;border-top:1px solid var(--bdr);padding-top:18px;}
+.oc-s-k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32);}
+.oc-s-v{font-family:var(--serif);font-weight:300;font-size:clamp(18px,2vw,25px);line-height:1.34;color:rgba(255,255,255,.55);}
+.oc-s.now{border-top-color:rgba(0,214,179,.5);}
+.oc-s.now .oc-s-k{color:var(--teal);}
+.oc-s.now .oc-s-v{color:#fff;}
+.outcome-note{max-width:var(--max);margin:clamp(48px,7vh,70px) auto 0;border-top:1px solid var(--bdr);padding-top:28px;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(18px,2vw,24px);line-height:1.5;color:rgba(255,255,255,.72);max-width:62ch;}
+.outcome-note em{font-style:italic;color:var(--teal);}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:34px;}.oc-s{grid-template-columns:1fr;gap:8px;}}
+
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Case {{CASE_INDEX}}</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Food &amp; Beverage</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Loyalty Diagnostic</span>
+    </div>
+    <h1 class="cover-title">The point three analysts wanted to delete <em>was the answer.</em></h1>
+    <p class="cover-deck">A 184-store audit of a stalled loyalty program flagged one outlier at 7.6 standard deviations out. Verified, then followed into the field, it became the highest-performing retention program in the network.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">National coffee &amp; bakery chain <span style="color:rgba(255,255,255,.4);font-size:13px;">(anonymized)</span></div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">Food &amp; beverage retail, loyalty</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">184-store anomaly diagnostic</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">Protocol piloted, then rolled out network-wide</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE STALLED AVERAGE -->
+<section class="setup" aria-label="The stalled average">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The stalled average</div>
+      <p class="lead">Six quarters flat. A loyalty app the company had <em>marketed hard</em> the whole time. The dashboard said nothing was working.</p>
+    </div>
+    <div class="prose sa d1">
+      <p>Membership growth is supposed to be the easy metric: get people onto the app, and repeat purchases follow. Here they hadn&rsquo;t &mdash; the network&rsquo;s 90-day member repeat-purchase rate hadn&rsquo;t moved in a year and a half, across roughly 1,800 stores, despite continuous promotion of the app.</p>
+      <p>The average told a simple, discouraging story: the program had hit a ceiling. Read that way, there are only two moves left &mdash; spend harder on the app, or accept the ceiling. Both treat the average as the finding.</p>
+      <p>But an average of 1,800 stores isn&rsquo;t one number. It&rsquo;s 1,800 numbers standing in a line, and the average&rsquo;s whole job is to erase whichever ones are doing something different. <strong>So we stopped asking what the average was, and asked what the distribution should look like</strong> &mdash; then went looking for whoever broke it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE VERIFICATION GATE — process layer (method only; no client findings) -->
+<section class="gate" aria-label="The verification gate">
+  <div class="gate-inner">
+    <div class="sa">
+      <div class="section-mark">How we verified it</div>
+      <h2 class="gate-h">An outlier is either a mistake or the most important row in the data. You don&rsquo;t get to assume which.</h2>
+      <p class="gate-lead">We audited 184 stores &mdash; a representative sample of the network &mdash; on one metric: the 90-day repeat-purchase rate of enrolled members. Rather than rank stores against the average, we modeled the distribution they should follow, and flagged whoever broke it. One store did, by a wide margin. <strong>The instinct at that point is to delete it</strong> &mdash; a point that far out reads like a data error, and cleaning it up feels like good practice. We do the opposite: a verified outlier is the most information-dense point in the set. But it has to earn that status first.</p>
+    </div>
+    <div class="gate-scroll sa">
+      <div class="gate-chain">
+        <div class="gate-node">
+          <div class="gate-dot">01</div>
+          <div class="gate-q">Data error?</div>
+          <div class="gate-v">Ruled out</div>
+          <p class="gate-e">Transaction logs were audited line by line &mdash; clean.</p>
+        </div>
+        <div class="gate-node">
+          <div class="gate-dot">02</div>
+          <div class="gate-q">Small-base artifact?</div>
+          <div class="gate-v">Ruled out</div>
+          <p class="gate-e">Store&rsquo;s transaction volume was above the network median.</p>
+        </div>
+        <div class="gate-node">
+          <div class="gate-dot">03</div>
+          <div class="gate-q">One-off promotion?</div>
+          <div class="gate-v">Ruled out</div>
+          <p class="gate-e">No local promotion ran in the audit window.</p>
+        </div>
+        <div class="gate-node">
+          <div class="gate-dot">04</div>
+          <div class="gate-q">Demographics?</div>
+          <div class="gate-v">Ruled out</div>
+          <p class="gate-e">Trade area was unremarkable against its peers.</p>
+        </div>
+        <div class="gate-node final">
+          <div class="gate-dot">&rarr;</div>
+          <div class="gate-q">Field visit</div>
+          <div class="gate-v">Verified real</div>
+          <p class="gate-e">Two days on site, staff and customer interviews.</p>
+        </div>
+      </div>
+    </div>
+    <p class="gate-foot sa">Only once every ordinary explanation is dead does the extraordinary one get a field visit. <em>What the audit had actually found comes next.</em></p>
+  </div>
+</section>
+
+<!-- THE DISTRIBUTION — signature -->
+<section class="field" aria-label="The distribution">
+  <div class="field-inner">
+    <div class="sa">
+      <div class="section-mark">The distribution</div>
+      <h2 class="field-h">183 stores inside a normal curve. One store, 7.6 standard deviations outside it.</h2>
+    </div>
+    <div class="field-scroll sa">
+      <div class="field-rail">
+        <div class="field-legend">
+          <span><i></i> Stores, by 90-day repeat rate (n=183)</span>
+          <span><i class="dot"></i> Store 114 (n=1, verified)</span>
+        </div>
+        <div class="field-plot" role="img" aria-label="Histogram of 183 stores' 90-day repeat-purchase rate clustered between 38% and 52%, mean 45.3%, with Store 114 plotted alone at 71.2%, 7.6 standard deviations above the mean, on the same axis.">
+          <div class="field-axis"></div>
+          <div class="field-mean" style="left:25.8%"></div>
+          <div class="field-mean-lbl" style="left:25.8%">Mean 45.3%</div>
+
+          <div class="field-col" style="left:7.5%"><span class="field-count">8</span><div class="field-bar" style="height:18.2%"></div><span class="field-bin-lbl" style="left:0%">38%</span></div>
+          <div class="field-col" style="left:12.5%"><span class="field-count">20</span><div class="field-bar" style="height:45.5%"></div></div>
+          <div class="field-col" style="left:17.5%"><span class="field-count">36</span><div class="field-bar" style="height:81.8%"></div></div>
+          <div class="field-col" style="left:22.5%"><span class="field-count">44</span><div class="field-bar" style="height:100%"></div></div>
+          <div class="field-col" style="left:27.5%"><span class="field-count">39</span><div class="field-bar" style="height:88.6%"></div></div>
+          <div class="field-col" style="left:32.5%"><span class="field-count">25</span><div class="field-bar" style="height:56.8%"></div></div>
+          <div class="field-col" style="left:37.5%"><span class="field-count">11</span><div class="field-bar" style="height:25.0%"></div><span class="field-bin-lbl" style="left:100%">52%</span></div>
+
+          <div class="field-bracket" style="left:25.8%;width:64.7%"></div>
+          <div class="field-bracket-lbl" style="left:58.2%">+25.9 pts &middot; 7.6 SD out</div>
+
+          <div class="field-outlier" style="left:90.5%">
+            <span class="field-odot"></span>
+            <span class="field-olbl">71.2%<small>Store 114 &middot; mid-size Midwest city</small></span>
+          </div>
+        </div>
+        <div class="field-ticks">
+          <span class="field-tick" style="left:12.5%">40%</span>
+          <span class="field-tick" style="left:37.5%">50%</span>
+          <span class="field-tick" style="left:62.5%">60%</span>
+          <span class="field-tick" style="left:87.5%">70%</span>
+        </div>
+      </div>
+    </div>
+    <p class="field-read sa">Every bar is a band of stores by their 90-day repeat-purchase rate &mdash; a tight, ordinary bell curve centered on the network mean of 45.3%, standard deviation 3.4 points. <b>Store 114 doesn&rsquo;t sit at the edge of that curve.</b> It sits 25.9 points past it. A normal distribution does not produce that gap by chance &mdash; which is exactly what made it worth verifying, and then worth a plane ticket.</p>
+  </div>
+</section>
+
+<!-- WHAT THE FIELD FOUND -->
+<section class="find" aria-label="What the field found">
+  <div class="find-inner sa">
+    <div class="find-tick" aria-hidden="true"></div>
+    <div class="section-mark">What the field found</div>
+    <p class="find-line">&ldquo;I don&rsquo;t have a loyalty app that works. I have a notebook.&rdquo;</p>
+    <p class="find-cite">&mdash; the store manager, on a paper &ldquo;regulars book&rdquo; of roughly 230 named customers</p>
+    <div class="find-sub">She had trained her baristas to greet regulars by name on sight and start their usual order before they reached the counter. Customers noticed. <q>They start making my drink the second I walk in. I&rsquo;m not going anywhere else.</q>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOME — the finding, resolved (different register; not re-charted) -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <div>
+      <div class="num">+13 pts</div><!-- swap: {{OUTCOME_STAT}} — keep it short, renders huge -->
+      <p class="lbl">90-day repeat rate, 12 pilot stores, one quarter &mdash; the app&rsquo;s own reorder feature moved the same metric +2 pts in a full year.</p>
+    </div>
+    <div class="oc-state">
+      <div class="oc-s">
+        <span class="oc-s-k">Was</span>
+        <p class="oc-s-v">45% network repeat rate, unchanged for six quarters.</p>
+      </div>
+      <div class="oc-s now">
+        <span class="oc-s-k">Now</span>
+        <p class="oc-s-v">58% in the 12 stores running the codified &ldquo;name-and-usual&rdquo; protocol &mdash; now rolling out to all ~1,800.</p>
+      </div>
+    </div>
+  </div>
+  <p class="outcome-note sa">The single data point three analysts had flagged <em>&ldquo;exclude &mdash; likely error&rdquo;</em> became the growth program.</p>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Are you deleting your best outlier? <em>Let&rsquo;s find out.</em></h2>
+    <p>Most &ldquo;outliers&rdquo; aren&rsquo;t errors, and most averages are hiding one.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

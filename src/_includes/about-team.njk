@@ -1,9 +1,11 @@
-<section class="team" aria-label="Meet the team">
+<section class="team" id="team" aria-label="Meet the team">
   <div class="team-inner sa">
     <div class="team-row">
     {% for employee in collections.employees %}
       <div class="tm sa s{{ loop.index }}">
-        <img class="tm-photo tm-photo-ph" src="{{ employee.data.image }}" alt="{{ employee.data.name }}">
+        <div class="tm-photo-frame">
+          {% siteImage employee.data.image, employee.data.name, "tm-photo" %}
+        </div>
         <h3 class="tm-name">{{ employee.data.name }}</h3>
         <p class="tm-role">{{ employee.data.role }}</p>
       </div>

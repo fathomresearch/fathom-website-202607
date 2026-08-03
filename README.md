@@ -6,6 +6,55 @@ now — a site redesign exploration, and a working AI chat agent prototype.
 
 ---
 
+## Eleventy image workflow
+
+The active Eleventy site uses `@11ty/eleventy-img` to convert source images at build time.
+After cloning or pulling the repo, run `npm ci` to install the image plugin and the other
+dependencies recorded in `package-lock.json`.
+
+Team profile source images belong in:
+
+```text
+src/assets/team/
+```
+
+Source images may be JPEG, PNG, or WebP. They do not need to be manually resized or converted,
+but they should be at least 800px wide when an 800px output is required. Cropping and visible
+framing are handled by the site's HTML/CSS.
+
+Use the generic `siteImage` shortcode for team photos and other site images:
+
+```njk
+{% siteImage
+  "assets/team/Danni-Bayn.jpg",
+  "Danni Bayn",
+  "tm-photo"
+%}
+```
+
+The optional fourth argument controls image loading and defaults to `"lazy"`. Use `"eager"`
+for an above-the-fold image:
+
+```njk
+{% siteImage "assets/hero.jpg", "Research team collaborating", "hero-image", "eager" %}
+```
+
+The current image settings generate exactly one WebP image, with a maximum width of 800px and
+quality set to 80. Eleventy does not upscale smaller source images. Output folders and filenames
+remain readable and follow the source path:
+
+```text
+src/assets/team/Danni-Bayn.jpg
+    → _site/images/team/Danni-Bayn.webp
+    → /images/team/Danni-Bayn.webp
+```
+
+Generated files in `_site/` should not be edited manually. Running `npm run build` deletes and
+recreates `_site/`. The current configuration generates WebP only, with no JPEG/PNG fallback.
+The shortcode and image settings live in `eleventy.config.js`.
+
+---
+
 ## 1. Site redesign (`references/`)
 
 All pages are self-contained static HTML — inline `<style>`/`<script>`, no build step, no

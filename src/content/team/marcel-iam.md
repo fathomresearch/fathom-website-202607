@@ -1,7 +1,7 @@
 ---
 name: Marcel Iam
-role: Manager, Consumer Insights & Market Research
-image: assets/team/Marcel-Iam.jpg
+role: Manager, Research Analytics & Strategic Initiatives
+image: assets/team/Marcel-Iam.png
 order: 4
 permalink: false
 ---

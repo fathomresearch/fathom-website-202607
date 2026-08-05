@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Fathom Research &amp; Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:#fff;color:#2C3E50;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --navy:#0A1628;--navy-deep:#050B14;--teal:#00D6B3;--teal-h:#009E85;--teal-dim:#009E85;
+  --white:#fff;--warm:#F8F7F4;--paper:#FDFCFA;--body:#2C3E50;--ink:#121d2b;
+  --muted:#6B7280;--border:#ECEAE6;--bdr:rgba(255,255,255,.08);--struck:#9099a6;
+  --max:1200px;--measure:640px;--pad:80px;
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.s1{transition-delay:.08s;} .s2{transition-delay:.16s;} .s3{transition-delay:.24s;}
+.s4{transition-delay:.32s;} .s5{transition-delay:.40s;} .s6{transition-delay:.48s;}
+.label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+.label::before{content:'';display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;}
+/* eyebrow, mono variant — opens every new section below the hero, ties the page together */
+.mark{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;}
+.mark::before{content:'';display:block;width:22px;height:1.5px;background:var(--teal);flex-shrink:0;}
+.mark-onwarm{color:var(--teal-dim);}
+.section-lg{padding:120px var(--pad);}
+.section-sm{padding:56px var(--pad);}
+.snd{background:var(--navy-deep);color:#fff;}
+.sw{background:var(--paper);color:var(--ink);}
+.swm{background:var(--warm);color:var(--ink);}
+.container{max-width:var(--max);margin:0 auto;}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p+p{margin-top:18px;}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
+.nav-link:hover{color:rgba(255,255,255,.92);}
+.nav-link.active{color:rgba(255,255,255,.92);font-weight:500;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-h);}
+
+/* ── DECLARATION — the three radicals (unchanged) ── */
+.declaration{display:flex;flex-direction:column;padding:96px 0 108px;background:var(--navy);position:relative;overflow:hidden;}
+.declaration .inner{padding:0 var(--pad);}
+.declaration .container{max-width:100%;padding:0;margin:0;display:flex;flex-direction:column;}
+.radical-stack{margin-bottom:28px;}
+.radical{display:flex;align-items:center;gap:28px;margin-bottom:10px;}
+.radical:last-child{margin-bottom:0;}
+.radical.sa{transition:opacity 1.3s cubic-bezier(.22,1,.36,1),transform 1.3s cubic-bezier(.22,1,.36,1);}
+.radical.sa.radical-d1{transition-delay:0s;}
+.radical.sa.radical-d2{transition-delay:.7s;}
+.radical.sa.radical-d3{transition-delay:1.4s;}
+.radical-text{font-family:'Spectral',serif;font-size:68px;font-weight:400;line-height:1;color:#fff;letter-spacing:-.025em;white-space:nowrap;flex-shrink:0;}
+.radical-text em{font-style:italic;font-weight:300;color:var(--teal);}
+.radical-bar{height:46px;background:var(--teal);flex:1;min-width:80px;margin-right:calc(-1 * var(--pad));}
+.declaration-body{max-width:calc(600px + var(--pad));padding:0 var(--pad);}
+.declaration-body p{font-size:18px;line-height:1.72;color:rgba(255,255,255,.55);margin-bottom:10px;}
+/* Meet-the-team bookmark tab — now lives at the close of "What we believe", not the hero.
+   Width formula is identical to the founder-column/spine formula in .team-inner below (same
+   basis: 7 columns, 6×40px gaps, computed against the section's own content width) so the
+   two blocks render at exactly the same width, not just visually close. */
+.meet-tab{width:calc((100% - 240px) / 7);height:46px;margin-top:64px;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .2s;}
+.meet-tab:hover{background:var(--teal-h);}
+
+/* ── MISSION — "why we exist" — a positioning statement, not a worksheet.
+   The words industry likes to claim get struck out, the headline states the
+   founding belief, then the reasoning unfolds as one continuous piece of
+   prose, no boxes, no comparison grid, no pulled "quote" for a line nobody
+   said but us. The resolution is just the paragraph's own last sentence,
+   given weight with a bold clause the same way the rest of the site does it. ── */
+.mission{padding:clamp(96px,15vh,152px) var(--pad);}
+.mission-inner{max-width:820px;}
+/* names whose claim is being struck, same job .expected .lbl does in the
+   case-study template — without it, crossing out real virtues (like
+   "decisive") reads as self-negation instead of a genre critique. */
+.mission-words-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--struck);margin-bottom:14px;}
+.mission-words{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:36px;}
+.struck-word{position:relative;font-family:'Spectral',serif;font-style:italic;font-weight:300;font-size:clamp(19px,2.1vw,26px);color:var(--struck);}
+.struck-word::after{content:'';position:absolute;left:-4%;right:-4%;top:54%;height:1.5px;background:var(--struck);opacity:.85;}
+.struck-word:nth-child(1)::after{transform:rotate(-2.2deg);}
+.struck-word:nth-child(2)::after{transform:rotate(1.6deg);}
+.struck-word:nth-child(3)::after{transform:rotate(-1.4deg);}
+.mission-hl{font-family:'Spectral',serif;font-weight:300;font-size:clamp(30px,4.6vw,52px);line-height:1.18;letter-spacing:-.02em;color:var(--ink);text-wrap:balance;}
+.mission-hl-light{display:inline-block;margin-top:8px;color:var(--struck);font-style:italic;white-space:nowrap;font-weight:300;font-size:clamp(18px,3.2vw,34px);}
+.mission-body{margin-top:44px;max-width:var(--measure);}
+.mission-body p{font-size:17px;line-height:1.78;color:var(--body);}
+.mission-body p+p{margin-top:18px;}
+.mission-body strong{color:var(--ink);font-weight:600;}
+/* the resolution — not a pulled quote, and not a second headline either.
+   A display-serif jump here borrows the language of a full-bleed "turn"
+   moment (.signal-line, .reframe-line) with no scene change to back it up,
+   so it just reads as a weaker echo of .mission-hl. Instead this stays in
+   the same sans body voice as the paragraphs above it, but marked as the
+   line that matters with three devices already proven on-brand: a thin
+   teal rule to open a new beat (see .tealband, .metrics), bold ink weight
+   for the sentence that's meant to be heard (see .prop-body strong,
+   .ai-body strong), and the teal-dim accent color for the closing clause
+   (see .lead-stmt em, .cta-hl em). */
+.mission-resolve{margin-top:40px;padding-top:28px;border-top:1.5px solid var(--teal);max-width:var(--measure);font-family:'IBM Plex Sans',sans-serif;font-size:18px;font-weight:600;line-height:1.68;letter-spacing:-.005em;color:var(--ink);}
+.mission-resolve .accent{color:var(--teal-dim);}
+
+/* ── VALUE GRID — "why research matters" (label/lead + prose) ── */
+.value-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead-stmt{font-family:'Spectral',serif;font-weight:300;font-size:clamp(24px,2.8vw,36px);line-height:1.34;letter-spacing:-.015em;color:var(--ink);max-width:26ch;text-wrap:balance;}
+.lead-stmt em{font-style:italic;color:var(--teal-dim);}
+.matters-body{max-width:520px;}
+.matters-lead{font-size:17px;line-height:1.7;color:var(--body);}
+.matters-sub{margin-top:22px;font-size:14.5px;font-weight:500;letter-spacing:.01em;color:var(--muted);}
+.matters-list{margin-top:12px;display:flex;flex-direction:column;gap:11px;}
+.matters-list li{position:relative;padding-left:22px;font-size:16.5px;font-weight:500;color:var(--ink);line-height:1.4;}
+.matters-list li::before{content:'';position:absolute;left:0;top:10px;width:11px;height:1.5px;background:var(--teal);}
+
+/* ── PILLARS — "what we believe" — row-based grid so all three statements share one
+   baseline and all three bodies share another, regardless of how each title wraps ── */
+.believe-section{padding-bottom:0;}
+.believe-hl{font-family:'Spectral',serif;font-weight:300;font-size:clamp(28px,4vw,44px);line-height:1.14;color:#fff;letter-spacing:-.02em;max-width:16ch;margin-top:6px;}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);column-gap:56px;row-gap:0;margin-top:56px;padding-top:44px;border-top:.5px solid rgba(255,255,255,.14);}
+.pillar-word{font-family:'Spectral',serif;font-style:italic;font-weight:300;font-size:38px;color:var(--teal);letter-spacing:-.02em;margin-bottom:22px;}
+.pillar-title{font-family:'Spectral',serif;font-weight:400;font-size:21px;color:#fff;margin-bottom:14px;letter-spacing:-.01em;line-height:1.3;}
+.pillar-body{font-size:15px;line-height:1.72;color:rgba(255,255,255,.55);}
+
+/* ── TEAM (unchanged, tab now flows directly into it — no lead-in block splitting the two) ── */
+.team{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--warm);overflow:hidden;}
+.team::before{content:'';position:absolute;top:0;bottom:0;left:var(--pad);width:calc((100% - 2*var(--pad) - 6*40px) / 7);background:var(--teal);z-index:0;}
+.team-inner{position:relative;z-index:1;display:grid;grid-template-columns:calc((100% - 6*40px) / 7) 1fr;gap:40px;align-items:start;padding:64px var(--pad);}
+.team-quote{grid-column:2;margin-top:56px;font-family:'Spectral',serif;font-style:italic;font-weight:300;font-size:clamp(18px,2vw,24px);line-height:1.55;color:var(--muted);max-width:56ch;}
+.tm-photo{aspect-ratio:4/5;border-radius:3px;object-fit:cover;display:block;width:100%;background:linear-gradient(145deg,#13294d,#0A1628);}
+.founder-col{position:relative;text-align:center;scroll-margin-top:100px;}
+.founder-col-role{position:absolute;left:0;right:0;bottom:100%;margin-bottom:16px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.08em;}
+.founder-col-ph{width:100%;margin:0 0 16px;}
+.founder-col-name{font-family:'Spectral',serif;font-size:24px;font-weight:400;color:#fff;letter-spacing:-.02em;}
+.team-row{display:grid;grid-template-columns:repeat(6,1fr);gap:40px;}
+.tm{text-align:center;}
+.tm-photo-ph{width:100%;margin-bottom:16px;}
+.tm-name{font-family:'Spectral',serif;font-size:19px;font-weight:400;color:var(--navy);margin-bottom:5px;letter-spacing:-.01em;}
+.tm-role{font-size:12px;font-weight:400;color:var(--muted);line-height:1.5;}
+
+/* ── FOOTER ── */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:'Spectral',serif;font-size:16px;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+
+@media(max-width:1100px){
+  :root{--pad:48px;}
+  .team::before{display:none;}
+  .team-inner{grid-template-columns:1fr;gap:44px;padding:56px var(--pad) 72px;}
+  .team-quote{grid-column:1;margin-top:8px;}
+  .team-row{grid-template-columns:repeat(3,1fr);gap:32px 28px;}
+  .founder-col{background:var(--teal);width:100%;max-width:300px;margin:0 auto;padding:34px 28px 32px;border-radius:3px;}
+  .founder-col-role{position:static;margin-bottom:16px;}
+  .founder-col-ph{margin:0 auto 16px;}
+  .meet-tab{width:300px;max-width:100%;}
+  .radical-text{font-size:48px;}
+  .radical-bar{height:34px;}
+  .value-grid{grid-template-columns:1fr;gap:32px;}
+  .lead-stmt{max-width:none;}
+  /* Pillars: desktop lays out word/title/body as three shared rows (see .pillars above) so
+     they align horizontally; below 1100px that same DOM order would print all three words,
+     then all three titles, then all three bodies, which reads as nonsense. Re-group each
+     pillar's word+title+body back into one stacked block via explicit order. */
+  .pillars{grid-template-columns:1fr;column-gap:0;row-gap:0;}
+  .pillars > *:nth-child(1){order:1;}
+  .pillars > *:nth-child(2){order:4;margin-top:44px;}
+  .pillars > *:nth-child(3){order:7;margin-top:44px;}
+  .pillars > *:nth-child(4){order:2;}
+  .pillars > *:nth-child(5){order:5;}
+  .pillars > *:nth-child(6){order:8;}
+  .pillars > *:nth-child(7){order:3;}
+  .pillars > *:nth-child(8){order:6;}
+  .pillars > *:nth-child(9){order:9;}
+}
+@media(max-width:768px){
+  :root{--pad:24px;}
+  .nav-link{display:none;}
+  .team-inner{gap:36px;padding:48px var(--pad) 64px;}
+  .team-row{grid-template-columns:repeat(2,1fr);gap:30px 22px;}
+  .founder-col{max-width:320px;}
+  .meet-tab{width:320px;}
+  .founder-col-name{font-size:23px;}
+  .radical-text{font-size:34px;}
+  .radical-bar{height:24px;gap:16px;}
+  .radical{gap:16px;}
+  .footer-inner{grid-template-columns:1fr;}
+  .footer-contact{text-align:left;}
+  .believe-hl{font-size:30px;}
+  .mission-hl{font-size:28px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .sa{opacity:1;transform:none;transition:none;}
+  .radical.sa{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Main navigation">
+  <a href="./index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="30" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="what-we-do-2.html" class="nav-link">What We Do 2</a>
+    <a href="about.html" class="nav-link active">About</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<!-- THE DECLARATION (unchanged design) -->
+<section class="declaration" aria-label="Who we are">
+  <div class="container">
+    <div class="inner"><span class="label sa">About Fathom</span></div>
+    <div class="radical-stack">
+      <div class="radical sa radical-d1"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>humanity.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+      <div class="radical sa radical-d2"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>authenticity.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+      <div class="radical sa radical-d3"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>honesty.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+    </div>
+    <div class="declaration-body sa s2">
+      <p>Clear thinking. Authentic answers. Research built to be used.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WE EXIST -->
+<section class="mission sw" aria-label="Why we exist">
+  <div class="container mission-inner">
+    <span class="mark sa">Why we exist</span>
+    <p class="mission-words sa s1"><span class="struck-word">Thorough.</span><span class="struck-word">Comprehensive.</span><span class="struck-word">Decisive.</span></p>
+    <h2 class="mission-hl sa s2">We built Fathom because research was broken.<br><span class="mission-hl-light">And everyone knew it.</span></h2>
+    <div class="mission-body sa s3">
+      <p><strong>Sometimes it&rsquo;s timing.</strong> Reports that take months to land, arrive after the call&rsquo;s already made, and get filed away more often than opened. Most of us have sat in that meeting.</p>
+      <p><strong>Other times it&rsquo;s direction:</strong> not knowing which customers to prioritize or where the real opportunity is hiding. That doubt rarely raises a red flag. It just stalls the room, or lets whoever&rsquo;s loudest decide.</p>
+    </div>
+    <p class="mission-resolve sa s4">Closing that gap, timing or direction, is the job. We hand back more than findings: a recommendation that lands while it can still change the decision, and a clear read on where to look. <span class="accent">Sometimes, the angle nobody in the room had considered.</span></p>
+  </div>
+</section>
+
+<!-- WHY RESEARCH MATTERS -->
+<section class="section-lg swm" aria-label="Why research matters">
+  <div class="container value-grid">
+    <div class="sa">
+      <span class="mark mark-onwarm">Why research matters</span>
+      <p class="lead-stmt">A decision gets made either way.&nbsp;Be the one that makes it on the <em>data that matters</em>.</p>
+    </div>
+    <div class="matters-body sa s1">
+      <p class="matters-lead">Most companies aren&rsquo;t short on data anymore &mdash; dashboards, surveys, transaction histories. What&rsquo;s harder to find is which of it actually matters.</p>
+      <p class="matters-sub">That&rsquo;s where we spend our time &mdash; not handing back everything we found, but pointing to:</p>
+      <ul class="matters-list">
+        <li>A direction worth testing</li>
+        <li>A segment worth prioritizing</li>
+        <li>An assumption worth revisiting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BELIEVE -->
+<section class="section-lg snd believe-section" aria-label="What we believe">
+  <div class="container">
+    <span class="mark sa">What we believe</span>
+    <h2 class="believe-hl sa s1">3 things we don’t compromise on.</h2>
+    <div class="pillars">
+      <p class="pillar-word sa s1">Judgment.</p>
+      <p class="pillar-word sa s2">Curiosity.</p>
+      <p class="pillar-word sa s3">Honesty.</p>
+      <h3 class="pillar-title sa s1">Human judgment isn’t automatable.</h3>
+      <h3 class="pillar-title sa s2">We answer the question underneath the question.</h3>
+      <h3 class="pillar-title sa s3">We say what we see.</h3>
+      <p class="pillar-body sa s1">Tools can move fast through information. They can&rsquo;t recognize what matters, know your company&rsquo;s politics, or make the call you&rsquo;d stand behind in a room. That&rsquo;s still a human job, and we take it seriously.</p>
+      <p class="pillar-body sa s2">Clients rarely hand us the real question first &mdash; they hand us the version they know how to phrase. Part of the job is finding the one underneath it, and staying curious past the first answer that technically fits.</p>
+      <p class="pillar-body sa s3">Even when it challenges the brief, the hypothesis, or the answer everyone in the room was hoping for. A finding you can&rsquo;t trust isn&rsquo;t an insight &mdash; it&rsquo;s decoration.</p>
+    </div>
+  </div>
+  <a href="#founder" class="meet-tab sa s2">Meet the team</a>
+</section>
+
+<!-- THE TEAM (unchanged) -->
+<section class="team" id="team" aria-label="Meet the team">
+  <div class="team-inner sa">
+    <div class="founder-col" id="founder">
+      <span class="founder-col-role">Founder &amp; CEO</span>
+      <img class="tm-photo founder-col-ph" src="images/team/Danni-Bayn.jpg" alt="Danni Bayn">
+      <h3 class="founder-col-name">Danni Bayn</h3>
+    </div>
+    <div class="team-row">
+      <div class="tm sa s1">
+        <img class="tm-photo tm-photo-ph" src="images/team/Tom-Colville.jpg" alt="Tom Colville">
+        <h4 class="tm-name">Tom Colville</h4>
+        <p class="tm-role">Director of Analytics</p>
+      </div>
+      <div class="tm sa s2">
+        <img class="tm-photo tm-photo-ph" src="images/team/Kelvin-Wong.jpeg" alt="Kelvin Wong">
+        <h4 class="tm-name">Kelvin Wong</h4>
+        <p class="tm-role">Manager, Consumer Insights &amp; Analytics</p>
+      </div>
+      <div class="tm sa s3">
+        <img class="tm-photo tm-photo-ph" src="images/team/Marcel-Iam.jpg" alt="Marcel Iam">
+        <h4 class="tm-name">Marcel Iam</h4>
+        <p class="tm-role">Manager, Consumer Insights &amp; Market Research</p>
+      </div>
+      <div class="tm sa s4">
+        <img class="tm-photo tm-photo-ph" src="images/team/Preeti-Ganesh.jpg" alt="Preeti Ganesh">
+        <h4 class="tm-name">Preeti Ganesh</h4>
+        <p class="tm-role">AI Strategist / Insights Analyst</p>
+      </div>
+      <div class="tm sa s5">
+        <img class="tm-photo tm-photo-ph" src="images/team/Namasya-Patel.png" alt="Namasya Patel">
+        <h4 class="tm-name">Namasya Patel</h4>
+        <p class="tm-role">AI Strategist / Insights Analyst</p>
+      </div>
+      <div class="tm sa s6">
+        <img class="tm-photo tm-photo-ph" src="images/team/Ellaine-Tsai.jpeg" alt="Ellaine Tsai">
+        <h4 class="tm-name">Ellaine Tsai</h4>
+        <p class="tm-role">AI Strategist / Insights Analyst</p>
+      </div>
+    </div>
+    <p class="team-quote sa">Research is only as good as the people asking the questions,<br>reading between the answers, and deciding what matters.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="22" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="work.html" class="footer-link">Work</a>
+        <a href="what-we-do.html" class="footer-link">What We Do</a>
+        <a href="what-we-do-2.html" class="footer-link">What We Do 2</a>
+        <a href="about.html" class="footer-link">About</a>
+      </nav>
+      <div class="footer-contact">
+        <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+        <a href="tel:+16123263993">(612) 326-3993</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+      </div>
+    </div>
+    <div class="footer-close">
+      <p class="footer-tagline">Clarity Beneath the Surface</p>
+      <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.1});
+document.querySelectorAll('.sa').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

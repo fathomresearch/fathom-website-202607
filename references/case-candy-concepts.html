@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confectionery — Relatable beat extreme, every time. | Fathom Research &amp; Strategy</title>
+<meta name="description" content="How five commercial concepts for a national candy brand's sour-candy launch were tested — and why the grounded, relatable ones read as on-brand while the abstract, high-concept ones didn't, regardless of which one people found more memorable. A Fathom Research & Strategy case study.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<!-- Fonts below are scoped ONLY to the moderator-card artifact in the process layer — a deliberate,
+     contained departure from the brand type system, so the card reads as a real field document. -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CASE STUDY — "Relatable beat extreme" (concept/creative testing)
+     Fathom Research & Strategy — real-case mode
+
+     Client anonymized throughout as "a national candy brand" (real
+     brand, product names, agency, and internal creative names are
+     withheld by design — see confidentiality note below). Concept
+     nicknames (The Commute, The Introduction, The Color Loop, The
+     Reverie, The Throwback) are descriptive labels authored for this
+     page; they are not the client's real concept names. All ratings,
+     the Strong/Moderate/Weak reads, the sample composition, and the
+     quotes (lightly cleaned, generically attributed, visual specifics
+     that could identify the real creative removed) are real.
+
+     Signature = a benchmark-style grid, 5 concepts x 3 judging
+     criteria, diverging teal(strong)/grey(weak), sorted by brand fit
+     rather than by overall score. Override rationale: this is
+     concept/message testing, whose table-listed native artifact is
+     sorted diverging bars — but the real data isn't a forced-choice
+     best-minus-worst score, it's a qualitative rubric across three
+     criteria per concept, and a bar chart of the overall scores would
+     visually CONTRADICT the finding (the numeric ranking doesn't
+     track it). The grid preserves the real pattern a bar chart erases.
+
+     Process layer = THE INSTRUMENT: a moderator's card showing the
+     three things every concept was judged against (message clarity,
+     brand fit, fun & humor) — matching the signature grid's three
+     columns exactly, not the report's separate four-item list of
+     research objectives, which don't map 1:1 onto what was actually
+     scored. Drawn once atop a faint stack implying repetition across
+     concepts — paired with copy that's explicit the three dimensions
+     stayed constant while the conversation itself was live and
+     moderator-led, not a script read the same way in every room.
+     Recruit composition
+     (7 groups, 18 participants, national-proportion recruiting,
+     screener) sits as plain supporting text, not its own chart —
+     there wasn't enough real, softened data left to visualize
+     honestly. No client findings in this layer, method only.
+
+     No unresolved {{TOKENS}} — this is a finished, real-case page.
+     ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --warm:#F8F7F4; --paper:#FDFCFA;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280;
+  --line:#E7E2D9; --struck:#8b96a3; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px; --measure:640px; --pad:clamp(24px,6vw,80px);
+}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.sa{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.02em;transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:var(--ink);border:1.5px solid var(--line);padding:13.5px 30px;border-radius:4px;letter-spacing:.02em;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-dim);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:var(--sans);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:#fff;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
+.nav-cta:hover{background:var(--teal-dim);}
+@media(max-width:860px){.nav-link{display:none;}}
+
+/* COVER */
+.cover{background:var(--navy);color:#fff;padding:clamp(56px,10vh,112px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 85% at 25% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-bottom:clamp(44px,8vh,80px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;flex-wrap:wrap;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5.6vw,84px);line-height:1.08;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:17ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:rgba(255,255,255,.62);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+.dossier{position:relative;z-index:1;border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){.dossier-inner{grid-template-columns:1fr 1fr;}.dossier-cell:nth-child(3){border-left:0;}.dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* SETUP — the instinct in the room */
+.setup{background:var(--paper);padding:clamp(80px,13vh,150px) var(--pad);}
+.setup-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(32px,6vw,90px);align-items:start;}
+.lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:var(--measure);}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.setup-inner{grid-template-columns:1fr;gap:22px;}}
+
+/* PROCESS LAYER — the room + the lens */
+.rq{background:var(--navy);color:#fff;padding:clamp(80px,13vh,150px) var(--pad);}
+.rq-inner{max-width:var(--max);margin:0 auto;}
+.rq-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,90px);align-items:start;}
+.rq-text{max-width:52ch;}
+.rq-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,40px);line-height:1.16;letter-spacing:-.025em;color:#fff;margin:22px 0 26px;}
+@media(max-width:900px){.rq-layout{grid-template-columns:1fr;gap:44px;}.rq-text{max-width:none;}}
+/* ============================================================
+   THE MODERATOR CARD — deliberately breaks from the brand system
+   (paper, typewriter, red-pen handwriting) so it reads as a real
+   field artifact, not a UI panel. Scoped entirely to .mcard-wrap;
+   nothing else on the page inherits these tokens or fonts.
+   ============================================================ */
+.instr-wrap{max-width:520px;margin:0 0 clamp(34px,4.6vh,46px);padding:20px 26px 30px 14px;}
+.mcard-stack{position:relative;}
+.mcard-page{position:absolute;inset:0;background:linear-gradient(175deg,#F2E9D6,#E7DBC0);border:1px solid rgba(43,38,32,.16);border-radius:2px;box-shadow:0 10px 22px -14px rgba(20,14,4,.4);}
+.mcard-page.p1{transform:rotate(-3.4deg) translate(10px,9px);opacity:.68;}
+.mcard-page.p2{transform:rotate(3.8deg) translate(-9px,12px);opacity:.42;}
+.mcard-page.p3{transform:rotate(-2deg) translate(14px,-6px);opacity:.24;}
+.mcard{position:relative;z-index:1;background:linear-gradient(178deg,#F6EFDE 0%,#EFE4CC 100%);border:1px solid rgba(43,38,32,.18);border-radius:2px;padding:26px 24px 22px 42px;transform:rotate(-1.1deg);box-shadow:0 24px 48px -20px rgba(20,14,4,.48),0 2px 6px rgba(20,14,4,.2);color:#2B2620;}
+.mcard-holes{position:absolute;left:15px;top:24px;bottom:24px;display:flex;flex-direction:column;justify-content:space-between;}
+.mcard-hole{width:9px;height:9px;border-radius:50%;background:#EFE4CC;box-shadow:inset 0 1px 2px rgba(20,14,4,.55),0 1px 0 rgba(255,255,255,.5);}
+.mcard-head{margin-bottom:14px;padding-bottom:13px;border-bottom:1px dashed rgba(43,38,32,.3);display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.mcard-kicker{font-family:'Special Elite',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#6b5d45;}
+.mcard-title{font-family:'Special Elite',monospace;font-size:16px;letter-spacing:.01em;color:#2B2620;}
+.mcard-rows{display:grid;gap:0;}
+.mcard-row{position:relative;display:grid;grid-template-columns:20px 22px 1fr auto;gap:2px 9px;align-items:start;padding:13px 0;border-top:1px dashed rgba(43,38,32,.22);}
+.mcard-row:first-child{border-top:0;padding-top:1px;}
+.mcard-check{width:13px;height:13px;border:1.4px solid rgba(43,38,32,.55);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.mcard-check svg{width:10px;height:10px;}
+.mcard-num{font-family:'Courier Prime',monospace;font-size:11.5px;color:#6b5d45;margin-top:1px;}
+.mcard-row-t{grid-column:3;font-family:'Courier Prime',monospace;font-weight:700;font-size:13.5px;letter-spacing:.02em;color:#2B2620;text-transform:uppercase;}
+.mcard-row-b{grid-column:3;margin-top:4px;font-family:'Courier Prime',monospace;font-size:12px;line-height:1.55;color:#55493C;max-width:34ch;}
+.mcard-time{grid-column:4;font-family:'Courier Prime',monospace;font-size:10px;color:#8a7a5f;white-space:nowrap;margin-top:2px;}
+.mcard-underline{text-decoration:underline;text-decoration-style:wavy;text-decoration-color:#A23B2E;text-underline-offset:3px;}
+.mcard-note{position:absolute;right:-8px;bottom:38px;width:126px;font-family:'Caveat',cursive;font-weight:700;font-size:19px;line-height:1.18;color:#A23B2E;transform:rotate(-6deg);pointer-events:none;}
+.mcard-note svg{position:absolute;top:-30px;left:-26px;width:34px;height:34px;transform:rotate(8deg);}
+.instr-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:38px;}
+@media(max-width:560px){.mcard-note{position:static;width:auto;margin:14px 2px 0;transform:rotate(-1.2deg);}.mcard-note svg{display:none;}.instr-wrap{padding-right:14px;}}
+.rq-stat{font-size:15px;line-height:1.85;color:rgba(255,255,255,.6);}
+.rq-note{margin-top:clamp(26px,3.6vh,36px);border-top:1px solid var(--bdr);padding-top:22px;font-size:16px;line-height:1.78;color:rgba(255,255,255,.6);}
+.rq-note b{color:#fff;font-weight:500;}
+@media(max-width:820px){.rq-cols{grid-template-columns:1fr;gap:36px;}}
+
+/* SIGNATURE — the heatmap grid */
+.heat{background:var(--warm);padding:clamp(80px,13vh,150px) var(--pad);}
+.heat-inner{max-width:var(--max);margin:0 auto;}
+.heat-h{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,44px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);max-width:24ch;margin:22px 0 clamp(20px,3.4vh,32px);}
+.heat-scroll{overflow-x:auto;padding-bottom:4px;}
+.heat-grid{min-width:760px;display:grid;grid-template-columns:minmax(168px,1.35fr) repeat(3,minmax(128px,1fr)) minmax(80px,.62fr);}
+.heat-corner{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-bottom:14px;align-self:end;}
+.heat-th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 10px 14px;align-self:end;line-height:1.4;}
+.heat-r-name{border-top:1px solid var(--line);padding:18px 14px 18px 0;display:flex;flex-direction:column;justify-content:center;}
+.heat-r-name .rn{font-family:var(--serif);font-size:17px;color:var(--ink);}
+.heat-r-name .rn sup{font-family:var(--mono);color:var(--teal-dim);margin-left:3px;}
+.heat-cell{border-top:1px solid var(--line);margin:2px 4px;padding:14px 10px;border-radius:4px;display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;}
+.heat-cell.strong{background:rgba(0,158,133,.13);color:var(--ink);border-top-color:transparent;}
+.heat-cell.moderate{background:rgba(18,29,43,.05);color:var(--ink);border-top-color:transparent;}
+.heat-cell.weak{background:rgba(139,150,163,.16);color:var(--ink);border-top-color:transparent;}
+.heat-glyph{font-weight:700;}
+.heat-cell.strong .heat-glyph{color:var(--teal-dim);}
+.heat-cell.moderate .heat-glyph{color:var(--muted);}
+.heat-cell.weak .heat-glyph{color:var(--struck);}
+.heat-score{border-top:1px solid var(--line);padding:14px 10px;display:flex;align-items:center;font-family:var(--mono);font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums;}
+.heat-row.cluster{margin-top:10px;}
+.heat-row.cluster .heat-r-name,.heat-row.cluster .heat-cell,.heat-row.cluster .heat-score{border-top-width:2px;border-top-color:var(--line);}
+.heat-key{margin-top:16px;display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.heat-key span{display:inline-flex;align-items:center;gap:7px;}
+.heat-key i{width:9px;height:9px;border-radius:2px;}
+.heat-note{margin-top:14px;font-size:13.5px;line-height:1.7;color:var(--muted);max-width:76ch;}
+.heat-read{margin-top:clamp(36px,5.4vh,54px);border-top:1px solid var(--line);padding-top:26px;font-size:16.5px;line-height:1.78;color:var(--body);max-width:76ch;}
+.heat-read b{color:var(--ink);font-weight:600;}
+.heat-quotes{margin-top:clamp(36px,5.4vh,54px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,28px);}
+.hq{background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px 26px;}
+.hq blockquote{font-family:var(--serif);font-weight:300;font-style:italic;font-size:18px;line-height:1.5;color:var(--ink);}
+.hq .attr{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dim);}
+@media(max-width:820px){.heat-quotes{grid-template-columns:1fr;}}
+
+/* CLIMAX */
+.moment{background:var(--navy-deep);color:#fff;padding:clamp(80px,14vh,170px) var(--pad);}
+.moment-inner{max-width:900px;margin:0 auto;text-align:center;}
+.moment-tick{width:1px;height:clamp(44px,7vh,78px);margin:0 auto 30px;background:linear-gradient(180deg,transparent,var(--teal));}
+.moment .section-mark{justify-content:center;margin-bottom:36px;}
+.moment-line{font-family:var(--serif);font-weight:300;font-size:clamp(26px,4vw,52px);line-height:1.18;letter-spacing:-.025em;color:#fff;text-wrap:balance;}
+.moment-line em{font-style:italic;color:var(--teal);}
+
+/* OUTCOME */
+.outcome{background:var(--navy);color:#fff;padding:clamp(70px,11vh,130px) var(--pad);border-top:.5px solid var(--bdr);}
+.outcome-head{max-width:var(--max);margin:0 auto clamp(30px,4.5vh,48px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr);gap:clamp(30px,5vw,72px);align-items:start;}
+.outcome .num{font-family:var(--serif);font-weight:200;font-size:clamp(44px,5.6vw,80px);line-height:.95;letter-spacing:-.02em;color:var(--teal);font-variant-numeric:tabular-nums;margin-bottom:16px;}
+.outcome .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.7;max-width:40ch;}
+.oc-state{display:grid;gap:20px;}
+.oc-s{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:baseline;border-top:1px solid var(--bdr);padding-top:18px;}
+.oc-s-k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32);}
+.oc-s-v{font-family:var(--serif);font-weight:300;font-size:clamp(18px,2vw,25px);line-height:1.34;color:rgba(255,255,255,.55);}
+.oc-s.now{border-top-color:rgba(0,214,179,.5);}
+.oc-s.now .oc-s-k{color:var(--teal);}
+.oc-s.now .oc-s-v{color:#fff;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:34px;}}
+@media(max-width:560px){.oc-s{grid-template-columns:1fr;gap:8px;}}
+
+/* CLOSE */
+.close{background:var(--paper);padding:clamp(90px,15vh,170px) var(--pad);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close .section-mark{justify-content:center;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;width:auto;display:block;}
+.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;text-align:center;line-height:1;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;color:rgba(255,255,255,.4);transition:color .2s;}
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.1);padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+@media(max-width:820px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="Fathom home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+    <span class="nav-logo-sub">Research &amp; Strategy</span>
+  </a>
+  <div class="nav-links">
+    <a href="work.html" class="nav-link active">Work</a>
+    <a href="what-we-do.html" class="nav-link">What We Do</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="challenge-us.html" class="nav-cta">Challenge Us</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span>Confectionery</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Creative Concept Testing</span>
+    </div>
+    <h1 class="cover-title">It didn&rsquo;t need to get more extreme. <em>It needed to get more relatable.</em></h1>
+    <p class="cover-deck">Five commercial concepts for a sour-candy launch, one assumption in the room that the loudest reaction wins, and a read that said otherwise.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">National Candy Brand</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">Confectionery</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">Qualitative concept testing</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Output</div><div class="dossier-v">Priority direction + creative recommendation</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- SETUP -->
+<section class="setup" aria-label="The instinct in the room">
+  <div class="setup-inner">
+    <div class="sa">
+      <div class="section-mark" style="margin-bottom:26px;">The instinct in the room</div>
+      <p class="lead">Go louder. It&rsquo;s sour candy for a young audience — <em>the more extreme the reaction, the better the ad.</em></p>
+    </div>
+    <div class="prose sa d1">
+      <p>That&rsquo;s a reasonable instinct, and a testable one. The typical version of this test rates five storyboards on how much attention they grab, picks the loudest, and sends it to production. That approach optimizes for spectacle.</p>
+      <p>We ran seven focus groups instead of a survey, and watched where attention actually went — where it drifted, and where people saw themselves — rather than just asking which ad was the flashiest. What still felt like the brand once the joke landed mattered more than what people remembered a minute later.</p>
+      <p>The question was never which concept was the most outrageous. <strong>It was which one people could see themselves in.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS LAYER — the instrument: one fixed card, run against every concept -->
+<section class="rq" aria-label="How every concept was judged">
+  <div class="rq-inner">
+    <div class="rq-layout">
+    <div class="rq-text">
+    <div class="sa">
+      <div class="section-mark">How every concept was judged</div>
+      <h2 class="rq-h">One consistent lens, testing the same three things across seven conversations.</h2>
+    </div>
+    <p class="rq-stat sa d1">Seven focus groups, eighteen participants, recruited to reflect national demographic proportions across age, gender, and ethnicity. All screened as category buyers and non-rejectors of the brand; most had purchased the brand itself in the last six months.</p>
+    <p class="rq-note sa d2">Every room found its own way into the conversation — reactions, tangents, whatever surfaced. What didn&rsquo;t change was what we measured against: the same three things, concept after concept. <b>That consistency is what makes the comparison real</b> — a diagnosis, not a popularity contest.</p>
+    </div>
+    <div class="instr-wrap sa d1">
+      <div class="mcard-stack" role="img" aria-label="A moderator's discussion guide, showing the three fixed criteria — message clarity, brand fit, and fun and humor — used to judge every concept.">
+        <div class="mcard-page p3"></div>
+        <div class="mcard-page p2"></div>
+        <div class="mcard-page p1"></div>
+        <div class="mcard">
+          <div class="mcard-holes" aria-hidden="true"><span class="mcard-hole"></span><span class="mcard-hole"></span><span class="mcard-hole"></span></div>
+          <div class="mcard-head">
+            <div>
+              <div class="mcard-kicker">Moderator guide</div>
+              <div class="mcard-title">Concept reaction</div>
+            </div>
+          </div>
+          <div class="mcard-rows">
+            <div class="mcard-row">
+              <span class="mcard-check"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.2L4.8 9 10 3" stroke="#A23B2E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="mcard-num">01</span>
+              <div class="mcard-row-t">Message clarity</div>
+              <span class="mcard-time">~5 min</span>
+              <p class="mcard-row-b">Does the claim land, without tipping into &ldquo;too much&rdquo;?</p>
+            </div>
+            <div class="mcard-row">
+              <span class="mcard-check"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.2L4.8 9 10 3" stroke="#A23B2E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="mcard-num">02</span>
+              <div class="mcard-row-t">Brand fit</div>
+              <span class="mcard-time">~5 min</span>
+              <p class="mcard-row-b">Does it still <span class="mcard-underline">feel like the brand</span>, or like a different one wearing its packaging?</p>
+              <div class="mcard-note">keeps coming up &mdash; unprompted<svg viewBox="0 0 34 34" fill="none" aria-hidden="true"><path d="M30 4 C 18 2, 6 14, 4 27" stroke="#A23B2E" stroke-width="1.5" stroke-linecap="round"/><path d="M4 27 L9 24 M4 27 L7 31" stroke="#A23B2E" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            </div>
+            <div class="mcard-row">
+              <span class="mcard-check"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.2L4.8 9 10 3" stroke="#A23B2E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="mcard-num">03</span>
+              <div class="mcard-row-t">Fun &amp; humor</div>
+              <span class="mcard-time">~5 min</span>
+              <p class="mcard-row-b">Does the humor actually land, or just sit there?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="instr-cap">Same three things &middot; 5 concepts &middot; 7 rooms</p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE — the heatmap grid -->
+<section class="heat" aria-label="Where the story landed">
+  <div class="heat-inner">
+    <div class="sa">
+      <div class="section-mark">Where the story landed</div>
+      <h2 class="heat-h">The concepts that felt true to people&rsquo;s own lives read as on-brand. The ones that didn&rsquo;t, didn&rsquo;t.</h2>
+    </div>
+    <div class="heat-scroll sa">
+      <div class="heat-grid" role="img" aria-label="Five concepts rated on message clarity, brand fit, and fun and humor, sorted by brand fit rather than overall score. The Commute and The Introduction rate strong on all three; The Color Loop rates strong on clarity and moderate on the rest; The Reverie and The Throwback rate weak on all three.">
+        <div class="heat-corner">Concept</div>
+        <div class="heat-th">Message clarity</div>
+        <div class="heat-th">Brand fit</div>
+        <div class="heat-th">Fun &amp; humor</div>
+        <div class="heat-th">Overall&sup2;</div>
+
+        <div class="heat-r-name"><span class="rn">The Commute</span></div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-score">4.0</div>
+
+        <div class="heat-r-name"><span class="rn">The Introduction<sup>1</sup></span></div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-score">3.4</div>
+
+        <div class="heat-row cluster" style="display:contents;">
+        <div class="heat-r-name"><span class="rn">The Color Loop</span></div>
+        <div class="heat-cell strong"><span class="heat-glyph">+</span>Strong</div>
+        <div class="heat-cell moderate"><span class="heat-glyph">&middot;</span>Moderate</div>
+        <div class="heat-cell moderate"><span class="heat-glyph">&middot;</span>Moderate</div>
+        <div class="heat-score">3.7</div>
+        </div>
+
+        <div class="heat-row cluster" style="display:contents;">
+        <div class="heat-r-name"><span class="rn">The Reverie</span></div>
+        <div class="heat-cell weak"><span class="heat-glyph">&minus;</span>Weak</div>
+        <div class="heat-cell weak"><span class="heat-glyph">&minus;</span>Weak</div>
+        <div class="heat-cell weak"><span class="heat-glyph">&minus;</span>Weak</div>
+        <div class="heat-score">3.6</div>
+        </div>
+
+        <div class="heat-r-name"><span class="rn">The Throwback</span></div>
+        <div class="heat-cell weak"><span class="heat-glyph">&minus;</span>Weak</div>
+        <div class="heat-cell weak"><span class="heat-glyph">&minus;</span>Weak</div>
+        <div class="heat-cell weak"><span class="heat-glyph">&minus;</span>Weak</div>
+        <div class="heat-score">3.5</div>
+      </div>
+    </div>
+    <div class="heat-key sa" aria-hidden="true">
+      <span><i style="background:rgba(0,158,133,.55);"></i>Strong (+)</span>
+      <span><i style="background:rgba(139,150,163,.7);"></i>Moderate (&middot;)</span>
+      <span><i style="background:var(--struck);"></i>Weak (&minus;)</span>
+    </div>
+    <p class="heat-note sa"><sup>1</sup> Rated strong on every dimension measured — one specific visual choice split the room and pulled the overall score below the group it otherwise matches. Execution, not story. &nbsp;<sup>2</sup> Average rating out of 5, shown for reference; it does not sort this grid.</p>
+    <p class="heat-read sa">Sorted by brand fit, not by overall score — <b>the two don&rsquo;t agree, and that disagreement is the finding.</b> Two concepts read as strong across every dimension we measured; two read as weak across every dimension. Both of the strong concepts were grounded, ordinary-life scenarios exaggerated for the joke. Both of the weak ones were abstract, atmospheric, and — memorable as they were — harder to place back on the brand once the visual wore off.</p>
+    <div class="heat-quotes sa">
+      <div class="hq">
+        <blockquote>&ldquo;I like how there was a narrative I could actually grasp.&rdquo;</blockquote>
+        <p class="attr">Focus group participant &mdash; on the top-rated concept</p>
+      </div>
+      <div class="hq">
+        <blockquote>&ldquo;I&rsquo;d be so focused on the visual and the loop that I&rsquo;d forget about the candy &mdash; besides the sour part.&rdquo;</blockquote>
+        <p class="attr">Focus group participant &mdash; on one of the abstract concepts</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIMAX -->
+<section class="moment" aria-label="The recommendation">
+  <div class="moment-inner sa">
+    <div class="moment-tick" aria-hidden="true"></div>
+    <div class="section-mark">The recommendation</div>
+    <p class="moment-line">Stop treating the brand&rsquo;s own device like decoration. <em>Build the next round of concepts around it.</em></p>
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-head sa"><div class="section-mark">The outcome</div></div>
+  <div class="outcome-inner sa">
+    <div>
+      <div class="num">5 &rarr; 1</div><!-- short, oversized-slot-safe figure: 5 concepts narrowed to 1 direction -->
+      <p class="lbl">Built on the brand&rsquo;s own signature asset — grounded in real situations, exaggerated one step — not a newer, more abstract direction.</p>
+    </div>
+    <div class="oc-state">
+      <div class="oc-s">
+        <span class="oc-s-k">Was</span>
+        <p class="oc-s-v">Five concepts on the table, several of them pulling further from the brand&rsquo;s own visual identity, not closer to it.</p>
+      </div>
+      <div class="oc-s now">
+        <span class="oc-s-k">Now</span>
+        <p class="oc-s-v">One direction, and a standing instruction: build every future concept on the brand&rsquo;s classic asset and real situations — treat it as the engine, not the decoration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark">Your turn</div>
+    <h2>Betting on the loudest concept? <em>Test what people actually see themselves in.</em></h2>
+    <p>You don&rsquo;t need five storyboards and a launch deadline to start. One clear read of which one feels true is enough.</p>
+    <div class="close-actions">
+      <a href="challenge-us.html" class="btn">Challenge Us</a>
+      <a href="work.html" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" aria-label="Footer">
+  <div class="footer-inner">
+    <div class="fl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg><span class="fl-s">Research &amp; Strategy</span></div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="work.html" class="footer-link">Work</a>
+      <a href="what-we-do.html" class="footer-link">What We Do</a>
+      <a href="about.html" class="footer-link">About</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="mailto:info@fathomresearch.ai">info@fathomresearch.ai</a>
+      <a href="tel:+16123263993">(612) 326-3993</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+    </div>
+  </div>
+  <div class="footer-close">
+    <p class="footer-tagline">Clarity Beneath the Surface</p>
+    <p class="footer-copy">&copy; 2026 Fathom Research &amp; Strategy</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.sa').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

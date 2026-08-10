@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Spectral:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#FDFCFA;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+a:hover{color:#009E85;}
+::selection{background:#00D6B3;color:#050B14;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#2C3E50;background:#FDFCFA;line-height:1.5;overflow-x:hidden;">
+
+  <nav style="position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,6vw,80px);background:#0A1628;border-bottom:.5px solid rgba(255,255,255,.09);">
+    <a href="/" style="display:inline-flex;flex-direction:column;gap:5px;line-height:0;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="28" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"></path><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"></path><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"></path><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"></path><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"></path><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"></path></svg>
+      <span style="font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;line-height:1;text-align:center;">Research &amp; Strategy</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:36px;">
+      <a href="/work/" style="font-size:14px;color:rgba(255,255,255,.48);">Work</a>
+      <a href="/what-we-do/" style="font-size:14px;font-weight:500;color:rgba(255,255,255,.92);">What We Do</a>
+      <a href="/about/" style="font-size:14px;color:rgba(255,255,255,.48);">About</a>
+      <a href="/challenge-us/" style="font-size:13px;font-weight:500;color:#0A1628;background:#00D6B3;padding:10px 20px;border-radius:4px;letter-spacing:.03em;">Challenge Us</a>
+    </div>
+  </nav>
+
+  <header style="position:relative;background:#0A1628;color:#fff;padding:clamp(76px,13vh,132px) clamp(24px,6vw,80px) clamp(56px,8vh,88px);overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 1000px 700px at 74% 0%,#16304d 0%,#0A1628 52%,#050B14 100%);"></div>
+    <div style="position:relative;max-width:1240px;margin:0 auto;">
+      <span style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#00D6B3;margin-bottom:38px;"><span style="display:block;width:26px;height:1.5px;background:#00D6B3;"></span>What We Do</span>
+      <h1 style="font-family: 'Spectral',Georgia,serif; font-weight: 200; font-size: clamp(40px,6.4vw,88px); line-height: 1.02; letter-spacing: -.035em; color: #fff; max-width: 25ch; text-wrap: balance">Data tells you what happened,<br><em style="font-style: italic; font-weight: 200; color: rgb(0, 214, 179);">our insights tell you <br>what to do next.</em></h1>
+      <div style="margin-top:clamp(44px,7vh,76px);padding:24px 0 0;border-top:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px 48px;align-items:baseline;">
+        <p style="font-family:'Spectral',Georgia,serif;font-weight:300;font-size:19px;color:rgba(255,255,255,.82);letter-spacing:-.01em;">fathom <em style="font-style:italic;color:rgba(255,255,255,.42);">(n./v.)</em></p>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.7;letter-spacing:.04em;color:rgba(255,255,255,.42);max-width:56ch;">a unit of depth — and to understand something thoroughly, after some effort.</p>
+      </div>
+    </div>
+  </header>
+
+  <section style="position:relative;background:#FDFCFA;padding:clamp(68px,10vh,112px) clamp(24px,6vw,80px) clamp(60px,9vh,96px);overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(10,22,40,.045) 0 1px,transparent 1px 56px),repeating-linear-gradient(180deg,rgba(10,22,40,.045) 0 1px,transparent 1px 56px);mask-image:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 80px),transparent);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 80px),transparent);"></div>
+
+    <div style="position:relative;max-width:1240px;margin:0 auto;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:clamp(40px,6vh,64px);">
+        <div>
+          <span style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#009E85;margin-bottom:24px;"><span style="display:block;width:26px;height:1.5px;background:#00D6B3;"></span>Where we fit</span>
+          <h2 style="font-family: 'Spectral',Georgia,serif; font-weight: 200; font-size: clamp(32px,4.6vw,60px); line-height: 1.06; letter-spacing: -.03em; color: #121d2b; max-width: 20ch; text-wrap: balance">Wherever your campaign is,<br>that's where we start.</h2>
+        </div>
+        <p style="font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(17px,1.6vw,21px);line-height:1.5;color:#009E85;max-width:34ch;">Read it in ten seconds — the bigger the decision, the deeper we go.</p>
+      </div>
+
+      <div style="overflow-x:auto;">
+      <div style="min-width:900px;">
+        <div style="position:relative;height:12px;">
+          <div aria-hidden="true" style="position:absolute;left:0;right:0;top:5px;height:2px;background:linear-gradient(90deg,#0A1628 70%,rgba(10,22,40,.25));"></div>
+          <div style="position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.5vw,36px);">
+            <span aria-hidden="true" style="display:block;width:11px;height:11px;border-radius:50%;background:#FDFCFA;border:2.5px solid #0A1628;"></span>
+            <span aria-hidden="true" style="display:block;width:11px;height:11px;border-radius:50%;background:#FDFCFA;border:2.5px solid #0A1628;"></span>
+            <span aria-hidden="true" style="display:block;width:11px;height:11px;border-radius:50%;background:#FDFCFA;border:2.5px solid #0A1628;"></span>
+            <span aria-hidden="true" style="display:block;width:11px;height:11px;border-radius:50%;background:#00D6B3;border:2.5px solid #0A1628;"></span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0 28px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#121d2b;">Your campaign →</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#9099a6;">fm = fathoms of engagement</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.5vw,36px);align-items:start;">
+
+          <div style="position:relative;padding:14px 16px 20px;margin:-8px -16px 0;" style-hover="background:rgba(0,214,179,.055);">
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#009E85;margin-bottom:10px;">01 · Planning</span>
+            <h3 style="font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(21px,1.9vw,26px);line-height:1.25;letter-spacing:-.015em;color:#121d2b;max-width:14ch;">“Which way do we go?”</h3>
+            <div aria-hidden="true" style="width:1px;height:28px;margin:18px 0 10px 5px;background-image:repeating-linear-gradient(180deg,#009E85 0 4px,transparent 4px 9px);"></div>
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9099a6;margin-bottom:12px;">▼ 1 fm</span>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;max-width:280px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t0 }}" onClick="{{ t0 }}">Quick Pulse</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t1 }}" onClick="{{ t1 }}">Category Entry Points</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t2 }}" onClick="{{ t2 }}">Brand Assets</span>
+            </div>
+          </div>
+
+          <div style="position:relative;padding:14px 16px 20px;margin:-8px -16px 0;" style-hover="background:rgba(0,214,179,.055);">
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#009E85;margin-bottom:10px;">02 · Audience</span>
+            <h3 style="font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(21px,1.9vw,26px);line-height:1.25;letter-spacing:-.015em;color:#121d2b;max-width:14ch;">“Who is this actually for?”</h3>
+            <div aria-hidden="true" style="width:1px;height:56px;margin:18px 0 10px 5px;background-image:repeating-linear-gradient(180deg,#009E85 0 4px,transparent 4px 9px);"></div>
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9099a6;margin-bottom:12px;">▼ 2 fm</span>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;max-width:280px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t3 }}" onClick="{{ t3 }}">Segmentation</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t4 }}" onClick="{{ t4 }}">Voice of the Consumer</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t5 }}" onClick="{{ t5 }}">Journey Mapping</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t6 }}" onClick="{{ t6 }}">Personas</span>
+            </div>
+          </div>
+
+          <div style="position:relative;padding:14px 16px 20px;margin:-8px -16px 0;" style-hover="background:rgba(0,214,179,.055);">
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#009E85;margin-bottom:10px;">03 · Creative</span>
+            <h3 style="font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(21px,1.9vw,26px);line-height:1.25;letter-spacing:-.015em;color:#121d2b;max-width:14ch;">“Which idea do we make?”</h3>
+            <div aria-hidden="true" style="width:1px;height:84px;margin:18px 0 10px 5px;background-image:repeating-linear-gradient(180deg,#009E85 0 4px,transparent 4px 9px);"></div>
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9099a6;margin-bottom:12px;">▼ 3 fm</span>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;max-width:280px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t7 }}" onClick="{{ t7 }}">Concept Testing</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t8 }}" onClick="{{ t8 }}">Message Testing</span>
+            </div>
+            <a href="/cases/sportsbook/" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#009E85;">See it done →</a>
+          </div>
+
+          <div style="position:relative;padding:14px 16px 20px;margin:-8px -16px 0;" style-hover="background:rgba(0,214,179,.055);">
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#009E85;margin-bottom:10px;">04 · The Big Bet</span>
+            <h3 style="font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(21px,1.9vw,26px);line-height:1.25;letter-spacing:-.015em;color:#121d2b;max-width:14ch;">“Can we commit to this?”</h3>
+            <div aria-hidden="true" style="width:1px;height:112px;margin:18px 0 10px 5px;background-image:repeating-linear-gradient(180deg,#009E85 0 4px,transparent 4px 9px);"></div>
+            <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#9099a6;margin-bottom:12px;">▼ 4 fm</span>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;max-width:280px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#FDFCFA;background:#0A1628;border:1px solid #0A1628;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t9 }}" onClick="{{ t9 }}">Combined engagement</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#0A1628;border:1px solid rgba(10,22,40,.25);background:#FDFCFA;padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t10 }}" onClick="{{ t10 }}">Standing counsel</span>
+            </div>
+            <a href="/cases/motorsports/" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#009E85;">See it done →</a>
+          </div>
+        </div>
+
+        <div style="display:{{ supportDisplay }};align-items:center;gap:14px 16px;flex-wrap:wrap;margin-top:clamp(36px,5vh,56px);padding-top:26px;border-top:1px solid #E7E2D9;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#9099a6;white-space:nowrap;">Between decision points</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#6B7280;border:1px dashed rgba(10,22,40,.28);padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t11 }}" onClick="{{ t11 }}">Survey Programming</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#6B7280;border:1px dashed rgba(10,22,40,.28);padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t12 }}" onClick="{{ t12 }}">Questionnaire Audit</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#6B7280;border:1px dashed rgba(10,22,40,.28);padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t13 }}" onClick="{{ t13 }}">Analysis Sprint</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:#6B7280;border:1px dashed rgba(10,22,40,.28);padding:7px 12px;border-radius:2px;cursor:help;" onMouseEnter="{{ t14 }}" onClick="{{ t14 }}">Insights Pulses</span>
+        </div>
+
+        <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:10px 18px;margin-top:20px;padding:18px 22px;border:1px solid #E7E2D9;background:rgba(255,255,255,.75);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#009E85;white-space:nowrap;">◎ Readout</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#121d2b;white-space:nowrap;">{{ tipLabel }}</span>
+          <p style="font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:17px;line-height:1.5;color:#2C3E50;">{{ tipText }}</p>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="background:#F8F7F4;border-top:1px solid #E7E2D9;border-bottom:1px solid #E7E2D9;padding:clamp(68px,11vh,116px) clamp(24px,6vw,80px);">
+    <div style="max-width:1240px;margin:0 auto;text-align:center;">
+      <span style="display:inline-flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#009E85;margin-bottom:36px;"><span style="display:block;width:26px;height:1.5px;background:#00D6B3;"></span>However deep we go, you end up with</span>
+      <p style="font-family:'Spectral',Georgia,serif;font-weight:200;font-size:clamp(28px,4vw,54px);line-height:1.28;letter-spacing:-.025em;color:#121d2b;max-width:24ch;margin:0 auto;text-wrap:balance;">A recommendation.<br>The evidence to defend it.<br><em style="font-style:italic;color:#009E85;">Not a deck nobody opens again.</em></p>
+    </div>
+  </section>
+
+  <section style="position:relative;background:#050B14;padding:clamp(92px,15vh,164px) clamp(24px,6vw,80px);text-align:center;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 900px 620px at 50% 120%,#16304d 0%,#0A1628 50%,#050B14 100%);"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-420px;left:50%;width:900px;height:900px;margin-left:-450px;background-image:repeating-radial-gradient(circle at center,rgba(0,214,179,.16) 0 1px,transparent 1px 70px);mask-image:radial-gradient(circle at center,#000 22%,transparent 62%);-webkit-mask-image:radial-gradient(circle at center,#000 22%,transparent 62%);"></div>
+    <div style="position:relative;max-width:720px;margin:0 auto;">
+      <h2 style="font-family:'Spectral',Georgia,serif;font-weight:200;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;color:#fff;text-wrap:balance;">Tell us what you're trying to figure out.</h2>
+      <p style="margin-top:22px;font-size:17px;line-height:1.68;color:rgba(255,255,255,.55);max-width:46ch;margin-left:auto;margin-right:auto;">We'll tell you which phase you're actually in — and what gets you out of it fastest.</p>
+      <a href="/challenge-us/" style="display:inline-block;margin-top:40px;font-size:14px;font-weight:500;color:#0A1628;background:#00D6B3;padding:16px 38px;border-radius:4px;letter-spacing:.025em;" style-hover="background:#009E85;">Challenge Us</a>
+    </div>
+  </section>
+
+  <footer style="padding:64px clamp(24px,6vw,80px) 0;background:#0A1628;border-top:.5px solid rgba(255,255,255,.09);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;align-items:start;padding-bottom:56px;">
+        <div style="display:inline-flex;flex-direction:column;gap:5px;line-height:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="22" style="display:block;width:auto;" aria-hidden="true"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"></path><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"></path><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"></path><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"></path><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"></path><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"></path></svg>
+          <span style="font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;line-height:1;text-align:center;margin-top:5px;">Research &amp; Strategy</span>
+        </div>
+        <nav style="display:flex;flex-direction:column;gap:12px;">
+          <a href="/" style="font-size:13px;color:rgba(255,255,255,.40);">Home</a>
+          <a href="/work/" style="font-size:13px;color:rgba(255,255,255,.40);">Work</a>
+          <a href="/what-we-do/" style="font-size:13px;color:rgba(255,255,255,.40);">What We Do</a>
+          <a href="/about/" style="font-size:13px;color:rgba(255,255,255,.40);">About</a>
+        </nav>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="mailto:info@fathomresearch.ai" style="font-size:13px;color:rgba(255,255,255,.40);">info@fathomresearch.ai</a>
+          <a href="tel:+16123263993" style="font-size:13px;color:rgba(255,255,255,.40);">(612) 326-3993</a>
+          <a href="https://linkedin.com" style="font-size:13px;color:rgba(255,255,255,.40);">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div style="border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;">
+        <p style="font-family:'Spectral',Georgia,serif;font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;">Clarity Beneath the Surface</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;">© 2026 Fathom Research &amp; Strategy</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSupport&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { tip: null };
+  tips = [
+    ['Quick Pulse','A short survey of real consumers, fielded and read back to you in days \u2014 not months.'],
+    ['Category Entry Points','The everyday moments when people think of your category \u2014 and whether they think of you in them.'],
+    ['Brand Assets','The colors, phrases, and shapes people recognize as yours before they see the logo.'],
+    ['Segmentation','Sorting your market into real groups of people, so you know exactly who is worth winning.'],
+    ['Voice of the Consumer','Conversations and surveys that explain why people buy, switch, or walk away.'],
+    ['Journey Mapping','Every step from first hearing about you to buying \u2014 and where people quietly drop off.'],
+    ['Personas','One-page portraits of your customers, so the whole team pictures the same person.'],
+    ['Concept Testing','Your ideas, shown to real consumers before you pay to produce one of them.'],
+    ['Message Testing','Which claims people actually believe \u2014 and which they scroll straight past.'],
+    ['Combined engagement','A custom mix of the instruments above, scoped to the size of the bet.'],
+    ['Standing counsel','We stay in the room through the decision \u2014 not just up to it.'],
+    ['Survey Programming','You wrote the questions; we build the survey and get it into the field.'],
+    ['Questionnaire Audit','Expert eyes on your survey before you spend money fielding it.'],
+    ['Analysis Sprint','You already have the data; we turn it into a recommendation.'],
+    ['Insights Subscription','A research team on call all year, without adding headcount.']
+  ];
+  renderVals() {
+    const v = { supportDisplay: (this.props.showSupport ?? true) ? 'flex' : 'none' };
+    this.tips.forEach((t, i) => { v['t' + i] = () => this.setState({ tip: i }); });
+    const cur = this.state.tip;
+    v.tipLabel = cur == null ? 'Standing by' : this.tips[cur][0];
+    v.tipText = cur == null ? 'Point at any instrument on the chart and this readout will tell you, in plain language, what it does.' : this.tips[cur][1];
+    return v;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fathom Brand Guide — Fathom Research &amp; Strategy</title>
+<meta name="description" content="Fathom’s house style, read back from the published site: the evaluation framework, colour and type roles, the device kit, a computed contrast audit, and the drift log.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     "Fathom Brand Guide"
+
+     A descriptive brand guide, written by auditing the published
+     Eleventy site (src/pages/*, src/pages/cases/*, the header and
+     footer includes, eleventy.config.js) and the case-study build
+     rules, then stating the conventions those files already follow.
+
+     Three parts:
+       I   The twelve evaluation lenses, in tiers (meaning / craft /
+           discipline) — the framework the rest of the guide answers.
+       II  The system itself: positioning, voice, mark, colour, type,
+           layout, the eight signature devices (rendered live in
+           their real CSS), imagery, motion.
+       III Contrast audit (computed WCAG 2.1 ratios, not estimates)
+           and the drift log — every place one idea grew two values
+           because each page carries its own copy of the base CSS.
+
+     Self-contained: inline <style>/<script>, no build step, matching
+     the rest of references/. Single visual world on purpose — the
+     palette is the content, so it is never theme-swapped.
+
+     Anything stated as a rule was observed in the source. Anything
+     in the drift table is a real difference between two live files.
+     ============================================================ -->
+<style>
+
+
+/* ============================================================
+   FATHOM BRAND GUIDE
+   Set in the brand's own system. Single visual world on purpose:
+   the palette is the content, so it is never theme-swapped.
+   Every colour is declared on bare :root — nothing behind a
+   media query or [data-theme] stamp.
+   ============================================================ */
+:root{
+  --navy:#0A1628; --navy-deep:#050B14; --navy-mid:#122a44;
+  --teal:#00D6B3; --teal-dim:#009E85;
+  --paper:#FDFCFA; --warm:#F8F7F4; --white:#fff;
+  --ink:#121d2b; --body:#2C3E50; --muted:#6B7280; --struck:#8b96a3;
+  --line:#E7E2D9; --bdr:rgba(255,255,255,.09);
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',monospace;
+  --max:1180px; --measure:66ch; --pad:clamp(22px,5.5vw,72px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:64px;}
+body{
+  font-family:var(--sans);background:var(--paper);color:var(--body);
+  line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+
+/* ── shared devices, lifted from the live site ── */
+.wrap{max-width:var(--max);margin:0 auto;}
+.mark{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--teal-dim);
+}
+.mark::before{content:'';display:block;width:26px;height:1.5px;background:currentColor;flex-shrink:0;}
+.mark-t{color:var(--teal);}
+.band{padding:clamp(64px,9vh,108px) var(--pad);}
+.band-paper{background:var(--paper);color:var(--body);}
+.band-warm{background:var(--warm);color:var(--body);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.band-navy{background:var(--navy);color:rgba(255,255,255,.72);}
+
+h2.sec{
+  font-family:var(--serif);font-weight:300;font-size:clamp(29px,3.8vw,50px);
+  line-height:1.08;letter-spacing:-.028em;color:var(--ink);
+  margin-top:22px;max-width:19ch;text-wrap:balance;
+}
+.band-navy h2.sec{color:#fff;}
+h2.sec em{font-style:italic;font-weight:300;color:var(--teal-dim);}
+.band-navy h2.sec em{color:var(--teal);}
+h3.sub{
+  font-family:var(--serif);font-weight:400;font-size:clamp(20px,2vw,25px);
+  line-height:1.24;letter-spacing:-.012em;color:var(--ink);
+}
+.band-navy h3.sub{color:#fff;}
+.lede{font-size:17px;line-height:1.75;color:var(--body);max-width:var(--measure);margin-top:24px;}
+.band-navy .lede{color:rgba(255,255,255,.6);}
+.lede strong{font-weight:600;color:var(--ink);}
+.band-navy .lede strong{color:#fff;}
+p.note{font-size:15px;line-height:1.72;color:var(--body);max-width:var(--measure);}
+.band-navy p.note{color:rgba(255,255,255,.6);}
+.mut{color:var(--muted);}
+.klabel{
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--teal-dim);
+}
+.band-navy .klabel{color:var(--teal);}
+.stack{display:flex;flex-direction:column;}
+.gap-s{gap:14px;} .gap-m{gap:26px;} .gap-l{gap:44px;} .gap-xl{gap:64px;}
+code{
+  font-family:var(--mono);font-size:.88em;letter-spacing:.01em;
+  background:rgba(10,22,40,.05);border:1px solid var(--line);
+  padding:1px 6px;border-radius:3px;color:var(--ink);white-space:nowrap;
+}
+.band-navy code{background:rgba(255,255,255,.07);border-color:var(--bdr);color:rgba(255,255,255,.85);}
+
+/* scroll reveal — the site's own mechanism, same easing */
+.sa{opacity:0;transform:translateY(22px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}
+
+/* ============================================================
+   INDEX BAR — mirrors the site's fixed 72px navy nav
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:60;background:var(--navy);
+  border-bottom:.5px solid var(--bdr);
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:0 var(--pad);height:56px;
+}
+.topbar-id{
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--teal);white-space:nowrap;
+}
+.topbar-nav{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;}
+.topbar-nav::-webkit-scrollbar{display:none;}
+.topbar-nav a{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.46);white-space:nowrap;padding:4px 0;transition:color .2s;
+}
+.topbar-nav a:hover{color:rgba(255,255,255,.95);}
+@media(max-width:720px){.topbar-id{display:none;}}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(58px,10vh,104px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(105% 88% at 78% 0%, rgba(0,214,179,.11), transparent 56%);
+}
+.cover-inner{position:relative;max-width:var(--max);margin:0 auto;padding-bottom:clamp(46px,8vh,78px);}
+.cover-title{
+  font-family:var(--serif);font-weight:300;font-size:clamp(40px,6.6vw,88px);
+  line-height:1.03;letter-spacing:-.032em;color:#fff;max-width:17ch;
+  margin:26px 0 26px;text-wrap:balance;
+}
+.cover-title em{font-style:italic;font-weight:200;color:var(--teal);}
+.cover-deck{font-size:clamp(16px,1.35vw,19px);line-height:1.66;color:rgba(255,255,255,.62);max-width:56ch;font-weight:300;}
+.dossier{border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:24px var(--pad) 26px;}
+.dossier-cell+.dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:17px;font-weight:400;color:#fff;letter-spacing:-.01em;line-height:1.35;}
+@media(max-width:860px){
+  .dossier-inner{grid-template-columns:1fr 1fr;}
+  .dossier-cell:nth-child(3){border-left:0;}
+  .dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}
+}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell+.dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* ============================================================
+   PART I — THE LENSES
+   ============================================================ */
+.tier{border-top:2px solid var(--teal-dim);padding-top:26px;}
+.tier-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
+.tier-name{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.3vw,29px);letter-spacing:-.015em;color:var(--ink);}
+.tier-q{font-family:var(--serif);font-style:italic;font-weight:300;font-size:17px;color:var(--teal-dim);}
+.lenses{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:var(--line);margin-top:28px;}
+.lens{background:var(--paper);padding:26px 26px 30px;display:flex;flex-direction:column;gap:12px;}
+.lens-name{font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:-.01em;color:var(--ink);line-height:1.25;}
+.lens-q{font-size:14.5px;line-height:1.65;color:var(--body);}
+.lens-ev{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.01em;color:var(--muted);padding-top:12px;border-top:1px solid var(--line);margin-top:auto;}
+.lens-ev b{color:var(--teal-dim);font-weight:500;display:block;letter-spacing:.16em;text-transform:uppercase;font-size:9.5px;margin-bottom:5px;}
+
+/* ============================================================
+   COLOUR
+   ============================================================ */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:1px;background:var(--line);margin-top:36px;}
+.sw{background:var(--paper);display:flex;flex-direction:column;}
+.sw-chip{height:96px;position:relative;}
+.sw-chip span{
+  position:absolute;left:14px;bottom:12px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+}
+.sw-meta{padding:16px 16px 20px;display:flex;flex-direction:column;gap:7px;}
+.sw-token{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--ink);letter-spacing:.02em;}
+.sw-role{font-size:13.5px;line-height:1.6;color:var(--body);}
+.sw-cr{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);font-variant-numeric:tabular-nums;}
+
+.rulebox{
+  margin-top:44px;border:1px solid var(--line);background:var(--white);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+}
+.rulebox>div{padding:30px 32px 34px;display:flex;flex-direction:column;gap:14px;}
+.rulebox>div+div{border-left:1px solid var(--line);}
+.rb-yes{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dim);}
+.rb-no{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--struck);}
+.rb-demo{padding:22px 24px;border:1px solid var(--line);}
+.rb-demo.on-navy{background:var(--navy);border-color:var(--navy);}
+.rb-demo.on-paper{background:var(--warm);}
+.rb-line{font-family:var(--serif);font-weight:300;font-size:23px;line-height:1.3;letter-spacing:-.015em;}
+@media(max-width:760px){.rulebox{grid-template-columns:1fr;}.rulebox>div+div{border-left:0;border-top:1px solid var(--line);}}
+
+/* ============================================================
+   TYPE SPECIMENS
+   ============================================================ */
+.roles{display:flex;flex-direction:column;margin-top:36px;border-top:1px solid var(--line);}
+.role{padding:38px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start;}
+.role-key{display:flex;flex-direction:column;gap:9px;}
+.role-fam{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);}
+.role-job{font-size:13px;line-height:1.6;color:var(--muted);}
+.role-wt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--teal-dim);}
+.spec-serif{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.2vw,54px);line-height:1.08;letter-spacing:-.03em;color:var(--ink);text-wrap:balance;}
+.spec-serif em{font-style:italic;font-weight:200;color:var(--teal-dim);}
+.spec-sans{font-size:17px;line-height:1.76;color:var(--body);max-width:var(--measure);}
+.spec-mono{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);line-height:2.1;}
+@media(max-width:760px){.role{grid-template-columns:1fr;gap:18px;}}
+
+.formula{margin-top:44px;border-left:2px solid var(--teal);padding-left:clamp(20px,3vw,34px);display:flex;flex-direction:column;gap:26px;}
+.formula-def{font-family:var(--mono);font-size:12px;line-height:1.9;letter-spacing:.04em;color:var(--muted);}
+.formula-def b{color:var(--teal-dim);font-weight:500;}
+.examples{display:flex;flex-direction:column;gap:18px;}
+.ex{font-family:var(--serif);font-weight:300;font-size:clamp(19px,2.1vw,25px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.ex em{font-style:italic;color:var(--teal-dim);}
+.ex cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+
+/* ============================================================
+   DEVICE KIT — rendered live
+   ============================================================ */
+.kit{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);margin-top:36px;}
+.kit-cell{background:var(--paper);padding:28px 28px 32px;display:flex;flex-direction:column;gap:18px;}
+.kit-cell.dark{background:var(--navy);}
+.kit-name{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dim);}
+.kit-cell.dark .kit-name{color:var(--teal);}
+.kit-stage{min-height:92px;display:flex;align-items:center;}
+.kit-desc{font-size:13.5px;line-height:1.68;color:var(--muted);margin-top:auto;padding-top:6px;}
+.kit-cell.dark .kit-desc{color:rgba(255,255,255,.5);}
+
+/* device: struck word */
+.struck-word{position:relative;font-family:var(--serif);font-style:italic;font-weight:300;font-size:26px;color:var(--struck);display:inline-block;}
+.struck-word::after{content:'';position:absolute;left:-4%;right:-4%;top:54%;height:1.5px;background:var(--struck);opacity:.85;transform:rotate(-2.2deg);}
+.struck-row{display:flex;flex-wrap:wrap;gap:8px 24px;}
+.struck-row .struck-word:nth-child(2)::after{transform:rotate(1.6deg);}
+.struck-row .struck-word:nth-child(3)::after{transform:rotate(-1.4deg);}
+
+/* device: teal rule + metric */
+.metrics{display:flex;border-top:2px solid var(--teal);width:100%;}
+.metric{flex:1;padding:20px 20px 0 0;}
+.metric+.metric{padding-left:20px;border-left:1px solid var(--line);}
+.metric-num{font-size:40px;font-weight:700;color:var(--ink);letter-spacing:-.025em;line-height:1;font-variant-numeric:tabular-nums;}
+.metric-num .u{font-size:.55em;font-weight:600;letter-spacing:0;}
+.metric-num.teal{color:var(--teal-dim);}
+.metric-lab{font-family:var(--mono);font-size:9.5px;font-weight:500;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:9px;line-height:1.5;}
+
+/* device: radical bar */
+.radical{display:flex;align-items:center;gap:20px;width:100%;}
+.radical-text{font-family:var(--serif);font-size:31px;font-weight:400;line-height:1;color:#fff;letter-spacing:-.025em;white-space:nowrap;flex-shrink:0;}
+.radical-text em{font-style:italic;font-weight:300;color:var(--teal);}
+.radical-bar{height:22px;background:var(--teal);flex:1;min-width:40px;margin-right:-28px;}
+
+/* device: depth ladder */
+.ladder{display:flex;gap:30px;align-items:flex-end;}
+.rung{display:flex;flex-direction:column;gap:8px;align-items:flex-start;}
+.rung i{display:block;width:1px;background-image:repeating-linear-gradient(180deg,var(--teal-dim) 0 4px,transparent 4px 9px);margin-left:4px;}
+.rung span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);}
+
+/* device: eyebrow demo, dossier demo */
+.kit-eyebrow{display:flex;flex-direction:column;gap:14px;}
+
+/* device: card lift */
+.liftcard{
+  width:100%;border:.5px solid var(--line);border-radius:8px;background:var(--white);padding:20px 22px 24px;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;
+}
+.liftcard:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(10,22,40,.12);}
+.liftcard .s{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-dim);display:flex;align-items:center;gap:8px;}
+.liftcard .s::before{content:'';display:block;width:14px;height:1.5px;background:var(--teal-dim);}
+.liftcard h4{font-family:var(--serif);font-weight:400;font-size:18px;line-height:1.3;color:var(--ink);margin-top:9px;letter-spacing:-.005em;}
+
+/* ============================================================
+   IMAGERY
+   ============================================================ */
+.treat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;margin-top:36px;}
+.treat figure{display:flex;flex-direction:column;gap:12px;}
+.treat .plate{aspect-ratio:4/3;position:relative;overflow:hidden;border:1px solid var(--line);background:#8f8f8f;}
+.treat .plate canvas{width:100%;height:100%;display:block;}
+.treat .plate.duo::before{content:'';position:absolute;inset:0;background:rgba(0,214,179,.12);mix-blend-mode:color;z-index:1;}
+.treat .plate.duo::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,transparent 40%,rgba(10,22,40,.5) 100%);z-index:2;}
+.treat figcaption{font-family:var(--mono);font-size:10.5px;line-height:1.7;letter-spacing:.03em;color:var(--muted);}
+.treat figcaption b{display:block;color:var(--teal-dim);font-weight:500;letter-spacing:.16em;text-transform:uppercase;font-size:9.5px;margin-bottom:5px;}
+
+/* ============================================================
+   TABLES — drift log & contrast audit
+   ============================================================ */
+.tablewrap{overflow-x:auto;margin-top:34px;border:1px solid var(--line);background:var(--white);}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px;}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;}
+thead th{
+  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);background:var(--warm);
+  border-bottom:1px solid var(--line);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0;}
+td.tok{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap;}
+td.val{font-family:var(--mono);font-size:11.5px;color:var(--body);}
+td.num{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.pass{color:var(--teal-dim);font-weight:500;}
+.fail{color:#b0475f;font-weight:500;}
+.pill{
+  display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:2px;
+  border:1px solid var(--line);color:var(--muted);white-space:nowrap;
+}
+.pill.keep{border-color:var(--teal-dim);color:var(--teal-dim);}
+.chipdot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:-1px;border:1px solid rgba(10,22,40,.18);}
+
+/* ============================================================
+   CLOSING RULES CARD
+   ============================================================ */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;background:var(--bdr);margin-top:40px;}
+.rule{background:var(--navy);padding:26px 26px 30px;display:flex;flex-direction:column;gap:11px;}
+.rule-n{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);}
+.rule-t{font-family:var(--serif);font-weight:400;font-size:19px;line-height:1.3;color:#fff;letter-spacing:-.01em;}
+.rule-b{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,.55);}
+
+.colophon{padding:44px var(--pad) 60px;background:var(--navy-deep);color:rgba(255,255,255,.4);}
+.colophon-inner{max-width:var(--max);margin:0 auto;display:flex;flex-wrap:wrap;gap:18px 44px;justify-content:space-between;align-items:flex-end;}
+.colophon p{font-size:12.5px;line-height:1.75;max-width:62ch;}
+.colophon .tagline{font-family:var(--serif);font-style:italic;font-weight:300;font-size:16px;color:rgba(255,255,255,.55);letter-spacing:.02em;}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .sa{opacity:1;transform:none;transition:none;}
+  .liftcard{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar" aria-label="Guide sections">
+  <span class="topbar-id">Fathom &middot; Brand Guide</span>
+  <div class="topbar-nav">
+    <a href="#lenses">Lenses</a>
+    <a href="#promise">Promise</a>
+    <a href="#voice">Voice</a>
+    <a href="#mark">Mark</a>
+    <a href="#colour">Colour</a>
+    <a href="#type">Type</a>
+    <a href="#layout">Layout</a>
+    <a href="#devices">Devices</a>
+    <a href="#imagery">Imagery</a>
+    <a href="#motion">Motion</a>
+    <a href="#audit">Audit</a>
+    <a href="#drift">Drift</a>
+  </div>
+</nav>
+
+<header class="cover">
+  <div class="cover-inner">
+    <span class="mark mark-t">The house style, written down</span>
+    <h1 class="cover-title">The system was already there. <em>Nobody had named it.</em></h1>
+    <p class="cover-deck">Fathom&rsquo;s identity has been built page by page &mdash; consistent enough to recognise, loose enough to drift. This guide reads the live site back and states the rules it has been following, so the next page can be built on purpose instead of by imitation.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Scope</div><div class="dossier-v">Published site &amp; case pages</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Read from</div><div class="dossier-v">8 live pages, 2 includes, 1 build config</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Method</div><div class="dossier-v">Source audit, not a rewrite</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Status</div><div class="dossier-v">Descriptive &mdash; with drift flagged</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     PART I — THE LENSES
+     ============================================================ -->
+<section class="band band-paper" id="lenses" aria-labelledby="lenses-h">
+  <div class="wrap stack gap-xl">
+    <div class="sa">
+      <span class="mark">Part I &middot; The approach</span>
+      <h2 class="sec" id="lenses-h">Twelve lenses, in the order <em>they should be asked.</em></h2>
+      <p class="lede">A brand is not evaluated as one thing. It is read through a stack of separate questions, and the order matters: a beautiful palette on a brand that cannot say what it sells is a decorated void. So the lenses run outside-in &mdash; what the brand <strong>means</strong>, then how it is <strong>made</strong>, then whether it <strong>holds up</strong> under repetition, deadline and scrutiny. Everything in Part II is an answer to one of these.</p>
+    </div>
+
+    <div class="tier sa">
+      <div class="tier-head">
+        <span class="tier-name">Tier one &mdash; Meaning</span>
+        <span class="tier-q">Does the brand know what it is?</span>
+      </div>
+      <div class="lenses">
+        <div class="lens">
+          <span class="lens-name">Positioning &amp; promise</span>
+          <p class="lens-q">What is claimed, who it is claimed against, and what would have to be true for it to be false. A brand with no named enemy has no position.</p>
+          <p class="lens-ev"><b>Evidence</b>Headline claims, the metrics chosen as proof, the thing repeatedly refused.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Verbal identity</span>
+          <p class="lens-q">Voice, syntax, lexicon. Not adjectives like &ldquo;confident&rdquo; &mdash; the actual sentence shapes that recur, the punctuation that carries meaning, the words that never appear.</p>
+          <p class="lens-ev"><b>Evidence</b>Every headline and button label across the site, read as one corpus.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Narrative structure</span>
+          <p class="lens-q">How a page argues. What order ideas arrive in, where tension is introduced, where the turn happens, what the reader is asked to do.</p>
+          <p class="lens-ev"><b>Evidence</b>Section rhythm on the home, work and case pages.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Metaphor discipline</span>
+          <p class="lens-q">Whether the brand&rsquo;s central image is load-bearing or ornamental &mdash; and whether it is mixed with three others by the third scroll.</p>
+          <p class="lens-ev"><b>Evidence</b>The depth / sounding / signal-and-noise family and where it stops.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier sa">
+      <div class="tier-head">
+        <span class="tier-name">Tier two &mdash; Craft</span>
+        <span class="tier-q">Is it built as one thing?</span>
+      </div>
+      <div class="lenses">
+        <div class="lens">
+          <span class="lens-name">Mark &amp; lockup</span>
+          <p class="lens-q">The wordmark, the symbol, the descriptor, and the rules that keep them a set: sizes, colourways, clear space, what is never done to them.</p>
+          <p class="lens-ev"><b>Evidence</b>Inline nav/footer SVG, the logo library, the sub-lockup treatment.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Colour as roles</span>
+          <p class="lens-q">Not a list of hexes &mdash; a job for each value, a budget for the accent, and a stated rule for what changes when the ground changes.</p>
+          <p class="lens-ev"><b>Evidence</b>Token blocks across pages, plus computed contrast on every real pairing.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Typography</span>
+          <p class="lens-q">How many families, what each is for, which weights are permitted, and the grammar the headlines are set in.</p>
+          <p class="lens-ev"><b>Evidence</b>Font links, weight declarations, and the recurring two-clause headline.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Layout &amp; ground rhythm</span>
+          <p class="lens-q">Measure, gutters, the section scale, and the sequence of background tones that gives a long page its pulse.</p>
+          <p class="lens-ev"><b>Evidence</b><code>--max</code>, <code>--pad</code>, section padding, the navy/paper/warm alternation.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Signature devices</span>
+          <p class="lens-q">The small repeatable moves that make a page recognisable at twenty percent zoom, before a word is read. The most transferable asset a brand owns.</p>
+          <p class="lens-ev"><b>Evidence</b>Eyebrow, teal rule, struck word, dossier rail, radical bar, depth ladder.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Imagery &amp; data</span>
+          <p class="lens-q">How the brand treats material it did not draw &mdash; photography it licensed, logos it borrowed, numbers a client gave it.</p>
+          <p class="lens-ev"><b>Evidence</b>Filter stacks on case imagery, client-logo treatment, the charting rules.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier sa">
+      <div class="tier-head">
+        <span class="tier-name">Tier three &mdash; Discipline</span>
+        <span class="tier-q">Does it hold up?</span>
+      </div>
+      <div class="lenses">
+        <div class="lens">
+          <span class="lens-name">Motion</span>
+          <p class="lens-q">Whether movement is a system with one easing and one purpose, or a pile of effects. And whether it degrades gracefully for people who switch it off.</p>
+          <p class="lens-ev"><b>Evidence</b>The shared reveal, the hero resolve, reduced-motion handling.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Accessibility</span>
+          <p class="lens-q">Contrast computed rather than eyeballed, colour never the only channel, focus visible, hover never load-bearing on touch.</p>
+          <p class="lens-ev"><b>Evidence</b>Every real foreground/background pairing, run through WCAG maths.</p>
+        </div>
+        <div class="lens">
+          <span class="lens-name">Consistency &amp; governance</span>
+          <p class="lens-q">Where the same idea has two values, why it happened, which one wins, and who decides next time. Drift is the default state of any system nobody owns.</p>
+          <p class="lens-ev"><b>Evidence</b>Token diffs between pages; five copies of one base stylesheet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROMISE
+     ============================================================ -->
+<section class="band band-navy" id="promise" aria-labelledby="promise-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark mark-t">Part II &middot; Positioning</span>
+      <h2 class="sec" id="promise-h">The promise is a refusal <em>before it is a claim.</em></h2>
+      <p class="lede">Fathom does not sell research. It sells the end of a specific frustration: the study that arrives after the decision, and the deck nobody opens twice. Every page states the claim by first naming what it refuses &mdash; and the refusal is always concrete enough to be checked.</p>
+    </div>
+
+    <div class="sa d1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px 44px;">
+      <div class="stack gap-s">
+        <span class="klabel">The enemy, named</span>
+        <p class="note">Six-week timelines. Beautiful decks with no recommendation. Stated preference mistaken for truth. Research filed in a shared drive. The room where the loudest voice decides.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">The claim</span>
+        <p class="note">Depth and speed are not a trade-off. AI does the processing; researchers do the judgment. What comes back is a recommendation you can defend, not a readout.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">The proof, always countable</span>
+        <p class="note">48-hour category scan. Two-to-three-week strategic study. Four-to-ten-week engagements. A handful of pro bono organisations a year, chosen by us.</p>
+      </div>
+    </div>
+
+    <div class="sa d2" style="border-top:1px solid var(--bdr);padding-top:30px;">
+      <p class="note" style="max-width:74ch;"><strong>The rule this creates:</strong> never write a Fathom claim that cannot be falsified. &ldquo;World-class insight&rdquo; is not a position; &ldquo;a category scan in 48 hours&rdquo; is. If a new line cannot be checked by a client with a calendar, it is decoration &mdash; cut it or make it countable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VOICE
+     ============================================================ -->
+<section class="band band-paper" id="voice" aria-labelledby="voice-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Verbal identity</span>
+      <h2 class="sec" id="voice-h">Two clauses. The second one <em>turns.</em></h2>
+      <p class="lede">Fathom&rsquo;s headline is not a sentence, it is a manoeuvre. A plain statement sets an expectation; an em dash or a full stop pivots; the second clause reverses it. The turn is always the italic, always the lighter tone. Once you see it, it is on every page.</p>
+    </div>
+
+    <div class="formula sa d1">
+      <p class="formula-def"><b>FORM &nbsp;</b> [ plain statement, roman ] &nbsp;&mdash;&nbsp; [ the turn, <em style="font-family:var(--serif);letter-spacing:0;text-transform:none;font-size:14px;">italic, one tone lighter</em> ]</p>
+      <div class="examples">
+        <p class="ex">Research should tell you what to do &mdash; <em>not just what happened.</em><cite>Home &middot; hero</cite></p>
+        <p class="ex">Data tells you what happened, <em>our insights tell you what to do next.</em><cite>What We Do &middot; hero</cite></p>
+        <p class="ex">Depth and speed aren&rsquo;t a trade-off. <em>They&rsquo;re the point.</em><cite>Home &middot; proposition</cite></p>
+        <p class="ex">The fans were loyal. <em>Nobody knew what they were loyal to.</em><cite>Case &middot; motorsports</cite></p>
+        <p class="ex">The brief changed on a Friday. <em>The pitch was Tuesday.</em><cite>Case &middot; sportsbook</cite></p>
+        <p class="ex">They had a theory. <em>Nobody had tested it.</em><cite>Case &middot; wealth</cite></p>
+      </div>
+    </div>
+
+    <div class="sa d2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:34px 48px;margin-top:14px;">
+      <div class="stack gap-s">
+        <span class="klabel">Always</span>
+        <p class="note">Sentence case headlines. Active voice, present tense, second person. The em dash as the pivot &mdash; it is the brand&rsquo;s punctuation mark. Concrete nouns. One idea per section. Title Case only on buttons, nav links and eyebrows.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Never</span>
+        <p class="note">Exclamation marks. Hype adjectives &mdash; leverage, unlock, best-in-class, game-changing. Title Case headlines. All-caps beyond a micro-label. Hedged findings. A second metaphor in the same page.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Reserved lines</span>
+        <p class="note"><em style="font-family:var(--serif);">Clarity Beneath the Surface</em> is the footer close &mdash; italic Spectral, never promoted to a headline. <em style="font-family:var(--serif);">fathom (n./v.)</em> &mdash; the dictionary device that licenses the depth metaphor. Use it once, on the page that needs to explain the name.</p>
+      </div>
+    </div>
+
+    <div class="sa d3">
+      <div class="rulebox">
+        <div>
+          <span class="rb-yes">Do &mdash; refuse gracefully</span>
+          <div class="rb-demo on-paper">
+            <p class="rb-line" style="color:var(--ink);">A handful of organisations a year, <em style="font-style:italic;color:var(--teal-dim);">chosen by us.</em></p>
+          </div>
+          <p class="note" style="font-size:14px;">Limits are stated flatly and made part of the offer. Scarcity without apology reads as standards, not sales.</p>
+        </div>
+        <div>
+          <span class="rb-no">Don&rsquo;t &mdash; inflate</span>
+          <div class="rb-demo on-paper">
+            <p class="rb-line" style="color:var(--struck);text-decoration:line-through;text-decoration-color:rgba(139,150,163,.5);text-decoration-thickness:1px;">We partner with mission-driven organisations to unlock transformative impact.</p>
+          </div>
+          <p class="note" style="font-size:14px;">Nothing here can be checked, nothing is refused, and no reader is told what they get. This is the register the whole brand is built against.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARK
+     ============================================================ -->
+<section class="band band-warm" id="mark" aria-labelledby="mark-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Mark &amp; lockup</span>
+      <h2 class="sec" id="mark-h">A wordmark, a sounding, <em>and a descriptor that whispers.</em></h2>
+    </div>
+
+    <div class="sa d1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);">
+      <div style="background:var(--navy);padding:34px 30px;display:flex;flex-direction:column;gap:20px;justify-content:space-between;">
+        <div style="display:inline-flex;flex-direction:column;gap:5px;line-height:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 410.52 68" fill="#00D6B3" height="30" style="display:block;width:auto;" role="img" aria-label="Fathom wordmark"><path d="M23.22,29.56v18.81h27.06v6.63h-27.06v21.82h-7.71V22.86h38.09v6.71h-30.38Z"/><path d="M92.14,30.72l-20.28,46.11h-7.94l24.44-53.97h7.63l24.52,53.97h-8.1l-20.28-46.11Z"/><path d="M148.89,29.56h-18.5v-6.71h44.64v6.71h-18.5v47.26h-7.63V29.56Z"/><path d="M242.19,22.86v53.97h-7.71v-24.06h-31v24.06h-7.71V22.86h7.71v23.21h31v-23.21h7.71Z"/><path d="M261.42,49.84c0-15.81,12.18-27.6,28.76-27.6s28.61,11.72,28.61,27.6-12.18,27.6-28.61,27.6-28.76-11.8-28.76-27.6ZM311.07,49.84c0-11.95-8.94-20.74-20.89-20.74s-21.05,8.79-21.05,20.74,8.94,20.74,21.05,20.74,20.89-8.79,20.89-20.74Z"/><path d="M387.6,76.83l-.08-39.32-19.51,32.77h-3.55l-19.51-32.54v39.09h-7.4V22.86h6.32l22.51,37.93,22.21-37.93h6.32l.08,53.97h-7.4Z"/></svg>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;line-height:1;text-align:center;">Research &amp; Strategy</span>
+        </div>
+        <p style="font-family:var(--mono);font-size:10.5px;line-height:1.8;letter-spacing:.03em;color:rgba(255,255,255,.42);">Primary lockup on navy.<br>Wordmark 28&ndash;30px in nav, 22px in footer. Descriptor centred beneath, never beside.</p>
+      </div>
+      <div style="background:var(--paper);padding:34px 30px;display:flex;flex-direction:column;gap:20px;justify-content:space-between;">
+        <svg viewBox="0 0 148.5 121.98" height="66" style="display:block;width:auto;fill:#009E85;" role="img" aria-label="Fathom symbol"><path d="M146.19,51.65h-14.21C127.5,23.79,103.37,2.51,74.25,2.51S20.99,23.79,16.52,51.65H2.31v3.5h13.75c-.19,1.92-.29,3.87-.29,5.84,0,32.3,26.18,58.48,58.48,58.48s58.48-26.18,58.48-58.48c0-1.97-.1-3.92-.29-5.84h13.75v-3.5ZM74.25,6.01c27.13,0,49.72,19.76,54.17,45.64h-36.19l-17.98-31.14-17.98,31.14H20.08C24.53,25.77,47.12,6.01,74.25,6.01ZM60.24,51.65l14.01-24.27,14.01,24.27h-28.02ZM90.28,55.15l17.3,29.96H40.92l17.3-29.96h32.06ZM129.23,60.99c0,30.31-24.66,54.98-54.98,54.98s-54.98-24.66-54.98-54.98c0-1.97.11-3.92.31-5.84h34.67l-19.28,33.4h78.56l-19.28-33.4h34.67c.2,1.92.31,3.87.31,5.84Z"/></svg>
+        <p style="font-family:var(--mono);font-size:10.5px;line-height:1.8;letter-spacing:.03em;color:var(--muted);">The symbol: a sphere cut by a waterline, with the depth mark rising through it. Standalone use only where the name is already established &mdash; favicon, avatar, stamp.</p>
+      </div>
+      <div style="background:var(--paper);padding:34px 30px;display:flex;flex-direction:column;gap:14px;">
+        <span class="klabel">Rules</span>
+        <p class="note" style="font-size:14px;">Three colourways only: teal on navy, navy on light, white on photography. Clear space equals the cap height of the wordmark on every side. The descriptor <em style="font-family:var(--serif);">Research &amp; Strategy</em> is set in tracked micro-caps at roughly a quarter of the wordmark height, centred, at 68% opacity on navy and 28% in the footer &mdash; it is a whisper, not a second line of the logo.</p>
+        <p class="note" style="font-size:14px;">Never: recolour outside the three ways, set the descriptor beside the wordmark, place the mark on a mid-tone photograph without a scrim, or rebuild it in a system font.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COLOUR
+     ============================================================ -->
+<section class="band band-paper" id="colour" aria-labelledby="colour-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Colour</span>
+      <h2 class="sec" id="colour-h">One accent, spent <em>almost nowhere.</em></h2>
+      <p class="lede">Fathom is a two-value brand &mdash; a deep navy ground and a single teal &mdash; carried by a warm neutral family that keeps it from reading as tech. The discipline is not in the hexes; it is in the budget. Teal covers roughly one to three percent of any screen. Everything else is ground, ink and hairline.</p>
+    </div>
+
+    <div class="swatches sa d1">
+      <div class="sw">
+        <div class="sw-chip" style="background:#0A1628;"><span style="color:rgba(255,255,255,.62);">#0A1628</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--navy</span>
+          <span class="sw-role">The primary ground. Nav, footer, hero, every alternating dark band.</span>
+          <span class="sw-cr">Teal on this ground &middot; 9.73:1</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#050B14;"><span style="color:rgba(255,255,255,.6);">#050B14</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--navy-deep</span>
+          <span class="sw-role">Reserved. The single pivot section on a case page, and nothing else.</span>
+          <span class="sw-cr">Once per page, or it stops meaning anything</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#122a44;"><span style="color:rgba(255,255,255,.62);">#122a44</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--navy-mid</span>
+          <span class="sw-role">Gradient partner only &mdash; the lit corner of a radial. Never a flat fill.</span>
+          <span class="sw-cr">Three different values in use &mdash; see Drift</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#00D6B3;"><span style="color:#04231e;">#00D6B3</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--teal</span>
+          <span class="sw-role">The accent, on dark grounds only. Eyebrow dashes, rules, CTA fills, the italic turn.</span>
+          <span class="sw-cr">On white &middot; 1.86:1 &mdash; never as text on light</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#009E85;"><span style="color:#fff;">#009E85</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--teal-dim</span>
+          <span class="sw-role">The same accent, translated for light grounds. Also every teal hover state.</span>
+          <span class="sw-cr">On paper &middot; 3.29:1 &mdash; large text only</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#FDFCFA;border-bottom:1px solid var(--line);"><span style="color:var(--muted);">#FDFCFA</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--paper</span>
+          <span class="sw-role">The default light ground. Warm-biased, never pure white for full sections.</span>
+          <span class="sw-cr">Body ink on this ground &middot; 10.71:1</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#F8F7F4;border-bottom:1px solid var(--line);"><span style="color:var(--muted);">#F8F7F4</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--warm</span>
+          <span class="sw-role">The second light ground. Inset panels, form cards, the band that breaks up two whites.</span>
+          <span class="sw-cr">Ink on warm &middot; 15.85:1</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#121d2b;"><span style="color:rgba(255,255,255,.62);">#121d2b</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--ink</span>
+          <span class="sw-role">Headlines on light grounds. Slightly warmer and softer than the navy ground.</span>
+          <span class="sw-cr">Display and sub-heads only</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#2C3E50;"><span style="color:rgba(255,255,255,.62);">#2C3E50</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--body</span>
+          <span class="sw-role">Running text everywhere on light. Blue-biased slate, not black.</span>
+          <span class="sw-cr">On white &middot; 10.98:1</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#6B7280;"><span style="color:#fff;">#6B7280</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--muted</span>
+          <span class="sw-role">Secondary text, captions, data labels, card briefs.</span>
+          <span class="sw-cr">On white &middot; 4.83:1</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#8b96a3;"><span style="color:#fff;">#8b96a3</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--struck</span>
+          <span class="sw-role">Semantic, not decorative: the rejected path. The assumption the research overturned.</span>
+          <span class="sw-cr">2.93:1 &mdash; never the sole carrier of meaning</span>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background:#E7E2D9;border-bottom:1px solid var(--line);"><span style="color:var(--muted);">#E7E2D9</span></div>
+        <div class="sw-meta">
+          <span class="sw-token">--line</span>
+          <span class="sw-role">Every hairline on light. Warm-biased so rules read as paper, not as UI chrome.</span>
+          <span class="sw-cr">On dark: rgba(255,255,255,.09)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sa d2">
+      <div class="rulebox">
+        <div>
+          <span class="rb-yes">The one rule that matters</span>
+          <div class="rb-demo on-navy">
+            <p class="rb-line" style="color:#fff;">Depth and speed aren&rsquo;t a trade-off. <em style="font-style:italic;color:var(--teal);">They&rsquo;re the point.</em></p>
+          </div>
+          <div class="rb-demo on-paper">
+            <p class="rb-line" style="color:var(--ink);">Depth and speed aren&rsquo;t a trade-off. <em style="font-style:italic;color:var(--teal-dim);">They&rsquo;re the point.</em></p>
+          </div>
+          <p class="note" style="font-size:14px;"><code>#00D6B3</code> on navy, <code>#009E85</code> on paper. The accent changes value when the ground changes so it stays the same <em style="font-family:var(--serif);">colour</em> perceptually &mdash; and so it stays readable.</p>
+        </div>
+        <div>
+          <span class="rb-no">What breaks it</span>
+          <div class="rb-demo on-paper">
+            <p class="rb-line" style="color:#00D6B3;">Bright teal set as text on a light ground.</p>
+          </div>
+          <div class="rb-demo on-paper" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="background:#00D6B3;color:#0A1628;font-size:13px;font-weight:500;padding:11px 22px;border-radius:4px;">Challenge Us</span>
+            <span style="background:#00D6B3;color:#0A1628;font-size:13px;font-weight:500;padding:11px 22px;border-radius:4px;">See The Work</span>
+            <span style="background:#00D6B3;color:#0A1628;font-size:13px;font-weight:500;padding:11px 22px;border-radius:4px;">Get In Touch</span>
+          </div>
+          <p class="note" style="font-size:14px;">1.86:1 &mdash; unreadable, and it makes the brand look like a start-up. Three equal CTAs in one view spends the accent budget and leaves the reader with no decision to make. One primary action per screen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sa d3" style="border-top:2px solid var(--teal-dim);padding-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:30px 44px;">
+      <div class="stack gap-s">
+        <span class="klabel">Where teal is allowed</span>
+        <p class="note" style="font-size:14px;">The eyebrow dash. The 2px rule that opens a data block. One CTA fill. The italic turn in a dark headline. The single highlighted metric. One active state.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Where it is not</span>
+        <p class="note" style="font-size:14px;">Body copy. Backgrounds larger than a button. Icons for their own sake. More than one emphasis in a single headline. Anything decorative.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Semantic colour</span>
+        <p class="note" style="font-size:14px;">Fathom has no red/amber/green system and does not need one. In charts, the diverging pair is teal against <span style="color:var(--struck);">struck grey</span>, with <code>--line</code> as the neutral midpoint &mdash; and colour is always paired with a glyph and a word.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TYPE
+     ============================================================ -->
+<section class="band band-warm" id="type" aria-labelledby="type-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Typography</span>
+      <h2 class="sec" id="type-h">Three families. <em>Three jobs. No overlap.</em></h2>
+      <p class="lede">Spectral carries the argument, IBM Plex Sans carries the information, IBM Plex Mono carries the instrumentation. The pairing works because Plex Sans and Plex Mono are siblings &mdash; the mono voice is a register of the body voice, not a fourth identity imported for texture.</p>
+    </div>
+
+    <div class="roles sa d1">
+      <div class="role">
+        <div class="role-key">
+          <span class="role-fam">Spectral</span>
+          <span class="role-job">Display only. Headlines, sub-heads, pull quotes, dossier values, the footer tagline. Never body copy.</span>
+          <span class="role-wt">200 / 300 / 400 &middot; italic 200 / 300</span>
+        </div>
+        <div class="stack gap-m">
+          <p class="spec-serif">Research should tell you what to do &mdash; <em>not just what happened.</em></p>
+          <p class="note" style="font-size:14px;">Tracking tightens as size grows: <code>-.02em</code> at 30px, <code>-.035em</code> at 88px. Line-height 1.02&ndash;1.18. Weight drops as size grows &mdash; 200 is for the largest lines on dark grounds, 400 for card titles and dossier values.</p>
+        </div>
+      </div>
+      <div class="role">
+        <div class="role-key">
+          <span class="role-fam">IBM Plex Sans</span>
+          <span class="role-job">Body, UI, buttons, nav, form fields, and the oversized metric numerals.</span>
+          <span class="role-wt">400 / 500 / 600 / 700</span>
+        </div>
+        <div class="stack gap-m">
+          <p class="spec-sans">Most research firms make you choose. Go deep and wait months. Move fast and accept shallow. We built Fathom because that choice is false. AI handles the processing. Our researchers handle the judgment.</p>
+          <p class="note" style="font-size:14px;">15&ndash;18px, line-height 1.68&ndash;1.78, measure capped at 640&ndash;660px. 500 for buttons and active nav, 600 for micro-labels, 700 reserved for the big metric figures &mdash; the only place a heavy weight appears.</p>
+        </div>
+      </div>
+      <div class="role">
+        <div class="role-key">
+          <span class="role-fam">IBM Plex Mono</span>
+          <span class="role-job">Instrumentation. Eyebrows, data labels, units, tags, filing keys, the noise field.</span>
+          <span class="role-wt">400 / 500 &middot; always tracked</span>
+        </div>
+        <div class="stack gap-m">
+          <p class="spec-mono">Where we fit &nbsp;/&nbsp; fm = fathoms of engagement &nbsp;/&nbsp; &#9660; 3 fm &nbsp;/&nbsp; Exhibit B &nbsp;/&nbsp; Method</p>
+          <p class="note" style="font-size:14px;">10&ndash;12px, letter-spacing .14&ndash;.22em, uppercase. Mono signals <em style="font-family:var(--serif);">measured</em> &mdash; it labels things that were counted, filed or instrumented. It never sets a sentence.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note sa d2" style="font-size:14px;"><strong style="color:var(--ink);">Loading:</strong> the three families are pulled from Google Fonts with <code>preconnect</code> to both hosts and <code>display=swap</code>, and every page requests only the weights it actually uses. Spectral&rsquo;s fallback stack is <code>Georgia, 'Times New Roman', serif</code> &mdash; a genuine transitional serif, so a failed load degrades in proportion rather than dropping to a default sans.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LAYOUT
+     ============================================================ -->
+<section class="band band-paper" id="layout" aria-labelledby="layout-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Layout &amp; ground rhythm</span>
+      <h2 class="sec" id="layout-h">A long page is paced <em>by its grounds.</em></h2>
+      <p class="lede">Fathom pages are not built from cards on a single background. They are built as a sequence of full-bleed bands whose tone changes, and the rhythm does the pacing work that a sidebar or an illustration would do elsewhere. One rule governs it: <strong>no two dark bands touch.</strong></p>
+    </div>
+
+    <div class="sa d1" style="display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);">
+      <div style="background:var(--navy);padding:20px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);">Navy</span><span style="font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.5);">Cover &middot; the claim, and the filing rail beneath it</span></div>
+      <div style="background:var(--paper);padding:20px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-dim);">Paper</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);">Setup &middot; the tension, and the obvious wrong path</span></div>
+      <div style="background:var(--warm);padding:20px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-dim);">Warm</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);">Evidence &middot; the exhibits, or the signature visual</span></div>
+      <div style="background:var(--navy-deep);padding:20px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);">Navy-deep</span><span style="font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.5);">The turn &middot; one serif line, centred, once per page</span></div>
+      <div style="background:var(--navy);padding:20px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--bdr);"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);">Navy</span><span style="font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.5);">Outcome &middot; what the work became</span></div>
+      <div style="background:var(--paper);padding:20px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-dim);">Paper</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);">Close &middot; one question, one primary action</span></div>
+    </div>
+
+    <div class="sa d2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:30px 44px;">
+      <div class="stack gap-s">
+        <span class="klabel">Frame</span>
+        <p class="note" style="font-size:14px;">Fixed 72px navy nav with a matching spacer element. Content capped at <code>1200px</code> on marketing pages, <code>1240px</code> on case pages. Gutter <code>clamp(24px, 6vw, 80px)</code>.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Vertical scale</span>
+        <p class="note" style="font-size:14px;">Standard band <code>96px</code>, large <code>128px</code>, tight <code>44&ndash;56px</code>. Newer pages express the same intervals as <code>clamp(80px, 13vh, 150px)</code> so tall viewports get more air.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Radii</span>
+        <p class="note" style="font-size:14px;"><code>0</code> for full-bleed blocks and bars. <code>2px</code> tags. <code>3px</code> photo frames. <code>4px</code> buttons and inputs. <code>8px</code> cards. <code>100px</code> pills only. Nothing is fully rounded.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Hairlines</span>
+        <p class="note" style="font-size:14px;"><code>.5px</code> on dark grounds, <code>1px</code> on light. Grids are built from 1px gaps in a <code>--line</code>-coloured container rather than per-cell borders &mdash; corners never double up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEVICES
+     ============================================================ -->
+<section class="band band-paper" id="devices" aria-labelledby="devices-h" style="padding-top:0;">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Signature devices</span>
+      <h2 class="sec" id="devices-h">The kit that makes a page recognisable <em>before it is read.</em></h2>
+      <p class="lede">These are the brand&rsquo;s most portable assets &mdash; more so than the logo, which appears twice a page at 28px. Each one is rendered live below in its real CSS. Use two or three per page; using all of them at once is how a page starts looking like a demo of itself.</p>
+    </div>
+
+    <div class="kit sa d1">
+      <div class="kit-cell">
+        <span class="kit-name">01 &middot; The eyebrow</span>
+        <div class="kit-stage kit-eyebrow">
+          <span class="mark">Where we fit</span>
+          <span class="mark">The evidence</span>
+        </div>
+        <p class="kit-desc">A 26px rule, then mono micro-caps at .22em. Opens every section. Teal on dark, teal-dim on light. It is the brand&rsquo;s full stop between ideas.</p>
+      </div>
+
+      <div class="kit-cell">
+        <span class="kit-name">02 &middot; The teal rule</span>
+        <div class="kit-stage">
+          <div class="metrics">
+            <div class="metric"><div class="metric-num">48<span class="u"> hrs</span></div><div class="metric-lab">Category scan</div></div>
+            <div class="metric"><div class="metric-num">2&ndash;3<span class="u"> wks</span></div><div class="metric-lab">Full study</div></div>
+            <div class="metric"><div class="metric-num teal">100<span class="u">%</span></div><div class="metric-lab">Recommendations</div></div>
+          </div>
+        </div>
+        <p class="kit-desc">A 2px teal line above a row means <em style="font-family:var(--serif);">measured content starts here</em>. One figure in the row may take the accent; the rest stay ink.</p>
+      </div>
+
+      <div class="kit-cell">
+        <span class="kit-name">03 &middot; The struck word</span>
+        <div class="kit-stage">
+          <div class="struck-row">
+            <span class="struck-word">Thorough.</span>
+            <span class="struck-word">Comprehensive.</span>
+            <span class="struck-word">Decisive.</span>
+          </div>
+        </div>
+        <p class="kit-desc">Spectral italic in <code>--struck</code>, with a 1.5px rule set at 54% height and rotated a degree or two so it reads as drawn, not typeset. Semantic: this is the path <em style="font-family:var(--serif);">not</em> taken.</p>
+      </div>
+
+      <div class="kit-cell dark">
+        <span class="kit-name">04 &middot; The radical bar</span>
+        <div class="kit-stage" style="overflow:hidden;">
+          <div class="radical"><span class="radical-text">Radical <em>honesty.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
+        </div>
+        <p class="kit-desc">A teal bar at the cap height of the line beside it, running off the right edge of the page. The bleed is the point &mdash; it implies the statement continues past the frame.</p>
+      </div>
+
+      <div class="kit-cell dark">
+        <span class="kit-name">05 &middot; The dossier rail</span>
+        <div class="kit-stage" style="align-items:stretch;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;width:100%;">
+            <div style="padding:4px 16px 4px 0;"><div class="dossier-k">Method</div><div class="dossier-v" style="font-size:15px;">Ethnographic research</div></div>
+            <div style="padding:4px 0 4px 16px;border-left:1px solid var(--bdr);"><div class="dossier-k">Engagement</div><div class="dossier-v" style="font-size:15px;">Brand &amp; campaign strategy</div></div>
+          </div>
+        </div>
+        <p class="kit-desc">Four cells, hairline-divided, mono teal key over serif white value. It files a case like a record &mdash; the visual claim being that this work is documented, not narrated.</p>
+      </div>
+
+      <div class="kit-cell">
+        <span class="kit-name">06 &middot; The depth ladder</span>
+        <div class="kit-stage">
+          <div class="ladder">
+            <span class="rung"><i style="height:22px;"></i><span>&#9660; 1 fm</span></span>
+            <span class="rung"><i style="height:44px;"></i><span>&#9660; 2 fm</span></span>
+            <span class="rung"><i style="height:66px;"></i><span>&#9660; 3 fm</span></span>
+            <span class="rung"><i style="height:88px;"></i><span>&#9660; 4 fm</span></span>
+          </div>
+        </div>
+        <p class="kit-desc">The name made into a unit. A dotted rule whose length encodes engagement depth, labelled in fathoms. The only place the metaphor is allowed to become literal.</p>
+      </div>
+
+      <div class="kit-cell">
+        <span class="kit-name">07 &middot; The card lift</span>
+        <div class="kit-stage">
+          <div class="liftcard" tabindex="0">
+            <span class="s">Financial services</span>
+            <h4>The segment everyone ignored was the biggest opportunity</h4>
+          </div>
+        </div>
+        <p class="kit-desc">Hover the card. <code>translateY(-6px)</code> over 350ms with a navy-tinted shadow at 12%. The only lift in the system &mdash; buttons rise 1px, nothing else moves.</p>
+      </div>
+
+      <div class="kit-cell dark">
+        <span class="kit-name">08 &middot; The radial glow</span>
+        <div class="kit-stage" style="margin:-28px -28px 0;padding:34px 28px;background:radial-gradient(110% 90% at 78% 0%, rgba(0,214,179,.14), transparent 56%);">
+          <p style="font-family:var(--serif);font-weight:300;font-size:25px;line-height:1.22;letter-spacing:-.02em;color:#fff;">What does this give people <em style="font-style:italic;color:var(--teal);">that nothing else can?</em></p>
+        </div>
+        <p class="kit-desc">Teal at 9&ndash;14% alpha, thrown from one corner of a navy section. It lights the ground without becoming a coloured background. Never centred, never above 15%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     IMAGERY
+     ============================================================ -->
+<section class="band band-warm" id="imagery" aria-labelledby="imagery-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark">Imagery &amp; data</span>
+      <h2 class="sec" id="imagery-h">Photography never carries <em>the colour.</em></h2>
+      <p class="lede">Every photograph on the site is desaturated before it is allowed on the page, then tinted back toward the brand. This is what keeps licensed stock from fighting the palette &mdash; and it means an image can be swapped without a colour review. The filter stack is fixed; only the picture changes.</p>
+    </div>
+
+    <div class="treat sa d1">
+      <figure>
+        <div class="plate"><canvas id="p1" width="320" height="240" aria-label="Sample photograph, untreated"></canvas></div>
+        <figcaption><b>Source</b>As licensed. Never placed on the page in this state.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate"><canvas id="p2" width="320" height="240" aria-label="Sample photograph, desaturated"></canvas></div>
+        <figcaption><b>Step one</b>grayscale(100%)<br>contrast(1.08) brightness(.9)</figcaption>
+      </figure>
+      <figure>
+        <div class="plate duo"><canvas id="p3" width="320" height="240" aria-label="Sample photograph, duotone treated"></canvas></div>
+        <figcaption><b>Step two</b>teal at 12% on mix-blend-mode: color, then a 160&deg; navy scrim from 40%</figcaption>
+      </figure>
+    </div>
+
+    <div class="sa d2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px 44px;border-top:1px solid var(--line);padding-top:30px;">
+      <div class="stack gap-s">
+        <span class="klabel">Client logos</span>
+        <p class="note" style="font-size:14px;">Greyscale at 72% opacity, sitting in an even hairline rail. They return to full colour on hover only. A logo wall is a claim about company, not a design element &mdash; it stays quiet until touched.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">People</span>
+        <p class="note" style="font-size:14px;">Team portraits are the one exception: full colour, 4:5, 3px radius, in a fixed frame so uneven source crops still line up. Radical humanity is a stated value; the faces are not filtered.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Charts</span>
+        <p class="note" style="font-size:14px;">Static editorial visuals, hand-built, no chart library. Length or position carries the value and the printed figure is only a label. Diverging scales run teal to struck-grey. Never a dual axis, never colour without a glyph and a word.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">One picture per case</span>
+        <p class="note" style="font-size:14px;">A case page earns exactly one signature visualisation, chosen from the research method&rsquo;s own native artifact. The geometry appears once &mdash; the cover does not preview it and the outcome does not redraw it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MOTION
+     ============================================================ -->
+<section class="band band-navy" id="motion" aria-labelledby="motion-h">
+  <div class="wrap stack gap-l">
+    <div class="sa">
+      <span class="mark mark-t">Motion</span>
+      <h2 class="sec" id="motion-h">One easing curve, <em>used almost everywhere.</em></h2>
+      <p class="lede">Motion in this system is not expressive; it is a reading aid. Content arrives slightly late and slightly low, so the eye is led down the page in the order the argument is written. Everything shares <code>cubic-bezier(.22, 1, .36, 1)</code> &mdash; a fast start with a long settle.</p>
+    </div>
+
+    <div class="sa d1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:30px 44px;">
+      <div class="stack gap-s">
+        <span class="klabel">The reveal</span>
+        <p class="note" style="font-size:14px;"><code>opacity 0&rarr;1</code> with <code>translateY(24px&rarr;0)</code> over 700&ndash;800ms, staggered in 70&ndash;100ms steps. Driven by one IntersectionObserver at a 0.1&ndash;0.18 threshold that unobserves after firing &mdash; elements never re-animate on scroll-back.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">The resolve</span>
+        <p class="note" style="font-size:14px;">Reserved for the home hero. Blur 16px to 0 with letter-spacing easing from <code>.12em</code> to <code>-.02em</code>. Literal: noise resolving into signal. Lines are set <code>white-space: nowrap</code> so the tracking swing can never re-wrap them mid-animation.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">The strike</span>
+        <p class="note" style="font-size:14px;">On a case-page turn, a rule draws across the expected answer &mdash; width 0 to 100% over 700ms &mdash; then the reframed question resolves out of blur. Orchestrated in sequence, not fired at once.</p>
+      </div>
+      <div class="stack gap-s">
+        <span class="klabel">Non-negotiable</span>
+        <p class="note" style="font-size:14px;">Every animated rule has a <code>prefers-reduced-motion</code> counterpart that lands content in its final state. Hover is never the only route to information &mdash; the What We Do instrument panel opens a tap popup below 900px for exactly this reason.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AUDIT
+     ============================================================ -->
+<section class="band band-paper" id="audit" aria-labelledby="audit-h">
+  <div class="wrap stack gap-m">
+    <div class="sa">
+      <span class="mark">Part III &middot; Contrast audit</span>
+      <h2 class="sec" id="audit-h">Computed, <em>not eyeballed.</em></h2>
+      <p class="lede">Every real foreground/background pairing on the live site, run through the WCAG 2.1 ratio. Normal text needs 4.5:1; large text &mdash; 24px, or 18.66px bold &mdash; needs 3:1. Most of the system is comfortably clear. Four pairings are not, and they are all low-opacity white on navy or teal-dim used below its size floor.</p>
+    </div>
+
+    <div class="tablewrap sa d1">
+      <table>
+        <thead>
+          <tr><th scope="col">Pairing</th><th scope="col">Where it appears</th><th scope="col">Ratio</th><th scope="col">Verdict</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="val"><span class="chipdot" style="background:#00D6B3;"></span>#00D6B3 on #0A1628</td><td>Eyebrows, dossier keys, the italic turn</td><td class="num">9.73:1</td><td class="num pass">Passes AA &amp; AAA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#0A1628;"></span>#0A1628 on #00D6B3</td><td>Every primary button label</td><td class="num">9.73:1</td><td class="num pass">Passes AA &amp; AAA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#121d2b;"></span>#121d2b on #F8F7F4</td><td>Headlines on warm bands</td><td class="num">15.85:1</td><td class="num pass">Passes AA &amp; AAA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#2C3E50;"></span>#2C3E50 on #fff</td><td>All running text on light</td><td class="num">10.98:1</td><td class="num pass">Passes AA &amp; AAA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#a2a6ad;"></span>white 62% on navy</td><td>Case-page deck copy</td><td class="num">7.42:1</td><td class="num pass">Passes AA &amp; AAA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#91969e;"></span>white 55% on navy</td><td>Hero sub-copy, section bodies on dark</td><td class="num">6.10:1</td><td class="num pass">Passes AA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#6B7280;"></span>#6B7280 on #fff</td><td>Captions, card briefs, data labels</td><td class="num">4.83:1</td><td class="num pass">Passes AA</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#80868f;"></span>white 48% on navy</td><td>Inactive nav links, 14px</td><td class="num">4.94:1</td><td class="num pass">Passes AA, with little margin</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#009E85;"></span>#009E85 on #FDFCFA</td><td>Italic accent lines at 17&ndash;21px</td><td class="num">3.29:1</td><td class="num fail">Large text only &mdash; currently used below the floor</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#6c737e;"></span>white 40% on navy</td><td>Footer links, 13px</td><td class="num">3.79:1</td><td class="num fail">Below AA for normal text</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#8b96a3;"></span>#8b96a3 on #FDFCFA</td><td>The struck / rejected path</td><td class="num">2.93:1</td><td class="num fail">Acceptable only because it is struck through and never sole-carrier</td></tr>
+          <tr><td class="val"><span class="chipdot" style="background:#404957;"></span>white 22% on navy</td><td>Footer copyright line</td><td class="num">1.99:1</td><td class="num fail">Below AA &mdash; effectively decorative</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note sa d2" style="font-size:14px;margin-top:26px;"><strong style="color:var(--ink);">The fixes are small.</strong> Lift footer links from 40% to 55% white and the copyright from 22% to 40%; that alone clears three rows. For teal-dim italic accents, either raise them to 24px or set them in <code>--ink</code> and let the italic carry the emphasis on its own &mdash; the accent does not need to be doing the work at 17px.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     DRIFT
+     ============================================================ -->
+<section class="band band-warm" id="drift" aria-labelledby="drift-h">
+  <div class="wrap stack gap-m">
+    <div class="sa">
+      <span class="mark">Consistency</span>
+      <h2 class="sec" id="drift-h">Where one idea <em>grew two values.</em></h2>
+      <p class="lede">Every page carries its own copy of the base stylesheet, so a refinement made on a newer page never travelled backwards. None of these are visible individually. Together they are why the site feels close to a system rather than being one. Recommended canonical value in each row is the newer, more considered one.</p>
+    </div>
+
+    <div class="tablewrap sa d1">
+      <table>
+        <thead>
+          <tr><th scope="col">What</th><th scope="col">Values in use</th><th scope="col">Where they split</th><th scope="col">Canonical</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="tok">--border / --line</td><td class="val">#ECEAE6 &nbsp;vs&nbsp; #E7E2D9</td><td>Home, About, Work, Challenge Us vs What We Do and all case pages</td><td><span class="pill keep">#E7E2D9</span></td></tr>
+          <tr><td class="tok">--struck</td><td class="val">#9099a6 &nbsp;vs&nbsp; #8b96a3</td><td>About vs the case pages</td><td><span class="pill keep">#8b96a3</span></td></tr>
+          <tr><td class="tok">--navy-mid</td><td class="val">#0e2038 &middot; #122a44 &middot; #16304d</td><td>Home, case pages, What We Do &mdash; three different gradient partners</td><td><span class="pill keep">#122a44</span></td></tr>
+          <tr><td class="tok">--bdr</td><td class="val">rgba(255,255,255,.08) &nbsp;vs&nbsp; .09</td><td>Older pages vs newer</td><td><span class="pill keep">.09</span></td></tr>
+          <tr><td class="tok">Light ground</td><td class="val">#fff &nbsp;vs&nbsp; #FDFCFA</td><td>Older sections use pure white; newer pages use warm paper</td><td><span class="pill keep">#FDFCFA</span></td></tr>
+          <tr><td class="tok">Eyebrow</td><td class="val">Plex Sans 10px/.18em &nbsp;vs&nbsp; Plex Mono 11px/.22em</td><td>Home, Work, About vs What We Do and all case pages</td><td><span class="pill keep">Mono</span></td></tr>
+          <tr><td class="tok">Duotone tint</td><td class="val">rgba(0,215,132,.12)</td><td>Case card overlay &mdash; that is #00D784, not the brand teal</td><td><span class="pill keep">rgba(0,214,179,.12)</span></td></tr>
+          <tr><td class="tok">Accent one-off</td><td class="val">#00806c</td><td>The pro bono hook on Work &mdash; a fourth green with no token</td><td><span class="pill keep">--teal-dim</span></td></tr>
+          <tr><td class="tok">--pad</td><td class="val">80/48/24 breakpoints &nbsp;vs&nbsp; clamp()</td><td>Older pages step at breakpoints; newer pages scale fluidly</td><td><span class="pill keep">clamp(24px,6vw,80px)</span></td></tr>
+          <tr><td class="tok">Base stylesheet</td><td class="val">5 near-identical inline copies</td><td>Every page in <code>src/pages/</code></td><td><span class="pill keep">One shared partial</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note sa d2" style="font-size:14px;margin-top:26px;"><strong style="color:var(--ink);">Governance, in one line:</strong> the tokens and the three type roles are fixed and may not be changed page-by-page; everything else &mdash; clamp values, section copy, which light ground a band uses &mdash; is a judgement call. When a new page needs a value that does not exist, it goes in the shared base or it does not go in.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     RULES CARD
+     ============================================================ -->
+<section class="band band-navy" id="card" aria-labelledby="card-h">
+  <div class="wrap stack gap-m">
+    <div class="sa">
+      <span class="mark mark-t">If you read nothing else</span>
+      <h2 class="sec" id="card-h">Nine rules that keep a new page <em>on-brand.</em></h2>
+    </div>
+    <div class="rules sa d1">
+      <div class="rule"><span class="rule-n">One</span><span class="rule-t">Write the turn first</span><span class="rule-b">A Fathom headline is two clauses where the second reverses the first. If your line has no turn, it is not finished.</span></div>
+      <div class="rule"><span class="rule-n">Two</span><span class="rule-t">Make the claim countable</span><span class="rule-b">48 hours. Two to three weeks. A handful a year. If a client with a calendar cannot check it, cut it.</span></div>
+      <div class="rule"><span class="rule-n">Three</span><span class="rule-t">Spend teal once</span><span class="rule-b">One eyebrow, one rule, one button, one italic. Bright teal on dark, dim teal on light, never the reverse.</span></div>
+      <div class="rule"><span class="rule-n">Four</span><span class="rule-t">Three families, three jobs</span><span class="rule-b">Spectral argues, Plex Sans informs, Plex Mono measures. A mono sentence or a serif paragraph is a bug.</span></div>
+      <div class="rule"><span class="rule-n">Five</span><span class="rule-t">Pace with grounds</span><span class="rule-b">Navy, paper, warm, navy. No two dark bands touch, and navy-deep appears at most once.</span></div>
+      <div class="rule"><span class="rule-n">Six</span><span class="rule-t">Pick two devices</span><span class="rule-b">From the kit of eight. Using six on one page reads as a style demo, not a piece of work.</span></div>
+      <div class="rule"><span class="rule-n">Seven</span><span class="rule-t">Desaturate the photo</span><span class="rule-b">Greyscale, then tint back. No image is ever allowed to introduce a colour the palette does not have.</span></div>
+      <div class="rule"><span class="rule-n">Eight</span><span class="rule-t">One easing curve</span><span class="rule-b">cubic-bezier(.22, 1, .36, 1), 24px up, 700&ndash;800ms, staggered. And it all switches off on request.</span></div>
+      <div class="rule"><span class="rule-n">Nine</span><span class="rule-t">Compute the contrast</span><span class="rule-b">Before shipping, not after. The brand&rsquo;s own promise is that it says what it sees &mdash; the page should be readable enough to prove it.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <p>Written by reading the published Eleventy site &mdash; five page templates, three case pages, the shared header and footer includes, the image pipeline, and the case-study build rules &mdash; and stating the conventions they already follow. Everything marked as a rule was observed in the source; everything marked as drift is a real difference between two live files. Contrast figures are computed WCAG 2.1 ratios, not estimates.</p>
+    <p class="tagline">Clarity Beneath the Surface</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal — the site's own IntersectionObserver pattern.
+(function () {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sa').forEach(function (el) { io.observe(el); });
+})();
+
+// Imagery specimen — a generated plate rather than an embedded photograph, so the
+// filter stack is demonstrated without shipping a licensed image. Same scene in
+// all three plates; only the treatment changes.
+(function () {
+  function scene(ctx, w, h) {
+    var sky = ctx.createLinearGradient(0, 0, 0, h);
+    sky.addColorStop(0, '#3f6f8e'); sky.addColorStop(1, '#c9a279');
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+    // sun
+    ctx.fillStyle = 'rgba(255,214,150,.85)';
+    ctx.beginPath(); ctx.arc(w * 0.72, h * 0.42, h * 0.11, 0, Math.PI * 2); ctx.fill();
+    // water
+    var sea = ctx.createLinearGradient(0, h * 0.55, 0, h);
+    sea.addColorStop(0, '#2a5570'); sea.addColorStop(1, '#12283a');
+    ctx.fillStyle = sea; ctx.fillRect(0, h * 0.55, w, h * 0.45);
+    for (var i = 0; i < 26; i++) {
+      var y = h * 0.56 + Math.random() * h * 0.43;
+      ctx.fillStyle = 'rgba(255,232,198,' + (0.03 + Math.random() * 0.13) + ')';
+      ctx.fillRect(w * (0.35 + Math.random() * 0.5), y, 10 + Math.random() * 70, 1.4);
+    }
+    // headland
+    ctx.fillStyle = '#20313d';
+    ctx.beginPath();
+    ctx.moveTo(0, h * 0.55);
+    ctx.lineTo(w * 0.1, h * 0.44); ctx.lineTo(w * 0.2, h * 0.51);
+    ctx.lineTo(w * 0.31, h * 0.4); ctx.lineTo(w * 0.42, h * 0.55);
+    ctx.closePath(); ctx.fill();
+    // grain
+    for (var g = 0; g < 2200; g++) {
+      ctx.fillStyle = 'rgba(0,0,0,' + Math.random() * 0.06 + ')';
+      ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
+    }
+  }
+  [['p1', 'none'], ['p2', 'grayscale(100%) contrast(1.08) brightness(.9)'],
+   ['p3', 'grayscale(100%) contrast(1.08) brightness(.9)']].forEach(function (pair) {
+    var cv = document.getElementById(pair[0]);
+    if (!cv) return;
+    var ctx = cv.getContext('2d');
+    scene(ctx, cv.width, cv.height);
+    cv.style.filter = pair[1];
+  });
+})();
+</script>
+
+</body>
+</html>

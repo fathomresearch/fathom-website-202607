@@ -1,0 +1,434 @@
+---
+pageKey: work
+permalink: cases/candy/index.html
+title: "Concept testing that corrected the premise | Fathom Research & Strategy"
+description: "A major candy brand had five commercial concepts built on one shared instinct: go bigger. Seven focus groups with adult category buyers found the opposite, and corrected the premise before production."
+canonical: "/cases/candy/"
+ogTitle: "They thought they wanted louder. The data wanted relatability."
+ogType: "article"
+caseImage: "candy"
+caseAbout: "Focus-group concept testing for a commercial campaign"
+datePublished: "2026-09-17"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+{% include "seo.njk" %}
+<link rel="preload" href="/fonts/spectral-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+
+<!--
+  "The room wanted louder. The data wanted closer." Candy brand concept test.
+  Signature: a single-axis EXAGGERATION DIAL. Concept testing's native artifact
+  is a sorted diverging bar chart, but the source carries rank order and reasons,
+  not scores, so bars would require inventing values. The dial encodes the
+  documented ordering and the reason each tier won or lost instead.
+  Geometry is reconciled in scripts/check-case-geometry.mjs.
+  Client is unnamed throughout by request. No figures are invented.
+-->
+
+<link rel="stylesheet" href="/css/base.css">
+<style>
+
+:root{
+  /* Brand ground, unchanged from the rest of the site */
+  --navy:#0A1628; --navy-mid:#122a44;                 /* warm-biased hairline */
+  --struck:#8b96a3;               /* the considered new tone: the rejected/expected path */
+  --bdr:rgba(255,255,255,.09);
+  /* Type roles */
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  /* Metrics */
+  --max:1240px; --measure:660px; --pad:clamp(24px,6vw,80px);}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.5;overflow-x:hidden;}
+
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+
+/* ── shared devices ── */
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.rule{height:1px;background:var(--line);border:0;}
+.wrap{max-width:var(--max);margin:0 auto;}
+
+/* scroll reveal (same mechanism used across the site) */
+
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+
+/* ============================================================
+   NAV, consistent with the live site
+   ============================================================ */
+@media(max-width:860px){}
+
+/* ============================================================
+   COVER, shared case-study hero and dossier shell.
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(41px,7.4vh,76px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 90% at 80% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;max-width:var(--max);margin:0 auto;padding-bottom:clamp(33px,5.9vh,54px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:20ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:var(--teal);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+
+/* dossier rail, the case facts, filed like a record */
+.dossier{border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;font-weight:400;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){
+  .dossier-inner{grid-template-columns:1fr 1fr;}
+  .dossier-cell:nth-child(3){border-left:0;}
+  .dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}
+}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* ============================================================
+   THE BRIEF, the tension + the trap (expected path)
+   ============================================================ */
+.brief{background:var(--paper);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.brief-inner{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,3vh,30px);align-items:stretch;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.brief-lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.brief-lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:680px;}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+/* the expected path: the thing they did NOT do, set apart by the box and a dimmer tone */
+.expected{margin-top:40px;padding:26px 28px;border:1px solid var(--line);border-radius:4px;background:#fff;}
+.expected .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--struck);margin-bottom:12px;}
+.expected p{color:var(--muted);font-size:16px;line-height:1.7;}
+@media(max-width:820px){}
+
+/* ============================================================
+   OUTCOME, what the research became
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(32px,6vw,80px);align-items:center;}
+.outcome-line{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.5vw,46px);line-height:1.24;letter-spacing:-.02em;color:#fff;text-wrap:balance;}
+.outcome-line em{font-style:italic;color:var(--teal);}
+.outcome-stat{border-top:2px solid var(--teal);padding-top:24px;}
+.outcome-stat .num{font-family:var(--serif);font-weight:200;font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums;}
+.outcome-stat .num em{font-style:italic;color:var(--teal);font-size:.5em;}
+.outcome-stat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:16px;line-height:1.5;max-width:32ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:40px;}}
+
+/* ============================================================
+   CLOSE / CTA
+   ============================================================ */
+.close{background:var(--paper);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* ============================================================
+   FOOTER, consistent with the live site
+   ============================================================ */
+
+.footer-link:hover{color:rgba(255,255,255,.88);}
+
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+
+@media(max-width:820px){}
+
+@media(prefers-reduced-motion:reduce){
+  .sa{opacity:1;transform:none;transition:none;}
+  .reframe-expected::after{width:100%;transition:none;}
+  .reframe-turn,.reframe-line{opacity:1;transform:none;filter:none;transition:none;}
+}
+/* ============================================================
+   THE REFRAME, the signature moment. Full-bleed pivot.
+   ============================================================ */
+.reframe{background:var(--navy-deep);color:#fff;padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);position:relative;overflow:hidden;}
+.reframe::before{content:'';position:absolute;inset:0;background:radial-gradient(90% 120% at 50% 0%, rgba(0,214,179,.09), transparent 60%);pointer-events:none;}
+.reframe-inner{position:relative;max-width:1000px;margin:0 auto;text-align:center;}
+.reframe-inner .section-mark{justify-content:center;margin-bottom:44px;}
+.reframe-expected{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(19px,2.1vw,26px);line-height:1.4;color:var(--struck);position:relative;display:inline-block;margin-bottom:30px;}
+/* the strike is drawn on scroll-in */
+.reframe-expected::after{content:'';position:absolute;left:0;top:54%;height:2px;width:0;background:var(--struck);transition:width .7s cubic-bezier(.7,0,.3,1) .15s;pointer-events:none;}
+.reframe.in .reframe-expected::after{width:100%;}
+.reframe-turn{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:26px;opacity:0;transform:translateY(8px);transition:opacity .6s ease .55s,transform .6s ease .55s;}
+.reframe.in .reframe-turn{opacity:1;transform:none;}
+.reframe-line{font-family:var(--serif);font-weight:300;font-size:clamp(30px,5vw,66px);line-height:1.1;letter-spacing:-.025em;color:#fff;text-wrap:balance;opacity:0;filter:blur(12px);transition:opacity .9s ease .6s,filter .9s ease .6s;}
+.reframe-line em{font-style:italic;color:var(--teal);}
+.reframe.in .reframe-line{opacity:1;filter:blur(0);}
+
+.method-scope{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:26px;}
+.scope-chip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--body);
+  border:1px solid var(--line);background:#fff;padding:8px 13px;border-radius:2px;}
+.scope-chip b{color:var(--ink);font-weight:600;}
+
+/* ============================================================
+   THE DIAL, signature. One axis: how far from real life a
+   concept starts. The room aimed at the far end; the winners
+   started near the near end and moved one step.
+   Concept testing's native artifact is a sorted diverging bar
+   chart, but the source carries rank order and reasons, not
+   scores. Drawing bars would mean inventing values, so the
+   dial encodes the documented ordering instead.
+   ============================================================ */
+.dial{background:var(--warm);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.dial-head{max-width:var(--max);margin:0 auto clamp(30px,4.6vh,48px);}
+.dial-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(25px,3.2vw,42px);line-height:1.16;
+  letter-spacing:-.022em;color:var(--ink);margin-top:18px;max-width:24ch;text-wrap:balance;}
+.dial-scroll{max-width:var(--max);margin:0 auto;overflow-x:auto;}
+.dial-fig{min-width:640px;}
+.dial-fig svg{display:block;width:100%;height:auto;}
+.dial-key{max-width:var(--max);margin:22px auto 0;display:flex;flex-wrap:wrap;gap:10px 14px;
+  align-items:center;justify-content:center;}
+.dial-key span{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--body);display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line);background:#fff;padding:7px 13px;border-radius:2px;}
+.dial-key i{font-style:normal;font-weight:700;font-size:12px;}
+.dial-key .k-no i{color:var(--struck);}
+.dial-key .k-yes i{color:var(--teal-dim);}
+/* the takeaway, set as a pulled statement rather than a trailing paragraph */
+.dial-foot{max-width:760px;margin:clamp(34px,5vh,50px) auto 0;padding:clamp(26px,4vh,36px) clamp(26px,4vw,44px);
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:4px;
+  font-family:var(--serif);font-weight:300;font-size:clamp(19px,2.2vw,27px);line-height:1.44;
+  letter-spacing:-.012em;color:var(--ink);text-wrap:balance;}
+.dial-foot b{font-weight:400;font-style:italic;color:var(--teal-dim);}
+@media(max-width:700px){.dial-fig{min-width:580px;}}
+
+/* ============================================================
+   THE PROCESS. Form: a viewing protocol, because what made the
+   method work was what was watched, not what was asked.
+   ============================================================ */
+.watch{background:var(--paper);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.watch-inner{max-width:var(--max);margin:0 auto;}
+.watch-lead{font-family:var(--serif);font-weight:300;font-size:clamp(23px,2.7vw,34px);line-height:1.3;
+  letter-spacing:-.015em;color:var(--ink);margin:18px 0 clamp(34px,5vh,52px);max-width:32ch;text-wrap:balance;}
+.protocol{display:grid;grid-template-columns:auto 1fr;gap:0;border-top:1px solid var(--line);}
+.protocol-row{display:contents;}
+.protocol-row > *{border-bottom:1px solid var(--line);padding:22px 0;}
+.protocol-k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal-dim);padding-right:36px;white-space:nowrap;}
+.protocol-v{font-size:16px;line-height:1.72;color:var(--body);}
+.protocol-v b{color:var(--ink);font-weight:600;}
+.watch-scope{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:26px;}
+@media(max-width:760px){
+  .protocol{grid-template-columns:1fr;}
+  .protocol-row > *{border-bottom:0;padding:16px 0 0;}
+  .protocol-row > .protocol-v{padding-bottom:22px;border-bottom:1px solid var(--line);}
+}
+
+/* same ground as the section above: no colour change to carry the gap */
+.brief + .watch{padding-top:clamp(22px,3vh,34px);}
+</style>
+<link rel="stylesheet" href="/css/site.css">
+{% include "analytics.njk" %}
+</head>
+<body>
+
+{% include "header.njk" %}
+
+<main id="main">
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span class="idx">Case 05</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>CPG - Candy</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Concept Testing</span>
+    </div>
+    <h1 class="cover-title">They thought they wanted louder. <em>The data wanted relatability.</em></h1>
+    <p class="cover-deck">Five commercial concepts, one production deadline, and a shared instinct that sour candy should go big. The concepts that won were the ones that started somewhere ordinary.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">Major candy brand</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">CPG - Candy</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">Pre-production concept test</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Method</div><div class="dossier-v">Seven focus groups</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE BRIEF -->
+<section class="brief" aria-label="The brief">
+  <div class="brief-inner">
+    <div class="sa">
+      <div class="section-mark">The brief</div>
+    </div>
+    <div>
+      <p class="brief-lead sa d1">Five concepts, a production date, and an instinct in the room that everyone found reasonable: <em>this is sour candy for a young audience, so go big.</em></p>
+      <div class="prose sa d2" style="margin-top:34px;">
+        <p>Make it loud, weird, extreme. The more outrageous the sour reaction on screen, the more memorable the ad. Nobody in the room had a reason to doubt it.</p>
+        <p>With the date fixed, the job looked like picking a winner from the five. That is a smaller question than it appears, because it accepts the premise all five were built on.</p>
+      </div>
+      <div class="expected sa d3">
+        <div class="lbl">The path most would have taken</div>
+        <p>Test the five, pick the most attention-grabbing, produce it. That optimizes for spectacle, and spectacle was not what moved people.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROCESS -->
+<section class="watch" aria-label="How we built it">
+  <div class="watch-inner">
+    <div class="sa"><div class="section-mark">How we built it</div></div>
+    <p class="watch-lead sa d1">A ranking tells you which concept won. It does not tell you what all five were getting wrong together, and that was the more expensive question.</p>
+    <div class="protocol sa d2">
+      <div class="protocol-row">
+        <div class="protocol-k">Who we recruited</div>
+        <div class="protocol-v"><b>Adults who actually buy the brand</b>, not the young audience the concepts were aimed at. They can tell when an execution stops sounding like the brand they know.</div>
+      </div>
+      <div class="protocol-row">
+        <div class="protocol-k">What we asked</div>
+        <div class="protocol-v">Rate and rank all five, for a defensible ordering. <b>The ranking mattered less than the reasons behind it</b>, and the reasons are what we designed the session around.</div>
+      </div>
+      <div class="protocol-row">
+        <div class="protocol-k">What we watched</div>
+        <div class="protocol-v">Where attention went, <b>where it drifted</b>, and where people recognised themselves. A concept can score politely while losing the room, and no scale catches that.</div>
+      </div>
+      <div class="protocol-row">
+        <div class="protocol-k">What we tested for</div>
+        <div class="protocol-v">Not only which execution won, but <b>whether the premise underneath all five held up</b>. That is the test that changes what gets made, not just which file gets opened.</div>
+      </div>
+    </div>
+    <div class="watch-scope method-scope sa d3">
+      <span class="scope-chip"><b>7</b> focus groups</span>
+      <span class="scope-chip"><b>5</b> concepts</span>
+      <span class="scope-chip">Adult category buyers</span>
+      <span class="scope-chip">Rate, rank, and reasons</span>
+    </div>
+  </div>
+</section>
+
+<!-- THE DIAL, signature -->
+<section class="dial" aria-label="Where each kind of concept started, and which ones worked">
+  <div class="dial-head sa">
+    <div class="section-mark">What the groups showed</div>
+    <h2>Everything hinged on where a concept started.</h2>
+  </div>
+
+  <div class="dial-scroll sa d1">
+    <div class="dial-fig">
+      <svg viewBox="0 0 700 330" role="img"
+           aria-label="A single axis with an arrow running from drawn straight from real life on the left to pure absurdity on the right. Three evenly spaced bands sit on it. On the left, the elegant and aspirational concepts, rejected because they read as a perfume ad rather than the brand. In the middle, raised and filled in teal, the grounded concepts taken from ordinary life and pushed one step, which won the groups. On the right, the abstract high-concept executions, which scored lowest because people remembered the visuals and forgot the candy. A marker above the right-hand band shows where the room had aimed.">
+        <defs>
+          <marker id="axisArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="#9aa4b0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="aimTip" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="9" markerHeight="9" orient="auto">
+            <path d="M1,0 L9,0 L5,9 z" fill="#8b96a3"/>
+          </marker>
+          <linearGradient id="winFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#16E2C1"/>
+            <stop offset="100%" stop-color="#00C7A6"/>
+          </linearGradient>
+        </defs>
+
+        <!-- where the room aimed -->
+        <text x="542" y="40" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11"
+              font-weight="500" letter-spacing="1.9" fill="#6B7280">WHERE THE ROOM AIMED</text>
+        <line x1="542" y1="54" x2="542" y2="104" stroke="#8b96a3" stroke-width="1.3"
+              stroke-dasharray="3 5" marker-end="url(#aimTip)"/>
+
+        <!-- the spectrum, drawn as a direction -->
+        <line x1="92" y1="196" x2="616" y2="196" stroke="#cfd5db" stroke-width="1.5"
+              marker-end="url(#axisArrow)"/>
+        <line x1="92" y1="190" x2="92" y2="202" stroke="#cfd5db" stroke-width="1.5"/>
+
+        <!-- BAND 1 - elegant (x=92, w=132) -->
+        <rect x="92" y="156" width="132" height="40" rx="5" fill="#aeb6c0" opacity=".38"/>
+        <text x="158" y="181" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11"
+              font-weight="500" letter-spacing="1.3" fill="#4a5462">&#215; ELEGANT</text>
+        <text x="158" y="228" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="16" fill="#6B7280">read as a perfume ad,</text>
+        <text x="158" y="249" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="16" fill="#6B7280">not as the brand</text>
+
+        <!-- BAND 2 - the winner (x=284, w=132), raised -->
+        <rect x="284" y="130" width="132" height="66" rx="5" fill="url(#winFill)"/>
+        <text x="350" y="160" text-anchor="middle" font-family="'IBM Plex Sans',sans-serif" font-size="13.5"
+              font-weight="700" letter-spacing="1.5" fill="#052620">&#10003; THESE WON</text>
+        <text x="350" y="180" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10"
+              letter-spacing="1.5" fill="#06382F">GROUNDED</text>
+        <text x="350" y="228" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="17" fill="#121d2b">ordinary life,</text>
+        <text x="350" y="250" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="17" fill="#121d2b">pushed one step</text>
+
+        <!-- BAND 3 - abstract (x=476, w=132) -->
+        <rect x="476" y="156" width="132" height="40" rx="5" fill="#aeb6c0" opacity=".38"/>
+        <text x="542" y="181" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11"
+              font-weight="500" letter-spacing="1.3" fill="#4a5462">&#215; ABSTRACT</text>
+        <text x="542" y="228" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="16" fill="#6B7280">remembered the visuals,</text>
+        <text x="542" y="249" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="16" fill="#6B7280">forgot the candy</text>
+
+        <!-- axis ends -->
+        <text x="92" y="296" font-family="'IBM Plex Mono',monospace" font-size="10.5" font-weight="500"
+              letter-spacing="1.7" fill="#6B7280">DRAWN FROM REAL LIFE</text>
+        <text x="616" y="296" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5"
+              font-weight="500" letter-spacing="1.7" fill="#6B7280">PURE ABSURDITY</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="dial-key sa d2">
+    <span class="k-yes"><i>&#10003;</i> Won the groups</span>
+    <span class="k-no"><i>&#215;</i> Lost, and why</span>
+  </div>
+
+  <p class="dial-foot sa d2">The pattern cut against the instinct in the room. The abstract executions scored lowest; the elegant ones did not register as the brand at all. <b>Relatability was the engine. Absurdity was only the accent.</b></p>
+</section>
+
+<!-- THE REFRAME -->
+<section class="reframe" aria-label="The reframe">
+  <div class="reframe-inner">
+    <div class="section-mark">The reframe</div>
+    <p class="reframe-expected">The question on the table: which of these five is the winner?</p>
+    <div class="reframe-turn">So we changed the question</div>
+    <p class="reframe-line">Does the brand need to get more extreme, <em>or more recognisable?</em></p>
+  </div>
+</section>
+
+<!-- THE OUTCOME -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-inner" style="grid-template-columns:1fr;max-width:900px;text-align:center;">
+    <div class="sa">
+      <div class="section-mark" style="justify-content:center;margin-bottom:28px;">The outcome</div>
+      <p class="outcome-line">The research did more than pick a winner. It corrected the premise all five were built on. <em>Take something from people&rsquo;s actual lives and push it one absurd step, rather than starting from absurdity and losing them there.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE / CTA -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark" style="justify-content:center;">Your turn</div>
+    <h2>Testing the work, <em>or testing the premise?</em></h2>
+    <p>No lengthy brief required. If you know the decision you&rsquo;re trying to make, that&rsquo;s enough to start.</p>
+    <div class="close-actions">
+      <a href="/challenge-us/" class="btn">Challenge Us</a>
+      <a href="/work/" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+{% include "footer.njk" %}
+
+<script>
+// Scroll reveals, the same IntersectionObserver pattern used across the site.
+// The reframe section gets `.in` too, which drives its orchestrated strike +
+// resolve entirely in CSS.
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.18 });
+document.querySelectorAll('.sa, .reframe').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

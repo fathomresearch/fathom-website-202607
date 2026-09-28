@@ -1,31 +1,29 @@
 ---
 pageKey: challenge-us
 permalink: challenge-us/index.html
+title: "Challenge Us | Fathom Research & Strategy"
+description: "Tell us the decision you are trying to make. No lengthy brief required, and we respond within 48 hours."
+canonical: "/challenge-us/"
+ogTitle: "Challenge us"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Challenge Us — Fathom Research & Strategy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<title>{{ title }}</title>
+{% include "seo.njk" %}
+<link rel="preload" href="/fonts/spectral-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/base.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+
 body{font-family:'IBM Plex Sans',sans-serif;background:#fff;color:#2C3E50;-webkit-font-smoothing:antialiased;}
-img{display:block;max-width:100%;}
-a{text-decoration:none;color:inherit;}
-:root{
-  --navy:#0A1628;--teal:#00D6B3;--teal-h:#009E85;
-  --white:#fff;--warm:#F8F7F4;
-  --body:#2C3E50;--muted:#6B7280;--border:#ECEAE6;
-  --bdr:rgba(255,255,255,.08);--max:1200px;--pad:80px;
-}
+
+:root{--max:1200px;--pad:80px;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
-.sa{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
-.sa.in{opacity:1;transform:none;}
+
 .s1{transition-delay:.07s;}.s2{transition-delay:.17s;}.s3{transition-delay:.27s;}.s4{transition-delay:.37s;}.s5{transition-delay:.47s;}
 .label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
 .label::before{content:'';display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;}
@@ -36,22 +34,8 @@ a{text-decoration:none;color:inherit;}
 .sw{background:#fff;color:var(--navy);}
 .sn{background:var(--navy);color:#fff;}
 .swm{background:var(--warm);color:var(--navy);}
-.container{max-width:var(--max);margin:0 auto;}
-.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:14px 32px;border-radius:4px;letter-spacing:.025em;transition:background .2s,transform .15s;}
-.btn:hover{background:var(--teal-h);transform:translateY(-1px);}
-.btn-ghost{display:inline-block;font-size:14px;font-weight:500;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:13px 30px;border-radius:4px;letter-spacing:.025em;transition:border-color .2s,background .2s;}
-.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
-.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
-.nav-logo svg{display:block;width:auto;height:28px;}
-.nav-logo-sub{font-family:'IBM Plex Sans',sans-serif;font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
-.nav-links{display:flex;align-items:center;gap:36px;}
-.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
-.nav-link:hover{color:rgba(255,255,255,.92);}
-.nav-link.active{color:rgba(255,255,255,.92);font-weight:500;}
-.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
-.nav-cta:hover{background:var(--teal-h);}
 /* HERO SHARED */
 .page-hero{padding:88px var(--pad) 80px;background:var(--navy);color:#fff;}
 .page-hl{font-family:'Spectral',serif;font-size:60px;font-weight:300;line-height:1.06;color:#fff;letter-spacing:-.025em;max-width:760px;margin-bottom:24px;}
@@ -134,23 +118,15 @@ a{text-decoration:none;color:inherit;}
 .cta-hl em{font-style:italic;font-weight:200;color:rgba(255,255,255,.65);}
 .cta-sub{font-size:17px;color:rgba(255,255,255,.50);line-height:1.65;margin-bottom:40px;}
 /* FOOTER */
-.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
-.footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
-.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
-.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
-.footer-nav{display:flex;flex-direction:column;gap:12px;}
-.footer-link{font-size:13px;color:rgba(255,255,255,.40);letter-spacing:.01em;transition:color .2s;}
+
 .footer-link:hover{color:rgba(255,255,255,.88);}
-.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
-.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+
 .footer-contact a:hover{color:rgba(255,255,255,.88);}
-.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
-.footer-tagline{font-family:'Spectral',serif;font-size:16px;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;}
-.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
+
 /* RESPONSIVE */
 @media(max-width:1100px){:root{--pad:48px;}.page-hl{font-size:48px;}.grid-2{grid-template-columns:1fr;gap:36px;}}
-@media(max-width:768px){:root{--pad:24px;}.nav-link{display:none;}.grid-3{grid-template-columns:1fr;}.grid-2-even{grid-template-columns:1fr;}.metrics{flex-direction:column;}.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
-/* CHAT WIDGET — Challenge Us page only */
+@media(max-width:768px){:root{--pad:24px;}.grid-3{grid-template-columns:1fr;}.grid-2-even{grid-template-columns:1fr;}.metrics{flex-direction:column;}}
+/* CHAT WIDGET, Challenge Us page only */
 .fc-fab{position:fixed;right:28px;bottom:28px;z-index:200;width:56px;height:56px;border-radius:50%;
   background:var(--teal);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;
   box-shadow:0 12px 28px rgba(10,22,40,.22);transition:transform .18s,background .2s;}
@@ -171,7 +147,7 @@ a{text-decoration:none;color:inherit;}
 .fc-prompt-action{font-size:14px;line-height:1.35;font-weight:600;color:var(--navy);}
 .fc-prompt:hover .fc-prompt-action{color:var(--teal-h);}
 .fc-prompt::after{content:'';position:absolute;right:-7px;bottom:20px;width:14px;height:14px;
-  background:#fff;border-top:.5px solid var(--border);border-right:.5px solid var(--border);transform:rotate(45deg);}
+  background:#fff;border-top:.5px solid var(--border);border-right:.5px solid var(--border);transform:rotate(45deg);pointer-events:none;}
 .fc-prompt.is-hidden{opacity:0;pointer-events:none;transform:translateY(6px);}
 .fc-fab{animation:fc-fab-pulse 2.8s ease-in-out 1.2s 3;}
 @keyframes fc-fab-pulse{
@@ -214,9 +190,11 @@ a{text-decoration:none;color:inherit;}
 }
 @media(max-width:480px){.fc-panel{right:14px;left:14px;width:auto;bottom:90px;}.fc-fab{right:20px;bottom:20px;}}
 </style>
+<link rel="stylesheet" href="/css/site.css">
+{% include "analytics.njk" %}
 </head>
 <body>{% include "header.njk" %}
-<main>
+<main id="main">
 <section class="section-lg sw" aria-label="Challenge us form" style="padding-top:80px;">
   <div class="container">
     <div class="grid-2">
@@ -224,7 +202,7 @@ a{text-decoration:none;color:inherit;}
       <div class="sa">
         <span class="label">Challenge Us</span>
         <h1 style="font-family:'Spectral',serif;font-size:52px;font-weight:300;line-height:1.06;color:var(--navy);letter-spacing:-.025em;margin-bottom:20px;">Tell us what you&rsquo;re<br><em style="font-weight:200;color:rgba(10,22,40,.5);">up against.</em></h1>
-        <p style="font-size:17px;line-height:1.72;color:var(--body);margin-bottom:36px;">No lengthy brief required. If you know the decision you&rsquo;re trying to make, that&rsquo;s enough to start. Still unsure? <b>Talk to our agent at the corner</b> and we’ll help you figure it out.</p>
+        <p style="font-size:17px;line-height:1.72;color:var(--body);margin-bottom:36px;">No lengthy brief required. If you know the decision you&rsquo;re trying to make, that&rsquo;s enough to start. Still unsure? <b>Talk to our agent</b> and we’ll help you figure it out.</p>
 
         <div style="background:var(--warm);border-radius:8px;padding:28px 28px 32px;margin-bottom:32px;">
           <p style="font-size:13px;font-weight:600;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;">What happens next</p>
@@ -303,8 +281,8 @@ a{text-decoration:none;color:inherit;}
   </div>
   <div class="fc-messages" id="fc-messages" aria-live="polite"></div>
   <details class="fc-privacy">
-    <summary>By using our agents, you agree to our privacy policy.</summary>
-    <p>Your conversation might be used as additional context for our business diagnosis.</p>
+    <summary>By using our agents, you agree to our <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a>.</summary>
+    <p>Conversations are stored and shared with our team so we can follow up. Please keep anything confidential out of the chat and use the form instead.</p>
   </details>
   <div class="fc-composer">
     <textarea id="fc-input" class="fc-input" placeholder="What's the challenge?" rows="1"></textarea>
@@ -327,7 +305,7 @@ document.querySelectorAll('.sa').forEach(el=>io.observe(el));
 // real submit button (rewired to POST /submit) does that.
 const CHAT_API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
   ? 'http://localhost:8787'
-  : 'https://fathom-website-chat-agent.polished-resonance-6f57.workers.dev'; // TODO: swap to a custom domain (e.g. chat-api.fathomresearch.ai) once that's set up — see wrangler.toml notes
+  : 'https://fathom-website-chat-agent.polished-resonance-6f57.workers.dev'; // TODO: swap to a custom domain (e.g. chat-api.fathomresearch.ai) once that's set up, see wrangler.toml notes
 const CHAT_SESSION_KEY='fathom-challenge-chat-v1';
 
 class ChallengeChat{
@@ -413,7 +391,7 @@ class ChallengeChat{
     this.fab.setAttribute('aria-expanded', String(open));
     if(open && !this.history.length){
       this._appendBubble('assistant',
-        "Hey — tell me what you're up against and I'll get the basics down so someone can follow up.");
+        "Hey, tell me what you're up against and I'll get the basics down so someone can follow up.");
     }
     if(open) this.input.focus();
   }
@@ -453,7 +431,7 @@ class ChallengeChat{
         this._clearSession();
       }
       this._resolveBubble(thinkingEl,'error',
-        err.message || "Something went sideways on our end — you can also just fill out the form directly.");
+        err.message || "Something went sideways on our end. You can also fill out the form directly.");
     }finally{
       this._setBusy(false);
     }
@@ -510,6 +488,24 @@ if(document.getElementById('fathom-chat-fab')){
 }
 
 const challengeForm=document.getElementById('challenge-form');
+// Visible failure path for the form. Without it, a Worker outage or a
+// rate-limited submit is indistinguishable from a successful send.
+function showFormError(){
+  if(!challengeForm) return;
+  var box=document.getElementById('form-error');
+  if(!box){
+    box=document.createElement('p');
+    box.id='form-error';
+    box.setAttribute('role','alert');
+    box.style.cssText='margin-top:16px;padding:14px 16px;border:1px solid #C0392B;'+
+      'border-radius:4px;background:#FDF3F2;color:#8E2B21;font-size:14px;line-height:1.6;';
+    challengeForm.appendChild(box);
+  }
+  box.innerHTML='That did not send. Please try again, or email us directly at '+
+    '<a href="mailto:info@fathomresearch.ai" style="color:#8E2B21;text-decoration:underline;">'+
+    'info@fathomresearch.ai</a>.';
+  if(window.gtag) gtag('event','form_error',{form:'challenge_us'});
+}
 if(challengeForm){
   challengeForm.addEventListener('submit', async e=>{
     e.preventDefault();
@@ -532,10 +528,14 @@ if(challengeForm){
       });
       const data=await res.json();
       if(!data.ok) throw new Error(data.error || 'submit failed');
+      if(window.gtag) gtag('event','generate_lead',{form:'challenge_us'});
       challengeForm.innerHTML='<p style="font-family:\'Spectral\',serif;font-size:20px;color:var(--navy);">Got it. We\'ll be in touch within 48 hours.</p>';
     }catch(err){
+      // Previously this reset the button and said nothing, so a failed
+      // send looked identical to a successful one and the lead vanished.
       submitBtn.disabled=false;
       submitBtn.textContent='Send the Challenge';
+      showFormError();
     }
   });
 }

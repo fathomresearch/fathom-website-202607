@@ -43,6 +43,10 @@ export default function (eleventyConfig) {
     }
   );
 
+  eleventyConfig.addFilter("isoDate", (value) =>
+    (value instanceof Date ? value : new Date(value)).toISOString().slice(0, 10)
+  );
+
   eleventyConfig.addCollection("employees", (collectionApi) =>
     collectionApi
       .getFilteredByGlob("src/content/team/*.md")

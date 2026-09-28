@@ -1,0 +1,395 @@
+---
+pageKey: work
+permalink: cases/automotive/index.html
+title: "How two words changed meaning under a legacy auto brand | Fathom Research & Strategy"
+description: "A legacy automotive brand thought it had a relevance problem. Hundreds of interviews across five U.S. markets found that freedom and adventure had redefined themselves, and the brand already owned the new meaning."
+canonical: "/cases/automotive/"
+ogTitle: "The brand hadn't aged. The words had."
+ogType: "article"
+caseImage: "automotive"
+caseAbout: "Qualitative depth interviews on brand relevance"
+datePublished: "2026-09-17"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+{% include "seo.njk" %}
+<link rel="preload" href="/fonts/spectral-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+
+<!--
+  "The brand hadn't aged. The words had." Legacy automotive brand relevance study.
+  Signature: a 2-axis meaning DRIFT map. The finding is that two words moved, and
+  moved the same way, so movement (vectors) is what is drawn rather than a static
+  position map. Geometry is computed in scripts/check-case-geometry.mjs.
+  Client is unnamed throughout by request; all copy and the verbatim come from the
+  supplied engagement write-up. No figures are invented.
+-->
+
+<link rel="stylesheet" href="/css/base.css">
+<style>
+
+:root{
+  /* Brand ground, unchanged from the rest of the site */
+  --navy:#0A1628; --navy-mid:#122a44;                 /* warm-biased hairline */
+  --struck:#8b96a3;               /* the considered new tone: the rejected/expected path */
+  --bdr:rgba(255,255,255,.09);
+  /* Type roles */
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  /* Metrics */
+  --max:1240px; --measure:660px; --pad:clamp(24px,6vw,80px);}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.5;overflow-x:hidden;}
+
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px;}
+
+/* ── shared devices ── */
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:11px;}
+.rule{height:1px;background:var(--line);border:0;}
+.wrap{max-width:var(--max);margin:0 auto;}
+
+/* scroll reveal (same mechanism used across the site) */
+
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+
+/* ============================================================
+   NAV, consistent with the live site
+   ============================================================ */
+@media(max-width:860px){}
+
+/* ============================================================
+   COVER, shared case-study hero and dossier shell.
+   ============================================================ */
+.cover{background:var(--navy);color:#fff;padding:clamp(41px,7.4vh,76px) var(--pad) 0;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(110% 90% at 80% 0%, rgba(0,214,179,.10), transparent 55%);}
+.cover-inner{position:relative;max-width:var(--max);margin:0 auto;padding-bottom:clamp(33px,5.9vh,54px);}
+.cover-eyebrow{display:flex;gap:14px;align-items:center;color:rgba(255,255,255,.5);margin-bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+.cover-eyebrow .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;}
+.cover-title{font-family:var(--serif);font-weight:300;font-size:clamp(38px,6vw,92px);line-height:1.03;letter-spacing:-.03em;color:#fff;text-wrap:balance;max-width:20ch;margin-bottom:28px;}
+.cover-title em{font-style:italic;font-weight:200;color:var(--teal);}
+.cover-deck{font-size:clamp(16px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.62);max-width:52ch;font-weight:300;}
+
+/* dossier rail, the case facts, filed like a record */
+.dossier{border-top:1px solid var(--bdr);background:var(--navy);}
+.dossier-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.dossier-cell{padding:26px var(--pad);}
+.dossier-cell + .dossier-cell{border-left:1px solid var(--bdr);}
+.dossier-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.dossier-v{font-family:var(--serif);font-size:18px;font-weight:400;color:#fff;letter-spacing:-.01em;}
+@media(max-width:860px){
+  .dossier-inner{grid-template-columns:1fr 1fr;}
+  .dossier-cell:nth-child(3){border-left:0;}
+  .dossier-cell:nth-child(n+3){border-top:1px solid var(--bdr);}
+}
+@media(max-width:520px){.dossier-inner{grid-template-columns:1fr;}.dossier-cell + .dossier-cell{border-left:0;border-top:1px solid var(--bdr);}}
+
+/* ============================================================
+   THE BRIEF, the tension + the trap (expected path)
+   ============================================================ */
+.brief{background:var(--paper);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.brief-inner{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,3vh,30px);align-items:stretch;}
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+.brief-lead{font-family:var(--serif);font-weight:300;font-size:clamp(24px,2.9vw,38px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);}
+.brief-lead em{font-style:italic;color:var(--teal-dim);}
+.prose{font-size:17px;line-height:1.78;color:var(--body);max-width:680px;}
+.prose p + p{margin-top:20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+/* the expected path, struck, dimmed: the thing they DIDN'T do */
+.expected{margin-top:40px;padding:26px 28px;border:1px solid var(--line);border-radius:4px;background:#fff;}
+.expected .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--struck);margin-bottom:12px;}
+.expected p{color:var(--muted);font-size:16px;line-height:1.7;}
+@media(max-width:820px){}
+
+/* ============================================================
+   OUTCOME, what the research became
+   ============================================================ */
+.outcome{background:var(--navy);color:#fff;padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.outcome-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(32px,6vw,80px);align-items:center;}
+.outcome-line{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.5vw,46px);line-height:1.24;letter-spacing:-.02em;color:#fff;text-wrap:balance;}
+.outcome-line em{font-style:italic;color:var(--teal);}
+.outcome-stat{border-top:2px solid var(--teal);padding-top:24px;}
+.outcome-stat .num{font-family:var(--serif);font-weight:200;font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums;}
+.outcome-stat .num em{font-style:italic;color:var(--teal);font-size:.5em;}
+.outcome-stat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:16px;line-height:1.5;max-width:32ch;}
+@media(max-width:820px){.outcome-inner{grid-template-columns:1fr;gap:40px;}}
+
+/* ============================================================
+   CLOSE / CTA
+   ============================================================ */
+.close{background:var(--paper);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);text-align:center;}
+.close-inner{max-width:760px;margin:0 auto;}
+.close h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,60px);line-height:1.08;letter-spacing:-.025em;color:var(--ink);margin:22px 0 18px;text-wrap:balance;}
+.close h2 em{font-style:italic;color:var(--teal-dim);}
+.close p{font-size:17px;line-height:1.6;color:var(--muted);max-width:48ch;margin:0 auto 40px;}
+.close-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* ============================================================
+   FOOTER, consistent with the live site
+   ============================================================ */
+
+.footer-link:hover{color:rgba(255,255,255,.88);}
+
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+
+@media(max-width:820px){}
+
+@media(prefers-reduced-motion:reduce){
+  .sa{opacity:1;transform:none;transition:none;}
+  .reframe-expected::after{width:100%;transition:none;}
+  .reframe-turn,.reframe-line{opacity:1;transform:none;filter:none;transition:none;}
+}
+/* ============================================================
+   THE REFRAME, the signature moment. Full-bleed pivot.
+   ============================================================ */
+.reframe{background:var(--navy-deep);color:#fff;padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);position:relative;overflow:hidden;}
+.reframe::before{content:'';position:absolute;inset:0;background:radial-gradient(90% 120% at 50% 0%, rgba(0,214,179,.09), transparent 60%);pointer-events:none;}
+.reframe-inner{position:relative;max-width:1000px;margin:0 auto;text-align:center;}
+.reframe-inner .section-mark{justify-content:center;margin-bottom:44px;}
+.reframe-expected{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(19px,2.1vw,26px);line-height:1.4;color:var(--struck);position:relative;display:inline-block;margin-bottom:30px;}
+/* the strike is drawn on scroll-in */
+.reframe-expected::after{content:'';position:absolute;left:0;top:54%;height:2px;width:0;background:var(--struck);transition:width .7s cubic-bezier(.7,0,.3,1) .15s;pointer-events:none;}
+.reframe.in .reframe-expected::after{width:100%;}
+.reframe-turn{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:26px;opacity:0;transform:translateY(8px);transition:opacity .6s ease .55s,transform .6s ease .55s;}
+.reframe.in .reframe-turn{opacity:1;transform:none;}
+.reframe-line{font-family:var(--serif);font-weight:300;font-size:clamp(30px,5vw,66px);line-height:1.1;letter-spacing:-.025em;color:#fff;text-wrap:balance;opacity:0;filter:blur(12px);transition:opacity .9s ease .6s,filter .9s ease .6s;}
+.reframe-line em{font-style:italic;color:var(--teal);}
+.reframe.in .reframe-line{opacity:1;filter:blur(0);}
+
+/* ============================================================
+   THE DRIFT, signature. Two words moved; they moved the same way.
+   A 2-axis meaning map with vectors, not a static position map:
+   the finding IS the movement, so movement is what is drawn.
+   ============================================================ */
+.drift{background:var(--warm);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.drift-head{max-width:var(--max);margin:0 auto clamp(30px,4.6vh,48px);}
+.drift-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(25px,3.2vw,42px);line-height:1.16;
+  letter-spacing:-.022em;color:var(--ink);margin-top:18px;max-width:22ch;text-wrap:balance;}
+.drift-scroll{max-width:var(--max);margin:0 auto;overflow-x:auto;}
+.drift-fig{min-width:660px;}
+.drift-fig svg{display:block;width:100%;height:auto;}
+.drift-foot{max-width:var(--max);margin:22px auto 0;padding-top:22px;border-top:1px solid var(--line);
+  font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(18px,2vw,25px);line-height:1.45;
+  color:var(--ink);max-width:56ch;}
+@media(max-width:700px){.drift-fig{min-width:600px;}}
+
+/* ============================================================
+   THE PROCESS, how the interviews were built to find it.
+   Form: a question ladder, because the method WAS the questions.
+   ============================================================ */
+.method{background:var(--paper);padding:clamp(48px,7.4vh,80px) var(--pad) clamp(28px,3.8vh,42px);}
+.method-inner{max-width:var(--max);margin:0 auto;}
+.method-lead{font-family:var(--serif);font-weight:300;font-size:clamp(23px,2.7vw,34px);line-height:1.3;
+  letter-spacing:-.015em;color:var(--ink);margin:18px 0 clamp(34px,5vh,52px);max-width:30ch;text-wrap:balance;}
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.rung{background:#fff;padding:26px 24px 28px;}
+.rung-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dim);
+  margin-bottom:14px;}
+.rung-ask{font-family:var(--serif);font-style:italic;font-weight:300;font-size:20px;line-height:1.35;
+  color:var(--ink);margin-bottom:12px;}
+.rung-why{font-size:14px;line-height:1.7;color:var(--muted);}
+.method-scope{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:26px;}
+.scope-chip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--body);
+  border:1px solid var(--line);background:#fff;padding:8px 13px;border-radius:2px;}
+.scope-chip b{color:var(--ink);font-weight:600;}
+@media(max-width:820px){.ladder{grid-template-columns:1fr;}}
+
+
+/* same ground as the section above: no colour change to carry the gap */
+.brief + .method{padding-top:clamp(22px,3vh,34px);}
+</style>
+<link rel="stylesheet" href="/css/site.css">
+{% include "analytics.njk" %}
+</head>
+<body>
+
+{% include "header.njk" %}
+
+<main id="main">
+<!-- COVER -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <span class="idx">Case 04</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Automotive</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>Brand Strategy</span>
+    </div>
+    <h1 class="cover-title">The brand hadn&rsquo;t aged. <em>The words had.</em></h1>
+    <p class="cover-deck">A legacy automotive brand thought it had a relevance problem. What it actually had was two words, freedom and adventure, that had quietly changed meaning underneath it.</p>
+  </div>
+  <div class="dossier">
+    <div class="dossier-inner">
+      <div class="dossier-cell"><div class="dossier-k">Client</div><div class="dossier-v">Legacy automotive brand</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Industry</div><div class="dossier-v">Automotive</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Engagement</div><div class="dossier-v">Brand relevance study</div></div>
+      <div class="dossier-cell"><div class="dossier-k">Method</div><div class="dossier-v">Qualitative depth interviews</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE BRIEF -->
+<section class="brief" aria-label="The brief">
+  <div class="brief-inner">
+    <div class="sa">
+      <div class="section-mark">The brief</div>
+    </div>
+    <div>
+      <p class="brief-lead sa d1">The question every iconic company eventually runs into: <em>how do you stay relevant without becoming generic?</em></p>
+      <div class="prose sa d2" style="margin-top:34px;">
+        <p>Newer players were crowding the space. Evolve too much and you alienate the people who made you. Evolve too little and you fade. Every setting on that dial costs something, which is why the room kept circling it.</p>
+      </div>
+      <div class="expected sa d3">
+        <div class="lbl">The path most would have taken</div>
+        <p>Ask loyalists what they love, ask fence-sitters what is missing, split the difference. That produces a checklist, and a checklist misses the tension.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROCESS -->
+<section class="method" aria-label="How we built it">
+  <div class="method-inner">
+    <div class="sa"><div class="section-mark">How we built it</div></div>
+    <p class="method-lead sa d1">Ask people to rank features and you learn about features. We needed the words underneath them.</p>
+    <div class="ladder sa d2">
+      <div class="rung">
+        <div class="rung-k">01 &middot; Definition</div>
+        <p class="rung-ask">&ldquo;What does freedom mean now?&rdquo;</p>
+        <p class="rung-why">Not what the brand means. What the word means, in the life they are living now.</p>
+      </div>
+      <div class="rung">
+        <div class="rung-k">02 &middot; Lived example</div>
+        <p class="rung-ask">&ldquo;What did adventure look like in your real life?&rdquo;</p>
+        <p class="rung-why">A concrete instance, not an aspiration. That gap is where the real meaning shows.</p>
+      </div>
+      <div class="rung">
+        <div class="rung-k">03 &middot; Projection</div>
+        <p class="rung-ask">&ldquo;Who would this brand be if it walked into a party?&rdquo;</p>
+        <p class="rung-why">People describe a brand&rsquo;s character far more honestly through a person than a scale.</p>
+      </div>
+    </div>
+    <div class="method-scope sa d3">
+      <span class="scope-chip"><b>Hundreds</b> of interviews</span>
+      <span class="scope-chip"><b>5</b> major U.S. markets</span>
+      <span class="scope-chip">Brand lovers <b>and</b> skeptics</span>
+      <span class="scope-chip">No feature ranking</span>
+    </div>
+  </div>
+</section>
+
+<!-- THE DRIFT, signature -->
+<section class="drift" aria-label="What the words used to mean, and what they mean now">
+  <div class="drift-head sa">
+    <div class="section-mark">What surfaced</div>
+    <h2>Two words moved. They moved the same way.</h2>
+  </div>
+
+  <div class="drift-scroll sa d1">
+    <div class="drift-fig">
+      <svg viewBox="0 0 700 440" role="img"
+           aria-label="A meaning map with two axes. The horizontal axis runs from out in the world on the left to inside my own life on the right. The vertical axis runs from exceptional at the top to everyday at the bottom. Freedom moved from the open road, upper left, to control of my own time, lower right. Adventure moved from the version worth posting, upper left, to a small break from routine, lower right. Both arrows travel into the lower right quadrant, which is shaded and labelled where the brand already lived.">
+        <defs>
+          <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#009E85"/>
+          </marker>
+        </defs>
+
+        <!-- the quadrant the brand already occupied -->
+        <rect x="361" y="219" width="265" height="165" fill="#00D6B3" opacity=".08"/>
+        <text x="616" y="374" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5"
+              letter-spacing="1.6" fill="#00705E">WHERE THE BRAND ALREADY LIVED</text>
+
+        <!-- axes -->
+        <line x1="96" y1="219" x2="626" y2="219" stroke="#E7E2D9" stroke-width="1"/>
+        <line x1="361" y1="54" x2="361" y2="384" stroke="#E7E2D9" stroke-width="1"/>
+        <line x1="96" y1="384" x2="626" y2="384" stroke="#c9c2b6" stroke-width="1"/>
+        <line x1="96" y1="54" x2="96" y2="384" stroke="#c9c2b6" stroke-width="1"/>
+
+        <!-- axis labels -->
+        <text x="96" y="410" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.6" fill="#6B7280">OUT IN THE WORLD</text>
+        <text x="626" y="410" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.6" fill="#6B7280">INSIDE MY OWN LIFE</text>
+        <text x="80" y="58" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.6" fill="#6B7280" transform="rotate(-90 80 58)">EVERYDAY &#8594; EXCEPTIONAL</text>
+
+        <!-- FREEDOM: (170.2,139.8) -> (477.6,298.2) -->
+        <line x1="184" y1="147" x2="462" y2="290" stroke="#009E85" stroke-width="1.6"
+              stroke-dasharray="5 4" marker-end="url(#arw)"/>
+        <circle cx="170.2" cy="139.8" r="6" fill="#FDFCFA" stroke="#8b96a3" stroke-width="2"/>
+        <text x="170.2" y="124" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.4" fill="#8b96a3">FREEDOM, THEN</text>
+        <text x="170.2" y="108" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="17" fill="#121d2b">the open road</text>
+        <circle cx="477.6" cy="298.2" r="7.5" fill="#00D6B3"/>
+        <text x="477.6" y="325" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.4" fill="#009E85">FREEDOM, NOW</text>
+        <text x="477.6" y="345" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="17" fill="#121d2b">control of my own time</text>
+
+        <!-- ADVENTURE: (233.8,93.6) -> (551.8,245.4) -->
+        <line x1="248" y1="100" x2="536" y2="238" stroke="#009E85" stroke-width="1.6"
+              stroke-dasharray="5 4" marker-end="url(#arw)"/>
+        <circle cx="233.8" cy="93.6" r="6" fill="#FDFCFA" stroke="#8b96a3" stroke-width="2"/>
+        <text x="233.8" y="78" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.4" fill="#8b96a3">ADVENTURE, THEN</text>
+        <text x="233.8" y="62" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="17" fill="#121d2b">the version worth posting</text>
+        <circle cx="551.8" cy="245.4" r="7.5" fill="#00D6B3"/>
+        <text x="551.8" y="204" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10.5" letter-spacing="1.4" fill="#009E85">ADVENTURE, NOW</text>
+        <text x="551.8" y="184" text-anchor="middle" font-family="Spectral,Georgia,serif" font-style="italic" font-size="17" fill="#121d2b">a small break from routine</text>
+      </svg>
+    </div>
+  </div>
+
+  <p class="drift-foot sa d2">Freedom stopped meaning the open road and started meaning control over your own time, which most people said they lost around 2020. Adventure stopped being the Instagram version and became a small break from routine.</p>
+</section>
+
+<!-- THE REFRAME -->
+<section class="reframe" aria-label="The reframe">
+  <div class="reframe-inner">
+    <div class="section-mark">The reframe</div>
+    <p class="reframe-expected">The question in the room: what should we change?</p>
+    <div class="reframe-turn">So we changed the question</div>
+    <p class="reframe-line">What is this brand already giving people <em>that they can&rsquo;t name themselves?</em></p>
+  </div>
+</section>
+
+<!-- THE OUTCOME -->
+<section class="outcome" aria-label="The outcome">
+  <div class="outcome-inner" style="grid-template-columns:1fr;max-width:900px;text-align:center;">
+    <div class="sa">
+      <div class="section-mark" style="justify-content:center;margin-bottom:28px;">The outcome</div>
+      <p class="outcome-line">Not a reinvention. A remix: heritage held, contemporary cues added in steps small enough not to spook the base, and a doubling down on control, customization and everyday adventure. <em>Other brands carry you to the adventure. This one is the adventure.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE / CTA -->
+<section class="close" aria-label="Work with us">
+  <div class="close-inner sa">
+    <div class="section-mark" style="justify-content:center;">Your turn</div>
+    <h2>Tell us the problem. <em>We&rsquo;ll tell you what we can do with it.</em></h2>
+    <p>No lengthy brief required. If you know the decision you&rsquo;re trying to make, that&rsquo;s enough to start.</p>
+    <div class="close-actions">
+      <a href="/challenge-us/" class="btn">Challenge Us</a>
+      <a href="/work/" class="btn-ghost">See more work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+{% include "footer.njk" %}
+
+<script>
+// Scroll reveals, the same IntersectionObserver pattern used across the site.
+// The reframe section gets `.in` too, which drives its orchestrated strike +
+// resolve entirely in CSS.
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.18 });
+document.querySelectorAll('.sa, .reframe').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

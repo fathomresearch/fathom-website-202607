@@ -1,0 +1,69 @@
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="https://fathomresearch.ai{{ canonical }}">
+
+<meta property="og:type" content="{{ ogType | default('website') }}">
+<meta property="og:site_name" content="Fathom Research &amp; Strategy">
+<meta property="og:title" content="{{ ogTitle | default(title) }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="https://fathomresearch.ai{{ canonical }}">
+<meta property="og:image" content="https://fathomresearch.ai/images/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fathom Research &amp; Strategy">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ ogTitle | default(title) }}">
+<meta name="twitter:description" content="{{ description }}">
+<meta name="twitter:image" content="https://fathomresearch.ai/images/og-card.png">
+
+<link rel="icon" href="/images/Fathom_Icon_Teal.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<meta name="theme-color" content="#0A1628">
+
+
+{% if ogType == "article" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ ogTitle | dump | safe }},
+  "description": {{ description | dump | safe }},
+  "image": "https://fathomresearch.ai/images/cases/{{ caseImage }}-1600.webp",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://fathomresearch.ai{{ canonical }}" },
+  "author":    { "@type": "Organization", "name": "Fathom Research & Strategy", "url": "https://fathomresearch.ai/" },
+  "publisher": { "@type": "Organization", "name": "Fathom Research & Strategy",
+                 "logo": { "@type": "ImageObject", "url": "https://fathomresearch.ai/images/Fathom_LockUp_Horizontal_Teal.svg" } },
+  "isPartOf":  { "@type": "CollectionPage", "name": "Work", "url": "https://fathomresearch.ai/work/" },
+  "about": {{ caseAbout | dump | safe }},
+  "datePublished": "{{ datePublished }}",
+  "dateModified": "{{ dateModified | default(datePublished) }}"
+}
+</script>
+{% endif %}
+
+{% if pageKey == "home" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Fathom Research & Strategy",
+  "url": "https://fathomresearch.ai/",
+  "logo": "https://fathomresearch.ai/images/Fathom_LockUp_Horizontal_Teal.svg",
+  "image": "https://fathomresearch.ai/images/og-card.png",
+  "description": "Market research and strategy consultancy delivering recommendations, not readouts. Category scans in 48 hours, full strategic studies in two to three weeks.",
+  "email": "info@fathomresearch.ai",
+  "telephone": "+1-612-326-3993",
+  "slogan": "Clarity Beneath the Surface",
+  "areaServed": "US",
+  "knowsAbout": [
+    "Market segmentation",
+    "Concept testing",
+    "Message testing",
+    "Journey mapping",
+    "Voice of the consumer",
+    "Brand asset research"
+  ]
+}
+</script>
+{% endif %}

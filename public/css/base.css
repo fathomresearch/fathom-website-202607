@@ -1,0 +1,108 @@
+/* ============================================================
+   Fathom base layer: tokens, reset, base elements, shared
+   components. Loaded before each page's own <style>, so a page
+   can still override anything here.
+
+   Before this existed, every page carried its own copy of the
+   reset, the colour tokens, the buttons and the footer. Eight
+   different :root blocks had drifted apart, the same teal was
+   called --teal-h on some pages and --teal-dim on others, and
+   .btn had four different paddings. This file is the single
+   definition; both historical token spellings are kept as
+   aliases so no page breaks on the rename.
+   ============================================================ */
+
+:root{
+  /* ground */
+  --navy:#0A1628;
+  --navy-deep:#050B14;
+  --white:#fff;
+  --warm:#F8F7F4;
+  --paper:#FDFCFA;
+
+  /* accent. --teal-h and --teal-dim are the same colour; both
+     names are in use across the pages. */
+  --teal:#00D6B3;
+  --teal-h:#009E85;
+  --teal-dim:#009E85;
+
+  /* ink */
+  --ink:#121d2b;
+  --body:#2C3E50;
+  --muted:#6B7280;
+  --struck:#8b96a3;
+
+  /* rules. --border and --line are both in use. */
+  --border:#ECEAE6;
+  --line:#E7E2D9;
+  --bdr:rgba(255,255,255,.09);
+
+  /* type roles */
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',monospace;
+
+  /* --navy-mid, --max, --pad and --measure stay per page: the
+     hero gradients and measures are deliberately different. */
+}
+
+/* ── reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:var(--sans);color:var(--body);background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+::selection{background:var(--teal);color:var(--navy-deep);}
+
+/* ── layout ── */
+.container{max-width:var(--max);margin:0 auto;}
+
+/* ── buttons ──
+   Four paddings existed (14/32, 15/34, 16/38). 15/34 was the most
+   common and sits between the others. */
+.btn{display:inline-block;font-family:inherit;font-size:14px;font-weight:500;color:var(--navy);
+  background:var(--teal);padding:15px 34px;border-radius:4px;letter-spacing:.022em;border:0;cursor:pointer;
+  transition:background .2s,transform .15s;}
+.btn:hover{background:var(--teal-h);color:var(--navy);transform:translateY(-1px);}
+.btn-ghost{display:inline-block;font-family:inherit;font-size:14px;font-weight:500;color:#fff;
+  border:1.5px solid rgba(255,255,255,.35);padding:13.5px 32px;border-radius:4px;letter-spacing:.022em;
+  background:transparent;cursor:pointer;transition:border-color .2s,background .2s;}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+
+/* ── scroll reveal ── */
+.sa{opacity:0;transform:translateY(24px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.sa.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .sa{opacity:1;transform:none;transition:none;}
+}
+
+/* ── focus ── */
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+
+/* ── footer ──
+   Small drifts had crept in across pages: italic vs roman tagline,
+   .50 vs .55 opacity, a max-width present on some copies only.
+   This is the canonical version. Contrast values are set in
+   site.css, which loads after each page's own styles. */
+.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);position:relative;z-index:1;}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;
+  align-items:start;gap:40px;padding-bottom:56px;}
+.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
+.fl svg{height:22px;}
+.fl-s{font-size:7.5px;letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;
+  text-align:center;margin-top:5px;}
+.footer-nav{display:flex;flex-direction:column;gap:12px;}
+.footer-link{font-size:13px;letter-spacing:.01em;transition:color .2s;}
+.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
+.footer-contact a{font-size:13px;transition:color .2s;}
+.footer-close{max-width:var(--max);margin:0 auto;border-top:.5px solid rgba(255,255,255,.10);
+  padding:36px 0 44px;text-align:center;}
+.footer-tagline{font-family:var(--serif);font-size:16px;font-style:italic;font-weight:300;
+  letter-spacing:.02em;margin-bottom:8px;}
+.footer-copy{font-size:12px;letter-spacing:.03em;}
+@media(max-width:860px){
+  .footer-inner{grid-template-columns:1fr;}
+  .footer-contact{text-align:left;}
+}

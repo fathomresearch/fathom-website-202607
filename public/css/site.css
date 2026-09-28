@@ -1,0 +1,119 @@
+/* ============================================================
+   Fathom shared chrome: navigation, footer, motion fallbacks.
+   Loaded after each page's inline <style> so it wins the cascade.
+   Nav CSS lives here only, the per-page copies were byte-identical
+   but carried three different breakpoints (768/820/860px), so the
+   menu vanished at a different width depending on the page.
+   ============================================================ */
+
+:root{ --nav-h:72px; --nav-bp:900px; }
+
+/* ── SKIP LINK ── */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal,#00D6B3);color:#0A1628;
+  padding:12px 20px;font-size:14px;font-weight:600;border-radius:0 0 4px 0;}
+.skip-link:focus{left:0;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;
+  justify-content:space-between;padding:0 var(--pad);background:var(--navy,#0A1628);
+  border-bottom:.5px solid rgba(255,255,255,.08);}
+.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;flex-shrink:0;}
+.nav-logo svg{display:block;width:auto;height:28px;}
+.nav-logo-sub{font-family:'IBM Plex Sans',sans-serif;font-size:8px;font-weight:500;color:rgba(0,214,179,.68);
+  letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.62);letter-spacing:.01em;transition:color .2s;}
+.nav-link:hover{color:rgba(255,255,255,.92);}
+.nav-link.active{color:#fff;font-weight:500;}
+.nav-cta{font-size:13px;font-weight:500;color:var(--navy,#0A1628);background:var(--teal,#00D6B3);
+  padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--teal-h,#009E85);color:var(--navy,#0A1628);}
+
+/* ── MOBILE MENU TOGGLE ── */
+.nav-toggle{display:none;width:44px;height:44px;margin-right:-10px;align-items:center;justify-content:center;
+  background:none;border:0;cursor:pointer;color:#fff;flex-shrink:0;}
+.nav-toggle-bars{position:relative;display:block;width:22px;height:2px;background:currentColor;border-radius:2px;
+  transition:background .2s;}
+.nav-toggle-bars::before,.nav-toggle-bars::after{content:'';position:absolute;left:0;width:22px;height:2px;
+  background:currentColor;border-radius:2px;transition:transform .25s cubic-bezier(.22,1,.36,1),top .25s;}
+.nav-toggle-bars::before{top:-7px;}
+.nav-toggle-bars::after{top:7px;}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars{background:transparent;}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars::before{top:0;transform:rotate(45deg);}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars::after{top:0;transform:rotate(-45deg);}
+
+/* ── MOBILE MENU PANEL ── */
+.nav-mobile{position:fixed;top:var(--nav-h);left:0;right:0;z-index:99;background:var(--navy,#0A1628);
+  border-bottom:.5px solid rgba(255,255,255,.1);padding:8px var(--pad) 28px;
+  display:flex;flex-direction:column;
+  transform:translateY(-8px);opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .22s ease,transform .22s cubic-bezier(.22,1,.36,1),visibility .22s;}
+.nav-mobile.is-open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto;}
+.nav-mobile a{display:block;padding:18px 0;font-size:19px;font-weight:400;color:rgba(255,255,255,.82);
+  border-bottom:.5px solid rgba(255,255,255,.09);transition:color .2s;}
+.nav-mobile a:last-of-type{border-bottom:0;}
+.nav-mobile a.active{color:var(--teal,#00D6B3);}
+.nav-mobile a:hover{color:#fff;}
+.nav-mobile .nav-mobile-contact{margin-top:20px;padding-top:20px;border-top:.5px solid rgba(255,255,255,.14);
+  display:flex;flex-direction:column;gap:12px;}
+.nav-mobile .nav-mobile-contact a{padding:0;border:0;font-size:14px;color:rgba(255,255,255,.72);}
+
+body.nav-open{overflow:hidden;}
+
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+  .nav-actions{display:flex;align-items:center;gap:6px;}
+}
+@media(min-width:901px){
+  .nav-mobile{display:none;}
+}
+@media(max-width:380px){
+  .nav-cta{padding:9px 14px;font-size:12px;}
+  .nav-logo svg{height:24px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav-mobile,.nav-toggle-bars,.nav-toggle-bars::before,.nav-toggle-bars::after{transition:none;}
+}
+
+/* ── FOOTER CONTRAST ──
+   Footer links were rgba(255,255,255,.40) = 3.79:1 on navy, below the
+   4.5:1 AA floor for 13px text. They are also the only navigation a
+   phone user had before the mobile menu above existed. ── */
+.footer-link,.footer-contact a{color:rgba(255,255,255,.72);}
+.footer-link:hover,.footer-contact a:hover{color:#fff;}
+.footer-copy{color:rgba(255,255,255,.55);}
+.fl-s{color:rgba(255,255,255,.52);}
+.footer-tagline{color:rgba(255,255,255,.68);}
+
+/* ── SCROLL-REVEAL FALLBACK ──
+   .sa starts at opacity:0 and is revealed by an IntersectionObserver.
+   Without JS the page renders blank, so force it visible when scripting
+   is unavailable. Delays are also trimmed: at .47s plus a .75s
+   transition, fast scrolling showed empty screens. ── */
+@media(scripting:none){
+  .sa{opacity:1 !important;transform:none !important;}
+}
+.s1{transition-delay:.05s !important;}
+.s2{transition-delay:.1s !important;}
+.s3{transition-delay:.15s !important;}
+.s4{transition-delay:.2s !important;}
+.s5{transition-delay:.25s !important;}
+
+/* ── SECTION RHYTHM ──
+   The site used fixed 96/120/128px block padding plus clamps running as
+   high as 190px, so several sections spent a full viewport on three lines
+   of text. One fluid scale, roughly 30% tighter at the top end, applied
+   here so every page inherits the same rhythm. ── */
+:root{
+  --sp-sm: clamp(34px, 4.5vw, 52px);
+  --sp:    clamp(56px, 7vw, 88px);
+  --sp-lg: clamp(72px, 9vw, 112px);
+}
+.section{padding:var(--sp) var(--pad) !important;}
+.section-sm{padding:var(--sp-sm) var(--pad) !important;}
+.section-lg{padding:var(--sp-lg) var(--pad) !important;}
+
+/* Blocks that carry a single centred statement do not need a full screen. */
+.outcome-section{padding:var(--sp) var(--pad) !important;}
+.cta-section{padding:var(--sp-lg) var(--pad) !important;}

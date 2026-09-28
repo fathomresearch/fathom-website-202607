@@ -1,0 +1,202 @@
+---
+pageKey: services
+permalink: services/index.html
+title: "Services | Fathom Research & Strategy"
+description: "Fathom's research catalogue: questionnaire audits and analysis sprints in days, concept and message testing in weeks, segmentation and journey mapping for the bigger bets. Scope fixed at kickoff, and every project starts within a week of sign-off."
+canonical: "/services/"
+ogTitle: "Pick the depth the decision deserves"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+{% include "seo.njk" %}
+<link rel="preload" href="/fonts/spectral-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/base.css">
+<style>
+
+:root{ --navy-mid:#122a44;
+  --max:1240px; --pad:clamp(24px,6vw,80px);}
+body{font-family:var(--sans);background:var(--paper);color:var(--body);-webkit-font-smoothing:antialiased;line-height:1.5;}
+
+.section-mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:12px;}
+.section-mark::before{content:'';width:26px;height:1.5px;background:var(--teal);}
+
+@media(prefers-reduced-motion:reduce){.sa{opacity:1;transform:none;transition:none;}}
+
+/* HERO */
+.hero{background:var(--navy);color:#fff;padding:clamp(56px,9vh,92px) var(--pad) clamp(44px,7vh,72px);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 1000px 700px at 74% 0%,var(--navy-mid) 0%,var(--navy) 52%,var(--navy-deep) 100%);pointer-events:none;}
+.hero-inner{position:relative;max-width:var(--max);margin:0 auto;}
+.hero h1{font-family:var(--serif);font-weight:200;font-size:clamp(38px,5.6vw,76px);line-height:1.04;letter-spacing:-.032em;color:#fff;max-width:20ch;margin-top:30px;text-wrap:balance;}
+.hero h1 em{font-style:italic;font-weight:200;color:var(--teal);}
+.hero-sub{margin-top:26px;font-size:clamp(16px,1.4vw,19px);line-height:1.68;color:rgba(255,255,255,.66);max-width:56ch;}
+.hero-facts{margin-top:clamp(34px,5vh,52px);padding-top:26px;border-top:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:22px 40px;}
+.fact-k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:9px;}
+.fact-v{font-size:15px;line-height:1.6;color:rgba(255,255,255,.72);}
+
+/* CATALOGUE */
+.cat{padding:clamp(56px,8vh,86px) var(--pad);}
+.cat-inner{max-width:var(--max);margin:0 auto;}
+.grp{padding-top:clamp(30px,4.6vh,48px);}
+.grp+.grp{margin-top:clamp(34px,5vh,54px);border-top:1px solid var(--line);}
+.grp-head{margin-bottom:28px;}
+.grp-name{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.1vw,40px);line-height:1.12;letter-spacing:-.025em;color:var(--ink);}
+.grp-note{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(16px,1.5vw,19px);color:var(--teal-h);max-width:46ch;margin-top:10px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:5px;padding:26px 26px 28px;display:flex;flex-direction:column;transition:border-color .24s,box-shadow .24s,transform .24s;}
+.card:hover{border-color:rgba(0,214,179,.5);box-shadow:0 12px 30px rgba(10,22,40,.07);transform:translateY(-2px);}
+.card-name{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.24;letter-spacing:-.012em;color:var(--ink);}
+.card-hook{font-family:var(--serif);font-style:italic;font-weight:300;font-size:16px;line-height:1.48;color:var(--teal-h);margin-top:9px;}
+.card-price{margin-top:16px;font-family:var(--sans);font-size:19px;font-weight:600;color:var(--ink);letter-spacing:-.015em;}
+.card-meta{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 16px;}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink);border:1px solid var(--line);background:var(--warm);padding:6px 10px;border-radius:2px;display:inline-flex;align-items:center;gap:6px;}
+.chip i{font-style:normal;color:var(--teal-h);font-weight:600;}
+.card-gets{padding-top:15px;border-top:1px solid var(--line);margin-top:auto;}
+.card-gets summary{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);cursor:default;list-style:none;display:flex;
+  align-items:center;justify-content:space-between;gap:10px;}
+.card-gets summary::-webkit-details-marker{display:none;}
+.card-gets summary::after{content:'';flex-shrink:0;width:7px;height:7px;border-right:1.5px solid var(--teal-h);
+  border-bottom:1.5px solid var(--teal-h);transform:rotate(45deg) translateY(-2px);opacity:0;transition:transform .2s;}
+.card-gets p{font-size:14.5px;line-height:1.68;color:var(--body);margin-top:8px;}
+/* the catalogue is 13 cards; on a phone that is a long scroll, so the detail
+   collapses there and the names, timings and scope stay scannable. Cards are
+   rendered open, and only script collapses them, so no-JS loses nothing. */
+@media(max-width:700px){
+  .card{padding:20px 20px 22px;}
+  .card-gets summary{cursor:pointer;padding:4px 0;}
+  .card-gets summary::after{opacity:1;}
+  .card-gets[open] summary::after{transform:rotate(-135deg) translateY(-2px);}
+}
+
+/* INCLUDED */
+.incl{background:var(--warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(46px,7vh,76px) var(--pad);}
+.incl-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:start;}
+.incl h2{font-family:var(--serif);font-weight:300;font-size:clamp(25px,3vw,38px);line-height:1.14;letter-spacing:-.025em;color:var(--ink);margin-top:18px;max-width:16ch;}
+.incl-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px 34px;}
+.incl-item{font-size:15px;line-height:1.66;color:var(--body);padding-left:22px;position:relative;}
+.incl-item::before{content:'';position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:50%;border:2px solid var(--teal);pointer-events:none;}
+.incl-foot{grid-column:1/-1;margin-top:8px;padding-top:22px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.7;color:var(--muted);max-width:70ch;}
+
+/* CTA */
+.cta{position:relative;background:var(--navy-deep);padding:clamp(62px,9.5vh,104px) var(--pad);text-align:center;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 620px at 50% 120%,var(--navy-mid) 0%,var(--navy) 50%,var(--navy-deep) 100%);pointer-events:none;}
+.cta-inner{position:relative;max-width:660px;margin:0 auto;}
+.cta h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-.028em;color:#fff;text-wrap:balance;}
+.cta h2 em{font-style:italic;font-weight:300;color:rgba(255,255,255,.62);}
+.cta p{margin:20px auto 32px;font-size:16px;line-height:1.7;color:rgba(255,255,255,.62);max-width:46ch;}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+
+@media(max-width:860px){
+  .incl-inner{grid-template-columns:1fr;}
+  
+  
+}
+</style>
+<link rel="stylesheet" href="/css/site.css">
+{% include "analytics.njk" %}
+</head>
+<body>
+{% include "header.njk" %}
+<main id="main">
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="section-mark">Services</span>
+    <h1>Pick the depth <em>the decision deserves.</em></h1>
+    <p class="hero-sub">Some questions need an answer this week. Some need a study that still holds up in a boardroom six months from now. Both are here, and both start the same way.</p>
+    <div class="hero-facts">
+      <div><div class="fact-k">Scoping</div><div class="fact-v">A 30-minute kickoff replaces the proposal process.</div></div>
+      <div><div class="fact-k">Price</div><div class="fact-v">Fixed at kickoff, in writing, before work starts.</div></div>
+      <div><div class="fact-k">Start</div><div class="fact-v">Within a week of sign-off.</div></div>
+      <div><div class="fact-k">Rush</div><div class="fact-v">50% faster delivery available on request.</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="cat" aria-label="Service catalogue">
+  <div class="cat-inner">
+    {%- for g in services %}
+    <div class="grp">
+      <div class="grp-head sa">
+        <h2 class="grp-name">{{ g.group }}</h2>
+        <p class="grp-note">{{ g.note }}</p>
+      </div>
+      <div class="cards">
+        {%- for s in g.items %}
+        <article class="card sa">
+          <h3 class="card-name">{{ s.name }}</h3>
+          <p class="card-hook">{{ s.hook }}</p>
+          <p class="card-price">{{ s.price }}</p>
+          <div class="card-meta">
+            <span class="chip"><i>&#9201;</i>{{ s.time }}</span>
+            <span class="chip"><i>&#9678;</i>{{ s.scope }}</span>
+          </div>
+          <details class="card-gets" open>
+            <summary>What you get</summary>
+            <p>{{ s.gets }}</p>
+          </details>
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="incl" aria-label="Included in every project">
+  <div class="incl-inner">
+    <div class="sa">
+      <span class="section-mark">Every project</span>
+      <h2>The same things ship with all of it.</h2>
+    </div>
+    <div class="incl-list sa">
+      <p class="incl-item">Full data tables</p>
+      <p class="incl-item">Raw data files, SPSS or CSV</p>
+      <p class="incl-item">A 60-minute presentation and Q&amp;A</p>
+      <p class="incl-item">Two rounds of revisions</p>
+      <p class="incl-item">An extra week for follow-up questions</p>
+      <p class="incl-item">A written scope that governs the engagement</p>
+      <p class="incl-foot">Prices and timings shown are starting points, confirmed at kickoff, and exclude tax and any third-party costs such as incentives or specialist panel. Larger samples, additional markets and languages, more concepts or assets, and tracking studies are scoped on request. Hard-to-reach audiences change sampling requirements and are quoted case by case.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta" aria-label="Challenge us">
+  <div class="cta-inner sa">
+    <h2>Not sure which one <em>you actually need?</em></h2>
+    <p>Tell us the decision you&rsquo;re trying to make. We&rsquo;ll tell you which of these fits, and say so if the answer is none of them.</p>
+    <div class="cta-actions">
+      <a href="/challenge-us/" class="btn">Challenge Us</a>
+      <a href="/work/" class="btn-ghost">See the work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+{% include "footer.njk" %}
+<script>
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
+document.querySelectorAll('.sa').forEach(el=>io.observe(el));
+
+// Collapse the service detail on phones only. Authored open so that without
+// script, or on a wide screen, every card reads in full as before.
+(function(){
+  var mq = window.matchMedia('(max-width:700px)');
+  var all = document.querySelectorAll('.card-gets');
+  function sync(narrow){
+    for (var i = 0; i < all.length; i++) all[i].open = !narrow;
+  }
+  sync(mq.matches);
+  mq.addEventListener('change', function(e){ sync(e.matches); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{# GA4. The measurement id lives in src/_data/site.js.
+   Skipped entirely until a real id is set, so local builds and previews
+   do not send hits and the placeholder never ships a broken tag. #}
+{% if site.gaId and "XXXXXXXXXX" not in site.gaId %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ site.gaId }}');
+</script>
+{% endif %}

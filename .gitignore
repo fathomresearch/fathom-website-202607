@@ -3,3 +3,6 @@ _site/
 .DS_Store
 .wrangler/
 .claude/settings.local.json
+
+# Phoenix Code editor artifact, not project config
+jsconfig.json

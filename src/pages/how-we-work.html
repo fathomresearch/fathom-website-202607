@@ -1,69 +1,55 @@
 ---
-pageKey: what-we-do
-permalink: what-we-do/index.html
+pageKey: how-we-work
+permalink: how-we-work/index.html
+title: "How We Work | Fathom Research & Strategy"
+description: "Segmentation, concept and message testing, journey mapping, personas and quick pulse surveys. Fathom meets your campaign wherever it already is and goes as deep as the decision needs."
+canonical: "/how-we-work/"
+ogTitle: "How we work"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What We Do — Fathom Research & Strategy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:ital,wght@0,200;0,300;1,200;1,300&display=swap" rel="stylesheet">
+<title>{{ title }}</title>
+{% include "seo.njk" %}
+<link rel="preload" href="/fonts/spectral-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/base.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+
 body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--body);background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-img{display:block;max-width:100%;}
-a{color:inherit;text-decoration:none;}
+
 a:hover{color:var(--teal-h);}
-::selection{background:var(--teal);color:var(--navy-deep);}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
-:root{
-  --navy:#0A1628;--navy-mid:#16304d;--navy-deep:#050B14;--teal:#00D6B3;--teal-h:#009E85;
-  --paper:#FDFCFA;--warm:#F8F7F4;--ink:#121d2b;--body:#2C3E50;--muted:#6B7280;--struck:#9099a6;
-  --border:#E7E2D9;--bdr:rgba(255,255,255,.09);--max:1240px;--pad:clamp(24px,6vw,80px);
-}
-.container{max-width:var(--max);margin:0 auto;}
+
+:root{--navy-mid:#16304d;--max:1240px;--pad:clamp(24px,6vw,80px);}
+
 .eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;}
 .eyebrow::before{content:'';display:block;width:26px;height:1.5px;background:var(--teal);flex-shrink:0;}
-.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:16px 38px;border-radius:4px;letter-spacing:.025em;transition:background .2s;}
-.btn:hover{background:var(--teal-h);color:var(--navy);}
 
 /* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
-.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
-.nav-logo svg{display:block;width:auto;height:28px;}
-.nav-logo-sub{font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
-.nav-links{display:flex;align-items:center;gap:36px;}
-.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
-.nav-link:hover{color:rgba(255,255,255,.92);}
-.nav-link.active{color:rgba(255,255,255,.92);font-weight:500;}
-.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
-.nav-cta:hover{background:var(--teal-h);color:var(--navy);}
-@media(max-width:768px){.nav-link{display:none;}}
+@media(max-width:768px){}
 
 /* ── HERO ── */
-.hero{position:relative;background:var(--navy);color:#fff;padding:clamp(76px,13vh,132px) var(--pad) clamp(56px,8vh,88px);overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 1000px 700px at 74% 0%,var(--navy-mid) 0%,var(--navy) 52%,var(--navy-deep) 100%);}
+.hero{position:relative;background:var(--navy);color:#fff;padding:clamp(56px,9.6vh,90px) var(--pad) clamp(41px,5.9vh,60px);overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 1000px 700px at 74% 0%,var(--navy-mid) 0%,var(--navy) 52%,var(--navy-deep) 100%);pointer-events:none;}
 .hero-inner{position:relative;max-width:var(--max);margin:0 auto;}
 .hero-mark{color:var(--teal);margin-bottom:38px;}
 .hero-h1{font-family:'Spectral',Georgia,serif;font-weight:200;font-size:clamp(40px,6.4vw,88px);line-height:1.02;letter-spacing:-.035em;color:#fff;max-width:25ch;text-wrap:balance;}
 .hero-h1 em{font-style:italic;font-weight:200;color:var(--teal);}
-.hero-def{margin-top:clamp(44px,7vh,76px);padding:24px 0 0;border-top:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px 48px;align-items:baseline;}
+.hero-def{margin-top:clamp(33px,5.2vh,52px);padding:24px 0 0;border-top:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px 48px;align-items:start;}
 .hero-def-term{font-family:'Spectral',Georgia,serif;font-weight:300;font-size:19px;color:rgba(255,255,255,.82);letter-spacing:-.01em;}
 .hero-def-term em{font-style:italic;color:rgba(255,255,255,.42);}
 .hero-def-body{font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.7;letter-spacing:.04em;color:rgba(255,255,255,.42);max-width:56ch;}
 
 /* ── WHERE WE FIT ── */
-.fit-section{position:relative;background:var(--paper);padding:clamp(68px,10vh,112px) var(--pad) clamp(60px,9vh,96px);overflow:hidden;}
-.fit-section::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(10,22,40,.045) 0 1px,transparent 1px 56px),repeating-linear-gradient(180deg,rgba(10,22,40,.045) 0 1px,transparent 1px 56px);mask-image:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 80px),transparent);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 80px),transparent);}
+.fit-section{position:relative;background:var(--paper);padding:clamp(50px,7.4vh,76px) var(--pad) clamp(44px,6.7vh,65px);overflow:hidden;}
+.fit-section::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(10,22,40,.045) 0 1px,transparent 1px 56px),repeating-linear-gradient(180deg,rgba(10,22,40,.045) 0 1px,transparent 1px 56px);mask-image:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 80px),transparent);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 120px,#000 calc(100% - 80px),transparent);pointer-events:none;}
 .fit-inner{position:relative;max-width:var(--max);margin:0 auto;}
-.fit-head{display:flex;align-items:baseline;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:clamp(40px,6vh,64px);}
+.fit-head{display:flex;align-items:baseline;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:clamp(32px,4.4vh,44px);}
 .fit-mark{color:var(--teal-h);margin-bottom:24px;}
 .fit-hl{font-family:'Spectral',Georgia,serif;font-weight:200;font-size:clamp(32px,4.6vw,60px);line-height:1.06;letter-spacing:-.03em;color:var(--ink);max-width:20ch;text-wrap:balance;}
-.fit-sub{font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(17px,1.6vw,21px);line-height:1.5;color:var(--teal-h);max-width:34ch;}
 
 .fit-scroll{overflow-x:auto;}
 .fit-diagram{min-width:900px;}
@@ -79,7 +65,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 .fit-axis-r{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--struck);}
 
 .fit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.5vw,36px);align-items:start;}
-.fit-col{position:relative;padding:14px 16px 20px;margin:-8px -16px 0;border-radius:4px;transition:background .2s;}
+.fit-col{position:relative;padding:14px 16px 20px;margin:-8px 0 0;border-radius:4px;transition:background .2s;}
 .fit-col:hover{background:rgba(0,214,179,.055);}
 .fit-col-num{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-h);margin-bottom:10px;}
 .fit-col-q{font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(21px,1.9vw,26px);line-height:1.25;letter-spacing:-.015em;color:var(--ink);max-width:14ch;}
@@ -87,11 +73,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 .fit-col-unit{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--struck);margin-bottom:12px;}
 .fit-tags{display:flex;flex-wrap:wrap;gap:7px;max-width:280px;}
 .fit-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:var(--ink);border:1px solid rgba(10,22,40,.25);background:var(--paper);padding:7px 12px;border-radius:2px;cursor:help;transition:border-color .2s;}
-.fit-tag:hover,.fit-tag:focus-visible{border-color:var(--teal-h);}
-.fit-tag--active{color:var(--paper);background:var(--navy);border-color:var(--navy);}
+.fit-tag:hover,.fit-tag:focus-visible{color:var(--paper);background:var(--navy);border-color:var(--navy);}
 .fit-col-cta{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-h);}
 
-.fit-support{display:flex;align-items:center;gap:14px 16px;flex-wrap:wrap;margin-top:clamp(36px,5vh,56px);padding-top:26px;border-top:1px solid var(--border);}
+.fit-support{display:flex;align-items:center;gap:14px 16px;flex-wrap:wrap;margin-top:clamp(32px,3.7vh,40px);padding-top:26px;border-top:1px solid var(--border);}
 .fit-support-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--struck);white-space:nowrap;}
 .fit-support-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:var(--muted);border:1px dashed rgba(10,22,40,.28);padding:7px 12px;border-radius:2px;cursor:help;transition:border-color .2s;}
 .fit-support-tag:hover,.fit-support-tag:focus-visible{border-color:var(--teal-h);}
@@ -101,16 +86,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 .fit-readout-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);white-space:nowrap;}
 .fit-readout-text{font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:17px;line-height:1.5;color:var(--body);}
 
-@media(max-width:900px){
+@media(max-width:1100px){
   .fit-scroll{overflow-x:visible;}
   .fit-diagram{min-width:0;}
   .fit-track{display:none;}
   .fit-axis{margin-top:0;}
   .fit-grid{position:relative;grid-template-columns:1fr;gap:0;padding-left:24px;margin-top:8px;}
-  .fit-grid::before{content:'';position:absolute;left:4px;top:10px;bottom:10px;width:1.5px;background:linear-gradient(180deg,var(--teal),rgba(0,214,179,.15));}
+  .fit-grid::before{content:'';position:absolute;left:4px;top:10px;bottom:10px;width:1.5px;background:linear-gradient(180deg,var(--teal),rgba(0,214,179,.15));pointer-events:none;}
   .fit-col{position:relative;margin:0;padding:26px 0;border-top:.5px solid var(--border);}
   .fit-col:first-child{border-top:none;padding-top:0;}
-  .fit-col::before{content:'';position:absolute;left:-24px;top:34px;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--paper);}
+  .fit-col::before{content:'';position:absolute;left:-24px;top:34px;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--paper);pointer-events:none;}
   .fit-col:first-child::before{top:8px;}
   .fit-col:hover{background:none;}
   .fit-col-q{max-width:none;}
@@ -119,8 +104,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
   .fit-readout{display:none;}
 }
 
-/* ── MOBILE INSTRUMENT POPUP — hover has no meaning on touch, so under
-   900px a tap opens a small floating definition box instead of driving
+/* ── MOBILE INSTRUMENT POPUP, hover has no meaning on touch, so under
+   1100px a tap opens a small floating definition box instead of driving
    the shared readout panel; tapping the same instrument again, or
    anywhere outside, closes it. ── */
 .fit-popup{position:absolute;z-index:200;max-width:260px;padding:14px 16px;background:var(--paper);border:1px solid var(--border);border-radius:6px;box-shadow:0 12px 32px rgba(10,22,40,.18);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .15s ease,transform .15s ease,visibility .15s;pointer-events:none;}
@@ -128,51 +113,55 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 .fit-popup-label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-h);margin-bottom:6px;}
 .fit-popup-text{font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:15px;line-height:1.5;color:var(--body);}
 
+/* bridge to the full catalogue: the diagram shows where we fit, this says
+   what actually gets run and how long it takes */
+.bridge{background:var(--paper);border-top:1px solid var(--border);padding:clamp(40px,6vh,64px) var(--pad);}
+.bridge-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;}
+.bridge-copy{max-width:52ch;}
+.bridge-copy h2{font-family:'Spectral',Georgia,serif;font-weight:300;font-size:clamp(24px,2.8vw,34px);
+  line-height:1.16;letter-spacing:-.022em;color:var(--ink);}
+.bridge-copy p{margin-top:12px;font-size:16px;line-height:1.7;color:var(--body);}
+.bridge .btn{flex-shrink:0;}
+
 /* ── OUTCOME ── */
-.outcome-section{background:var(--warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(68px,11vh,116px) var(--pad);}
+.outcome-section{background:var(--warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(50px,8.1vh,79px) var(--pad);}
 .outcome-inner{max-width:var(--max);margin:0 auto;text-align:center;}
 .outcome-mark{color:var(--teal-h);margin-bottom:36px;}
 .outcome-hl{font-family:'Spectral',Georgia,serif;font-weight:200;font-size:clamp(28px,4vw,54px);line-height:1.28;letter-spacing:-.025em;color:var(--ink);max-width:24ch;margin:0 auto;text-wrap:balance;}
 .outcome-hl em{font-style:italic;color:var(--teal-h);}
 
 /* ── CTA ── */
-.cta-section{position:relative;background:var(--navy-deep);padding:clamp(92px,15vh,164px) var(--pad);text-align:center;overflow:hidden;}
-.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 620px at 50% 120%,var(--navy-mid) 0%,var(--navy) 50%,var(--navy-deep) 100%);}
-.cta-section::after{content:'';position:absolute;bottom:-420px;left:50%;width:900px;height:900px;margin-left:-450px;background-image:repeating-radial-gradient(circle at center,rgba(0,214,179,.16) 0 1px,transparent 1px 70px);mask-image:radial-gradient(circle at center,#000 22%,transparent 62%);-webkit-mask-image:radial-gradient(circle at center,#000 22%,transparent 62%);}
+.cta-section{position:relative;background:var(--navy-deep);padding:clamp(68px,11.1vh,112px) var(--pad);text-align:center;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 620px at 50% 120%,var(--navy-mid) 0%,var(--navy) 50%,var(--navy-deep) 100%);pointer-events:none;}
+.cta-section::after{content:'';position:absolute;bottom:-420px;left:50%;width:900px;height:900px;margin-left:-450px;background-image:repeating-radial-gradient(circle at center,rgba(0,214,179,.16) 0 1px,transparent 1px 70px);mask-image:radial-gradient(circle at center,#000 22%,transparent 62%);-webkit-mask-image:radial-gradient(circle at center,#000 22%,transparent 62%);pointer-events:none;}
 .cta-inner{position:relative;max-width:720px;margin:0 auto;}
 .cta-hl{font-family:'Spectral',Georgia,serif;font-weight:200;font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;color:#fff;text-wrap:balance;}
 .cta-sub{margin-top:22px;font-size:17px;line-height:1.68;color:rgba(255,255,255,.55);max-width:46ch;margin-left:auto;margin-right:auto;}
 .cta-inner .btn{margin-top:40px;}
 
 /* ── FOOTER ── */
-.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
-.footer-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));align-items:start;gap:40px;padding-bottom:56px;}
-.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
-.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
-.footer-nav{display:flex;flex-direction:column;gap:12px;}
-.footer-link{font-size:13px;color:rgba(255,255,255,.40);letter-spacing:.01em;transition:color .2s;}
-.footer-link:hover{color:rgba(255,255,255,.88);}
-.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
-.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
-.footer-contact a:hover{color:rgba(255,255,255,.88);}
-.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
-.footer-tagline{font-family:'Spectral',Georgia,serif;font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;}
-.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
 
-@media(max-width:768px){.footer-inner{grid-template-columns:1fr;}.footer-contact{text-align:left;}}
+.footer-link:hover{color:rgba(255,255,255,.88);}
+
+.footer-contact a:hover{color:rgba(255,255,255,.88);}
+
+@media(max-width:768px){}
 </style>
+<link rel="stylesheet" href="/css/site.css">
+{% include "analytics.njk" %}
 </head>
 <body>{% include "header.njk" %}
-<main>
+<main id="main">
 
 <!-- HERO -->
 <header class="hero" aria-label="What we do">
   <div class="container hero-inner">
-    <span class="eyebrow hero-mark">What We Do</span>
+    <span class="eyebrow hero-mark">How We Work</span>
     <h1 class="hero-h1">Data tells you what happened,<br><em>our insights tell you <br>what to do next.</em></h1>
     <div class="hero-def">
       <p class="hero-def-term">fathom <em>(n./v.)</em></p>
-      <p class="hero-def-body">a unit of depth &mdash; and to understand something thoroughly, after some effort.</p>
+      <p class="hero-def-body">a unit of depth. Also, to understand something thoroughly, after some effort.</p>
     </div>
   </div>
 </header>
@@ -185,7 +174,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
         <span class="eyebrow fit-mark">Where we fit</span>
         <h2 class="fit-hl">Wherever your campaign is,<br>that&rsquo;s where we start.</h2>
       </div>
-      <p class="fit-sub">Read it in ten seconds &mdash; the bigger the decision, the deeper we go.</p>
     </div>
 
     <div class="fit-scroll">
@@ -248,7 +236,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
           <div class="fit-col-depth" style="--depth:112px" aria-hidden="true"></div>
           <span class="fit-col-unit">&#9660; 4 fm</span>
           <div class="fit-tags">
-            <button type="button" class="fit-tag fit-tag--active" data-tip="combined-engagement">Combined engagement</button>
+            <button type="button" class="fit-tag" data-tip="combined-engagement">Combined engagement</button>
             <button type="button" class="fit-tag" data-tip="standing-counsel">Standing counsel</button>
           </div>
           <a href="/cases/motorsports/" class="fit-col-cta">See it done &rarr;</a>
@@ -260,7 +248,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
         <button type="button" class="fit-support-tag" data-tip="survey-programming">Survey Programming</button>
         <button type="button" class="fit-support-tag" data-tip="questionnaire-audit">Questionnaire Audit</button>
         <button type="button" class="fit-support-tag" data-tip="analysis-sprint">Analysis Sprint</button>
-        <button type="button" class="fit-support-tag" data-tip="insights-subscription">Insights Pulses</button>
+        <button type="button" class="fit-support-tag" data-tip="insights-subscription">Insights Subscription</button>
       </div>
 
       <div class="fit-readout">
@@ -274,11 +262,23 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
   </div>
 </section>
 
+
+<!-- BRIDGE TO SERVICES -->
+<section class="bridge" aria-label="Full service catalogue">
+  <div class="bridge-inner">
+    <div class="bridge-copy">
+      <h2>Every instrument on that chart is a real engagement.</h2>
+      <p>Timings, sample sizes and what you walk away with, for all thirteen of them.</p>
+    </div>
+    <a href="/services/" class="btn">See all services</a>
+  </div>
+</section>
+
 <!-- HOWEVER DEEP WE GO -->
 <section class="outcome-section" aria-label="What you leave with">
   <div class="container outcome-inner">
     <span class="eyebrow outcome-mark">However deep we go, you end up with</span>
-    <p class="outcome-hl">A recommendation.<br>The evidence to defend it.<br><em>Not a deck nobody opens again.</em></p>
+    <p class="outcome-hl">A recommendation.<br>The evidence to defend it.<br><em>In time to use both.</em></p>
   </div>
 </section>
 
@@ -286,7 +286,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 <section class="cta-section" aria-label="Challenge us">
   <div class="container cta-inner">
     <h2 class="cta-hl">Tell us what you&rsquo;re trying to figure out.</h2>
-    <p class="cta-sub">We&rsquo;ll tell you which phase you&rsquo;re actually in &mdash; and what gets you out of it fastest.</p>
+    <p class="cta-sub">We&rsquo;ll tell you which phase you&rsquo;re actually in, and what gets you out of it fastest.</p>
     <a href="/challenge-us/" class="btn">Challenge Us</a>
   </div>
 </section>
@@ -296,17 +296,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
 <script>
 (function(){
   const tips = {
-    'quick-pulse': ['Quick Pulse', 'A short survey of real consumers, fielded and read back to you in days — not months.'],
-    'category-entry-points': ['Category Entry Points', 'The everyday moments when people think of your category — and whether they think of you in them.'],
+    'quick-pulse': ['Quick Pulse', 'A short survey of real consumers, fielded and read back to you in days rather than months.'],
+    'category-entry-points': ['Category Entry Points', 'The everyday moments when people think of your category, and whether they think of you in them.'],
     'brand-assets': ['Brand Assets', 'The colors, phrases, and shapes people recognize as yours before they see the logo.'],
     'segmentation': ['Segmentation', 'Sorting your market into real groups of people, so you know exactly who is worth winning.'],
     'voice-of-consumer': ['Voice of the Consumer', 'Conversations and surveys that explain why people buy, switch, or walk away.'],
-    'journey-mapping': ['Journey Mapping', 'Every step from first hearing about you to buying — and where people quietly drop off.'],
+    'journey-mapping': ['Journey Mapping', 'Every step from first hearing about you to buying, and where people quietly drop off.'],
     'personas': ['Personas', 'One-page portraits of your customers, so the whole team pictures the same person.'],
     'concept-testing': ['Concept Testing', 'Your ideas, shown to real consumers before you pay to produce one of them.'],
-    'message-testing': ['Message Testing', 'Which claims people actually believe — and which they scroll straight past.'],
+    'message-testing': ['Message Testing', 'Which claims people actually believe, and which they scroll straight past.'],
     'combined-engagement': ['Combined engagement', 'A custom mix of the instruments above, scoped to the size of the bet.'],
-    'standing-counsel': ['Standing counsel', 'We stay in the room through the decision — not just up to it.'],
+    'standing-counsel': ['Standing counsel', 'We stay in the room through the decision, not only up to it.'],
     'survey-programming': ['Survey Programming', 'You wrote the questions; we build the survey and get it into the field.'],
     'questionnaire-audit': ['Questionnaire Audit', 'Expert eyes on your survey before you spend money fielding it.'],
     'analysis-sprint': ['Analysis Sprint', 'You already have the data; we turn it into a recommendation.'],
@@ -359,7 +359,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
     openEl = el;
   }
 
-  const mq = window.matchMedia('(max-width:900px)');
+  const mq = window.matchMedia('(max-width:1100px)');
 
   document.querySelectorAll('[data-tip]').forEach(function(el){
     const key = el.getAttribute('data-tip');

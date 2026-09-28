@@ -1,31 +1,30 @@
 ---
 pageKey: about
 permalink: about/index.html
+title: "About | Fathom Research & Strategy"
+description: "Fathom Research & Strategy was built because research arrived too late to change the decision. Meet the team and the three things we do not compromise on."
+canonical: "/about/"
+ogTitle: "About Fathom"
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Fathom Research & Strategy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+<title>{{ title }}</title>
+{% include "seo.njk" %}
+<link rel="preload" href="/fonts/spectral-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/base.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+
 body{font-family:'IBM Plex Sans',sans-serif;background:#fff;color:#2C3E50;-webkit-font-smoothing:antialiased;}
-img{display:block;max-width:100%;}
-a{text-decoration:none;color:inherit;}
+
 :root{
-  --navy:#0A1628;--teal:#00D6B3;--teal-h:#009E85;
-  --white:#fff;--warm:#F8F7F4;--body:#2C3E50;--ink:#121d2b;
-  --muted:#6B7280;--struck:#9099a6;--border:#ECEAE6;--bdr:rgba(255,255,255,.08);
-  --max:1200px;--measure:640px;--pad:80px;
-}
+  --max:1200px;--measure:640px;--pad:80px;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
-.sa{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1);}
-.sa.in{opacity:1;transform:none;}
+
 .s1{transition-delay:.08s;} .s2{transition-delay:.16s;} .s3{transition-delay:.24s;}
 .s4{transition-delay:.32s;} .s5{transition-delay:.40s;} .s6{transition-delay:.48s;}
 .s7{transition-delay:.56s;}
@@ -38,28 +37,14 @@ a{text-decoration:none;color:inherit;}
 .sn{background:var(--navy);color:#fff;}
 .sw{background:#fff;color:var(--navy);}
 .swm{background:var(--warm);color:var(--navy);}
-.container{max-width:var(--max);margin:0 auto;}
-.btn{display:inline-block;font-size:14px;font-weight:500;color:var(--navy);background:var(--teal);padding:14px 32px;border-radius:4px;letter-spacing:.025em;transition:background .2s,transform .15s;}
-.btn:hover{background:var(--teal-h);transform:translateY(-1px);}
 
 /* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:var(--navy);border-bottom:.5px solid var(--bdr);}
-.nav-logo{display:inline-flex;flex-direction:column;gap:5px;line-height:0;text-decoration:none;}
-.nav-logo svg{display:block;width:auto;height:28px;}
-.nav-logo-sub{font-size:8px;font-weight:500;color:rgba(0,214,179,.68);letter-spacing:.18em;text-transform:uppercase;display:block;line-height:1;text-align:center;}
-.nav-links{display:flex;align-items:center;gap:36px;}
-.nav-link{font-size:14px;font-weight:400;color:rgba(255,255,255,.48);letter-spacing:.01em;transition:color .2s;}
-.nav-link:hover{color:rgba(255,255,255,.92);}
-.nav-link.active{color:rgba(255,255,255,.92);font-weight:500;}
-.nav-cta{font-size:13px;font-weight:500;color:var(--navy);background:var(--teal);padding:10px 20px;border-radius:4px;letter-spacing:.03em;transition:background .2s;}
-.nav-cta:hover{background:var(--teal-h);}
-
-/* ── DECLARATION — the three radicals ── */
+/* ── DECLARATION, the three radicals ── */
 .declaration{display:flex;flex-direction:column;padding:128px 0 96px;background:var(--navy);position:relative;overflow:hidden;}
 .declaration .inner{padding:0 var(--pad);}
 .declaration .container{max-width:100%;padding:0;margin:0;flex:1;display:flex;flex-direction:column;}
-/* Radical stack — bars bleed off right edge */
-.radical-stack{margin-bottom:28px;}
+/* Radical stack, bars bleed off right edge */
+.radical-stack{margin:0 0 28px;font-size:inherit;font-weight:400;}
 .radical{display:flex;align-items:center;gap:28px;margin-bottom:10px;}
 .radical:last-child{margin-bottom:0;}
 .radical-text{font-family:'Spectral',serif;font-size:68px;font-weight:400;line-height:1;color:#fff;letter-spacing:-.025em;white-space:nowrap;flex-shrink:0;}
@@ -71,17 +56,19 @@ a{text-decoration:none;color:inherit;}
 .declaration-body p+p{margin-top:0;}
 
 /* ── TEAM ── */
-/* MEET-THE-TEAM tab — teal cue at the bottom of the navy hero */
-.meet-tab{width:220px;max-width:100%;height:46px;margin-top:64px;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
+/* MEET-THE-TEAM tab, teal cue at the bottom of the navy hero */
+.meet-tab{width:320px;max-width:calc(100% - 48px);min-height:62px;margin:clamp(48px,7vh,72px) auto 0;background:var(--teal);border-radius:4px;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--navy);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:background .2s,transform .15s;}
+.meet-tab::after{content:"↓";font-size:15px;letter-spacing:0;}
+.meet-tab:hover{background:var(--teal-h,#009E85);transform:translateY(-1px);}
 
 /* WHY WE EXIST */
-.mission{padding:clamp(72px,11vh,116px) var(--pad);}
+.mission{padding:clamp(53px,8.1vh,79px) var(--pad);}
 .mission-inner{max-width:760px;margin:0;}
 .section-mark{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:22px;}
 .section-mark::before{content:'';display:block;width:22px;height:1.5px;background:var(--teal);flex-shrink:0;}
 .mission-words{display:flex;flex-wrap:wrap;gap:10px 26px;margin-bottom:28px;}
 .struck-word{position:relative;font-family:'Spectral',serif;font-style:italic;font-weight:300;font-size:clamp(19px,2.1vw,26px);color:var(--struck);}
-.struck-word::after{content:'';position:absolute;left:-4%;right:-4%;top:54%;height:1.5px;background:var(--struck);opacity:.85;}
+.struck-word::after{content:'';position:absolute;left:-4%;right:-4%;top:54%;height:1.5px;background:var(--struck);opacity:.85;pointer-events:none;}
 .struck-word:nth-child(1)::after{transform:rotate(-2.2deg);}
 .struck-word:nth-child(2)::after{transform:rotate(1.6deg);}
 .struck-word:nth-child(3)::after{transform:rotate(-1.4deg);}
@@ -109,13 +96,17 @@ a{text-decoration:none;color:inherit;}
 /* THE TEAM */
 .team{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--warm);overflow:hidden;}
 .team-inner{position:relative;z-index:1;padding:64px var(--pad);}
-/* Team photos — fixed frame keeps every source image the same display size */
+/* Team photos, fixed frame keeps every source image the same display size */
 .tm-photo-frame{aspect-ratio:4/5;border-radius:3px;overflow:hidden;margin-bottom:16px;background:linear-gradient(145deg,#13294d,#0A1628);}
 .tm-photo{display:block;width:100%;height:100%;object-fit:cover;}
 .team-row{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;}
 .tm{flex:0 1 calc((100% - 120px) / 4);text-align:center;}
 .tm-name{font-family:'Spectral',serif;font-size:19px;font-weight:400;color:var(--navy);margin-bottom:5px;letter-spacing:-.01em;}
 .tm-role{font-size:12px;font-weight:400;color:var(--muted);line-height:1.5;}
+.tm-li{display:inline-flex;justify-content:center;align-items:center;gap:7px;margin-top:10px;font-family:'IBM Plex Mono',monospace;
+  font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--body);transition:color .2s;}
+.tm-li svg{flex-shrink:0;}
+.tm-li:hover,.tm-li:focus-visible{color:var(--navy);text-decoration:underline;text-underline-offset:3px;}
 
 /* ── CTA ── */
 .cta-inner{text-align:center;max-width:580px;margin:0 auto;}
@@ -124,26 +115,17 @@ a{text-decoration:none;color:inherit;}
 .cta-sub{font-size:17px;color:rgba(255,255,255,.48);line-height:1.65;margin-bottom:36px;}
 
 /* ── FOOTER ── */
-.footer{padding:64px var(--pad) 0;background:var(--navy);border-top:.5px solid var(--bdr);}
-.footer-inner{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:56px;}
-.fl{display:inline-flex;flex-direction:column;gap:5px;line-height:0;}
-.fl-s{font-size:7.5px;color:rgba(255,255,255,.28);letter-spacing:.22em;text-transform:uppercase;display:block;line-height:1;text-align:center;margin-top:5px;}
-.footer-nav{display:flex;flex-direction:column;gap:12px;}
-.footer-link{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+
 .footer-link:hover{color:rgba(255,255,255,.88);}
-.footer-contact{display:flex;flex-direction:column;gap:10px;text-align:right;}
-.footer-contact a{font-size:13px;color:rgba(255,255,255,.40);transition:color .2s;}
+
 .footer-contact a:hover{color:rgba(255,255,255,.88);}
-.footer-close{border-top:.5px solid rgba(255,255,255,.10);padding:36px 0 44px;text-align:center;}
-.footer-tagline{font-family:'Spectral',serif;font-size:16px;color:rgba(255,255,255,.50);letter-spacing:.02em;margin-bottom:8px;}
-.footer-copy{font-size:12px;color:rgba(255,255,255,.22);letter-spacing:.03em;}
 
 @media(max-width:1100px){
   :root{--pad:48px;}
   .team-inner{padding:56px var(--pad) 72px;}
   .team-row{gap:32px 28px;}
   .tm{flex-basis:calc((100% - 56px) / 3);}
-  .meet-tab{width:220px;}
+  .meet-tab{width:320px;}
   .pillars{grid-template-columns:1fr;column-gap:0;row-gap:0;}
   .pillars > *:nth-child(1){order:1;}
   .pillars > *:nth-child(2){order:4;margin-top:44px;}
@@ -159,15 +141,14 @@ a{text-decoration:none;color:inherit;}
 }
 @media(max-width:768px){
   :root{--pad:24px;}
-  .nav-link{display:none;}
   .team-inner{padding:48px var(--pad) 64px;}
   .team-row{gap:30px 22px;}
   .tm{flex-basis:calc((100% - 22px) / 2);}
   .radical-text{font-size:34px;}
   .radical-bar{height:24px;gap:16px;}
   .radical{gap:16px;}
-  .footer-inner{grid-template-columns:1fr;}
-  .footer-contact{text-align:left;}
+  
+  
   .believe-hl{font-size:30px;}
   .mission-hl{font-size:28px;}
   .cta-hl{font-size:36px;}
@@ -176,22 +157,25 @@ a{text-decoration:none;color:inherit;}
   .reasons-grid{grid-template-columns:1fr;row-gap:28px;}
 }
 </style>
+<link rel="stylesheet" href="/css/site.css">
+{% include "analytics.njk" %}
 </head>
 <body>
 
 {% include "header.njk" %}
 
+<main id="main">
 <!-- THE DECLARATION -->
 <section class="declaration" aria-label="Who we are">
   <div class="container">
     <div class="inner"><span class="label sa">About Fathom</span></div>
-    <div class="radical-stack sa s1">
+    <h1 class="radical-stack sa s1">
       <div class="radical"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>humanity.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
       <div class="radical"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>authenticity.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
       <div class="radical"><span class="radical-text" style="margin-left:var(--pad);">Radical <em>honesty.</em></span><span class="radical-bar" aria-hidden="true"></span></div>
-    </div>
+    </h1>
     <div class="declaration-body sa s2">
-      <p>These aren&rsquo;t values on a poster. They&rsquo;re how we actually work — with our clients, with each other, and with the data in front of us.</p>
+      <p>This is how we work: with our clients, with each other, and with the data in front of us.</p>
     </div>
   </div>
 </section>
@@ -210,7 +194,7 @@ a{text-decoration:none;color:inherit;}
     </div>
 
     <div class="mission-body sa s3">
-      <p class="mission-lead">We saw teams making decisions without confidence&mdash;not because the data didn&rsquo;t exist, but because no one had turned it into something useful in time.</p>
+      <p class="mission-lead">We saw teams making decisions without confidence. The data existed. Nobody had turned it into something useful while it still mattered.</p>
     </div>
 
     <div class="reasons-grid sa s4">
@@ -220,7 +204,7 @@ a{text-decoration:none;color:inherit;}
       </div>
       <div class="reason">
         <span class="reason-label">Direction.</span>
-        <p class="reason-body">Not knowing which customers to prioritize, or where the real opportunity is hiding. That doubt rarely raises a red flag&mdash;it just stalls the room, or lets whoever&rsquo;s loudest decide.</p>
+        <p class="reason-body">Not knowing which customers to prioritize, or where the real opportunity is hiding. That doubt rarely raises a red flag. It stalls the room, or lets whoever&rsquo;s loudest decide.</p>
       </div>
     </div>
 
@@ -241,12 +225,12 @@ a{text-decoration:none;color:inherit;}
       <p class="pillar-word sa s1">Judgment.</p>
       <p class="pillar-word sa s2">Curiosity.</p>
       <p class="pillar-word sa s3">Honesty.</p>
-      <h3 class="pillar-title sa s1">Human judgment isn&rsquo;t automatable.</h3>
+      <h3 class="pillar-title sa s1">Human judgment is still the job.</h3>
       <h3 class="pillar-title sa s2">We answer the question underneath the question.</h3>
       <h3 class="pillar-title sa s3">We say what we see.</h3>
       <p class="pillar-body sa s1">Tools can move fast through information. They can&rsquo;t recognize what matters, know your company&rsquo;s politics, or make the call you&rsquo;d stand behind in a room. That&rsquo;s still a human job, and we take it seriously.</p>
-      <p class="pillar-body sa s2">Clients rarely hand us the real question first &mdash; they hand us the version they know how to phrase. Part of the job is finding the one underneath it, and staying curious past the first answer that technically fits.</p>
-      <p class="pillar-body sa s3">Even when it challenges the brief, the hypothesis, or the answer everyone in the room was hoping for. A finding you can&rsquo;t trust isn&rsquo;t an insight &mdash; it&rsquo;s decoration.</p>
+      <p class="pillar-body sa s2">Clients rarely hand us the real question first. They hand us the version they know how to phrase. Part of the job is finding the one underneath it, and staying curious past the first answer that technically fits.</p>
+      <p class="pillar-body sa s3">Even when it challenges the brief, the hypothesis, or the answer everyone in the room was hoping for. A finding you can&rsquo;t trust is decoration.</p>
     </div>
   </div>
   <a href="#team" class="meet-tab sa s2">Meet the team</a>
@@ -266,6 +250,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </section>
 
+</main>
 {% include "footer.njk" %}
 
 <script>
